@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv=”Access-Control-Allow-Origin” content=”*”>
+    <title>人脸检索管理</title>
+    <!-- <link rel="shortcut icon" href="/FaceManage/resources/img/fa.ico"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <!-- bootstrap-table样式文件 -->
+    <link href="./css/bootstrap-table.min.css" rel="stylesheet" />
+    <!-- bootstrap日历样式文件 -->
+    <link href="./css/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <!-- 字体图标 -->
+    <link href="./css/font-awesome.css" rel="stylesheet" />
+    <!-- 主页样式文件 -->
+    <link href="./css/index.css" rel="stylesheet" />
+    <!-- 人脸检索日志样式文件 -->
+    <link href="./css/style.css" rel="stylesheet" />
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <!-- 模板循环 -->
+    <script src="js/jquery.tmpl.min.js"></script>
+    <!-- bootstrap主文件 -->
+    <script src="./js/bootstrap.min.js" charset="utf-8"></script>
+    <!-- bootstrap日历 -->
+    <script src="./js/bootstrap-datetimepicker.js" charset="utf-8"></script>
+    <script src="./js/bootstrap-datetimepicker.zh-CN.js" charset="utf-8"></script>
+    <!-- bootstrapTable中文表格 -->
+    <script src="./js/bootstrap-table.min.js" charset="utf-8"></script>
+    <script src="./js/bootstrap-table-zh-CN.min.js" charset="utf-8"></script>
+    <!-- bootstrapTable导出 -->
+    <script src="./js/bootstrap-table-export.min.js" charset="utf-8"></script>
+    <script src="./js/tableExport.min.js" charset="utf-8"></script>
+    <!-- bootstrap表单验证 -->
+    <script src="./js/bootstrapValidator.js" charset="utf-8"></script>
+    <!-- 表格公共js -->
+    <script src="./js/tableCommon.js" charset="utf-8"></script>
+
+    <script src="./js/jquery.fineuploader-5.0.1.min.js"></script>
+    <script src="./js/bootstrap-dialog.min.js"></script>
+    <script src="https://cdn.bootcss.com/hazzik-jquery.livequery/1.3.6/jquery.livequery.js"></script>
+    <!--城市选择组件-->
+    <script src="./js/city/distpicker.data.js"></script>
+    <script src="./js/city/distpicker.js"></script>
+    <script src="https://cdn.bootcss.com/livequery/1.1.1/jquery.livequery.js"></script>
+
+
+    <!--公共路径------------------->
+
+    <!--公共路径------------------->
+    <script>
+
+        var pathurl = 'http://192.168.0.169:8080/FaceManage/'
+    </script>
+
+
+
+</head>
+
+<body>
+<!-- 自定义一级导航栏 -->
+<div class="mynav-box-blank">
+    <div class="mynav-box first-box">
+        <ul class="mynav-menu">
+            <li class="logo">
+                <a href="##"><img src="./img/index/logo_home.png" alt="人脸识别后台管理系统"></a>
+            </li>
+            <li class="foot dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b>
+            </a>
+                <ul class="dropdown-menu">
+                    <li><a href="./login.html">切换账号</a></li>
+                    <li><a href="#">系统设置</a></li>
+                </ul>
+            </li>
+            <li class="foot user">
+                <p>admin,您好</p>
+            </li>
+
+            <li class="foot user-logo"><img src="./img/index/user.png" alt="人脸识别后台管理系统">
+            </li>
+            <li class="foot time">
+                <p id="topDate"></p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 自定义二级导航栏 -->
+<div class="mynav-box-blank second-box-blank">
+    <div class="mynav-box second-box ">
+        <ul class="mynav-menu"></ul>
+    </div>
+</div>
+
+
+<div class="welcome">
+    <h3 class="text-center" style="color:#e3e3e3;padding-top: 10%">欢迎登陆人脸识别后台管理系统!</h3>
+</div>
+<div id="ajax-content">
+<!--外部内容-->
+<!--外部内容-->
+</div>
+<!--提示框开始-->
+<div class="modal fade face-modal in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="false">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="modal-body-id">比中成功</div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+
+</body>
+<script src="js/index.js"></script>
+<script>
+    window.onload = function () {
+
+
+        $("a:contains('人脸检索')").livequery('click', function () {
+            $('#ajax-content').load('retrieve.html')
+        });
+        $("a:contains('身份检索')").livequery('click', function () {
+            $('#ajax-content').load('idCard.html')
+        });
+        $("a:contains('人脸比对')").livequery('click', function () {
+            $('#ajax-content').load('compare.html')
+        });
+        $("a:contains('用户信息统计')").livequery('click', function () {
+            $('#ajax-content').load('userInfo.html')
+        });
+        $("a:contains('用户操作统计')").livequery('click', function () {
+            $('#ajax-content').load('useropera.html')
+        });
+        $("a:contains('比中率统计')").livequery('click', function () {
+            $('#ajax-content').load('prolist.html')
+        });
+        $("a:contains('身份查询')").livequery('click', function () {
+            $('#ajax-content').load('identityquery.html')
+        });
+
+        $("a:contains('人脸检索日志')").livequery('click', function () {
+            $('#ajax-content').load('./retrieveLog.html')
+        });
+        $("a:contains('身份检索日志')").livequery('click', function () {
+            $('#ajax-content').load('./retrieveLog2.html')
+        });
+        $("a:contains('人脸比对日志')").livequery('click', function () {
+            $('#ajax-content').load('./retrieveLog20.html')
+        });
+        $("a:contains('用户管理')").livequery('click', function () {
+            $('#ajax-content').load('./list.html')
+        });
+        $("a:contains('组织机构管理')").livequery('click', function () {
+            $('#ajax-content').load('./department.html')
+        });
+        // $("a:contains('角色管理')").livequery('click', function () {
+        //     $('#ajax-content').load('./userList.html')
+        // });
+    };
+</script>
+</html>

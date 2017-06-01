@@ -1,0 +1,345 @@
+
+body {
+  color: #525252;
+  background: url('../img/index/bg_home.jpg') 0 0 no-repeat;
+  background-size:cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC",
+		"Microsoft Yahei", "微软雅黑", "Wenquanyi Micro Hei", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow: auto !important;
+
+	word-break: break-all;
+
+
+display: flex;
+flex-flow: column;
+min-height: 100vh;
+
+
+}
+
+.logo{float:left;margin:0;height:100%;}
+.modal{ overflow: auto !important;}
+
+.face-box {
+	/* background-color: #515255 !important;
+	background: url(../img/index/bg_nav.png) 0 0 no-repeat; */
+	background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+}
+
+.mynav-box{
+  background: url(../img/index/bg_nav.png) 0 0 no-repeat;
+  background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-background-size: cover;
+	position: fixed;
+	margin: 0;
+	border: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 62px;
+	z-index: 10;
+}
+
+/* 填充导航栏 */
+.mynav-box-blank{
+	position: static;
+	margin: 0;
+	border: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 62px;;
+}
+
+
+ul.mynav-menu {
+  float: left;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	height: 62px;
+	padding-left: 0px;
+	list-style-type: none;
+}
+.firstMenu{
+  float: left;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	height: 62px;
+	padding-left: 0px;
+	list-style-type: none;
+}
+.firstMenu li{
+  float:left;
+	display:inline-block;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	width:auto;
+   /*  height: 55px; */
+    border-top-width: 0px;
+    padding-bottom: 0px;
+    border-bottom-width: 0px;
+	text-align:center;
+	margin-top: 20px;
+	margin-bottom: 0px;
+}
+.mynav-menu > li {
+	float:left;
+	display:inline-block;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	width:auto;
+   /*  height: 55px; */
+    border-top-width: 0px;
+    padding-bottom: 0px;
+    border-bottom-width: 0px;
+	text-align:center;
+	margin-top: 20px;
+	margin-bottom: 0px;
+
+}
+
+.mynav-menu > li[class~=logo]{
+    margin-top: 5px;
+	width:340px;
+	text-align:left;
+	padding: 0px 0px;
+
+}
+
+.mynav-menu > li[class~=logo] a{
+	padding: 0px 0px;
+
+}
+
+
+.mynav-menu > li[class~=foot] {
+	float:right;
+	color:#9faab7;
+
+}
+
+.mynav-menu > li[class~=time] {
+	margin-top: 12px;
+	margin-right: 20px;
+	float:right;
+	color:#9faab7;
+	width:85px;
+}
+
+.mynav-menu > li[class~=user-logo] {
+	margin-top: 12px;
+	float:right;
+	color:#9faab7;
+	width:55px;
+}
+.mynav-menu > li[class~=user] {
+	margin-top: 20px;
+	float:right;
+	color:#9faab7;
+	width: auto;;
+}
+
+
+
+
+.mynav-menu > li > a{
+	text-decoration:none;
+	font-size:14px;
+	/* font-weight:bold; */
+	color:#a1abb5;
+	padding: 15px 20px;
+}
+
+
+.mynav-menu > li > a:hover {
+	/* -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
+	-moz-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
+	box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5); */
+	color:#ffffff;
+
+}
+
+.mynav-menu > li[class~=dropdown] {
+    margin-top: 20px;
+    width:50px;
+   text-align:left;
+}
+
+.mynav-menu > li[class~=dropdown] > a{
+    margin-top: 30px;
+
+}
+
+.mynav-menu > li[class~=dropdown] > ul[class~=dropdown-menu] {
+	float: inherit;
+    position: relative;
+    top: 10px;
+    background-color:#454b4f;
+    text-align: center;
+}
+
+.mynav-menu > li[class~=dropdown] > ul[class~=dropdown-menu] > li {
+    color:#454b4f;
+}
+
+.mynav-menu > li[class~=dropdown] > ul[class~=dropdown-menu] > li:hover {
+    color:#5b6267;
+}
+
+
+
+.mynav-menu > li[class~=dropdown] > ul[class~=dropdown-menu] > li > a {
+    color:#a0aab7;
+
+}
+
+
+
+.mynav-menu > li[class~=dropdown] > ul[class~=dropdown-menu] > li > a:hover {
+    color:#383c41;
+}
+
+
+
+.mynav-menu > li > a[class~=active] {
+	/* margin: 10px;
+	padding: 0 20px;
+	text-align: center;
+	text-decoration: none;
+	font: bold 12px/25px Arial, sans-serif; */
+
+	 color: #ffffff;
+
+	 background: #29599a;  /* Old browsers */
+	/* background: -moz-linear-gradient(top,  #70c9e3 0%, #39a0be 100%); FF3.6+
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#70c9e3), color-stop(100%,#39a0be)); Chrome,Safari4+
+	background: -webkit-linear-gradient(top,  #70c9e3 0%,#39a0be 100%); Chrome10+,Safari5.1+
+	background: -o-linear-gradient(top,  #70c9e3 0%,#39a0be 100%); Opera 11.10+
+	background: -ms-linear-gradient(top,  #70c9e3 0%,#39a0be 100%); IE10+
+	background: linear-gradient(top,  #70c9e3 0%,#39a0be 100%); W3C
+	 */
+/* 	text-shadow: 1px 1px 1px rgba(255,255,255, .22); */
+
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border:1px solid #257dfe;
+	border-radius: 30px;
+	padding: 15px 20px;
+
+	/* -webkit-transition: all 0.15s ease;
+	-moz-transition: all 0.15s ease;
+	-o-transition: all 0.15s ease;
+	-ms-transition: all 0.15s ease;
+	transition: all 0.15s ease;
+	 */
+	/*
+	padding: 0 40px;
+	padding-top: 10px;
+	height: 45px;
+	text-transform: uppercase;
+	font: bold 20px/22px Arial, sans-serif; */
+}
+
+
+
+
+.second-box-blank{
+	position: static;
+	margin: 0;
+	border: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 48px;;
+
+
+}
+
+
+.second-box{
+	position: fixed;
+	margin-top: 62px;
+    margin-left: 0px;
+	background:  0 0 no-repeat;
+	background-color: #1f327;
+	border: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 48px;
+	z-index: 8;
+}
+
+.second-box > ul{
+	background:0 0 no-repeat;
+	background-color: #1f2327 !important;
+    height: 48px;
+
+}
+
+
+.second-box > ul > li{
+    margin-top: 15px;
+}
+
+
+.second-box > ul > li:first-child{
+    margin-left: 10px;
+}
+
+
+.second-box > ul > li > a{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    color: #cbd2d5;
+}
+
+.second-box > ul > li > a:hover{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+
+.second-box > ul >li > a[class~=active-second] {
+	 color: #ffffff;
+	 background: #29599a;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border:1px solid #257dfe;
+	border-radius: 30px;
+	padding: 10px 20px;
+    font-size: 12px;
+}
+
+footer copyright
+.login .copyright {
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+	color: #999;
+	font-size: 13px;
+}
+
+@media ( max-width : 1170px) {
+
+	.time{
+		 display: none !important;
+	}
+
+}

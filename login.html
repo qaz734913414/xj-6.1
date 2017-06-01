@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>人脸后台管理系统</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script src="js/bootstrapValidator.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+    <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login">
+<div class="content move">
+
+    <div class="login-form">
+
+        <img src="img/logo_login.png" height="87" width="276"/></div>
+    <form id="userLoginForm" method="post" action="#" class="login-form ">
+        <div class="alert-msg alert  hidden">
+            <span id="alertMsgSpan"> </span>
+        </div>
+
+        <div class="login-blank">
+            <span>&nbsp;</span>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+					<span class="input-group-addon"> <i class="fa fa-user"></i>
+					</span> <input type="text" class="form-control " name="username"
+                                   value="admin" placeholder="账号">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group ">
+					<span class="input-group-addon"> <i class="fa fa-lock"></i>
+					</span> <input type="text" class="form-control " name="password"
+                                   placeholder="密码" value="123456">
+            </div>
+        </div>
+        <div>
+            <input type="checkbox" name="remember" id="remember" value="yes"/>
+            <label for="remember" style="color: #bbb;font-size: 14px;">记住我一周</label>
+        </div>
+        <div class="input-group">
+            <button class="btn btn-primary login-button ">
+                <b>登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</b>
+            </button>
+        </div>
+        <span class="foot">(推荐使用Chrome、IE9+等浏览器访问)</span>
+    </form>
+</div>
+</body>
+<script>
+
+
+    $('button').click(function () {
+
+        $('#userLoginForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        }
+
+                    }
+                }
+            },
+
+            submitHandler: function (data) {
+                var formData = $("#userLoginForm").serialize();
+                $.ajax({
+                    type: 'post',
+                    url: 'http://192.168.0.169:8080/FaceManage/login',
+                    data: formData,
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == 0) {
+
+                            localStorage.setItem('token', data.token)
+                            window.location.href = "index.html";
+                        } else {
+                            alert("用户名或密码错误");
+                        }
+
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            }
+        });
+    })
+
+</script>
+</html>

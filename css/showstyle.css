@@ -1,0 +1,74 @@
+body {
+  
+    color: #42515a;
+    font: 12px Verdana,Arial,Helvetica;
+    margin: 0;
+    word-break: break-all;
+}
+
+.page {
+	background:#F0FCFC;
+    margin: 0 auto;
+    width: 980px;
+}
+.imgdiv{
+	background:#F0FCFC;
+}
+
+
+.footer {
+    background: rgba(0, 0, 0, 0) url("../img/foot_d.png") repeat scroll 0 0;
+    height: 146px;
+    line-height: 2em;
+    text-align: center;
+    width: 980px;
+}
+.footer a {
+    margin: 5px 10px;
+}
+.footer_z {
+    color: #000000;
+    margin: 5px auto;
+}
+
+.page2 {
+    margin: 5px auto;
+    width: 980px;
+}
+
+.fl {
+    float: left;
+}
+
+#main{
+	 /*  background: #F0FCFC url(../img/devoops_pattern_b10.png) 0 0 repeat; */
+	 background:  #F0FCFC; 
+	 overflow:hidden; 
+}
+
+.imgleft{
+	width: 300px;
+	height: 260px;
+	margin-left: 120px;
+	float:left;
+}
+.imgright{
+	width: 300px;
+	height: 260px;
+	margin-left: 80px;
+	float:left; 
+}
+.subtitle{
+	height:32px;
+	line-height:32px;
+	width:149px; 
+	margin-left: 10px;
+ 	background: rgba(0, 0, 0, 0) url("../img/project_intro.png") no-repeat scroll 0 0;
+	background-size:cover; 
+  	-moz-background-size: cover;
+  	-o-background-size: cover; 
+  	-webkit-background-size: cover;
+}
+
+
+
