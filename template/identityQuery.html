@@ -1,0 +1,105 @@
+
+<!-- 身份查询4 以下-->
+
+<div class="container-fluid face-table-group">
+    <div class=" row">
+        <div class="form-inline face-form">
+            <div class="form-group">
+                <input id="iidno" size="22" type="text" value="" class="form-control" placeholder="身份证号">
+                <input id="iname" size="22" type="text" value="" class="form-control" placeholder="姓名">
+            </div>
+            <div class="form-group button-group">
+                <a class="btn face-button" onclick="getMessage4()" id="btn-query"><span class="fa fa-search"
+                                                                                             aria-hidden="true"></span>搜索
+                </a>
+                <a class="btn face-button2" onclick="reset4()" id="btn-reset"><span class="fa fa-search"
+                                                                                         aria-hidden="true"></span>重置
+                </a>
+            </div>
+        </div>
+
+        <div class="row result-box ">
+            <div class="container-fluid">
+                <div class="row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="retrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="fa fa-times" aria-hidden="true"></span></button>
+                <h4 class="modal-title">身份查询详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-sm-4 col-md-4 col-lg-4 text-center show-results">
+                        <button type="button" class="btn left-btn"><span class="fa  fa-chevron-left"></span>
+                        </button>
+                        <h4>查询结果</h4>
+                        <button type="button" class="btn right-btn"><span class="fa  fa-chevron-right"
+                                                                          aria-hidden="true"></span>
+                        </button>
+                        <div class="thumbnail">
+                            <img id="modal-img" src="./img/default_img.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 items">
+                        <h4 class="text-center">身份信息详情</h4>
+                        <h4> &nbsp;</h4>
+                        <div class="caption">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade face-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="modal-body-id"></div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<script id="imgTemp" type="text/html">
+    <div class="col-sm-4 col-md-3 col-lg-2">
+        <div class="thumbnail {{= focus==''?'':' focus'}}">
+            <img src={{= url}} alt="...">
+            <div class="caption">
+                <p>姓名：{{= name}}</p>
+                <p>年龄：{{= age}}</p>
+                <p>性别：{{= sex}}</p>
+                <p>地区：{{= address}}</p>
+                <p class="hidden">身份证号：{{= idno}}</p>
+                {{if focus}}
+                <p class="hidden focus-font">重点人员情况：{{= focus}}'</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</script>
+<!-- 身份查询 以上-->
+<script src="./template/identityQuery.js" charset="utf-8"></script>

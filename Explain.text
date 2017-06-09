@@ -1,0 +1,25 @@
+﻿
+人脸检索管理
+      人脸检索       	 faceRetrieval
+      身份检索	       identityRetrieval
+      人脸比对	       faceMatching
+
+人脸日志管理
+      人脸检索日志	   faceRetrievalLog
+      身份检索日志	   identityRetrievalLog
+      人脸比对日志	   faceToFaceLog
+
+统计分析管理
+      用户信息统计	   userInformation
+      用户操作统计	   userOperations
+      比中率统计	      ratioStatistics
+      身份查询	       identityQuery
+
+配置中心
+      用户管理	       userManagement
+      组织机构管理	   organizationManagement
+      角色管理	       roleManagement
+      系统设置	       systemSettings
+      问题反馈	       problemFeedback
+      消息推送         messagePush
+      系统日志         systemLog

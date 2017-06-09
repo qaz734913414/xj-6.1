@@ -1,0 +1,680 @@
+
+	<style type="text/css">
+	.modal-backdrop {
+			display: none;
+		}
+
+		input,
+		select {
+			background-color: #292c2c;
+		}
+
+		.ztree li a.curSelectedNode {
+			background-color: #575757;
+			border: 0px;
+		}
+
+		.ztree li a.curSelectedNode {
+			background-color: #575757;
+			border: 0px;
+		}
+
+		.ztree li span {
+			font-size: 15px;
+			color: #FAFAFA;
+		}
+
+		.ztree li a {
+			height: 22px;
+		}
+
+		.ztree li span.button.ico_open {
+			/*./userList.html*/
+			background: url(./css/zTree/UI_41.png) no-repeat scroll 0 0 transparent;
+		}
+
+
+	}
+	.ztree li span.button.ico_close {
+		background: url(./css/zTree/UI_61.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.ico_docu {
+		background: url(./css/zTree/UI_43.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.center_close {
+		margin-top: 4px;
+		margin-left: 3px;
+		background: url(./css/zTree/UI_65.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.center_open {
+		margin-top: 4px;
+		margin-left: 3px;
+		background: url(./css/zTree/UI_53.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.root_close {
+		margin-top: 4px;
+		background: url(./css/zTree/UI_65.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.root_open {
+		margin-top: 4px;
+		background: url(./css/zTree/UI_53.png) no-repeat scroll 0 0 transparent;
+	}
+	.ztree li span.button.bottom_close {
+		margin-top: 4px;
+		margin-left: 3px;
+		background: url(./css/zTree/UI_65.png) no-repeat scroll 0 0 transparent;
+	}
+	</style>
+	<style type="text/css">
+		/*.modal-backdrop { display: none; }*/
+	</style>
+
+	<head>
+
+		<body>
+			<div id="ajax-content">
+				<div class="roleList">
+					<div class="container-fluid face-table-group" id="role">
+						<div class="form-group" style="margin-left:10px;padding-top: 14px;">
+							<div class="col-sm-1" style="width: 100px;margin-top: 2px;">
+								<button class="btn face-button" style="margin-left:-22px;" onclick="addRole()" type="button">
+									<i class="fa fa-plus"></i>
+									新建角色
+								</button>
+							</div>
+						</div>
+<!-- 					</form> -->
+			<div>&nbsp;</div>
+			<div>&nbsp;</div>
+			<table id="roleTable" data-show-header="true"
+				data-show-refresh="false" data-pagination="true"
+				data-side-pagination="server" data-page-list="[10, 20, 100]"
+				data-page-size="5" class="table table-striped face-table"
+				data-checkbox="true" >
+				<thead>
+					<tr>
+						<th id="rId" data-field="rId" data-halign="center" data-align="center"
+							data-valign="middle" class="hidden">机构编号</th>
+
+						<th data-field="rName" data-halign="center" data-align="center"
+							data-valign="middle">角色名</th>
+
+						<th data-field="operate" data-halign="center" data-align="center"
+							data-valign="middle" data-formatter="operateFormatter"
+							data-events="operateEvents">操作</th>
+					</tr>
+				</thead>
+				<tbody id="body">
+				</tbody>
+			</table>
+		</div>
+					<input type="hidden" id="comfirm_modal_hidden_id" name="comfirm_modal_hidden_id"  />
+
+
+				</div>
+				<div class="roleAdd" style="display:none">
+					<div class="container-fluid face-table-group" >
+					<div class="row">&nbsp;&nbsp;</div>
+					<div class="row">&nbsp;&nbsp;</div>
+						<form modelAttribute="role" id="roleInfoForm"
+										class="form-horizontal" role="form" >
+								<div class="div-inline" style="font-size:16px;color:#FAFAFA;margin-left:0px;float:left;">角色名称  : </div>
+								<div class="col-sm-2 div-inline" style="margin-top:-5px;">
+								<input type="text" class="form-control hidden" path="rId" id="rId" name="rId" placeholder="id" ></input>
+								<input type="text" class="form-control" path="rName" id="rName" name="rName" placeholder="角色名" ></input>
+									</div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div>&nbsp;</div>
+								<div style="margin-left:50px;"><font size="4px" color="#1874CD">权限授权</font></div>
+								<div id="tree" style="margin-left:50px;">
+									<ul id="treeDemo" class="ztree" ></ul>
+								</div>
+								<div class="form-inline" style="margin-top:30px;">
+									<div class="form-group col-xs-2">
+										<button type="submit" class="btn face-button">
+											<i class="fa fa-rocket"></i> &nbsp;提&nbsp;&nbsp;交
+										</button>
+									</div>
+									<div class="form-group col-xs-2">
+										<button type="button"
+											onclick="goback()"
+											class="btn face-button2">
+											<i class="fa fa-reply"></i> &nbsp;返&nbsp;&nbsp;回
+										</button>
+									</div>
+								</div>
+							</form>
+					</div>
+					<input type="hidden" id="comfirm_modal_hidden_id"
+						name="comfirm_modal_hidden_id" />
+
+				</div>
+				<div class="roleEdit" style="display:none">
+					<div class="container-fluid face-table-group">
+					<div class="row">&nbsp;&nbsp;</div>
+					<div class="row">&nbsp;&nbsp;</div>
+									<form modelAttribute="role" id="sroleInfoForm" class="form-horizontal" role="form">
+									<div class="div-inline" style="font-size:16px;color:#FAFAFA;margin-left:50px;float:left;">角色名称   : </div>
+									<div class="col-sm-2 div-inline" style="margin-top:-5px;">
+									<input type="text" class="form-control hidden" path="rId" id="rId" name="rId" />
+									<input type="text" class="form-control" path="rName" id="xrName" name="rName" placeholder="角色名" />
+									</div>
+									<div>&nbsp;</div>
+									<div>&nbsp;</div>
+									<div>&nbsp;</div>
+									<div style="margin-left:50px;"><font size="4px" color="#1874CD">权限授权</font></div>
+										<div id="tree" style="margin-left:50px;">
+											<ul id="streeDemo" class="ztree" ></ul>
+										</div>
+										<div class="form-inline" style="margin-top:30px;">
+											<div class="form-group col-xs-2">
+												<button type="submit" class="btn face-button">
+													<i class="fa fa-rocket"></i> &nbsp;提&nbsp;&nbsp;交
+												</button>
+											</div>
+											<div class="form-group col-xs-2">
+												<button type="button"
+													onclick="goback()"
+													class="btn face-button2">
+													<i class="fa fa-reply"></i> &nbsp;返&nbsp;&nbsp;回
+												</button>
+											</div>
+										</div>
+									</form>
+					</div>
+					<input type="hidden" id="comfirm_modal_hidden_id" name="comfirm_modal_hidden_id"  />
+				</div>
+
+				<!-- 提示框开始 -->
+					<div class="modal fade face-modal" id="myComfirmModal" tabindex="-1" role="dialog" aria-labelledby="myComfirmModalLabel" aria-hidden="true">
+						   <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+						      <div class="modal-content">
+						         <div class="modal-header">
+						            <button type="button" class="close"data-dismiss="modal" aria-hidden="true">&times;</button>
+						            <h4 class="modal-title" id="myComfirmModalLabel"></h4>
+						         </div>
+						         <div class="modal-body" style="text-align:center;" id="confirm_modal-body-id"></div>
+						         <div class="modal-footer" style="text-align:center;">
+						            <button type="button" class="btn face-button" id="sureSubmit">
+													确定
+						            </button>
+						            <button type="button" class="btn btn-primary" data-dismiss="modal">
+													取消
+						            </button>
+						         </div>
+						     </div>
+						</div>
+					</div>
+					<div class="modal fade face-modal" id="PromptModal" tabindex="-1" role="dialog" aria-labelledby="PromptLabel" aria-hidden="true">
+						   <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+						      <div class="modal-content">
+						         <div class="modal-header">
+						            <h4 class="modal-title" id="PromptModalLabel"></h4>
+						         </div>
+						         <div class="modal-body" style="text-align:center;" id="Prompt-body-text"></div>
+						         <div class="modal-footer" style="text-align:center;">
+						            <button type="button" class="btn face-button" id="sure">
+													确定
+						            </button>
+						         </div>
+						     </div>
+						</div>
+					</div>
+			</div>
+		</body>
+		<script>
+			//var roleList = ${list};
+			$('.roleList').show();
+			$('.roleList').siblings().hide();
+
+
+	$('#sureSubmit').on('click',function(){
+		$('#myComfirmModal').modal('hide');
+		$.ajax({
+			type:'post',
+			url:'http://192.168.0.239:8080/FaceManage/role/roleDelete',
+	//		url:'./true.json',''
+			data:{
+				rid:$("#comfirm_modal_hidden_id").val()
+			},
+			cache: false,
+		    async: false,
+			dataType:'json',
+			success:function(data){
+				console.log(data)
+				 if(data.code == 200){
+				 	console.log(data.code)
+					$("#PromptModalLabel").html("提示");
+					$("#Prompt-body-text").html("角色删除成功");
+					$('#PromptModal').modal('show');
+				}else{
+					$("#PromptModalLabel").html("提示");
+					$("#Prompt-body-text").html(data.msg);
+					$('#PromptModal').modal('show');
+				}
+				$("#roleTable").bootstrapTable('refresh');
+			},
+			error:function(){
+				// alert('系统出错请稍后再试');
+				$("#Prompt-body-text").html('系统出错');
+				$('#PromptModal').modal('show');
+			}
+		});
+	});
+	$('#PromptModal #sure').on('click',function(){
+		$('#PromptModal').modal('hide');
+	})
+	$(function(){
+		getTable();
+	});
+
+	// 	table
+	function getTable() {   //表格初始化
+		$('.roleList').siblings().hide();
+		$("#roleTable").bootstrapTable('destroy');
+		$("#roleTable").bootstrapTable({
+			method : "post",
+			url : "http://192.168.0.239:8080/FaceManage/role/listAll",
+			pagination : true,
+			contentType : "application/x-www-form-urlencoded",
+			queryParamsType : " limit",
+			paginationDetailHAlign : "left",
+		//	height : $(document).height() - 200
+//			queryParams: function queryParams(params) {   //设置查询参数
+//            var param = {
+//                pageNumber: params.pageNumber,
+//                pageSize: params.pageSize,
+//                orderNum : $("#orderNum").val()
+//            };
+//            return param;
+//          },
+			onLoadSuccess: function(data){  //加载成功时执行
+              console.log(data)
+            },
+		});
+	}
+	function operateFormatter(value, row, index) {
+		return [
+				'<button type="button" class="updateBtn btn-sm btn face-button" style="margin-right:15px;">修改</button>',
+				'<button type="button" class="removeBtn btn-sm btn face-button2" style="margin-right:15px;">删除</button>' ]
+				.join('');
+	}
+	window.operateEvents = {
+		'click .removeBtn' : function(e, value, row, index) {
+			roleDelete(row);
+			// $("#roleTable").bootstrapTable('refresh');
+		},
+		'click .updateBtn' : function(e, value, row, index) {
+			roleEdit(row);
+		}
+	};
+	// $('#roleTable').on('click','button.removeBtn',function(){
+	// 	console.log('11111111111111')
+	// 	roleDelete(row);
+	// 	$("#roleTable").bootstrapTable('refresh');
+	// })
+	function roleDelete(row){  //删除盒子提示信息
+		$("#comfirm_modal_hidden_id").val(row.rId);
+		$("#confirm_modal-body-id").html("确定要删除角色名:<span style=\"color: red;\">"+row.rName+"</span>吗?");
+		$("#myComfirmModal").modal('show');
+	}
+	function addRole(){    //新建角色
+		// $('.roleList').hide();
+		$('.roleAdd').show();
+		$('.roleAdd').siblings().hide();
+		addRoleZtree();
+		//http://192.168.0.239:8080/FaceManage/role/addRole
+		//字段	                含义
+		//checkNodes	返回的下拉框渲染数据
+		//rName	                新增的用户名
+//		LoadAjaxContent("${ctx }/role/roleAdd");
+	}
+
+	function roleEdit(row){
+		console.log(row)
+
+	//	提交按钮
+	//http://192.168.0.239:8080/FaceManage/role/editRole
+
+	//字段	                含义	                                是否必须
+	//changeNodes	返回的下拉框渲染数据	是
+		// $('.roleList').hide();
+		$('.roleEdit').show();
+		$('.roleEdit').siblings().hide();
+//		var rName=
+		roleEditZtree(row.rId,row.rName);
+//		LoadAjaxContent("${ctx }/role/roleEdit/"+row.rId);
+	}
+
+//	function searchFormSubmit(){
+//		LoadAjaxContent("${ctx }/admin/inituserlist",
+//						"role="+$("#role_condition").val()
+//						+"&wes="+$("#wes_condition").val()
+//						+"&cds="+$("#cds_condition").val()
+//						+"&qms="+$("#qms_condition").val()
+//						+"&delete="+$("#delete_condition").val()
+//						);
+//	}
+	function goback(){
+		$('.roleList').show();
+		$('.roleList').siblings().hide();
+		getTable()
+	}
+		</script>
+		<script type="text/javascript">
+
+	function addRoleZtree(){
+			var zTree;
+			var selectNode;
+			var load = false;
+			var checkNodes;
+			var setting = {
+				async : {
+					enable : true,
+					dataType : "json",
+					type : "post",
+					url:'http://192.168.0.239:8080/FaceManage/menu/initZTree',
+					autoParam : [ "id" ]    //每次异步加载传给服务器的参数
+				},
+				view : {
+					dblClickExpand : true,
+					selectedMulti : false,
+				},
+				data : {
+					key : {
+						name : "nodeName" // 取后台传过来的json数据中 nodeName 字段值作为节点名称
+					},
+					simpleData : {
+						enable : true,
+						idKey : "id",      //节点的id,注意此处要对应你后台传过来的节点的属性名id
+						pIdKey : "pId",    //节点的pId,注意此处要对应你后台传过来的节点的属性名pId
+						rootPId : 0        //根节点的pId = 0
+					}
+				},
+				 check: {
+		         chkboxType: { "Y": "ps", "N": "ps" },
+		         chkStyle: "checkbox",//复选框类型
+		         enable: true //每个节点上是否显示 CheckBox
+		     },
+				callback : {
+						onAsyncSuccess : zTreeOnAsyncSuccess,//异步加载完毕的回调函数
+						onCheck : zTreeOnCheck
+				}
+			};
+				function zTreeOnCheck(event, treeId, treeNode) {
+
+					var treeObj = $.fn.zTree.getZTreeObj('treeDemo');
+					var cnodes = treeObj.getCheckedNodes(true);
+		            checkNodes = "";
+		            for(var i=0;i<cnodes.length;i++){
+		            checkNodes += cnodes[i].id + ",";   //获取选中节点的值
+		            }
+
+			};
+				function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+				//这个函数仅仅是为了 初始化时展开 1级菜单
+				console.log(msg)
+				if (!load) {
+					var nodes = zTree.getNodesByParam("pId", 0, null);
+					$.each(nodes, function(i, n) {
+						zTree.expandNode(n, true, false, true);
+					});
+					load = true;
+				}else{
+					var nodes = zTree.getNodesByParam("pId", treeNode.id, null);
+					$.each(nodes, function(i, n) {
+						zTree.expandNode(n, true, false, true);
+					});
+				}
+
+			}
+			$(document).ready(function() {
+				// Load Datatables and run plugin on tables
+//				LoadDataTablesScripts(AllTables);
+				// Add Drag-n-Drop feature
+//				LoadBootstrapValidatorScript(addFormVali);
+				addFormVali()
+//				WinMove();
+			});
+			$(function() {
+				zTree = $.fn.zTree.init($('#treeDemo'), setting);
+			});
+				// Run Datables plugin and create 3 variants of settings
+//			function AllTables() {
+//				TestTable2();
+//				LoadSelect2Script(MakeSelect2);
+//			}
+			function MakeSelect2() {
+				$('select').select2();
+				$('.dataTables_filter').each(
+						function() {
+							$(this).find('label input[type=text]').attr('placeholder',
+									'请输入关键字');
+						});
+			}
+
+//			$('.btn.face-button').on('click',function(){
+//				return false;
+//			})
+
+			function addFormVali() {
+				$('#roleInfoForm').bootstrapValidator({
+					fields : {
+		// 				rLevel : {
+		// 					validators : {
+		// 						notEmpty : {
+		// 							message : '请输入角色级别'
+		// 						},
+		// 					}
+		// 				},
+						rName : {
+							validators : {
+								notEmpty : {
+									message : '请输入角色名称'
+								},
+							}
+						}
+					},
+					submitHandler : function(form) {   //新增角色跳转后的页面提交
+//						alert('asdkljaskldjl;a')
+						var rName = $("#rName").val();
+						var formData = $("#roleInfoForm").serialize();
+						console.log(checkNodes);
+						console.log(rName)
+						if(!checkNodes){
+							console.log("请选择权限授权")
+								$("#myModalLabel").html("提示");
+									$("#modal-body-id").html("请选择权限授权");
+									$('#myModal').modal('show');
+						}else{
+							$.ajax({
+							url:'http://192.168.0.239:8080/FaceManage/role/addRole',
+							type:'post',
+							data:{
+								checkNodes:checkNodes,
+								rName:rName
+							},
+							success:function(data){
+								console.log(data)
+								if (data.code == 200) {
+									console.log("添加成功")
+									$("#myModalLabel").html("提示");
+									$("#modal-body-id").html("添加成功");
+									$('#myModal').modal('show');
+//									LoadAjaxContent('${ctx }/role/list');
+								} else {
+									console.log(data.msg)
+									$("#myModalLabel").html("提示");
+									$("#modal-body-id").html(data.msg);
+									$('#myModal').modal('show');
+								}
+							},
+							error:function(){
+								console.log('系统出错请稍后再试');
+								$("#myModalLabel").html("提示");
+								$("#modal-body-id").html('系统出错请稍后再试');
+								$('#myModal').modal('show');
+							}
+						})
+						}
+
+					}
+				});
+			}
+	}
+
+		</script>
+		<script>
+			function roleEditZtree(rId,rName){
+					var zTree;
+					var selectNode;
+					var load = false;
+					var changeNodes;
+					console.log(rName);
+					$("#xrName").val(rName);
+					var menus;
+					var setting = {
+						async : {
+							enable : true,
+							dataType : "json",
+							type : "post",
+							url : "http://192.168.0.239:8080/FaceManage/menu/initZTree?rName="+rName,  //请求节点生成的servlet
+							autoParam : [ "id" ]    //每次异步加载传给服务器的参数
+						},
+						view : {
+							dblClickExpand : true,
+							selectedMulti : false,
+						},
+						data : {
+							key : {
+								name : "nodeName" // 取后台传过来的json数据中 nodeName 字段值作为节点名称
+							},
+							simpleData : {
+								enable : true,
+								idKey : "id",      //节点的id,注意此处要对应你后台传过来的节点的属性名id
+								pIdKey : "pId",    //节点的pId,注意此处要对应你后台传过来的节点的属性名pId
+								rootPId : 0        //根节点的pId = 0
+							}
+						},
+						 check: {
+				         enable: true, //每个节点上是否显示 CheckBox
+				         chkboxType: { "Y": "ps", "N": "ps" },
+				         chkStyle: "checkbox",//复选框类型
+				     },
+						callback : {
+						onAsyncSuccess : zTreeOnAsyncSuccess,    //异步加载完毕的回调函数
+						onCheck : onCheck
+						}
+					};
+
+						function onCheck(e,treeId,treeNode){
+							var treeObj = $.fn.zTree.getZTreeObj("streeDemo");
+							var cnodes = treeObj.getCheckedNodes(true);
+				            changeNodes = "";
+				            for(var i=0;i<cnodes.length;i++){
+				            changeNodes += cnodes[i].id + ",";   //获取选中节点的值
+				            }
+				        }
+						function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) { //这个函数仅仅是为了 初始化时展开 1级菜单
+						if (!load) {
+							var nodes = zTree.getNodesByParam("pId", 0, null);
+							$.each(nodes, function(i, n) {
+								zTree.expandNode(n, true, false, true);
+							});
+							load = true;
+						}else{
+							var nodes = zTree.getNodesByParam("pId", treeNode.id, null);
+							$.each(nodes, function(i, n) {
+								zTree.expandNode(n, true, false, true);
+							});
+						}
+
+					}
+
+					 $(function(){
+				                zTree = $.fn.zTree.init($("#streeDemo"), setting);
+				    });
+				// Run Datables plugin and create 3 variants of settings
+//				function AllTables(){
+//					TestTable2();
+//					LoadSelect2Script(MakeSelect2);
+//				}
+				function MakeSelect2(){
+					$('select').select2();
+					$('.dataTables_filter').each(function(){
+						$(this).find('label input[type=text]').attr('placeholder', '请输入关键字');
+					});
+				}
+
+				$(document).ready(function() {
+					// Load Datatables and run plugin on tables
+//					LoadDataTablesScripts(AllTables);
+					// Add Drag-n-Drop feature
+//					LoadBootstrapValidatorScript(addFormVali);
+					addFormVali()
+//					WinMove();
+				});
+
+
+				function addFormVali(){
+					$('#sroleInfoForm').bootstrapValidator({
+						fields: {
+				// 			rLevel: {
+				// 				validators: {
+				// 					notEmpty: {
+				// 						message: '请输入角色级别'
+				// 					},
+				// 				}
+				// 			},
+							rName: {
+								validators: {
+									notEmpty: {
+										message: '请输入角色名称'
+									},
+								}
+							}
+						},
+						submitHandler:function(form) {
+							var formData=$("#sroleInfoForm").serialize();
+							//rId=&rName=%E4%B8%A4%E9%9D%A2%E6%80%A7lc%E7%9A%84
+							console.log(changeNodes)
+							//  changeNodes=1,5,28,&rId=&rName=%E5%8E%BF%E9%95%BF
+							console.log($("#xrName").val())
+							console.log(changeNodes)
+							$.ajax({
+								url:'http://192.168.0.239:8080/FaceManage/role/editRole',
+								type:'post',
+								data:{
+									changeNodes:changeNodes,
+									rId:rId,
+									rName:$("#xrName").val()
+								},
+								success:function(data){
+									if(data.code == 200){
+										console.log('修改成功')
+										 $("#myModalLabel").html("提示");
+										$("#modal-body-id").html("修改成功");
+										$('#myModal').modal('show');
+//										LoadAjaxContent('${ctx }/role/list');
+									}else{
+										console.log(data.msg)
+										$("#myModalLabel").html("提示");
+										$("#modal-body-id").html(data.msg);
+										$('#myModal').modal('show');
+									}
+								},
+								error:function(){
+									console.log('系统出错请稍后再试')
+									$("#myModalLabel").html("提示");
+									$("#modal-body-id").html('系统出错请稍后再试');
+									$('#myModal').modal('show');
+								}
+							})
+						}
+					});
+				}
+			}
+
+
+		</script>

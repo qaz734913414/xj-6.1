@@ -1,0 +1,120 @@
+
+<div class="container-fluid face-table-group">
+    <div class="row">
+        <div class="form-inline face-form" id="my-button">
+            <div class="form-group">
+                <select id="u_unit_id" class="form-control">
+                    <option value="-1">单位名称</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="area_id" class="form-control">
+                    <option value="-1">行政区域</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="u_type" class="form-control">
+                    <option value="-1">账户类别</option>
+                    <option value="0">APP</option>
+                    <option value="1">后台</option>
+                    <option value="2">通用</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!--  <label for>角色</label>-->
+                <select id="u_role_id" class="form-control">
+                    <option value="-1">角色</option>
+                    <option value="0">政府</option>
+                    <option value="-1">团体</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="dateStatus" class="form-control">
+                    <option value="-1">到期状态</option>
+                    <option value="0">即将到期</option>
+                    <option value="1">未到期</option>
+                    <option value="2">已到期</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select id="u_status" class="form-control"
+                        onchange="if(this.value=='Y'){document.getElementById('dateStatus').disabled=false;}else{document.getElementById('dateStatus').disabled=true;}">
+                    <option value="A">用户状态</option>
+                    <option value="Y">正常用户</option>
+                    <option value="N">停用用户</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="用户名" id="u_real_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <a class="btn face-button" onclick="getTable1()" style="background:#226ed4">
+                    <span class="glyphicon glyphicon-search"></span>
+                    搜索
+                </a>
+                <a class="btn face-button2" onclick="reset()" style="background:#e76361">
+                    <span class="glyphicon glyphicon-repeat"></span>
+                    重置
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table id="userTable" data-show-header="true"
+               data-show-refresh="false" data-pagination="true"
+               data-side-pagination="server" data-page-list="[10, 20, 100, 1000]"
+               data-page-size="10" class="table table-striped face-table" data-checkbox="true">
+            <thead>
+            <tr>
+                <th data-field="uRealName" data-halign="center" data-align="center"
+                    data-valign="middle">姓名
+                </th>
+
+                <th data-field="uSex" data-halign="center" data-align="center"
+                    data-valign="middle">性别
+                </th>
+
+                <th data-field="uCardId" data-halign="center" data-align="center"
+                    data-valign="middle">证件号
+                </th>
+
+                <th data-field="uUnitId" data-halign="center" data-align="center"
+                    data-valign="middle">单位
+                </th>
+
+                <th data-field="uDuty" data-halign="center" data-align="center"
+                    data-valign="middle">职务
+                </th>
+
+                <th data-field="uPolicyNum" data-halign="center"
+                    data-align="center" data-valign="middle">警号
+                </th>
+
+                <th data-field="dArea" data-halign="center" data-align="center"
+                    data-valign="middle">行政区域
+                </th>
+
+                <th data-field="uType" data-halign="center" data-align="center"
+                    data-valign="middle" data-formatter="typeFormatter">账户类别
+                </th>
+
+                <th data-field="uStatus" data-halign="center" data-align="center"
+                    data-valign="middle" data-formatter="statusFormatter">用户状态
+                </th>
+
+                <th data-field="expireTime" data-halign="center"
+                    data-align="center" data-valign="middle">账户到期时间
+                </th>
+            </tr>
+            </thead>
+            <tbody id="userBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="./template/userInformation.js" charset="utf-8"></script>

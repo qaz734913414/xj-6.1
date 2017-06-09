@@ -1,0 +1,132 @@
+
+    <!-- 用户操作统计2 以下-->
+    <div class="container-fluid face-table-group">
+        <div class="row">
+            <div class="form-inline face-form">
+                <div class="form-group">
+                    <select id="timestatus" class="form-control" onchange="changeTime()">
+                        <option value="-1">统计方式</option>
+                        <option value="0">按年统计</option>
+                        <option value="1">按月统计</option>
+                        <option value="2">按天统计</option>
+                        <option value="3">按时统计</option>
+                    </select>
+                </div>
+                <div class="form-group mydate">
+                    <input size="16" type="text" value="" id="startDate" class="form-control"
+                           placeholder="开始时间">
+                    <input size="16" type="text" value="" id="endDate" class="form-control" placeholder="结束时间">
+                </div>
+                <div class="form-group">
+                    <select id="fashion" class="form-control" onchange="changeTable()">
+                        <option value="-1">统计业务</option>
+                        <option value="0">人脸检索管理</option>
+                        <option value="1">人脸日志管理</option>
+                        <option value="2">统计分析管理</option>
+                        <option value="3">配置中心</option>
+                    </select>
+                </div>
+                <div class="form-group button-group">
+                    <a class="btn face-button" onclick="getMessage2()" id="btn-query"><span class="fa fa-search"
+                                                                                                 aria-hidden="true"></span>搜索
+                    </a>
+                    <a class="btn face-button2" onclick="reset2()" id="btn-reset"><span class="fa fa-search"
+                                                                                             aria-hidden="true"></span>重置
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row tablediv">
+            <table id="first" data-show-header="true" data-show-refresh="false"
+
+
+                   data-pagination="true" data-side-pagination="server"
+                   data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+                   class="table table-striped face-table">
+                <thead>
+                <tr>
+                    <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                    <th data-field="menu2" data-halign="center" data-align="center" data-valign="middle">人脸检索管理</th>
+                    <th data-field="menu3" data-halign="center" data-align="center" data-valign="middle">人脸日志管理</th>
+                    <th data-field="menu4" data-halign="center" data-align="center" data-valign="middle">统计分析管理</th>
+                    <th data-field="menu5" data-halign="center" data-align="center" data-valign="middle">配置中心</th>
+                </tr>
+                </thead>
+                <tbody id="firstBody">
+                </tbody>
+            </table>
+            <table id="second" data-show-header="true" data-show-refresh="false"
+                   data-pagination="true" data-side-pagination="server"
+                   data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+                   class="table table-striped face-table">
+                <thead>
+                <tr>
+                    <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                    <th data-field="menu6" data-halign="center" data-align="center" data-valign="middle">人脸检索</th>
+                    <th data-field="menu7" data-halign="center" data-align="center" data-valign="middle">身份检索</th>
+                    <th data-field="menu8" data-halign="center" data-align="center" data-valign="middle">人脸比对</th>
+                    <th data-field="menu9" data-halign="center" data-align="center" data-valign="middle">人脸多图比对</th>
+                    <th data-field="menu10" data-halign="center" data-align="center" data-valign="middle">动态布控</th>
+                </tr>
+                </thead>
+                <tbody id="secondBody">
+                </tbody>
+            </table>
+            <table id="third" data-show-header="true" data-show-refresh="false"
+                   data-pagination="true" data-side-pagination="server"
+                   data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+                   class="table table-striped face-table">
+                <thead>
+                <tr>
+                    <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                    <th data-field="menu11" data-halign="center" data-align="center" data-valign="middle">人脸检索日志</th>
+                    <th data-field="menu12" data-halign="center" data-align="center" data-valign="middle">身份检索日志</th>
+                    <th data-field="menu13" data-halign="center" data-align="center" data-valign="middle">人脸比对日志</th>
+                </tr>
+                </thead>
+                <tbody id="thirdBody">
+                </tbody>
+            </table>
+            <table id="four" data-show-header="true" data-show-refresh="false"
+                   data-pagination="true" data-side-pagination="server"
+                   data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+                   class="table table-striped face-table">
+                <thead>
+                <tr>
+                    <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                    <th data-field="menu14" data-halign="center" data-align="center" data-valign="middle">用户信息统计</th>
+                    <th data-field="menu15" data-halign="center" data-align="center" data-valign="middle">用户操作统计</th>
+                    <th data-field="menu16" data-halign="center" data-align="center" data-valign="middle">比中率统计</th>
+                    <th data-field="menu17" data-halign="center" data-align="center" data-valign="middle">身份查询</th>
+                </tr>
+                </thead>
+                <tbody id="countBody">
+                </tbody>
+            </table>
+            <table id="five" data-show-header="true" data-show-refresh="false"
+                   data-pagination="true" data-side-pagination="server"
+                   data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+                   class="table table-striped face-table">
+                <thead>
+                <tr>
+                    <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                    <th data-field="menu18" data-halign="center" data-align="center" data-valign="middle">用户管理</th>
+                    <th data-field="menu19" data-halign="center" data-align="center" data-valign="middle">组织机构管理</th>
+                    <th data-field="menu20" data-halign="center" data-align="center" data-valign="middle">角色管理</th>
+                    <th data-field="menu21" data-halign="center" data-align="center" data-valign="middle">系统设置</th>
+                    <th data-field="menu22" data-halign="center" data-align="center" data-valign="middle">接入平台</th>
+                    <th data-field="menu23" data-halign="center" data-align="center" data-valign="middle">设备管理</th>
+                    <th data-field="menu24" data-halign="center" data-align="center" data-valign="middle">服务状态</th>
+                    <th data-field="menu25" data-halign="center" data-align="center" data-valign="middle">系统日志</th>
+                    <th data-field="menu26" data-halign="center" data-align="center" data-valign="middle">人脸库管理</th>
+                    <th data-field="menu27" data-halign="center" data-align="center" data-valign="middle">消息推送</th>
+                    <th data-field="menu28" data-halign="center" data-align="center" data-valign="middle">问题反馈</th>
+                </tr>
+                </thead>
+                <tbody id="countBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 用户操作统计2 以上-->
+<script src="./template/userOperations.js" charset="utf-8"></script>

@@ -1,0 +1,13 @@
+{
+  "rows": [
+    {
+      "createTime": "2017-06-05",  
+      "mId": 1,
+      "username": "admin",
+      "status": "Y",
+      "updateTime": "2017-06-05",
+      "mContent": "系统升级，请稍后再试"
+    }
+  ],
+  "total": 1
+}

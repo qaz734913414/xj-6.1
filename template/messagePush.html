@@ -1,0 +1,150 @@
+
+<!-- 消息推送 -->
+<div class="container-fluid face-table-group">
+    <div class="row">
+        <div class="form-inline face-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="queryMesUser" onclick="" placeholder="请输入发布人名称">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="queryMesText" placeholder="请输入发布的消息">
+            </div>
+            <div class="form-group mydate">
+                <input type="text" class="form-control" id="from" placeholder="请选择开始时间"> —
+                <input type="text" class="form-control" id="to" placeholder="请选择结束时间">
+            </div>
+            <div class="form-group button-group">
+                <button id="queryMes" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>查询</button>
+                <button id="queryreset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</button>
+            </div>
+
+            <div class="form-group">
+              <button class="btn face-button" id="addMesBtn" onclick="addMesBtn()" type="button" id="new">
+                <i class="fa fa-plus"></i> 添加
+              </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="face-table problem-table"></table>
+    </div>
+    <input type="hidden" value="" id="nTitle" />
+    <input type="hidden" value="" id="mTitle" />
+    <input type="hidden" value="" id="mContent" />
+    <input type="hidden" value="" id="target" />
+    <!-- 添加消息弹出框 -->
+    <div class="modal fade face-modal in" id="addMessageBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display:none;">
+      <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title text-center">添加消息</h4>
+          </div>
+          <div class="modal-body">
+            <form id="messageVal" modelattribute="user" class="form-inline bootstrap-validator-form" role="form" novalidate="novalidate">
+              <div class="form-group">
+                <label for="addMesUser">通知的标题</label>
+                  <input type="text" class="form-control" id="addMesTit" name="mTitle" onclick="" placeholder="请输入通知的标题">
+              </div>
+              <div class="form-group">
+                <label for="addMesUser">通知的内容标题</label>
+                  <input type="text" class="form-control" id="addMesTitCon" name="nTitle" onclick="" placeholder="请输入通知的内容标题">
+              </div>
+              <div class="form-group addMessage">
+                <label for="addMes">通知的内容</label>
+                <textarea class="form-control" id="addMes" name="mContent" placeholder="请输入通知的内容"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="addMes">通知的对象</label>
+                <select class="form-control" id="addTarget" name="target" style="width:100px;color:#555;">
+                    <option value="1" selected="selected">所有人</option>
+                    <option value="2">安卓</option>
+                    <option value="3">IOS</option>
+                <select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center ">
+              <button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
+              <button type="button " data-dismiss="modal " id="continue" class="btn face-button ">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 修改消息弹出框 -->
+    <div class="modal fade face-modal in" id="reviseMesBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display:none;">
+      <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title text-center">修改消息</h4>
+          </div>
+          <div class="modal-body">
+            <form id="reviseMesVal" modelattribute="user" class="form-inline bootstrap-validator-form" role="form" novalidate="novalidate">
+              <div class="form-group">
+                <label for="addMesUser">通知的标题</label>
+                  <input type="text" class="form-control" id="reviseMesTit" onclick="" placeholder="请输入通知的标题">
+              </div>
+              <div class="form-group">
+                <label for="addMesUser">通知的内容标题</label>
+                  <input type="text" class="form-control" id="reviseMesTitCon" onclick="" placeholder="请输入通知的内容标题">
+              </div>
+              <div class="form-group addMessage">
+                <label for="addMes">通知的内容</label>
+                <textarea class="form-control" id="reviseMes" placeholder="请输入通知的内容"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="addMes">通知的对象</label>
+                <select class="form-control" id="reviseTarget" name="target" style="width:100px;color:#555;">
+                    <option value="1">所有人</option>
+                    <option value="2">安卓</option>
+                    <option value="3">IOS</option>
+                <select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer text-center ">
+              <button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
+              <button type="button " data-dismiss="modal " id="continue" class="btn face-button ">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 提示 -->
+    <div class="modal fade face-modal " id="promptBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true"></button>
+            <h4 class="modal-title text-center">提示</h4>
+          </div>
+          <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+          <div class="modal-footer">
+
+            <button type="button" data-dismiss="modal" id="continue" class="btn face-button">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 删除提示框 -->
+
+    <div class="modal fade face-modal " id="deleteBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true"></button>
+            <h4 class="modal-title text-center">提示</h4>
+          </div>
+          <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" id="cancel" class="btn btn-default">取消</button>
+            <button type="button" data-dismiss="modal" id="continue" class="btn face-button">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./template/messagePush.js"></script>

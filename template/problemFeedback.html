@@ -1,0 +1,70 @@
+
+<!-- 用户反馈 -->
+<div class="container-fluid face-table-group">
+    <div class="row">
+        <div class="form-inline face-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="userName" placeholder="请输入提问人姓名">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="userPhone" placeholder="请输入提问人手机号码">
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="status">
+                  <option value="" selected="selected">问题状态</option>
+                  <option value="Y">已回复</option>
+                  <option value="N">未回复</option>
+                </select>
+            </div>
+            <div class="form-group mydate">
+                <input type="text" class="form-control" id="from" placeholder="检索时间开始"> —
+                <input type="text" class="form-control" id="to" placeholder="检索时间结束">
+            </div>
+            <div class="form-group button-group">
+                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>查询</button>
+                <button id="btn-reset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="face-table problem-table"></table>
+    </div>
+    <!-- 回复框 -->
+    <div class="modal fade face-modal " id="companyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true"></button>
+            <h4 class="modal-title text-center">回复</h4>
+          </div>
+          <div class="modal-body" style="text-align:center;">
+            <textarea id="companyContent"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" id="cancel" class="btn btn-default">取消</button>
+            <button type="button" data-dismiss="modal" id="continue" class="btn face-button">提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 提示 -->
+    <div class="modal fade face-modal " id="promptBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-hidden="true"></button>
+            <h4 class="modal-title text-center">提示</h4>
+          </div>
+          <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" id="cancel" class="btn btn-default">取消</button>
+            <button type="button" data-dismiss="modal" id="continue" class="btn face-button">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./template/problemFeedback.js"></script>

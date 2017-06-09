@@ -1,0 +1,266 @@
+
+
+<script src="js/city/distpicker.data.js"></script>
+<script src="js/city/distpicker.js"></script>
+
+
+<div class="container-fluid ">
+
+
+    <div class="row vertical-center">
+
+        <div class="col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-4 col-lg-2 col-lg-offset-5 add-img-box"
+             style="margin-top: 228px;">
+
+            <div href="#" class="thumbnail add-img"><img src="./img/default_img.png" class=""
+                                                         style="height: 270px;"></div>
+            <textarea id="remark" class="form-control hidden" rows="2" placeholder="请输入检索事由"></textarea>
+            <div id="add-image-button" class="btn  btn-lg btn-block face-button"
+                    style="position: relative; overflow: hidden; direction: ltr;">
+                <span class="fa fa-plus"></span>&nbsp;<span id="add-image-button-span">添加照片</span>
+
+            </div>
+            <div class="row select-button hidden">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <select class=" form-control ">
+                        <option value="0" selected="">云创</option>
+                        <option value="1">依图</option>
+                        <option value="2">旷视</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <button id="upload-button" class="btn btn-large  btn-block face-button">
+                        <span class="fa fa-search" aria-hidden="true"></span>&nbsp;开始检索
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+
+        </div>
+        <div class="col-sm-8 col-md-9 col-lg-10">
+            <div class="row filter-box hidden ">
+                <form id='retrievalFrom' class="form-inline face-form">
+                    <div class="form-group">
+                        <div data-toggle="distpicker" id="distpicker">
+                            <select class="form-control" name="province"></select>
+                            <select class="form-control" name="city"></select>
+                            <select class="form-control" name="area"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select name="nation" class="form-control nation">
+                            <option value="">民族</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="sex" class="form-control">
+                            <option value="">性别</option>
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                            <option value="2">未知</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="ispoint" class="form-control">
+                            <option value="">重点人员</option>
+                            <option value="Y">是</option>
+                            <option value="N">否</option>
+                            <option value="W">未知</option>
+                        </select>
+                    </div>
+                    <div class="form-group mydate">
+                        <label class=" ">出生日期</label>
+                        <input type="text" class="form-control" id="from" name="startbirth"> — <input
+                            type="text" class="form-control" id="to" name="endbirth">
+                    </div>
+
+                    <div class="form-group">
+                        <a class="btn face-button" id="faceRetrieval">筛选</a>
+                        <a id="faceReset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row result-box ">
+
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<!-- 提示框开始 -->
+<div class="modal fade" id="retrieveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times"
+                                                                                                  aria-hidden="true"></span>
+                </button>
+                <h4 class="modal-title">对比详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4 text-center show-resource">
+                        <h4>检索图片</h4>
+                        <div class="thumbnail">
+                            <img src="./img/default_img.png" alt="..." style="height: 294px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1 text-center similar">
+                        <div class="similar-box" style="height: 74px;">
+                            <p><span>相似度</span></p>
+                            <p><span><font>99.</font><font>55%</font></span></p>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 col-md-4 col-lg-4 text-center show-results">
+
+
+                        <button type="button" class="btn left-btn"><span class="fa  fa-chevron-left"></span></button>
+                        <h4>检索结果</h4>
+                        <button type="button" class="btn right-btn"><span class="fa  fa-chevron-right"
+                                                                          aria-hidden="true"></span></button>
+
+                        <div class="thumbnail">
+                            <img id="modal-img" src="./img/default_img.png" alt="..."
+                                 style="height: 294px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-3 items">
+                        <h4 class="text-center">结果详情</h4>
+                        <h4> &nbsp;</h4>
+                        <div class="caption">
+                                <!-- <p>相似度：<font id="similar">99.07%</font></p>
+                                <p>姓名：买买提.哈密尔.塔依尔坤.刀塔基德</p>
+                                <p>地区：<font id="area"></font></p>
+                                <p>出生年月：1987.5.5</p> -->
+                            </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-9 col-md-9 col-lg-9 text-center">
+                        <p class="hint">小提示：点击相似度按钮可以选择比中</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+<!-- 提示框结束 -->
+<div class="modal fade face-modal " id="retrieveModal2" tabindex="1" role="dialog" aria-labelledby="myModalLabel"
+     data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times"
+                                                                                                  aria-hidden="true"></span>
+                </button>
+                <h4 class="modal-title">比中详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">手机号</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="phoneNo" placeholder="请填写手机号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">车牌号</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="carNo" placeholder="请填写车牌号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">有害标志</label>
+                        <div class="col-sm-6" id="harmful">
+                            <label class="radio-inline">
+                                <input type="radio" name="harmful" id="inlineRadio1" value="1"> 有害
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="harmful" id="inlineRadio2" value="2"> 无害
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="harmful" id="inlineRadio3" value="3"> 未知
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">处理方式</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="dispose">
+                                <option value="0" selected="selected">未处理</option>
+                                <option value="1">警告</option>
+                                <option value="2">拘留</option>
+                                <option value="3">行政处罚</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">备注</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" id="modal-remark" rows="2" placeholder="请填写备注"></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="chosen-button" class="btn face-button">提交比中详情</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+
+    </div>
+    <!-- /.modal -->
+    <!-- 提示框结束 -->
+
+
+
+    <script id="imgTemp" type="text/html">
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <div class="thumbnail {{= focus=='Y'?'focus':''}}">
+                <img src={{= url}} alt="...">
+                <div class="caption">
+                    <p><span>相似度：</span><span class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span>
+                    </p>
+                    <p>姓名：{{= name}}</p>
+                    <p>性别：{{= sex==0?'女':'男'}}</p>
+                    <p>民族：${nation}</p>
+                    <p>地区：${address}</p>
+                    <p>身份证号：{{= idNo}}</p>
+                    <p>出生年月： {{= birthday}}</p>
+                    {{if focus=="Y"}}
+                    <p class="hidden focus-font">重点人员情况：{{= "是"}}</p>
+                    {{/if}}
+                    {{if focus=="N"}}
+                    <p class="hidden focus-font">重点人员情况：{{= "否"}}</p>
+                    {{/if}}
+                    {{if focus=="W"}}
+                    <p class="hidden focus-font">重点人员情况：{{= "未知"}}</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+</div>
+
+<script type="text/javascript" src="./template/faceRetrieval.js"></script>

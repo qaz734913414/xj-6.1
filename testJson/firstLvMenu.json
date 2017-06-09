@@ -1,0 +1,33 @@
+{
+  "result": [
+    {
+      "id": 2,
+      "name": "人脸检索管理",
+      "pid": 1,
+      "type": 0,
+      "url": "face/retrieve"
+    },
+    {
+      "id": 3,
+      "name": "人脸日志管理",
+      "pid": 1,
+      "type": 0,
+      "url": "facelog/retrieveLog"
+    },
+    {
+      "id": 4,
+      "name": "统计分析管理",
+      "pid": 1,
+      "type": 0,
+      "url": "user/countInfo"
+    },
+    {
+      "id": 5,
+      "name": "配置中心",
+      "pid": 1,
+      "type": 0,
+      "url": "user/list"
+    }
+  ],
+  "code": 200
+}

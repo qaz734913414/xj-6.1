@@ -1,0 +1,54 @@
+{
+  "result": [
+    {
+      "id": 2,
+      "name": "人脸检索",
+      "pid": 1,
+      "type": 0,
+      "url": "face/retrieve"
+    },
+    {
+      "id": 3,
+      "name": "身份检索",
+      "pid": 1,
+      "type": 0,
+      "url": "facelog/idCard"
+    },
+    {
+      "id": 4,
+      "name": "用户管理",
+      "pid": 1,
+      "type": 0,
+      "url": "user/compare"
+    },
+    {
+      "id": 4,
+      "name": "组织机构管理",
+      "pid": 1,
+      "type": 0,
+      "url": "user/compare"
+    },
+    {
+      "id": 4,
+      "name": "问题反馈",
+      "pid": 1,
+      "type": 0,
+      "url": "user/compare"
+    },
+    {
+      "id": 4,
+      "name": "人脸比对",
+      "pid": 1,
+      "type": 0,
+      "url": "user/compare"
+    },
+    {
+      "id": 4,
+      "name": "消息推送",
+      "pid": 1,
+      "type": 0,
+      "url": "user/compare"
+    }
+  ],
+  "code": 200
+}

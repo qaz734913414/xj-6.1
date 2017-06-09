@@ -1,7 +1,24 @@
 
 
+jQuery.support.cors = true;
+var user=localStorage.getItem('username');
+console.log(user)
+if(!user){
+  $('#loginModal #myModalLabel').html('请登录!');
+  $('#loginModal').modal('show');
+}
+$('#loginModal button').on('click',function(){
+  window.location.href="./login.html";
+});
+
+
+
+
+
 $(function(){
     var token = window.localStorage.getItem('token');
+    var username=window.localStorage.getItem('username');
+    $('#username').html(username);
     // console.log(token)
     if (token) {
         $.ajaxSetup({
@@ -11,10 +28,11 @@ $(function(){
         });
     }
     $('.second-box-blank').hide();
-    $('#ajax-content>div').hide();
+    // $('#ajax-content>div').hide();
     $.ajax({
         type: 'post',
-        url:'http://192.168.0.169:8080/FaceManage/menu/firstLevelMenu',
+        url:pathurl+'menu/firstLevelMenu',
+        // url:'./testJson/firstLvMenu.json',
         xhrFields: {
             withCredentials: true
         },
@@ -24,12 +42,14 @@ $(function(){
             var firstLevelData = firstLevelData.result;
             var str = '';
             for (var i = 0; i < firstLevelData.length; i++) {
-                str += '<li class="firstLvMenu"><a href="##' + firstLevelData[i].url + '">' + firstLevelData[i].name + '</a></li>';
+                str += '<li class="firstLvMenu"><a href="javascript:void(0)">' + firstLevelData[i].name + '</a></li>';
             }
             $('.first-box .mynav-menu').find('li').eq(1).after(str);
             secLvMenu(firstLevelData);
         }
     });
+
+
 })
 
 function secLvMenu(firstLevelData){
@@ -42,32 +62,40 @@ function secLvMenu(firstLevelData){
             $('.second-box-blank').show();
             $(this).find('a').attr('class','active');
             $(this).siblings().find('a').removeAttr('class','active');
-            var _href=$(this).find('a').attr('href');
-            var _url=$(this).find('a').attr('href').substr(_href.indexOf('/')+1);
+            // var _href=$(this).find('a').attr('href');
+            // var _url=$(this).find('a').attr('href').substr(_href.indexOf('/')+1);
 
             var nowIndex = $(this).index() - 2;
 
+
             $.ajax({
-                url:'http://192.168.0.169:8080/FaceManage/menu/secondLevelMenu',
+                url:pathurl+'menu/secondLevelMenu',
+                // url:'./testJson/secLvMenu.json',
                 type:'post',
                 data:{
                   pid:firstLevelData[i].id
                 },
                 success:function(secondLevelData){
+                    $('#ajax-content').empty();
                     var secondLevelData=secondLevelData.result;
                     var str = '';
                     for (var i = 0; i < secondLevelData.length; i++) {
-                        str+='<li><a href="##">'+secondLevelData[i].name+'</a></li>';
+                        str+='<li><a href="javascript:void(0);">'+secondLevelData[i].name+'</a></li>';
                     }
                     $('.second-box .mynav-menu').html(str);
                     $('.second-box .mynav-menu').find('a').eq(0).attr('class','active-second');
+
                     $('.second-box .mynav-menu li').each(function(i) {
                       $(this).on('click',function(){
                         $(this).find('a').attr('class','active-second');
                         $(this).siblings().find('a').removeAttr('class','active-second');
-                        $('#ajax-content>div').eq($(this).index()).show().siblings().hide();
+                        // $('#ajax-content>div').eq($(this).index()).show().siblings().hide();
+
                       })
-                    })
+                    });
+
+                    $('.second-box .mynav-menu li').eq(0).find('a').trigger('click');
+
                 }
             })
         })

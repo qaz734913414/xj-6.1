@@ -1,0 +1,92 @@
+
+<!-- 人脸日志检索 -->
+<div class="container-fluid face-table-group">
+    <div class="row">
+        <div class="form-inline face-form">
+            <div class="form-group">
+                <input type="text" class="form-control" value="" id="rusername" placeholder="检索用户">
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="plat">
+                  <option value="">来源</option>
+                  <option value="0">app</option>
+                  <option value="1">平台</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="company">
+                  <option value="">厂商</option>
+                  <option value="0">云创</option>
+                  <option value="1">依图</option>
+                  <option value="2">旷世</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="chosen">
+                  <option value="">是否比中</option>
+                  <option value="1">是</option>
+                  <option value="2">否</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="harmful">
+                  <option value="">是否有害</option>
+                  <option value="1">是</option>
+                  <option value="2">否</option>
+                  <option value="3">未知</option>
+                </select>
+            </div>
+            <div class="form-group mydate">
+                <input type="text" class="form-control" id="from" placeholder="检索时间开始"> —
+                <input type="text" class="form-control" id="to" placeholder="检索时间结束">
+            </div>
+            <div class="form-group button-group">
+                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>检索</button>
+                <button id="btn-reset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="face-table"></table>
+    </div>
+    <!--子页面开始 -->
+    <div class="modal fade face-modal" id="retrieveLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title">对比详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="imgTemp" type="text/x-jquery-tmpl">
+ 	<div class="retrieve-log-thumbnail-box">
+		<div class="thumbnail  {{= focus=='Y'?'focus':''}}">
+			<img src={{= url}} alt="..." />
+			<div class="caption">
+				<p><span>相似度：</span><span class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span></p>
+				 <p>姓名:{{= name}}</p>
+ 				 <p>证件号:{{= idNo}}</p>
+				 <p>地区：{{= address}}</p>
+				 <p>出生年月：{{= birthday}}</p>
+				 <p>性别：{{= sex==1?'男':'女'}}</p>
+         {{if focus=="Y"}}
+         <p class="hidden focus-font">重点人员情况：{{= "是"}}</p>
+         {{/if}}
+         {{if focus=="N"}}
+         <p class="hidden focus-font">重点人员情况：{{= "否"}}</p>
+         {{/if}}
+         {{if focus=="W"}}
+         <p class="hidden focus-font">重点人员情况：{{= "未知"}}</p>
+         {{/if}}
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/javascript" src="./template/faceRetrievalLog.js"></script>

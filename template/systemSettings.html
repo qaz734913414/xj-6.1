@@ -1,0 +1,134 @@
+<!-- //序号 参数类别 参数类别值 操作 -->
+
+
+<div class="container-fluid face-table-group" id="sysSet">
+    <div class="form-group">
+      <select class="form-control" id="querySystemSet" style="width:120px;">
+        <option value="-1">参数类别</option>
+        <option value="0">重点人员</option>
+        <option value="1">来源</option>
+        <option value="2">厂商</option>
+        <option value="3">账户类别</option>
+        <option value="4">到期状态</option>
+      </select>
+    </div>
+    <div class="form-group button-group">
+        <a class="btn face-button" onclick="parameterVal()"><span class="fa fa-search" aria-hidden="true"></span>查询</a>
+        <a id="systemSettingreset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</a>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-1">
+            <button style="margin-left:8px;" class="btn face-button" onclick="addsystemSet()" type="button">
+									<i class="fa fa-plus"></i>
+									新建参数
+								</button>
+        </div>
+    </div>
+    <table id="systemSetting" data-show-header="true" data-show-refresh="false" data-pagination="true" data-side-pagination="server" data-page-list="[10, 20, 100]" data-page-size="5" class="table table-striped face-table" data-checkbox="true">
+
+    </table>
+    <input type="hidden" id="pId" value="" />
+</div>
+<!-- 新建 -->
+<div class="modal fade face-modal" id="systemSetModal" class="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myComfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="systemSetModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="systemSet_modal-body">
+              <div class="form-inline face-form">
+                  <div class="form-group">
+                      <label for="parameterClass">参数类别</label>
+                      <select class="form-control" id="parameterClass" onchange="classChange()">
+                        <option value="-1">参数类别</option>
+                        <option value="0">重点人员</option>
+                        <option value="1">来源</option>
+                        <option value="2">厂商</option>
+                        <option value="3">账户类别</option>
+                        <option value="4">到期状态</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="parameterClass">参数类别值</label>
+                      <select class="form-control" id="parameterClassVal">
+                        <option value="-1">参数类别值</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn face-button" id="systemSetSubmit" class="modifySubmit">确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改 -->
+<div class="modal fade face-modal" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myComfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="systemSetModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="systemSet_modal-body">
+              <div class="form-inline face-form">
+                  <div class="form-group">
+                      <label for="parameterClass">参数类别</label>
+                      <select class="form-control" id="parameterClass" onchange="modifyClassChange()">
+                        <option value="-1">参数类别</option>
+                        <option value="0">重点人员</option>
+                        <option value="1">来源</option>
+                        <option value="2">厂商</option>
+                        <option value="3">账户类别</option>
+                        <option value="4">到期状态</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="parameterClass">参数类别值</label>
+                      <select class="form-control" id="parameterClassVal">
+                        <option value="-1">参数类别值</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn face-button" id="modifySubmit">确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除提示框 -->
+<div class="modal fade face-modal" id="delPromptBox" tabindex="-1" role="dialog" aria-labelledby="delPromptLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="delPromptTit"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="delPrompt-text"></div>
+            <div class="modal-footer" style="text-align:center;">
+
+                <button type="button" class="btn face-button" id="delPromptBtn">确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 提示框 -->
+<div class="modal fade face-modal" id="promptBox" tabindex="-1" role="dialog" aria-labelledby="PromptLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="promptTit"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="prompt-text"></div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn face-button" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./template/systemSettings.js" charset="utf-8"></script>
