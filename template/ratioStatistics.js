@@ -30,6 +30,8 @@
             //paginationPreText : "上一页",
             //paginationNextText : "下一页",
             searchOnEnterKey: true,
+            buttonsClass: "face",
+            showExport: true, //是否显示导出
             responseHandler:function(data){//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
                                             //在ajax后我们可以在这里进行一些事件的处理
               var dataObj=data.result;

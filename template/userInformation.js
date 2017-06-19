@@ -2,7 +2,32 @@ $(function () {
     getTable1();
     /* $(".face-table button[title='Export data']").removeClass("btn-default");
      $(".face-table button[title='Export data']").addClass("face-button"); */
+     init();
 });
+function init(){
+  $('#u_unit_id')
+  $('#u_role_id')
+  u_role_id
+  $.ajax({
+    type: 'POST',
+    url: pathurl+'user/initDeptAndRole',
+    success:function(data){
+      console.log(data)
+      var dListData = data.result.dList;//dList    rName  rId
+      var rListData = data.result.rList;
+      console.log(data.result)
+      dname=dListData;
+      rname=rListData;
+      for (var i = 0; i < dListData.length; i++) {
+          $('#u_unit_id').append('<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>');
+      }
+      for (var i = 0; i < rListData.length; i++) {
+          $('#u_role_id').append('<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>');
+      }
+
+    }
+  })
+}
 function getTable1() {
     $("#userTable").bootstrapTable('destroy');
     var u_unit_id = $("#u_unit_id").val();
@@ -58,6 +83,14 @@ function statusFormatter(value) {
     }
 }
 function reset() {
+// $("#u_unit_id").val();
+// $("#area_id").val();
+// $("#u_type").val();
+// $("#u_role_id").val();
+// $("#dateStatus").val();
+// $("#u_real_name").val();
+// $("#u_status").val();
     $(".face-form select").val("-1");
-    $('#u_status').val('Y')
+    $('#u_status').val('Y');
+    getTable1()
 }

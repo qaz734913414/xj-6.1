@@ -59,6 +59,13 @@ b, strong {
     font-size: 18px;
     line-height: 20px;
 }
+#backModel{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#2d3030;
+  z-index:-1;
+}
 .breadcrumb>li+li:before {
     padding: 0 5px;
     color: #757d82;
@@ -767,7 +774,9 @@ p.focus-font{
 .face-table-group .fixed-table-pagination{
 	color: #b1b6b7;
 }
-
+.roleMTable .face-table-group .fixed-table-pagination button[class~=dropdown-toggle]{
+  background-color:none!important;
+}
 .face-table-group .fixed-table-pagination button[class~=dropdown-toggle]{
 	background-color:#99a3ab ;
 	color:#202020 !important;
@@ -785,7 +794,10 @@ p.focus-font{
 	color: #b1b6b7;
 	border:0px;
 }
-
+/*.face-table tbody>tr:nth-child(even)>td*/
+.fixed-table-container tbody .selected:nth-child(even) td {
+     background-color: #2d3030!important;
+}
 .face-table-group .export .btn-face{
 	background-color:#226ed4;
 	color:#e1eaea;
@@ -968,13 +980,40 @@ p.focus-font{
 	    font-size:16px;
 
 	}
-
-	.face-form input{
-		width:135px !important;
-	}
-
-
-}
+  @media (max-width: 1380px){
+    #userModal .face-form input{
+  		/*width:0px !important;*/
+  	}
+  }
+  @media (max-width: 1380px){
+    #userModal .face-form input{
+         width: 20px !important;
+         font-size: 10px;
+    }
+  }
+  @media (max-width: 1200px){
+    #userModal .face-form input{
+         width: 20px !important;
+         font-size: 10px;
+    }
+  }
+  @media (max-width: 1380px){
+    #userModal .face-form input.form-control{
+  		/*width:0px !important;*/
+  	}
+  }
+  @media (max-width: 1380px){
+    #userModal .face-form input.form-control {
+         width: 194px !important;
+         font-size: 10px;
+    }
+  }
+  @media (max-width: 1200px){
+    #userModal .face-form input.form-control {
+         width: 194px !important;
+         font-size: 10px;
+    }
+  }
 @media (max-width: 1200px) {
 	.face-form input{
 		width:100px !important;
@@ -989,7 +1028,18 @@ p.focus-font{
 	    margin-right: 5px;
 	}
 }
-
+@media (max-width: 1380px){
+  #userdiv .fixed-table-container {
+      height: auto!important;
+      padding-bottom: 0px!important;
+  }
+}
+@media (min-width: 1380px){
+  #userdiv .fixed-table-container {
+      height: auto!important;
+      padding-bottom: 0px!important;
+  }
+}
 
 td.question,td.answer{
 
@@ -1074,13 +1124,19 @@ td.question,td.answer{
 	height:120px;
 }
 
-.mContent p{
+/*.mContent{
 	width:400px;
 	margin-right:-270px;
+  display:table-cell;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  width:400px;
 	overflow: hidden;
+  text-align:center;
 	text-overflow:ellipsis;
 	white-space: nowrap;
-}
+}*/
 #systemSetModal .form-group,#modifyModal .form-group{
 	display: block;
     margin: 30px 0;
@@ -1096,12 +1152,18 @@ td.question,td.answer{
 #systemSetModal #parameterClassVal,#modifyModal #parameterClassVal{
 	width:200px;
 }
-#sysSet .form-group{
+/*#sysSet .form-group{
 	float:left;
 	margin-top: 16px;
 }
 #sysSet .form-group a{
 	margin-left: 20px;
+}*/
+#sysSet .form-inline.face-form{
+  overflow:hidden;
+}
+#sysSet .form-group{
+  margin-top:0;
 }
 #dept .fixed-table-container{
   height:auto!important;
@@ -1111,6 +1173,112 @@ td.question,td.answer{
   width:243px;
   height:304px;
 }
-#logUsername:hover{
+#logUsername:hover,#logUsername:action{
   color:#0ff;
+}
+.btn-default {
+    text-shadow: 0 1px 0 #fff;
+     background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat;
+    border-color: #dbdbdb;
+    border-color: #ccc;
+}
+
+
+#retrievalFrom.face-form .form-group{
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+@media (min-width: 1380px){
+  #sysSet .form-group {
+      float: left;
+      margin-top: 16px;
+  }
+}
+.fixed-table-container{
+    height: auto!important;
+    padding-bottom: 0px!important;
+}
+/*#sysSet.face-table-group{
+  padding-left:25px!important;
+  padding-right:25px!important;
+}*/
+#role.face-table-group{
+  padding-left:25px!important;
+  padding-right:25px!important;
+}
+@media screen and (max-width:1380px) {
+#querySystemSet{
+  background-color: #99a3ab;
+  outline:none;
+  color: #202020;
+  border: 0px;
+}
+}
+@media screen and (min-width:1380px) {
+  #parameterClass{
+    background-color: #99a3ab;
+    outline: none;
+    color: #202020;
+    border: 0px;
+  }
+  #userdiv .fixed-table-container{
+    height: 693px!important;
+    padding-bottom: 40px!important;
+  }
+  .face-table tbody>tr:nth-child(even)>td {
+      background-color:#2d3030!important;
+  }
+}
+#treeDemo{width:auto;}
+#u_role_id option{
+  width:110px;
+}
+span.logUsername:hover{
+  color:#0ff;
+}
+.face-table tbody>tr:nth-child(even)>td {
+    background-color:#2d3030!important;
+}
+/*@media (max-width: 1380px){
+  .mContent p {
+      width: 400px;
+      margin-right:-100px;
+      text-align:center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+}*/
+@media (min-width: 768px){
+  #systemSetModal #systemSet_modal-body .form-group{
+    margin-bottom:20px;
+  }
+}
+.face-similar:hover{
+  display:none;
+}
+.mContent{
+  width:250px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+@media all and (min-width: 768px) {
+  .mContent{
+    width:250px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.message-push .table{
+    table-layout: fixed;
+}
+.published,.refreshTime{
+  width:200px;
 }

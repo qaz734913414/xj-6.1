@@ -1,3 +1,19 @@
+
+$(function(){
+  setTimeout(function(){
+    $('#userdiv .fixed-table-container').css('height','auto');
+    $('#userdiv .fixed-table-container').css('padding-bottom','0px');
+  },200)
+
+});
+
+$(window).resize(function () {
+  console.log(1111)
+  $('#userdiv .fixed-table-container').css('height','auto');
+  $('#userdiv .fixed-table-container').css('padding-bottom','0px');
+});
+
+
 var zTree;
 var selectNode;
 var load = false;
@@ -120,7 +136,8 @@ function onClick(event, treeId, treeNode) {
     queryParamsType : " limit",
     paginationDetailHAlign : "left",
     buttonsClass : "face",
-    height : $(document).height() - 202
+    height : '',/*(document).height() - 202*/
+    pageList: [4, 10, 25, 50, 100]
   // 			showExport : true, //是否显示导出
   // 			exportDataType : "basic"//basic', 'all', 'selected'.
   });
@@ -263,7 +280,7 @@ function beforeRename(treeId, treeNode, newName, isCancel) {
 // };
 //
 function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) { //这个函数仅仅是为了 初始化时展开 1级菜单
-  
+
   if (!load) {
     var nodes = zTree.getNodesByParam("pId", 0, null);
     $.each(nodes, function(i, n) {

@@ -97,7 +97,7 @@ function TableInit() {
                 title: '发布消息',
                 class:'mContent',
                 formatter: function(value) {
-                    return '<p>'+value+'</p>';
+                    return value
                 }
             },{
                 field: 'username',
@@ -108,12 +108,14 @@ function TableInit() {
             },{
                 field: 'createTime',
                 title: '发布时间',
+                width : '15%',
                 formatter: function(value) {
                     return value;
                 }
             },{
                 field: 'updateTime',
                 title: '更新时间',
+                width : '15%',
                 formatter: function(value) {
                     return value;
                 }
@@ -130,6 +132,17 @@ function TableInit() {
                 }
             },{
                 title: '操作',
+                cellStyle:function cellStyle(value, row, index, field) {
+                  return {
+                    classes: 'text-nowrap another-class',
+                    css: {
+                      'width':'250px',
+                      'overflow': 'hidden',
+                      'text-overflow':'ellipsis',
+                      'white-space': 'nowrap'
+                    }
+                  };
+                },
                 formatter: function(value, row, index) {
 
                     return ['<button type="button" id="reviseMessage" class="btn-sm btn face-button" style="margin-right:15px;">修改</button>',
@@ -290,7 +303,7 @@ $('.face-table').on('click','#reviseMessage',function(){
   $('#mId').val(mId);
   $('#reviseMesTit').val(parent.find('#nTitle').val());
   $('#reviseMesTitCon').val(parent.find('#mTitle').val());
-  $('#reviseMes').val(parent.find('.mContent p').html());
+  $('#reviseMes').val(parent.find('.mContent').html());
   $('#reviseTarget').find('option').eq(parent.find('#target').val()-1).prop('selected','selected');
 
   $('#reviseMesBox').modal('show');

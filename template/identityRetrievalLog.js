@@ -102,7 +102,7 @@ function TableInit() {
                 field: 'username',
                 title: '检索用户',
                 formatter: function(value) {
-                    return '<span id="logUsername">'+value+'</span>'
+                    return '<span id="logUsername"  class="logUsername">'+value+'</span>'
                 }
             }, {
                 field: 'yurl',
@@ -210,4 +210,10 @@ $(".face-table").delegate("#logUsername", "click", function(){
       $("#faceLogModal").modal();
     }
   })
+})
+$('.face-table').on('mouseover','.logUsername',function(){
+  $(this).css('color','#0ff');
+})
+$('.face-table').on('mouseout','.logUsername',function(){
+  $(this).css('color','#b1b6b7');
 })

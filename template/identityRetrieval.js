@@ -86,6 +86,7 @@ function getPicture(){
 
      }
 }
+
 function IdentityCodeValid(code) {
     var city={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "};
     var tip = "";
@@ -130,6 +131,14 @@ function IdentityCodeValid(code) {
     return pass;
 }
 
+$('.similar-box').on('click',function(ev){
+  console.log(ev);
+  console.log(ev.target);
+  if(ev.target.nodeName=='SPAN'||ev.target.nodeName=='CANVAS'){
+    upload();
+  }
+});
+
 function upload(){
 
     var form_Data = new FormData();
@@ -140,8 +149,9 @@ function upload(){
     form_Data.append("name",imageInfo.name);
     form_Data.append("url",getPictureUrl);
     //防止同时多次提交
+    //防止同时多次提交
     $("#upload").attr("disabled","disabled");
-    console.log(!!getPictureUrl)
+    console.log(draw.getType());
     if(!!getPictureUrl){
       $.ajax({
           type:'post',
@@ -152,7 +162,8 @@ function upload(){
           processData:false,
           dataType:'json',
           success:function(data){
-              console.log(data);
+
+
               var simi = data.result;
               if (simi == null || simi == "null" || simi == ""){
                   //重置按钮并且解绑
@@ -165,18 +176,23 @@ function upload(){
                   $("#myModal").modal();
               }else{
                   $(".compare-box .face-similar>p:last-child>span").html('<font>'+simi.substring(0,3)+'</font><font>'+simi.substring(3,6)+'</font>');
-                  $(".compare-box .face-type").hide();
-                  $(".compare-box .face-similar").show();
+
                   $("#canvas").bind("mousemove",function(e){
                       draw.show(e);
                   });
+                  $(".compare-box .face-similar").css('pointer-events','none');
                   //解决鼠标移动过快无法切换的bug
                   $(".face-similar").bind("mouseover",function(){
-                      if($(".face-type").hasClass("hidden")){
-                          $(".face-type").removeClass("hidden");
-                          $(".face-similar").hide();
+                      var display=$('.compare-box .face-type').css('display');
+
+                      if(display=='none'){
+                        $(".compare-box .face-type").show();
+                        $(".compare-box .face-similar").hide();
                       }
                   });
+                  $(".compare-box .face-type").hide();
+                  $(".compare-box .face-similar").show();
+
                   $("#canvas").bind("mouseout",function(e){
                       if(draw.isIn(e)==false){
                           $(".face-type").hide();
@@ -219,6 +235,7 @@ function DrawSimilar(){
         try{
           drawBorder(typeIndex);
           drawText(typeIndex);
+
         }catch(e){
 
         }
@@ -277,6 +294,7 @@ function DrawSimilar(){
         //alert($(".face-type").outerWidth()/2+"     "+ $(".similar-box").innerWidth()/2+"     "+ $(".similar-box").width()/2);
         $(".face-type").css("margin-left",$(".similar-box").width()/2-$(".face-type").outerWidth()/2);
         $(".face-type").css("margin-top",$(".similar-box").width()/2-$(".face-type").outerHeight()/2);
+
     }
     //画外框
     function drawBorder(index){
@@ -346,8 +364,10 @@ function DrawSimilar(){
         var unitVoctor = new Array(type.length);
         for(var i=0;i<unitVoctor.length;i++){
             unitVoctor[i] = new Vector(Math.sin(i*Math.PI*2/type.length),Math.cos(i*Math.PI*2/type.length));
-            console.info(unitVoctor[i]);
+            console.log(unitVoctor[i]);
         }
+        upload();
+        console.log('更改了')
         //单位向量值最大的即为所在区域
         var _type = 0;
         var maxValue = 0;

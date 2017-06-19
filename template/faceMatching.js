@@ -199,7 +199,13 @@ function DrawSimilar(){
     }
 
 }
-
+$('.similar-box').on('click',function(ev){
+  console.log(ev);
+  console.log(ev.target);
+  if(ev.target.nodeName=='SPAN'||ev.target.nodeName=='CANVAS'){
+    upload();
+  }
+});
 function upload() {
     if (uploadFile1 == null || uploadFile2 == null) {
         /* 	$("#modal-body-id").text("请选择图片");
@@ -233,18 +239,23 @@ function upload() {
                 $("#myModal").modal();
             }else{
                 $(".compare-box .face-similar>p:last-child>span").html('<font>'+simi.substring(0,3)+'</font><font>'+simi.substring(3,6)+'</font>');
-                $(".compare-box .face-type").hide();
-                $(".compare-box .face-similar").show();
+
                 $("#canvas").bind("mousemove",function(e){
                     draw.show(e);
                 });
+                $(".compare-box .face-similar").css('pointer-events','none');
                 //解决鼠标移动过快无法切换的bug
                 $(".face-similar").bind("mouseover",function(){
-                    if($(".face-type").hasClass("hidden")){
-                        $(".face-type").show();
-                        $(".face-similar").hide();
+                    var display=$('.compare-box .face-type').css('display');
+
+                    if(display=='none'){
+                      $(".compare-box .face-type").show();
+                      $(".compare-box .face-similar").hide();
                     }
                 });
+                $(".compare-box .face-type").hide();
+                $(".compare-box .face-similar").show();
+
                 $("#canvas").bind("mouseout",function(e){
                     if(draw.isIn(e)==false){
                         $(".face-type").hide();

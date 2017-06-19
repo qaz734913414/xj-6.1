@@ -22,13 +22,14 @@ function getTable() {   //表格初始化
   $("#systemSetting").bootstrapTable({
     method : "post",
     url : pathurl+"parameter/list",
-    url:'http://192.168.0.169:8080/FaceManage/parameter/list',
+    // url:'http://192.168.0.169:8080/FaceManage/parameter/list',
     // url:'./testJson/parameteList.json',
     striped: true, //是否显示行间隔色
     cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
     pagination: true, //是否显示分页（*）
     sortable: false, //是否启用排序
     sortOrder: "asc", //排序方式
+    pageList: [4, 10, 25, 50, 100],
     // queryParamsType: "limit",
     queryParams: function (params) {//这个是设置查询时候的参数，我直接在源码中修改过，不喜欢offetset 我后台用的 是pageNo. 这样处理就比较的满足我的要求，其实也可以在后台改，麻烦！
       console.log(params)
@@ -75,7 +76,7 @@ function getTable() {   //表格初始化
     },
     onLoadSuccess: function(data){  //加载成功时执行
       console.log(data);
-      
+
     },
     columns: [{
         title: '序号',

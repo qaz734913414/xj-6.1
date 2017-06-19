@@ -33,7 +33,7 @@ $(function () {
         $distpicker.distpicker('destroy');
     });
 
-    logId = null;
+    // logId = null;
     var uploader = bindUploadFileComponent("add-image-button");
     $("#upload-button").bind("click", upload);
     $("#retrieveModal .similar-box").bind("click", function () {
@@ -91,8 +91,6 @@ function faceList(){
       success: function (data) {
           console.log(data)
           if (data.code == 200) {
-            console.log(data.result.logId)
-              logId = data.logId;
               var data=data.result;
               //alert("拿到了logId："+logId);
               $("#add-image-button-span").text("重新添加照片");
@@ -116,8 +114,26 @@ function faceList(){
               imgs.sort(function (a, b) {
                   return b.percent - a.percent;
               });
-              $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
-              console.log(imgs)
+              var imgArr=[];
+              imgs.forEach(function(val,i){
+                console.log(val+'__'+i);
+                var imgObj={
+                        address:val.province+val.city+val.county,
+                        birthday:val.birthday,
+                        focus:val.ispoint,
+                        idNo:val.idno,
+                        logId:'',
+                        name:val.username,
+                        nation:val.nation,
+                        percent:val.percent,
+                        sex:val.sex,
+                        url:val.url
+                }
+                imgArr.push(imgObj);
+              })
+              console.log(imgArr)
+              $('#imgTemp').tmpl(imgArr).appendTo(imgsDom);
+              console.log(imgs);
               winChange();//调整高宽
               //绑定图片点击事件
               $(".result-box .thumbnail").bind('click', function () {
@@ -213,7 +229,6 @@ function showImageOnModal(resource) {
 
 }
 
-
 function upload() {
     if (uploadFile == null) {
         alert("请选择图片");
@@ -235,9 +250,7 @@ function upload() {
         processData: false,
         dataType: 'json',
         success: function (data) {
-
-
-        console.log(data)
+            console.log(data);
             if (data.code == 200) {
                 logId = data.logId;
                 var data=data.result;
@@ -263,6 +276,7 @@ function upload() {
                 imgs.sort(function (a, b) {
                     return b.percent - a.percent;
                 });
+                console.log(imgs);
                 $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
 
 

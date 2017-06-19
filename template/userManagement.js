@@ -15,7 +15,14 @@ $(function() {
         "btn-default");
     $(".face-table-group button[title='Export data']").addClass(
         "face-button");
-    $('#expireTime').datetimepicker({
+    $('#adduserModal #expireTimeVal').datetimepicker({
+        format: "yyyy-mm-dd",
+        showMeridian: true,
+        autoclose: true,
+        language: 'zh-CN',
+        minView: 2
+    });
+    $('#modifyUserModal #expireTimeVal').datetimepicker({
         format: "yyyy-mm-dd",
         showMeridian: true,
         autoclose: true,
@@ -99,10 +106,12 @@ function init() {
             for (var i = 0; i < rListData.length; i++) {
                 roleStr += '<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>';
             }
-            $('#uUnitId option').eq(0).after(unitStr);
-            $('#uunitId').html(unitStr);
-            $('#uRoleId').html(roleStr);
-
+            $('#adduserModal #uUnitId option').eq(0).after(unitStr);
+            $('#adduserModal #uunitId').html(unitStr);
+            $('#adduserModal #uRoleId').html(roleStr);
+            $('#modifyUserModal #uUnitId option').eq(0).after(unitStr);
+            $('#modifyUserModal #uunitId').html(unitStr);
+            $('#modifyUserModal #uRoleId').html(roleStr);
 
         },
         error: function() {
@@ -112,17 +121,20 @@ function init() {
         dataType: 'json'
     });
 }
-
-function getTable1() {
+//初始化table
+function getTable() {
     console.log($("#uRealName").val() + '__' + $("#uUnitId").val())
     $("#userTable").bootstrapTable('destroy');
     $("#userTable").bootstrapTable({
         method: "post",
         url: pathurl+'user/usersList',
-        queryParams:{
-
-          uRealName: $("#uRealName").val(),
-          uUnitId: $("#uUnitId").val()
+        queryParams:function(params){
+          return {
+            pageSize:params.pageSize,
+            pageNumber:params.pageNumber,
+            uRealName: $("#uRealName").val(),
+            uUnitId: $("#uUnitId").val()
+          }
         },
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
@@ -135,34 +147,7 @@ function getTable1() {
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "basic", //basic', 'all', 'selected'.
-        onLoadSuccess: function(data){  //加载成功时执行
-            console.log(data)
-        }
-    });
-}
-function getTable() {
-    console.log($("#uRealName").val() + '__' + $("#uUnitId").val())
-    $("#userTable").bootstrapTable('destroy');
-    $("#userTable").bootstrapTable({
-        method: "post",
-        url: pathurl+'user/usersList',
-        // queryParams:{
-        //   pageSize:this.pageSize,
-        //   pageNumber:this.pageNumber,
-        //   uRealName: $("#uRealName").val(),
-        //   uUnitId: $("#uUnitId").val()
-        // },
-        pagination: true,
-        contentType: "application/x-www-form-urlencoded",
-        queryParamsType: " limit",
-        paginationDetailHAlign: "left",
-        clickToSelect: true,
-        toolbar: "#userdiv",
-        searchOnEnterKey: true,
-        //		height:$(document).height()-130,
-        buttonsClass: "face",
-        showExport: true, //是否显示导出
-        exportDataType: "basic", //basic', 'all', 'selected'.
+        pageList: [4, 10, 25, 50, 100],
         onLoadSuccess: function(data){  //加载成功时执行
             console.log(data)
         }
@@ -176,9 +161,6 @@ function reset() {
     // console.log(aa);
     getTable();
 }
-$('#userModal #cancel').on('click',function(){
-  $('#userModal').modal('hide');
-})
 function statusFormatter(value, row, index) {
 
     if (row.uStatus == 'Y') {
@@ -189,6 +171,22 @@ function statusFormatter(value, row, index) {
             .join();
     }
 }
+
+function operateFormatter(value, row, index) {
+    return [
+            '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
+            '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
+            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>'
+        ]
+        .join('');
+}
+
+
+
+$('#userModal #cancel').on('click',function(){
+  $('#userModal').modal('hide');
+})
+
 
 function updateStatus(row) {
   console.log(row.uId)
@@ -201,6 +199,7 @@ function updateStatus(row) {
         success: function() {
             $("#modal-body-id").text("用户状态已改变!");
             $("#myModal").modal();
+            $("#userTable").bootstrapTable('refresh');
         },
         error: function() {
             $("#modal-body-id").text("处理失败!");
@@ -208,278 +207,310 @@ function updateStatus(row) {
         },
         dataType: 'json'
     });
-    $("#userTable").bootstrapTable('refresh');
-}
+} //修改状态
 window.statusEvents = {
     'click .reset': function(e, value, row, index) {
-        updateStatus(row);
-        $("#userTable").bootstrapTable('refresh');
+        updateStatus(row);  //修改状态
     }
 };
 
-function operateFormatter(value, row, index) {
-    return [
-            '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
-            '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
-            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>'
-        ]
-        .join('');
-}
-window.operateEvents = {
-    'click .resetPwd': function(e, value, row, index) {
-        resetPwd(row);
-        $("#userTable").bootstrapTable('refresh');
+
+window.operateEvents = {//done
+    'click .resetPwd': function(e, value, row, index) {//密码重置
+        $("#resetTModel #modal-body-text").text("确定将密码重置为123456吗?");
+        $("#resetTModel").modal('show');
+        $('#rowUId').val(row.uId);
     },
-    'click .update': function(e, value, row, index) {
+    'click .update': function(e, value, row, index) { //修改用户
         userEdit(row);
     },
-    'click .delete': function(e, value, row, index) {
-        deleteUser(row);
-        $("#userTable").bootstrapTable('refresh');
+    'click .delete': function(e, value, row, index) { //删除用户
+        // deleteUser(row);
+        $("#delUserTModel #modal-body-text").text("确定将该用户删除?");
+        $("#delUserTModel").modal('show');
+        $('#rowUId').val(row.uId);
     }
 };
+$("#resetTModel #cancel").click(function() {
+    $("#userTable").bootstrapTable('refresh');
+});
+$("#resetTModel #continue").off();//重置密码
+$("#resetTModel #continue").click(function() { //done
+    $("#resetTModel").modal('hide');
+    $.ajax({
+        type: 'POST',
+        url: pathurl+'user/resetpwd',
+        data: {
+            uId:$('#rowUId').val()
+        },
+        success: function() {
+            $("#modal-body-id").text("密码重置成功!");
+            $("#myModal").modal();
+            console.log('密码重置成功!')
+            $("#userTable").bootstrapTable('refresh');
+        },
+        error: function() {
+            $("#modal-body-id").text("处理失败!");
+            $("#myModal").modal();
+            console.log('密码重置失败!')
+        },
+        dataType: 'json'
+    });
+});
+
+
+
+
 //表格批量删除
 function toRemove() {
     var ids = getSelectedRowsIds('userTable');
+    $('#rowUId').val(ids);
     if (ids) {
-        $("#modal-body-text").text("删除后数据不可恢复，确定要删除吗?");
-        $("#deptModel").modal();
-        $("#deptModel #cancel").click(function() {
-            $("#userTable").bootstrapTable('refresh');
-        });
-        $("#deptModel #continue").click(function() {
-            console.log(111)
-            $.ajax({
-                type: 'POST',
-                url: pathurl+'user/deleteByIds',
-                data:{
-                  ids:ids
-                },
-                success: function() {
-                  console.log('多表删除成功')
-                    $("#modal-body-id").text("删除成功!");
-                    $("#myModal").modal();
-                    $("#userTable").bootstrapTable('refresh');
-                },
-                error: function() {
-                  console.log('多表删除失败')
-                    $("#modal-body-id").text("处理失败!");
-                    $("#myModal").modal();
-                }
-            });
-        });
+        $("#delUsersTModel #modal-body-text").text("删除后数据不可恢复，确定要删除吗?");
+        $("#delUsersTModel").modal('show');
     } else {
-        $("#modal-body-id").text("请选择一条数据进行操作!");
-        $("#myModal").modal();
+        $("#delUsersTModel #modal-body-text").text("请选择一条数据进行操作!");
+        $("#delUsersTModel").modal('show');
     }
-}
+}//done
+$("#delUsersTModel #cancel").click(function() {
+    $("#userTable").bootstrapTable('refresh');
+});
+$("#delUsersTModel #continue").off();
+$("#delUsersTModel #continue").click(function() {
+  $("#delUsersTModel").modal('hide')
+    console.log(111)
+    $.ajax({
+        type: 'POST',
+        url: pathurl+'user/deleteByIds',
+        data:{
+          ids:$('#rowUId').val()
+        },
+        success: function() {
+          console.log('多表删除成功')
+            $("#modal-body-id").text("删除成功!");
+            $("#myModal").modal();
+            $("#userTable").bootstrapTable('refresh');
+        },
+        error: function() {
+          console.log('多表删除失败')
+            $("#modal-body-id").text("处理失败!");
+            $("#myModal").modal();
+        }
+    });
+});
 //操作删除
-function deleteUser(row) {
-  console.log(row)
-    $("#modal-body-text").text("确定将该用户删除?");
-    $("#deptModel").modal();
-    $("#deptModel #cancel").click(function() {
-        $("#userTable").bootstrapTable('refresh');
-    });
-    $("#deptModel #continue").click(function() {
-        console.log(2222)
-        $.ajax({
-            type: 'POST',
-            url: pathurl+'user/delete',
-            data:{
-              id:row.uId
-            },
-            success: function() {
-              console.log('删除成功!')
-                $("#modal-body-id").text("删除成功!");
-                $("#myModal").modal();
-                $("#userTable").bootstrapTable('refresh');
-            },
-            error: function() {
-              console.log('处理失败!!')
-                $("#modal-body-id").text("处理失败!");
-                $("#myModal").modal();
-            }
-        });
-    });
-}
+// function deleteUser(row) {
+//   console.log(row)
+//     // $("#delUserTModel #modal-body-text").text("确定将该用户删除?");
+//     // $("#delUserTModel").modal('show');
+//
+// }
 
-function resetPwd(row) {
-    $("#modal-body-text").text("确定将密码重置为123456吗?");
-    $("#deptModel").modal();
-    $("#deptModel #cancel").click(function() {
-        $("#userTable").bootstrapTable('refresh');
+$("#delUserTModel #cancel").click(function() {
+    $("#userTable").bootstrapTable('refresh');
+});
+$("#delUserTModel #continue").off();
+$("#delUserTModel #continue").click(function() {
+    $("#delUserTModel").modal('hide');
+    $.ajax({
+        type: 'POST',
+        url: pathurl+'user/delete',
+        data:{
+          id:$('#rowUId').val()
+        },
+        success: function(data) {
+          console.log('删除成功!')
+          if(data.code==200){
+            $("#modal-body-id").text("删除成功!");
+            $("#myModal").modal();
+            $("#userTable").bootstrapTable('refresh');
+          }else{
+            $("#modal-body-id").text('删除失败');
+            $("#myModal").modal();
+          }
+        },
+        error: function() {
+          console.log('处理失败!!')
+            $("#modal-body-id").text("处理失败!");
+            $("#myModal").modal();
+        }
     });
-    $("#deptModel #continue").click(function() {
-        console.log(3333)
-        $.ajax({
-            type: 'POST',
-            url: pathurl+'user/resetpwd',
-            data: {
-                uId: row.uId
-            },
-            success: function() {
-                $("#modal-body-id").text("密码重置成功!");
-                $("#myModal").modal();
-                console.log('密码重置成功!')
-            },
-            error: function() {
-                $("#modal-body-id").text("处理失败!");
-                $("#myModal").modal();
-                console.log('密码重置失败!')
-            },
-            dataType: 'json'
-        });
-    });
-}
+});
+
 
 function userEdit(row) {
     $(".bs-checkbox input[name='btSelectItem']").attr("checked", false);
 
     //	$("#userForm")[0].reset();
-    $("#uName").val(row.uName);
-    $("#urealName").val(row.uRealName);
+    $("#modifyUserModal #uName").val(row.uName);
+    $("#modifyUserModal #urealName").val(row.uRealName);
     var uSex = row.uSex;
     console.log(uSex);
     if (uSex == 0) {
-        $("#userModal input[name='uSex'][value='0']").attr("checked", true);
-        $("#userModal input[name='uSex'][value='1']")
+        $("#modifyUserModal input[name='uSex'][value='0']").attr("checked", true);
+        $("#modifyUserModal input[name='uSex'][value='1']")
             .attr("checked", false);
-        $("#userModal input[name='uSex'][value='2']")
+        $("#modifyUserModal input[name='uSex'][value='2']")
             .attr("checked", false);
     } else if (uSex == 1) {
-        $("#userModal input[name='uSex'][value='1']").attr("checked", true);
-        $("#userModal input[name='uSex'][value='0']")
+        $("#modifyUserModal input[name='uSex'][value='1']").attr("checked", true);
+        $("#modifyUserModal input[name='uSex'][value='0']")
             .attr("checked", false);
-        $("#userModal input[name='uSex'][value='2']")
+        $("#modifyUserModal input[name='uSex'][value='2']")
             .attr("checked", false);
     } else {
-        $("#userModal input[name='uSex'][value='2']").attr("checked", true);
-        $("#userModal input[name='uSex'][value='1']")
+        $("#modifyUserModal input[name='uSex'][value='2']").attr("checked", true);
+        $("#modifyUserModal input[name='uSex'][value='1']")
             .attr("checked", false);
-        $("#userModal input[name='uSex'][value='0']")
+        $("#modifyUserModal input[name='uSex'][value='0']")
             .attr("checked", false);
     }
-    $("#uCardId").val(row.uCardId);
-    $("#uType").val(row.uType);
-    $("#uStatus").val(row.uStatus);
-    $("#uPhone").val(row.uPhone);
-    $("#uTelephone").val(row.uTelephone);
-    $("#uPolicyNum").val(row.uPolicyNum);
-    $("#uDuty").val(row.uDuty);
-    $("#uRoleId").val(row.uRoleId);
-    $("#uunitId").val(row.uUnitId);
-    $("#expireTime").val(row.expireTime);
-    $(".modal-title").html("修改用户");
-    $("#userModal").modal();
 
-    $("#userModal #cancel").click(function() {
+    console.log(row.expireTime);
+    $("#modifyUserModal #uCardId").val(row.uCardId);
+    $("#modifyUserModal #uType").val(row.uType);
+    $("#modifyUserModal #uStatus").val(row.uStatus);
+    $("#modifyUserModal #uPhone").val(row.uPhone);
+    $("#modifyUserModal #uTelephone").val(row.uTelephone);
+    $("#modifyUserModal #uPolicyNum").val(row.uPolicyNum);
+    $("#modifyUserModal #uDuty").val(row.uDuty);
+    $("#modifyUserModal #uRoleId").val(row.uRoleId);
+    $("#modifyUserModal #uunitId").val(row.uUnitId);
+    $("#modifyUserModal #expireTimeVal").val(row.expireTime);
+    $("#modifyUserModal .modal-title").html("修改用户");
+    $("#modifyUserModal").modal('show');
+    $("#modifyUserModal #cancel").off();
+    $("#modifyUserModal #cancel").click(function() {
+      $('#modifyUserModal').modal('hide');
         $("#userTable").bootstrapTable('refresh');
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
-    $("#userModal #continue").click(function() {
+    $("#modifyUserModal #continue").off();
+    $("#modifyUserModal #continue").click(function() {
+      $('#modifyUserModal').modal('hide');
         console.log(44444)
+        var data={
+            uId: uId,
+            uName: $("#modifyUserModal #uName").val(),
+            uRealName: $("#modifyUserModal #urealName").val(),
+            uSex: $("#modifyUserModal input[name='uSex']:checked").val(),
+            uCardId: $("#modifyUserModal #uCardId").val(),
+            uType: $("#modifyUserModal #uType").val(),
+            uStatus: $("#modifyUserModal #uStatus").val(),
+            uPhone: $("#modifyUserModal #uPhone").val(),
+            uTelephone: $("#modifyUserModal #uTelephone").val(),
+            uPolicyNum: $("#modifyUserModal #uPolicyNum").val(),
+            uDuty: $("#modifyUserModal #uDuty").val(),
+            uRoleId: $("#modifyUserModal #uRoleId").val(),
+            uUnitId: $("#modifyUserModal #uunitId").val(),
+            expireTime: $("#modifyUserModal #expireTimeVal").val()
+        }
+        console.log(data)
         $.ajax({
             type: 'post',
             url: pathurl+'user/edit',
             data: {
                 uId: uId,
-                uName: $("#uName").val(),
-                uRealName: $("#urealName").val(),
-                uSex: $("#userModal input[name='uSex']:checked").val(),
-                uCardId: $("#uCardId").val(),
-                uType: $("#uType").val(),
-                uStatus: $("#uStatus").val(),
-                uPhone: $("#uPhone").val(),
-                uTelephone: $("#uTelephone").val(),
-                uPolicyNum: $("#uPolicyNum").val(),
-                uDuty: $("#uDuty").val(),
-                uRoleId: $("#uRoleId").val(),
-                uUnitId: $("#uunitId").val(),
-                expireTime: $("#expireTime").val()
+                uName: $("#modifyUserModal #uName").val(),
+                uRealName: $("#modifyUserModal #urealName").val(),
+                uSex: $("#modifyUserModal input[name='uSex']:checked").val(),
+                uCardId: $("#modifyUserModal #uCardId").val(),
+                uType: $("#modifyUserModal #uType").val(),
+                uStatus: $("#modifyUserModal #uStatus").val(),
+                uPhone: $("#modifyUserModal #uPhone").val(),
+                uTelephone: $("#modifyUserModal #uTelephone").val(),
+                uPolicyNum: $("#modifyUserModal #uPolicyNum").val(),
+                uDuty: $("#modifyUserModal #uDuty").val(),
+                uRoleId: $("#modifyUserModal #uRoleId").val(),
+                uUnitId: $("#modifyUserModal #uunitId").val(),
+                expireTime: $("#modifyUserModal #expireTimeVal").val()
             },
             cache: false,
             dataType: 'json',
             success: function(data) {
               console.log(data)
-                if (data.code == 0) {
+                if (data.code == 200) {
                   console.log('修改成功')
-                    $("#myModalLabel").html("提示");
-                    $("#modal-body-id").html(data.msg);
-                    $('#myModal').modal('show');
-                    LoadAjaxContent(pathurl+'user/list');
+                  $('userModal').modal('hide');
+                  $("#modal-body-id").text(data.msg);
+                  $("#myModal").modal('show');
+                  $("#userForm")[0].reset();
+                  // LoadAjaxContent(pathurl+'user/list');
+                  $("#userTable").bootstrapTable('refresh');
                 } else {
                     $("#myModalLabel").html("提示");
-                    $("#modal-body-id").html(data.msg);
-                    $('#myModal').modal('show');
+                    $("#modal-body-text").html(data.msg);
+                    $('#deptModel').modal('show');
                 }
             },
             error: function() {
               console.log('修改失败')
-                $("#myModalLabel").html("提示");
                 $("#modal-body-id").html('系统出错请稍后再试');
-                //	$('#myModal').modal('show');
+                	$('#myModal').modal('show');
             }
         });
     });
+    // $("#userModal #continue").off();
 }
 
 function addUser() {
     $("#userForm")[0].reset();
-    $(".modal-title").html("添加用户");
-    $("#userModal").modal();
-    $("#userModal #cancel").click(function() {
-      $('#userModal').modal('hide');
+    $("#adduserModal .modal-title").html("添加用户");
+    $("#adduserModal").modal();
+    $("#adduserModal #cancel").off()
+    $("#adduserModal #cancel").click(function() {
+      $('#adduserModal').modal('hide');
+      $("#userTable").bootstrapTable('refresh');
     });
-
-    $("#userModal #continue").click(function(form) {
-        console.log(555555555)
-        $.ajax({
-            type: 'post',
-            url: pathurl+'user/new',
-            data: {
-                uName: $("#uName").val(),
-                uRealName: $("#urealName").val(),
-                uSex: $("#userModal input[name='uSex']:checked").val(),
-                uCardId: $("#uCardId").val(),
-                uType: $("#uType").val(),
-                uStatus: $("#uStatus").val(),
-                uPhone: $("#uPhone").val(),
-                uTelephone: $("#uTelephone").val(),
-                uPolicyNum: $("#uPolicyNum").val(),
-                uDuty: $("#uDuty").val(),
-                uRoleId: $("#uRoleId").val(),
-                uUnitId: $("#uunitId").val(),
-                expireTime: $("#expireTime").val()
-            },
-            cache: false,
-            dataType: 'json',
-            success: function(data) {
-                console.log(data)
-                if (data.code == 0) {
-                    $('userModal').modal('hide');
-                    $("#myModalLabel").html("提示");
-                    $("#modal-body-text").html(data.msg);
-                    $('#deptModel').modal('show');
-                    $("#userForm")[0].reset();
-                    LoadAjaxContent(pathurl+'user/list');
-                } else {
-                    $('#userModal').modal('hide');
-                    $("#myModalLabel").html("提示");
-                    $("#modal-body-text").html(data.msg);
-                    $('#deptModel').modal('show');
-                }
-            },
-            error: function() {
-                $("#myModalLabel").html("提示");
-                $("#modal-body-id").html('系统出错请稍后再试');
-                //	$('#myModal').modal('show');
-            }
-        });
-    });
-
 }
+$("#adduserModal #continue").off();
+$("#adduserModal #continue").click(function(form) {
+    console.log(555555555);
+
+    $.ajax({
+        type: 'post',
+        url: pathurl+'user/new',
+        data: {
+            uName: $("#adduserModal #uName").val(),
+            uRealName: $("#adduserModal #urealName").val(),
+            uSex: $("#adduserModal input[name='uSex']:checked").val(),
+            uCardId: $("#adduserModal #uCardId").val(),
+            uType: $("#adduserModal #uType").val(),
+            uStatus: $("#adduserModal #uStatus").val(),
+            uPhone: $("#adduserModal #uPhone").val(),
+            uTelephone: $("#adduserModal #uTelephone").val(),
+            uPolicyNum: $("#adduserModal #uPolicyNum").val(),
+            uDuty: $("#adduserModal #uDuty").val(),
+            uRoleId: $("#adduserModal #uRoleId").val(),
+            uUnitId: $("#adduserModal #uunitId").val(),
+            expireTime: $("#adduserModal #expireTime").val()
+        },
+        cache: false,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data)
+            if (data.code == 200) {
+                $('#adduserModal').modal('hide');
+                $("#modal-body-id").html('添加成功');
+                $('#myModal').modal('show');
+                $("#userForm")[0].reset();
+                // LoadAjaxContent(pathurl+'user/list');
+                $("#userTable").bootstrapTable('refresh');
+            } else {
+                $("#myModalLabel").html("提示");
+                $("#modal-body-text").html(data.msg);
+                $('#deptModel').modal('show');
+            }
+        },
+        error: function() {
+            $("#myModalLabel").html("提示");
+            $("#modal-body-id").html('系统出错请稍后再试');
+            //	$('#myModal').modal('show');
+        }
+    });
+});
 // setInterval(function(){
 //   data = new FormData()
 //   data.append('key1',"value1");
@@ -491,134 +522,40 @@ function doUpload() {
     $("#fileinputModal #cancel").click(function() {
         $("#userTable").bootstrapTable('refresh');
     });
-    $("#fileinputModal #continue").click(function() {
-        console.log(66666)
 
-        var formData = new FormData($( "#uploadForm" )[0]);
-        console.log(formData.get("file"));
-        if(formData.get("file").name){
-          $.ajax({
-              url: pathurl+'fileUpload',
-              type: 'POST',
-              data: formData,
-              async: false,
-              cache: false,
-              contentType: false,
-              processData: false,
-              success: function(data) {
-                  if (data.code == 200) {
+}
+$("#fileinputModal #continue").click(function() {
+    var formData = new FormData($( "#uploadForm" )[0]);
+    console.log(formData.get("file"));
+    if(formData.get("file").name){
+      $.ajax({
+          url: pathurl+'fileUpload',
+          type: 'POST',
+          data: formData,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) {
+              if (data.code == 200) {
 
-                      $("#modal-body-id").text(data.msg);
-                      $("#myModal").modal();
-                      $("#userTable").bootstrapTable('refresh');
-                  } else {
-                      $("#modal-body-id").text(data.msg);
-                      $("#myModal").modal();
-                  }
-              },
-              error: function(data) {
-                  $("#modal-body-id").text("上传文件失败,请重新尝试!");
+                  $("#modal-body-id").text('上传文件成功');
+                  $("#myModal").modal('show');
+                  $("#userTable").bootstrapTable('refresh');
+              } else {
+                  $("#modal-body-id").text(data.msg);
                   $("#myModal").modal();
               }
-          });
-        }else{
-          $("#modal-body-id").text('请选择要上传的文件');
-          $("#myModal").modal();
-          $("#userTable").bootstrapTable('refresh');
-        }
+          },
+          error: function(data) {
+              $("#modal-body-id").text("上传文件失败,请重新尝试!");
+              $("#myModal").modal();
+          }
+      });
+    }else{
+      $("#modal-body-id").text('请选择要上传的文件');
+      $("#myModal").modal();
 
-    });
-}
+    }
 
-
-
-
-//
-//
-// // Run Datables plugin and create 3 variants of settings
-// 	function AllTables() {
-// 		TestTable1();
-// 		LoadSelect2Script(MakeSelect2);
-// 	}
-// 	function MakeSelect2() {
-// 		//$('select').select2();
-// 		$("select").select2({
-// 			minimumResultsForSearch : -1
-// 		});
-// 		$('.dataTables_filter').each(
-// 				function() {
-// 					$(this).find('label input[type=text]').attr('placeholder',
-// 							'用户名、姓名');
-// 				});
-// 	}
-//
-// 	$(document).ready(function() {
-// 		// Load Datatables and run plugin on tables
-// 		LoadDataTablesScripts(AllTables);
-// 		// Add Drag-n-Drop feature
-// 		//	LoadBootstrapValidatorScript(addFormVali);
-// 		WinMove();
-//
-// 		getEcharts();
-// 	});
-//
-// 	function getEcharts() {
-// 		var roleChart = echarts.init(document.getElementById('roleEchart'));
-// 		var departmentChart = echarts.init(document
-// 				.getElementById('departmentEchart'));
-// 		// var rname = ${nList};
-// 		// var rvaluelist = ${value};
-// 		var rtemplist = [];
-// 		for (var i = 0; i < rname.length; i++) {
-// 			var temp = {
-// 				value : rvaluelist[i],
-// 				name : rname[i]
-// 			}
-// 			rtemplist.push(temp);
-// 		}
-// 		console.log(rtemplist);
-// 		// var dname = ${dnList};
-// 		// var dvaluelist = ${dvalueList};
-// 		var dtemplist = [];
-// 		for (var i = 0; i < dname.length; i++) {
-// 			var temp = {
-// 				value : dvaluelist[i],
-// 				name : dname[i]
-// 			}
-// 			dtemplist.push(temp);
-// 		}
-// 		roleChart.setOption(getOption("角色", rname, rtemplist));
-// 		departmentChart.setOption(getOption("单位", dname, dtemplist));
-// 	}
-// 	function getOption(title, name, templist) {
-// 		option = {
-// 			title : {
-// 				text : title + '统计',
-// 				x : 'center'
-// 			},
-// 			tooltip : {
-// 				trigger : 'item',
-// 				formatter : "{a} <br/>{b} : {c} ({d}%)"
-// 			},
-// 			legend : {
-// 				orient : 'vertical',
-// 				left : 'left',
-// 				data : name
-// 			},
-// 			series : [ {
-// 				name : title,
-// 				type : 'pie',
-// 				radius : '55%',
-// 				center : [ '50%', '60%' ],
-// 				data : templist,
-// 				itemStyle : {
-// 					emphasis : {
-// 						shadowBlur : 10,
-// 						shadowOffsetX : 0,
-// 						shadowColor : 'rgba(0, 0, 0, 0.5)'
-// 					}
-// 				}
-// 			} ]
-// 		};
-// 		return option;
-// 	}
+});
