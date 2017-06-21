@@ -238,7 +238,7 @@ function upload() {
                 $("#modal-body-id").text("对不起，查询不到任何相关数据");
                 $("#myModal").modal();
             }else{
-                $(".compare-box .face-similar>p:last-child>span").html('<font>'+simi.substring(0,3)+'</font><font>'+simi.substring(3,6)+'</font>');
+                $(".compare-box .face-similar>p:last-child>span").html('<font>'+simi.substring(0,3)+'</fonts><fonts>'+simi.substring(3,6)+'</font>');
 
                 $("#canvas").bind("mousemove",function(e){
                     draw.show(e);

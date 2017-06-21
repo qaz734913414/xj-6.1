@@ -3,219 +3,225 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
     <meta http-equiv=”Access-Control-Allow-Origin” content=”*”>
     <title>人脸识别后台管理系统</title>
     <link rel="shortcut icon" href="./img/fa.ico">
-<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=no">
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=no">
+    <link href="css/common/bootstrap.min.css" rel="stylesheet">
+    <!-- 字体图标 -->
+    <link href="css/common/font-awesome.css" rel="stylesheet"/>
+    <link href="./css/highlight.css" rel="stylesheet"/>
+    <link href="./css/uploadify.css" rel="stylesheet"/>
+    <link href="css/common/fineuploader-5.0.1.min.css" rel="stylesheet"/>
+    <link href="css/common/bootstrap-switch.min.css" rel="stylesheet"/>
+    <link href="./css/showstyle.css" rel="stylesheet"/>
 
-        <link href="./css/highlight.css" rel="stylesheet" />
-        <link href="./css/uploadify.css" rel="stylesheet" />
-        <link href="./css/fineuploader-5.0.1.min.css" rel="stylesheet" />
-        <link href="./css/bootstrap-switch.min.css" rel="stylesheet" />
-        <link href="./css/showstyle.css" rel="stylesheet" />
+    <!-- bootstrap-table样式文件 -->
+    <link href="css/common/bootstrap-table.min.css" rel="stylesheet"/>
+    <!-- bootstrap日历样式文件 -->
+    <link href="css/common/bootstrap-datetimepicker.css" rel="stylesheet"/>
 
-        <!-- bootstrap-table样式文件 -->
-        <link href="./css/bootstrap-table.min.css" rel="stylesheet" />
-        <!-- bootstrap日历样式文件 -->
-        <link href="./css/bootstrap-datetimepicker.css" rel="stylesheet" />
-        <!-- 字体图标 -->
-        <link href="./css/font-awesome.css" rel="stylesheet" />
-        <!-- 主页样式文件 -->
-        <link href="./css/index.css" rel="stylesheet" />
-        <!-- 人脸检索日志样式文件 -->
-        <link href="./css/style.css" rel="stylesheet" />
-        <!-- zTree样式 -->
-        <link href="./css/zTreeStyle.css" rel="stylesheet" />
+    <!-- 主页样式文件 -->
+    <link href="./css/index.css" rel="stylesheet"/>
+    <!-- 人脸检索日志样式文件 -->
+    <link href="./css/style.css" rel="stylesheet"/>
+    <!-- zTree样式 -->
+    <link href="./css/zTreeStyle.css" rel="stylesheet"/>
 
-        <link href="./css/bootstrap-theme.min.css" rel="stylesheet" />
-        <link href="./css/bootstrap-dialog.min.css" rel="stylesheet" />
+    <link href="css/common/bootstrap-theme.min.css" rel="stylesheet"/>
+    <link href="css/common/bootstrap-dialog.min.css" rel="stylesheet"/>
 
-        <script src="./js/jquery.min.js" charset="utf-8"></script>
-        <script src="./js/common.js" charset="utf-8"></script>
-        <script src="./js/jquery.fineuploader-5.0.1.min.js" charset="utf-8"></script>
-        <!-- 模板循环 -->
-        <script src="./js/jquery.tmpl.min.js" charset="utf-8"></script>
-        <!-- bootstrap主文件 -->
-        <script src="./js/bootstrap.min.js" charset="utf-8"></script>
-        <!-- bootstrap日历 -->
-        <script src="./js/bootstrap-datetimepicker.js" charset="utf-8"></script>
-        <script src="./js/bootstrap-datetimepicker.zh-CN.js" charset="utf-8"></script>
-        <!-- bootstrapTable中文表格 -->
-        <script src="./js/bootstrap-table.min.js" charset="utf-8"></script>
-        <script src="./js/bootstrap-table-zh-CN.min.js" charset="utf-8"></script>
-        <!-- bootstrapTable导出 -->
-        <script src="./js/bootstrap-table-export.min.js" charset="utf-8"></script>
-        <script src="./js/tableExport.min.js" charset="utf-8"></script>
-        <!-- bootstrap表单验证 -->
-        <script src="./js/bootstrapValidator.js" charset="utf-8"></script>
-        <!-- 表格公共js -->
-        <script src="./js/tableCommon.js" charset="utf-8"></script>
+    <script src="js/common/jquery.min.js" charset="utf-8"></script>
+    <script src="./js/common.js" charset="utf-8"></script>
+    <script src="js/common/jquery.fineuploader-5.0.1.min.js" charset="utf-8"></script>
+    <!-- 模板循环 -->
+    <script src="js/common/jquery.tmpl.min.js" charset="utf-8"></script>
+    <!-- bootstrap主文件 -->
+    <script src="js/common/bootstrap.min.js" charset="utf-8"></script>
+    <!-- bootstrap日历 -->
+    <script src="js/common/bootstrap-datetimepicker.js" charset="utf-8"></script>
+    <script src="js/common/bootstrap-datetimepicker.zh-CN.js" charset="utf-8"></script>
+    <!-- bootstrapTable中文表格 -->
+    <script src="js/common/bootstrap-table.min.js" charset="utf-8"></script>
+    <script src="js/common/bootstrap-table-zh-CN.min.js" charset="utf-8"></script>
+    <!-- bootstrapTable导出 -->
+    <script src="js/common/bootstrap-table-export.min.js" charset="utf-8"></script>
+    <script src="js/common/tableExport.min.js" charset="utf-8"></script>
+    <!-- bootstrap表单验证 -->
+    <script src="./js/bootstrapValidator.js" charset="utf-8"></script>
+    <!-- 表格公共js -->
+    <script src="./js/tableCommon.js" charset="utf-8"></script>
 
-        <!-- zTree -->
-        <script src="./js/jquery.ztree.all-3.5.js" charset="utf-8"></script>
-        <script src="./js/jquery.ztree.all-3.5.js" charset="utf-8"></script>
-        <script src="./js/jquery.ztree.core-3.5.js" charset="utf-8"></script>
-        <script src="./js/jquery.ztree.exedit-3.5.js" charset="utf-8"></script>
-        <script src="./js/jquery.ztree.excheck-3.5.js" charset="utf-8"></script>
+    <!-- zTree -->
+    <script src="js/common/jquery.ztree.all-3.5.js" charset="utf-8"></script>
+    <script src="js/common/jquery.ztree.all-3.5.js" charset="utf-8"></script>
+    <script src="js/common/jquery.ztree.core-3.5.js" charset="utf-8"></script>
+    <script src="js/common/jquery.ztree.exedit-3.5.js" charset="utf-8"></script>
+    <script src="js/common/jquery.ztree.excheck-3.5.js" charset="utf-8"></script>
     <script>
         var pathurl = 'http://192.168.0.169:8080/FaceManage/';
     </script>
 
 </head>
 <body>
-    <!-- 自定义一级导航栏 -->
-    <div class="mynav-box-blank">
-        <div class="mynav-box first-box">
-            <ul class="mynav-menu">
-                <li class="logo">
-                    <a href="javascript:void(0);"><img src="./img/index/logo_home.png" alt="人脸识别后台管理系统"></a>
-                </li>
-                <li class="foot dropdown">
-                    <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="./login.html">切换账号</a></li>
-                        <li><a href="#">系统设置</a></li>
-                    </ul>
-                </li>
+<!-- 自定义一级导航栏 -->
+<div class="mynav-box-blank">
+    <div class="mynav-box first-box">
+        <ul class="mynav-menu">
+            <li class="logo">
+                <a href="javascript:void(0);"><img src="./img/index/logo_home.png" alt="人脸识别后台管理系统"></a>
+            </li>
+            <li class="foot dropdown">
+                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="./login.html">切换账号</a></li>
+                    <li><a href="#">系统设置</a></li>
+                </ul>
+            </li>
 
-                <li class="foot user">
-                    <p><sapn id="username"></sapn>,您好</p>
-                </li>
+            <li class="foot user">
+                <p>
+                    <sapn id="username"></sapn>
+                    ,您好
+                </p>
+            </li>
 
-                <li class="foot user-logo">
-                  <img src="./img/index/user.png" alt="人脸识别后台管理系统">
-                </li>
-                <li class="foot time">
-                    <p id="topDate"></p>
-                </li>
-            </ul>
-        </div>
+            <li class="foot user-logo">
+                <img src="./img/index/user.png" alt="人脸识别后台管理系统">
+            </li>
+            <li class="foot time">
+                <p id="topDate"></p>
+            </li>
+        </ul>
     </div>
-    <!-- 自定义二级导航栏 -->
-    <div class="mynav-box-blank second-box-blank">
-        <div class="mynav-box second-box ">
-            <ul class="mynav-menu"></ul>
-        </div>
+</div>
+<!-- 自定义二级导航栏 -->
+<div class="mynav-box-blank second-box-blank">
+    <div class="mynav-box second-box ">
+        <ul class="mynav-menu"></ul>
     </div>
+</div>
 
-    <div class="welcome">
-        <h3 class="text-center" style="color:#e3e3e3;padding-top: 10%">欢迎登陆人脸识别后台管理系统!</h3>
-    </div>
-    <div id="ajax-content">
+<div class="welcome">
+    <h3 class="text-center" style="color:#e3e3e3;padding-top: 10%">欢迎登陆人脸识别后台管理系统!</h3>
+</div>
+<div id="ajax-content">
       <!-- 各页面引入 -->
     </div>
-    <!--提示框开始-->
-    <div class="modal fade face-modal in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-        <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel"></h4>
-                </div>
-                <div class="modal-body" style="text-align:center;" id="modal-body-id">比中成功</div>
-                <div class="modal-footer" style="text-align:center;">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">知道了</button>
-                </div>
+<!--提示框开始-->
+<div class="modal fade face-modal in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="false">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;" id="modal-body-id">比中成功</div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了</button>
             </div>
         </div>
     </div>
-    <!-- 提示框开始 -->
-	<div class="modal fade face-modal" id="loginModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" style="margin: 10% auto;width: 20%;">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel"></h4>
-				</div>
-				<div class="modal-body" style="text-align:center;"
-					id="modal-body-id"></div>
-				<div class="modal-footer" style="text-align:center;">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">知道了
-					</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
+</div>
+<!-- 提示框开始 -->
+<div class="modal fade face-modal" id="loginModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;"
+                 id="modal-body-id"></div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
 </body>
 <script src="js/index.js"></script>
 <script>
-window.onload = function() {
-  $('.second-box').on('click',"a:contains('人脸检索')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/faceRetrieval.html');
-  });
-  $('.second-box').on('click',"a:contains('身份检索')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/identityRetrieval.html');
-  });
-  $('.second-box').on('click',"a:contains('人脸比对')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/faceMatching.html');
-  });
+    window.onload = function () {
+        $('.second-box').on('click', "a:contains('人脸检索')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/faceRetrieval.html');
+        });
+        $('.second-box').on('click', "a:contains('身份检索')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/identityRetrieval.html');
+        });
+        $('.second-box').on('click', "a:contains('人脸比对')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/faceMatching.html');
+        });
 
-  $('.second-box').on('click',"a:contains('人脸检索日志')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/faceRetrievalLog.html');
-  });
-  $('.second-box').on('click',"a:contains('身份检索日志')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/identityRetrievalLog.html');
-  });
-  $('.second-box').on('click',"a:contains('人脸比对日志')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/faceToFaceLog.html');
-  });
+        $('.second-box').on('click', "a:contains('人脸检索日志')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/faceRetrievalLog.html');
+        });
+        $('.second-box').on('click', "a:contains('身份检索日志')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/identityRetrievalLog.html');
+        });
+        $('.second-box').on('click', "a:contains('人脸比对日志')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/faceToFaceLog.html');
+        });
 
-  $('.second-box').on('click',"a:contains('用户信息统计')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/userInformation.html');
-  });
-  $('.second-box').on('click',"a:contains('用户操作统计')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/userOperations.html');
-  });
-  $('.second-box').on('click',"a:contains('比中率统计')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/ratioStatistics.html');
-  });
-  $('.second-box').on('click',"a:contains('身份查询')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/identityQuery.html');
-  });
+        $('.second-box').on('click', "a:contains('用户信息统计')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/userInformation.html');
+        });
+        $('.second-box').on('click', "a:contains('用户操作统计')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/userOperations.html');
+        });
+        $('.second-box').on('click', "a:contains('比中率统计')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/ratioStatistics.html');
+        });
+        $('.second-box').on('click', "a:contains('身份查询')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/identityQuery.html');
+        });
 
-  $('.second-box').on('click',"a:contains('用户管理')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/userManagement.html');
-  });
-  $('.second-box').on('click',"a:contains('组织机构管理')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/organizationManagement.html');
-  });
-  $('.second-box').on('click',"a:contains('角色管理')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/roleManagement.html');
-  });
-  $('.second-box').on('click',"a:contains('系统设置')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/systemSettings.html');
-  });
-  $('.second-box').on('click',"a:contains('问题反馈')",function(){
-    $('#ajax-content').html('');
-    $('#ajax-content').load('./template/problemFeedback.html');
-  });
-  $('.second-box').on('click',"a:contains('消息推送')",function(){
-    $('#ajax-content').load('./template/messagePush.html');
-  });
-  $('.second-box').on('click',"a:contains('系统日志')",function(){
-    $('#ajax-content').load('./template/systemLog.html');
-  });
+        $('.second-box').on('click', "a:contains('用户管理')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/userManagement.html');
+        });
+        $('.second-box').on('click', "a:contains('组织机构管理')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/organizationManagement.html');
+        });
+        $('.second-box').on('click', "a:contains('角色管理')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/roleManagement.html');
+        });
+        $('.second-box').on('click', "a:contains('系统设置')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/systemSettings.html');
+        });
+        $('.second-box').on('click', "a:contains('问题反馈')", function () {
+            $('#ajax-content').html('');
+            $('#ajax-content').load('./template/problemFeedback.html');
+        });
+        $('.second-box').on('click', "a:contains('消息推送')", function () {
+            $('#ajax-content').load('./template/messagePush.html');
+        });
+        $('.second-box').on('click', "a:contains('系统日志')", function () {
+            $('#ajax-content').load('./template/systemLog.html');
+        });
 
-}
+    }
 
 </script>
 </html>

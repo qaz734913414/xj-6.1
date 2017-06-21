@@ -163,7 +163,7 @@ ul.mynav-menu {
 .mynav-menu > li > a{
 	text-decoration:none;
 	font-size:14px;
-	/* font-weight:bold; */
+	/* fonts-weight:bold; */
 	color:#a1abb5;
 	padding: 15px 20px;
 }
@@ -224,7 +224,7 @@ ul.mynav-menu {
 	padding: 0 20px;
 	text-align: center;
 	text-decoration: none;
-	font: bold 12px/25px Arial, sans-serif; */
+	fonts: bold 12px/25px Arial, sans-serif; */
 
 	 color: #ffffff;
 
@@ -255,7 +255,7 @@ ul.mynav-menu {
 	padding-top: 10px;
 	height: 45px;
 	text-transform: uppercase;
-	font: bold 20px/22px Arial, sans-serif; */
+	fonts: bold 20px/22px Arial, sans-serif; */
 }
 
 

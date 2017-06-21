@@ -196,8 +196,6 @@ function ButtonInit() {
 }
 
 
-
-
 //页面展示详细信息
 $(".face-table").delegate(".thumbnail", "click", function() {
     var logid = $(this).parents("tr").attr('data-id');

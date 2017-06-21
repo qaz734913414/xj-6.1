@@ -24,8 +24,8 @@ b, strong {
 }
 @font-face {
     font-family: "Microsoft YaHei", 'Glyphicons Halflings';
-    src: url('../fonts/glyphicons-halflings-regular.eot');
-    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    src: url('fonts/glyphicons-halflings-regular.eot');
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .bootstrap-table .table:not(.table-condensed), .bootstrap-table .table:not(.table-condensed)>tbody>tr>td, .bootstrap-table .table:not(.table-condensed)>tbody>tr>th, .bootstrap-table .table:not(.table-condensed)>tfoot>tr>td, .bootstrap-table .table:not(.table-condensed)>tfoot>tr>th, .bootstrap-table .table:not(.table-condensed)>thead>tr>td {
     padding: 8px;
@@ -138,6 +138,7 @@ select{
 	background:  no-repeat center
 		center !important;
 	border:2px dashed #29599a;
+	border-radius: 100%;
 	padding:10px;
 	margin: 0px;
 }
@@ -157,13 +158,14 @@ select{
 	width: 100%;
 	/* height: 300px; */
 	margin: 0px;
+	border-radius: 100%;
 }
 
 .add-img-box .mybutton{
 	height: 50px;
 	background-color: #236bd4;
     border-color: #257dfe;
-    color:e3e3e3;
+    color:#e3e3e3;
 }
 
 .add-img-box .myinput{
@@ -400,8 +402,8 @@ select{
 
 
 
-/* .result-box .container-fluid .row > div .thumbnail .caption > p > span:last-child font:last-child{
-	font-size:24px;
+/* .result-box .container-fluid .row > div .thumbnail .caption > p > span:last-child fonts:last-child{
+	fonts-size:24px;
 }
  */
 
@@ -678,12 +680,12 @@ p.focus-font{
 	font-size:20px;
 	cursor:pointer;
 	padding:5px;
-	color:e3e3e3;
+	color:#e3e3e3;
 }
 
 
 .face-similar > p:first-child > span{
-	color:e3e3e3;
+	color:#e3e3e3;
 	font-size:16px;
 }
 
@@ -775,7 +777,7 @@ p.focus-font{
 	color: #b1b6b7;
 }
 .roleMTable .face-table-group .fixed-table-pagination button[class~=dropdown-toggle]{
-  background-color:none!important;
+  background-color:none !important;
 }
 .face-table-group .fixed-table-pagination button[class~=dropdown-toggle]{
 	background-color:#99a3ab ;
@@ -932,7 +934,7 @@ p.focus-font{
 
 	#retrieveModal .modal-body .thumbnail img{
 	/* display: block; */
-	width: 245;
+	width: 245px;
 	/* height: 300px; */
 	margin: 0px;
 	}

@@ -41,6 +41,15 @@ function addFormVali() {
                     validators: {
                         notEmpty: {
                             message: '请输入用户名'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 11,
+                            message: '用户名长度必须在3到11位之间'
+                        },
+                        regexp: {
+                            regexp: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{3,11}/,
+                            message: '用户名只能包含字母+数字,或者手机号'
                         }
                     }
                 },
@@ -146,7 +155,7 @@ function getTable() {
         //		height:$(document).height()-130,
         buttonsClass: "face",
         showExport: true, //是否显示导出
-        exportDataType: "basic", //basic', 'all', 'selected'.
+        exportDataType: "all", //basic', 'all', 'selected'.
         pageList: [4, 10, 25, 50, 100],
         onLoadSuccess: function(data){  //加载成功时执行
             console.log(data)
