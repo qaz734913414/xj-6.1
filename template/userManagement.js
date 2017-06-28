@@ -9,7 +9,7 @@ if (token) {
     });
 }
 
-$(function() {
+$(function () {
     getTable();
     $(".face-table-group button[title='Export data']").removeClass(
         "btn-default");
@@ -29,8 +29,16 @@ $(function() {
         language: 'zh-CN',
         minView: 2
     });
+    $('#wrenchModal #expireTimeVal').datetimepicker({
+        format: "yyyy-mm-dd",
+        showMeridian: true,
+        autoclose: true,
+        language: 'zh-CN',
+        minView: 2
+    });
     addFormVali();
-    init(); /*初始化单位和角色的下拉框 dList rList*/
+    init();
+    /*初始化单位和角色的下拉框 dList rList*/
 });
 
 function addFormVali() {
@@ -95,20 +103,20 @@ function addFormVali() {
 }
 /*初始化单位和角色的下拉框 dList rList*/
 function init() {
-    var dname,rName;
+    var dname, rName;
     $.ajax({
         type: 'POST',
-        url: pathurl+'user/initDeptAndRole',
+        url: pathurl + 'user/initDeptAndRole',
         // url: './testJson/initDeptAndRole.json',
-        success: function(data) {
+        success: function (data) {
 
             var unitStr = '';
             var roleStr = '';
             var dListData = data.result.dList;//dList    rName  rId
             var rListData = data.result.rList;
-            console.log(data.result)
-            dname=dListData;
-            rname=rListData;
+            // console.log(data.result)
+            dname = dListData;
+            rname = rListData;
             for (var i = 0; i < dListData.length; i++) {
                 unitStr += '<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>';
             }
@@ -121,9 +129,12 @@ function init() {
             $('#modifyUserModal #uUnitId option').eq(0).after(unitStr);
             $('#modifyUserModal #uunitId').html(unitStr);
             $('#modifyUserModal #uRoleId').html(roleStr);
+            $('#wrenchModal #uUnitId option').eq(0).after(unitStr);
+            $('#wrenchModal #uunitId').html(unitStr);
+            $('#wrenchModal #uRoleId').html(roleStr);
 
         },
-        error: function() {
+        error: function () {
             $("#modal-body-id").text("处理失败!");
             $("#myModal").modal();
         },
@@ -136,14 +147,14 @@ function getTable() {
     $("#userTable").bootstrapTable('destroy');
     $("#userTable").bootstrapTable({
         method: "post",
-        url: pathurl+'user/usersList',
-        queryParams:function(params){
-          return {
-            pageSize:params.pageSize,
-            pageNumber:params.pageNumber,
-            uRealName: $("#uRealName").val(),
-            uUnitId: $("#uUnitId").val()
-          }
+        url: pathurl + 'user/usersList',
+        queryParams: function (params) {
+            return {
+                pageSize: params.pageSize,
+                pageNumber: params.pageNumber,
+                uRealName: $("#uRealName").val(),
+                uUnitId: $("#uUnitId").val()
+            }
         },
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
@@ -157,8 +168,8 @@ function getTable() {
         showExport: true, //是否显示导出
         exportDataType: "all", //basic', 'all', 'selected'.
         pageList: [4, 10, 25, 50, 100],
-        onLoadSuccess: function(data){  //加载成功时执行
-            console.log(data)
+        onLoadSuccess: function (data) {  //加载成功时执行
+            console.log('初始化'+data)
         }
     });
 }
@@ -182,83 +193,100 @@ function statusFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-    return [
+    if (row.bindType==0){
+        return [
             '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
             '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
-            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>'
-        ]
-        .join('');
+            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>',
+            '<button type="button" class="unbind btn-sm btn face-button2" style="margin-right:15px;">解绑</button>'
+        ].join('');
+    }else if(row.bindType==1){
+        return [
+            '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
+            '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
+            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>',
+            '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">已解绑</button>'
+        ].join('');
+    }
+
 }
 
 
-
-$('#userModal #cancel').on('click',function(){
-  $('#userModal').modal('hide');
+$('#userModal #cancel').on('click', function () {
+    $('#userModal').modal('hide');
 })
 
 
 function updateStatus(row) {
-  console.log(row.uId)
+    console.log(row.uId)
     $.ajax({
         type: 'POST',
-        url: pathurl+'user/status',
-        data:{
-          uId:row.uId
+        url: pathurl + 'user/status',
+        data: {
+            uId: row.uId
         },
-        success: function() {
+        success: function () {
             $("#modal-body-id").text("用户状态已改变!");
             $("#myModal").modal();
             $("#userTable").bootstrapTable('refresh');
         },
-        error: function() {
+        error: function () {
             $("#modal-body-id").text("处理失败!");
             $("#myModal").modal();
         },
         dataType: 'json'
     });
-} //修改状态
+}
+//修改状态
 window.statusEvents = {
-    'click .reset': function(e, value, row, index) {
+    'click .reset': function (e, value, row, index) {
         updateStatus(row);  //修改状态
     }
 };
 
 
 window.operateEvents = {//done
-    'click .resetPwd': function(e, value, row, index) {//密码重置
+    'click .resetPwd': function (e, value, row, index) {//密码重置
         $("#resetTModel #modal-body-text").text("确定将密码重置为123456吗?");
         $("#resetTModel").modal('show');
         $('#rowUId').val(row.uId);
     },
-    'click .update': function(e, value, row, index) { //修改用户
+    'click .update': function (e, value, row, index) { //修改用户
         userEdit(row);
     },
-    'click .delete': function(e, value, row, index) { //删除用户
+    'click .delete': function (e, value, row, index) { //删除用户
         // deleteUser(row);
-        $("#delUserTModel #modal-body-text").text("确定将该用户删除?");
+        $("#delUserTModel #modal-body-text").text("确定将" + row.uName + "删除?");
         $("#delUserTModel").modal('show');
         $('#rowUId').val(row.uId);
+    },
+    'click .unbind': function (e, value, row, index) { //删除用户
+        // deleteUser(row);
+        $("#unbindTModel #unbind-text").text("确定将" + row.uName + "解绑?");
+        $("#unbindTModel").modal('show');
+        $('#username').val(row.uName);
     }
 };
-$("#resetTModel #cancel").click(function() {
+$("#resetTModel #cancel").click(function () {
     $("#userTable").bootstrapTable('refresh');
 });
-$("#resetTModel #continue").off();//重置密码
-$("#resetTModel #continue").click(function() { //done
+//重置密码
+$("#resetTModel #continue").off();
+$("#resetTModel #continue").click(function () { //done
     $("#resetTModel").modal('hide');
     $.ajax({
         type: 'POST',
-        url: pathurl+'user/resetpwd',
+        url: pathurl + 'user/resetpwd',
         data: {
-            uId:$('#rowUId').val()
+            uId: $('#rowUId').val()
         },
-        success: function() {
+        success: function () {
             $("#modal-body-id").text("密码重置成功!");
             $("#myModal").modal();
             console.log('密码重置成功!')
             $("#userTable").bootstrapTable('refresh');
         },
-        error: function() {
+        error: function () {
             $("#modal-body-id").text("处理失败!");
             $("#myModal").modal();
             console.log('密码重置失败!')
@@ -266,8 +294,33 @@ $("#resetTModel #continue").click(function() { //done
         dataType: 'json'
     });
 });
+//解绑
+$("#unbindTModel #continue").off();
+$("#unbindTModel #continue").off().click(function () { //done
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'user/unbind',
+        data: {
+            username: $('#username').val()
+        },
+        success: function (data) {
+            console.log('解绑'+data);
+            $("#myModal #modal-body-id").text("解绑成功!");
+            $("#myModal").modal();
+            $("#unbindTModel").modal('hide');
+            $("#userTable").bootstrapTable('refresh');
+        },
+        error: function () {
+            $("#unbindTModel #unbind-text").text("解绑失败!");
+            $("#unbindTModel").modal();
+            $("#unbindTModel").modal('hide');
+            console.log('解绑失败!')
 
-
+            $("#userTable").bootstrapTable('refresh');
+        },
+        dataType: 'json'
+    });
+});
 
 
 //表格批量删除
@@ -281,28 +334,102 @@ function toRemove() {
         $("#delUsersTModel #modal-body-text").text("请选择一条数据进行操作!");
         $("#delUsersTModel").modal('show');
     }
-}//done
-$("#delUsersTModel #cancel").click(function() {
+}
+//表格批量解绑
+function toUnbind() {
+    var ids = getSelectedRowsIds('userTable');
+    $('#rowUId').val(ids);
+    if (ids) {
+        $("#unbindTModel #unbind-text").text("确定要批量解绑吗?");
+        $("#unbindTModel").modal('show');
+
+    } else {
+        $("#unbindTModel #unbind-text").text("请选择一条数据进行操作!");
+        $("#unbindTModel").modal('show');
+    }
+}
+$("#unbindTModel #continue").click(function () {
+    $("#unbindTModel").modal('hide')
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'user/batchunbinding',
+        data: {
+            ids: $('#rowUId').val(),
+
+        },
+        success: function () {
+
+            $("#modal-body-id").text("批量解绑成功!");
+            $("#myModal").modal();
+            getTable();
+            $("#userTable").bootstrapTable('refresh');
+        },
+        error: function () {
+            console.log('批量解绑失败')
+            $("#modal-body-id").text("批量解绑失败!");
+            $("#myModal").modal();
+        }
+    });
+});
+//表格批量修改
+function toWrench() {
+    var ids = getSelectedRowsIds('userTable');
+    $('#rowUId').val(ids);
+    if (ids) {
+        $("#wrenchModal").modal('show');
+
+    } else {
+        $("#unbindTModel #unbind-text").text("请选择一条数据进行操作!");
+        $("#unbindTModel").modal('show');
+    }
+}
+$("#wrenchModal #continue").click(function () {
+    $("#wrenchModal").modal('hide')
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'user/batchUpdate',
+        data: {
+            ids: $('#rowUId').val(),
+            expireTime:$('#wrenchModal #wrench #expireTimeVal').val(),
+            uRoleId:$('#wrenchModal #wrench #uRoleId').val(),
+            uUnitId:$('#wrenchModal #wrench #uunitId').val(),
+        },
+        success: function () {
+
+            $("#modal-body-id").text("批量修改成功!");
+            $("#myModal").modal();
+            $("#userTable").bootstrapTable('refresh');
+        },
+        error: function () {
+            console.log('批量修改失败')
+            $("#modal-body-id").text("批量修改失败!");
+            $("#myModal").modal();
+        }
+    });
+});
+//done
+// 多表删除
+$("#delUsersTModel #cancel").click(function () {
     $("#userTable").bootstrapTable('refresh');
 });
 $("#delUsersTModel #continue").off();
-$("#delUsersTModel #continue").click(function() {
-  $("#delUsersTModel").modal('hide')
+$("#delUsersTModel #continue").click(function () {
+    $("#delUsersTModel").modal('hide')
     console.log(111)
     $.ajax({
         type: 'POST',
-        url: pathurl+'user/deleteByIds',
-        data:{
-          ids:$('#rowUId').val()
+        url: pathurl + 'user/deleteByIds',
+        data: {
+            ids: $('#rowUId').val()
         },
-        success: function() {
-          console.log('多表删除成功')
+        success: function () {
+            console.log('多表删除成功')
             $("#modal-body-id").text("删除成功!");
             $("#myModal").modal();
             $("#userTable").bootstrapTable('refresh');
         },
-        error: function() {
-          console.log('多表删除失败')
+        error: function () {
+            console.log('多表删除失败')
             $("#modal-body-id").text("处理失败!");
             $("#myModal").modal();
         }
@@ -315,45 +442,48 @@ $("#delUsersTModel #continue").click(function() {
 //     // $("#delUserTModel").modal('show');
 //
 // }
-
-$("#delUserTModel #cancel").click(function() {
+// 删除
+$("#delUserTModel #cancel").click(function () {
     $("#userTable").bootstrapTable('refresh');
 });
+// 删除
 $("#delUserTModel #continue").off();
-$("#delUserTModel #continue").click(function() {
+$("#delUserTModel #continue").click(function () {
     $("#delUserTModel").modal('hide');
     $.ajax({
         type: 'POST',
-        url: pathurl+'user/delete',
-        data:{
-          id:$('#rowUId').val()
+        url: pathurl + 'user/delete',
+        data: {
+            uId: $('#rowUId').val()
         },
-        success: function(data) {
-          console.log('删除成功!')
-          if(data.code==200){
-            $("#modal-body-id").text("删除成功!");
-            $("#myModal").modal();
-            $("#userTable").bootstrapTable('refresh');
-          }else{
-            $("#modal-body-id").text('删除失败');
-            $("#myModal").modal();
-          }
+        success: function (data) {
+            console.log('删除成功!')
+            if (data.code == 200) {
+                $("#modal-body-id").text("删除成功!");
+                $("#myModal").modal();
+                $("#userTable").bootstrapTable('refresh');
+            } else {
+                $("#modal-body-id").text('删除失败');
+                $("#myModal").modal();
+            }
         },
-        error: function() {
-          console.log('处理失败!!')
+        error: function () {
+            console.log('处理失败!!')
             $("#modal-body-id").text("处理失败!");
             $("#myModal").modal();
         }
     });
 });
 
-
+// 修改
 function userEdit(row) {
+
     $(".bs-checkbox input[name='btSelectItem']").attr("checked", false);
 
     //	$("#userForm")[0].reset();
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
+    var uSex = row.uSex;
     var uSex = row.uSex;
     console.log(uSex);
     if (uSex == 0) {
@@ -390,17 +520,17 @@ function userEdit(row) {
     $("#modifyUserModal .modal-title").html("修改用户");
     $("#modifyUserModal").modal('show');
     $("#modifyUserModal #cancel").off();
-    $("#modifyUserModal #cancel").click(function() {
-      $('#modifyUserModal').modal('hide');
+    $("#modifyUserModal #cancel").click(function () {
+        $('#modifyUserModal').modal('hide');
         $("#userTable").bootstrapTable('refresh');
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
     $("#modifyUserModal #continue").off();
-    $("#modifyUserModal #continue").click(function() {
-      $('#modifyUserModal').modal('hide');
-        console.log(44444)
-        var data={
+    $("#modifyUserModal #continue").click(function () {
+        $('#modifyUserModal').modal('hide');
+
+        var data = {
             uId: uId,
             uName: $("#modifyUserModal #uName").val(),
             uRealName: $("#modifyUserModal #urealName").val(),
@@ -414,12 +544,16 @@ function userEdit(row) {
             uDuty: $("#modifyUserModal #uDuty").val(),
             uRoleId: $("#modifyUserModal #uRoleId").val(),
             uUnitId: $("#modifyUserModal #uunitId").val(),
-            expireTime: $("#modifyUserModal #expireTimeVal").val()
+            expireTime: $("#modifyUserModal #expireTimeVal").val(),
+            province: $("#modifyUserModal #distpicker select[name='province']").val(),
+
+            city: $("#modifyUserModal #distpicker select[name='city']").val(),
+            area: $("#modifyUserModal #distpicker select[name='area']").val(),
         }
         console.log(data)
         $.ajax({
             type: 'post',
-            url: pathurl+'user/edit',
+            url: pathurl + 'user/edit',
             data: {
                 uId: uId,
                 uName: $("#modifyUserModal #uName").val(),
@@ -438,55 +572,55 @@ function userEdit(row) {
             },
             cache: false,
             dataType: 'json',
-            success: function(data) {
-              console.log(data)
+            success: function (data) {
+                console.log(data)
                 if (data.code == 200) {
-                  console.log('修改成功')
-                  $('userModal').modal('hide');
-                  $("#modal-body-id").text(data.msg);
-                  $("#myModal").modal('show');
-                  $("#userForm")[0].reset();
-                  // LoadAjaxContent(pathurl+'user/list');
-                  $("#userTable").bootstrapTable('refresh');
+                    console.log('修改成功')
+                    $('userModal').modal('hide');
+                    $("#modal-body-id").text(data.msg);
+                    $("#myModal").modal('show');
+                    $("#userForm")[0].reset();
+                    // LoadAjaxContent(pathurl+'user/list');
+                    $("#userTable").bootstrapTable('refresh');
                 } else {
                     $("#myModalLabel").html("提示");
                     $("#modal-body-text").html(data.msg);
                     $('#deptModel').modal('show');
                 }
             },
-            error: function() {
-              console.log('修改失败')
+            error: function () {
+                console.log('修改失败')
                 $("#modal-body-id").html('系统出错请稍后再试');
-                	$('#myModal').modal('show');
+                $('#myModal').modal('show');
             }
         });
     });
     // $("#userModal #continue").off();
 }
-
+// 新增
 function addUser() {
     $("#userForm")[0].reset();
     $("#adduserModal .modal-title").html("添加用户");
     $("#adduserModal").modal();
     $("#adduserModal #cancel").off()
-    $("#adduserModal #cancel").click(function() {
-      $('#adduserModal').modal('hide');
-      $("#userTable").bootstrapTable('refresh');
+    $("#adduserModal #cancel").click(function () {
+        $('#adduserModal').modal('hide');
+        $("#userTable").bootstrapTable('refresh');
     });
 }
 $("#adduserModal #continue").off();
-$("#adduserModal #continue").click(function(form) {
+$("#adduserModal #continue").click(function (form) {
     console.log(555555555);
 
     $.ajax({
         type: 'post',
-        url: pathurl+'user/new',
+        url: pathurl + 'user/new',
         data: {
             uName: $("#adduserModal #uName").val(),
             uRealName: $("#adduserModal #urealName").val(),
             uSex: $("#adduserModal input[name='uSex']:checked").val(),
             uCardId: $("#adduserModal #uCardId").val(),
-            uType: $("#adduserModal #uType").val(),
+
             uStatus: $("#adduserModal #uStatus").val(),
             uPhone: $("#adduserModal #uPhone").val(),
             uTelephone: $("#adduserModal #uTelephone").val(),
@@ -494,11 +628,16 @@ $("#adduserModal #continue").click(function(form) {
             uDuty: $("#adduserModal #uDuty").val(),
             uRoleId: $("#adduserModal #uRoleId").val(),
             uUnitId: $("#adduserModal #uunitId").val(),
-            expireTime: $("#adduserModal #expireTime").val()
+            expireTime: $("#adduserModal #expireTimeVal").val(),
+            province: $("#adduserModal #distpicker select[name='province']").val(),
+
+            city: $("#adduserModal #distpicker select[name='city']").val(),
+            area: $("#adduserModal #distpicker select[name='area']").val(),
+            uVIP: $("#adduserModal #uVIP").is(':checked') ? '0' : '1'
         },
         cache: false,
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             console.log(data)
             if (data.code == 200) {
                 $('#adduserModal').modal('hide');
@@ -508,12 +647,13 @@ $("#adduserModal #continue").click(function(form) {
                 // LoadAjaxContent(pathurl+'user/list');
                 $("#userTable").bootstrapTable('refresh');
             } else {
+                $("#deptModel").css("z-index", 1500);
                 $("#myModalLabel").html("提示");
                 $("#modal-body-text").html(data.msg);
                 $('#deptModel').modal('show');
             }
         },
-        error: function() {
+        error: function () {
             $("#myModalLabel").html("提示");
             $("#modal-body-id").html('系统出错请稍后再试');
             //	$('#myModal').modal('show');
@@ -528,43 +668,93 @@ $("#adduserModal #continue").click(function(form) {
 function doUpload() {
     $("#modal-text").text("请上传后缀为'.xlsx'的表格,可以点击下载模板参考");
     $("#fileinputModal").modal();
-    $("#fileinputModal #cancel").click(function() {
+    $("#fileinputModal #cancel").click(function () {
         $("#userTable").bootstrapTable('refresh');
     });
 
 }
-$("#fileinputModal #continue").click(function() {
-    var formData = new FormData($( "#uploadForm" )[0]);
+$("#fileinputModal #continue").click(function () {
+    var formData = new FormData($("#uploadForm")[0]);
     console.log(formData.get("file"));
-    if(formData.get("file").name){
-      $.ajax({
-          url: pathurl+'fileUpload',
-          type: 'POST',
-          data: formData,
-          async: false,
-          cache: false,
-          contentType: false,
-          processData: false,
-          success: function(data) {
-              if (data.code == 200) {
+    if (formData.get("file").name) {
+        $.ajax({
+            url: pathurl + 'fileUpload',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
 
-                  $("#modal-body-id").text('上传文件成功');
-                  $("#myModal").modal('show');
-                  $("#userTable").bootstrapTable('refresh');
-              } else {
-                  $("#modal-body-id").text(data.msg);
-                  $("#myModal").modal();
-              }
-          },
-          error: function(data) {
-              $("#modal-body-id").text("上传文件失败,请重新尝试!");
-              $("#myModal").modal();
-          }
-      });
-    }else{
-      $("#modal-body-id").text('请选择要上传的文件');
-      $("#myModal").modal();
+                if (data.code == 200) {
+                    $("#modal-body-id").empty();
+                    var text = '';
+                    text += '<p onclick="fileInfo(0) "><a>上传成功:' + data.success + '</a> </p ><p onclick="fileInfo(1)"><a>上传失败:' + data.fail + '</a> </p><p onclick="fileInfo(2)"><a>上传重复:' + data.repeat + '</a> </p>';
+                    $("#modal-body-id").append(text);
+                    $("#myModal").modal('show');
+                    $("#userTable").bootstrapTable('refresh');
+                } else {
+                    $("#modal-body-id").text('上传文件失败,请重新尝试!');
+                    $("#myModal").modal();
+                }
+            },
+            error: function (data) {
+                $("#modal-body-id").text("上传文件失败,请重新尝试!");
+                $("#myModal").modal();
+            }
+        });
+    } else {
+        $("#modal-body-id").text('请选择要上传的文件');
+        $("#myModal").modal();
 
     }
 
 });
+function fileInfo(state) {
+    //初始化table
+
+    $("#fileInfoTable").bootstrapTable('destroy');
+    $("#fileInfoTable").bootstrapTable({
+        method: "post",
+        url: pathurl + 'import/initTable?state=' + state,
+        queryParams: function (params) {
+            return {
+                pageSize: params.pageSize,
+                pageNumber: params.pageNumber
+            }
+        },
+        pagination: true,
+        contentType: "application/x-www-form-urlencoded",
+        queryParamsType: " limit",
+        paginationDetailHAlign: "left",
+        showExport: true, //是否显示导出
+        exportDataType: "all", //basic', 'all', 'selected'.
+        pageList: [4, 10, 25, 50, 100],
+        onLoadSuccess: function (data) {  //加载成功时执行
+            $('#fileInfoModal').css('z-index', 1500);
+
+            if (state == 0) {
+
+                $('#fileInfoModal #fileInfoLabel').text('上传成功:' + data.total + '条')
+
+            }
+            else if (state == 1) {
+                $('#fileInfoModal #fileInfoLabel').text('上传失败:' + data.total + '条')
+            }
+            if (state == 2) {
+                $('#fileInfoModal #fileInfoLabel').text('上传重复:' + data.total + '条')
+            }
+            $('#fileInfoModal').modal();
+
+        }
+    });
+
+}
+function sexFormatter(value) {
+    if (value == 0) {
+        return '男';
+    } else {
+        return '女';
+    }
+}

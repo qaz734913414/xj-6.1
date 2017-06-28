@@ -1,3 +1,6 @@
+// $("#btntype button").click(function () {
+//     console.log($("#btntype button:focus").data("value"));
+// })
 
 var uploadFile;
 var heightFactor = 1.2;//图片高度宽度比例
@@ -236,11 +239,13 @@ function upload() {
     }
     var form_Data = new FormData();
     form_Data.append("file", uploadFile);
-    form_Data.append("type", $(".add-img-box select").val());
+    form_Data.append("type", $("#btntype button:hover").data("value"));
     form_Data.append("remark", $("#remark").val());
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
+
+    $('#loading').show();
     $.ajax({
         type: 'post',
         url: pathurl + 'face/retrieve/',
@@ -281,6 +286,7 @@ function upload() {
 
 
                 winChange();//调整高宽
+                $('#loading').hide();
                 //绑定图片点击事件
                 $(".result-box .thumbnail").bind('click', function () {
                     $("#retrieveModal").modal();

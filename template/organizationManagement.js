@@ -363,11 +363,10 @@ function deleteDept(row) {
   });
 }
 function deptEdit(row) {
-  console.log(row.cName)
-  console.log(row.dDid)
 
     $("#modifyInfoModal #name").val(row.cName);
     $("#modifyInfoModal #dPId").val(row.dDid);
+    $("#modifyInfoModal #code").val(row.code);
   //	alert($("#dPId").val()+"----"+row.dDid);
     $("#modifyInfoModal .modal-title").html("修改");
     $("#modifyInfoModal").modal();
@@ -379,6 +378,7 @@ function deptEdit(row) {
     $("#modifyInfoModal #continue").click(function(){
     var name =  $("#modifyInfoModal #name").val();
     var dpId = $("#modifyInfoModal #dPId").val();
+    var code = $("#modifyInfoModal #code").val();
     var did = row.did;
     // alert("name---"+name+"---dPid---"+dpId+"---did---"+did);
     $.ajax({
@@ -387,7 +387,9 @@ function deptEdit(row) {
       data : {
         name : name,
         dpId : dpId,
-        did : did
+        did : did,
+        code : code
+
       },
       cache : false,
       dataType : 'json',

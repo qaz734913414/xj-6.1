@@ -3,7 +3,7 @@
 <div id="backModel"></div>
 <div class="container-fluid face-table-group message-push">
     <div class="row">
-        <div class="form-inline face-form">
+        <div class="form-inline face-form" id="tapbar">
             <div class="form-group">
                 <input type="text" class="form-control" id="queryMesUser" onclick="" placeholder="请输入发布人名称">
             </div>
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="row">
-        <table class="face-table"></table>
+        <table id="add-table" class="face-table"></table>
     </div>
     <input type="hidden" value="" id="nTitle" />
     <input type="hidden" value="" id="mTitle" />
@@ -43,26 +43,12 @@
           </div>
           <div class="modal-body">
             <form id="messageVal" style="width: 485px;margin: 0 auto;" modelattribute="user" class="form-inline bootstrap-validator-form" role="form" novalidate="novalidate">
-              <div class="form-group" style="margin: 20px 0;display:block;">
-                <label style="width: 100px;text-align: justify;font-size: 14px;font-weight: normal;line-height: 34px;" for="addMesUser">通知的标题</label>
-                  <input type="text" class="form-control" id="addMesTit" name="mTitle" onclick="" placeholder="请输入通知的标题">
-              </div>
-              <div class="form-group" style="margin: 20px 0;display:block;">
-                <label style="width: 100px;text-align: justify;font-size: 14px;font-weight: normal;line-height: 34px;" for="addMesUser">通知的内容标题</label>
-                  <input type="text" class="form-control" id="addMesTitCon" name="nTitle" onclick="" placeholder="请输入通知的内容标题">
-              </div>
+
               <div class="form-group addMessage" style="margin: 20px 0;display:block;">
                 <label style="width: 100px;text-align: justify;font-size: 14px;font-weight: normal;line-height: 34px;vertical-align: top;" for="addMes">通知的内容</label>
                 <textarea class="form-control" id="addMes" name="mContent" style="resize: vertical;width: 380px;height: 120px;" placeholder="请输入通知的内容"></textarea>
               </div>
-              <div class="form-group" style="margin: 20px 0;display:block;">
-                <label style="width: 100px;text-align: justify;font-size: 14px;font-weight: normal;line-height: 34px;" for="addMes">通知的对象</label>
-                <select class="form-control" id="addTarget" name="target" style="width:100px;color:#555;">
-                    <option value="1" selected="selected">所有人</option>
-                    <option value="2">安卓</option>
-                    <option value="3">IOS</option>
-                </select>
-              </div>
+
             </form>
           </div>
           <div class="modal-footer text-center ">

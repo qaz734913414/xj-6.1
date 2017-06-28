@@ -63,7 +63,7 @@ function TableInit() {
             // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false, //是否显示详细视图
             showExport: true, //是否显示导出
-            exportDataType: "basic", //basic', 'all', 'selected'.
+            exportDataType : "basic", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
             responseHandler:function(res){

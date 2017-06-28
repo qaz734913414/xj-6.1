@@ -1,5 +1,5 @@
 jQuery.support.cors = true;
-var pathurl = 'http://192.168.0.169:8080/FaceManage/';
+var pathurl = 'http://192.168.0.239:8080/FaceManage/';
 
 
 $(function () {

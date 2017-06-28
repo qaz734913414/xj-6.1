@@ -1,7 +1,10 @@
+@font-face {
+	font-family: 'clock-font';
+	src: url('./fonts/DS-DIGI.TTF');
 
+}
 body {
   color: #525252;
-  background: url('../img/index/bg_home.jpg') 0 0 no-repeat;
   background-size:cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -36,7 +39,6 @@ min-height: 100vh;
 }
 
 .mynav-box{
-  background: url(../img/index/bg_nav.png) 0 0 no-repeat;
   background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -138,10 +140,11 @@ ul.mynav-menu {
     margin-right: 30px;
 	float:right;
 	color:#9faab7;
-	width:85px;
+	width: 150px;
 }
 .mynav-menu > li[class~=time] p{
-  width:80px;
+
+	font-size:1.3em;
 }
 
 .mynav-menu > li[class~=user-logo] {
@@ -157,26 +160,41 @@ ul.mynav-menu {
 	width: auto;;
 }
 
+#bgc {
+	position: relative;top: -33px;
+	padding:5px;
+}
+#bgc:hover {
+	cursor: pointer;
+}
+#imglist{
+	position: absolute;
+	top:40px;
+	right:40px;
 
-
-
+}
+#imglist li{
+	line-height:2;
+	text-align: center;
+	color: #fff;
+}
 .mynav-menu > li > a{
 	text-decoration:none;
 	font-size:14px;
 	/* fonts-weight:bold; */
-	color:#a1abb5;
+	color: #fff;
 	padding: 15px 20px;
 }
 
 
 .mynav-menu > li > a:hover {
-	/* -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
-	-moz-box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5);
-	box-shadow: 1px 1px 1px rgba(0,0,0,.29), inset 0px 0px 2px rgba(0,0,0, .5); */
-	color:#ffffff;
+	color:rgba(255,255,255,.7)
 
 }
-
+#uCardId{
+	display: inline-block;
+	width:170px!important;
+}
 .mynav-menu > li[class~=dropdown] {
     margin-top: 20px;
     width:50px;
@@ -290,7 +308,7 @@ ul.mynav-menu {
 
 .second-box > ul{
 	background:0 0 no-repeat;
-	background-color: #1f2327 !important;
+
     height: 48px;
 
 }
@@ -298,6 +316,7 @@ ul.mynav-menu {
 
 .second-box > ul > li{
     margin-top: 15px;
+
 }
 
 
@@ -310,13 +329,14 @@ ul.mynav-menu {
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 12px;
-    color: #cbd2d5;
+	color: #000;
 }
 
 .second-box > ul > li > a:hover{
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 12px;
+	color: royalblue;
 }
 
 .second-box > ul >li > a[class~=active-second] {
@@ -345,4 +365,7 @@ footer copyright
 		 display: none !important;
 	}
 
+}
+#topDate{
+	font-family: 'clock-font';
 }

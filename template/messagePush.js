@@ -44,14 +44,14 @@ function TableInit() {
 
     oTableInit.Init = function() {
 
-        $(".face-table").bootstrapTable('destroy');
+        $("#add-table").bootstrapTable('destroy');
 
-        $('.face-table').bootstrapTable({
-            url: pathurl+'messagepush/initTable', //请求后台的URL（*）
+        $('#add-table').bootstrapTable({
+            url: pathurl+'msgpush/initTable', //请求后台的URL（*）
 
             // url: './testJson/message.json',
             method: 'post', //请求方式（*）
-            toolbar: '.face-form', //工具按钮用哪个容器
+            toolbar: '#tapbar', //工具按钮用哪个容器
             striped: true, //是否显示行间隔色
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true, //是否显示分页（*）
@@ -75,7 +75,7 @@ function TableInit() {
             // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false, //是否显示详细视图
             // showExport: true, //是否显示导出
-            exportDataType: "basic", //basic', 'all', 'selected'.
+            exportDataType: "all", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
             onLoadSuccess: function(data){  //加载成功时执行
@@ -93,7 +93,7 @@ function TableInit() {
                     console.log(index)
                 }
             },{
-                field: 'mContent',
+                field: 'content',
                 title: '发布消息',
                 class:'mContent',
                 formatter: function(value) {
@@ -112,44 +112,29 @@ function TableInit() {
                 formatter: function(value) {
                     return value;
                 }
-            },{
-                field: 'updateTime',
-                title: '更新时间',
-                width : '15%',
-                formatter: function(value) {
-                    return value;
-                }
-            },{
-                field: 'status',
-                title: '推送状态',
-                formatter: function(value) {
-                  switch (value) {
-                      case "Y":
-                          return "已推送";
-                      case "N":
-                          return "未推送";
-                  }
-                }
-            },{
-                title: '操作',
-                cellStyle:function cellStyle(value, row, index, field) {
-                  return {
-                    classes: 'text-nowrap another-class',
-                    css: {
-                      'width':'250px',
-                      'overflow': 'hidden',
-                      'text-overflow':'ellipsis',
-                      'white-space': 'nowrap'
-                    }
-                  };
-                },
-                formatter: function(value, row, index) {
-
-                    return ['<button type="button" id="reviseMessage" class="btn-sm btn face-button" style="margin-right:15px;">修改</button>',
-                				'<button type="button" id="deleteMes" onclick="deleteMes('+row.mId+')" class="btn-sm btn face-button2" style="margin-right:15px;">删除</button>' ]
-                				.join('');
-                }
-            },{
+            },
+                
+                // {
+            //     title: '操作',
+            //     cellStyle:function cellStyle(value, row, index, field) {
+            //       return {
+            //         classes: 'text-nowrap another-class',
+            //         css: {
+            //           'width':'250px',
+            //           'overflow': 'hidden',
+            //           'text-overflow':'ellipsis',
+            //           'white-space': 'nowrap'
+            //         }
+            //       };
+            //     },
+            //     formatter: function(value, row, index) {
+            //
+            //         return ['<button type="button" id="reviseMessage" class="btn-sm btn face-button" style="margin-right:15px;">修改</button>',
+            //     				'<button type="button" id="deleteMes" onclick="deleteMes('+row.mId+')" class="btn-sm btn face-button2" style="margin-right:15px;">删除</button>' ]
+            //     				.join('');
+            //     }
+            // },
+                {
                 class:'hidden',
                 formatter: function(value, row, index) {
                     return ['<input type="hidden" value="'+row.mId+'" id="mId" />',
@@ -160,14 +145,14 @@ function TableInit() {
             }]
         });
     };
-// $('.face-table').bootstrapTable('hideColum', 'id');
+// $('#add-table').bootstrapTable('hideColum', 'id');
     //得到查询的参数
     // var formData = new FormData($( "#uploadForm" )[0]);
 
     oTableInit.queryParams = function(params) {
       console.log(params)
       var username=$("#queryMesUser").val();
-      var mContent=$("#queryMesText").val();
+      var content=$("#queryMesText").val();
       var startTime=$("#from").val();
       var endTime=$("#to").val();
 
@@ -175,7 +160,7 @@ function TableInit() {
         var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             // username:$("#queryMesUser").val(),
             username:$("#queryMesUser").val(),
-            mContent:$("#queryMesText").val(),
+            content:$("#queryMesText").val(),
             // startTime:$("#from").val(),
             // endTime:$("#to").val(),
             pageNumber:Math.ceil(params.offset/params.limit)+1,
@@ -185,7 +170,7 @@ function TableInit() {
         var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             // username:$("#queryMesUser").val(),
             username:$("#queryMesUser").val(),
-            mContent:$("#queryMesText").val(),
+            content:$("#queryMesText").val(),
             startTime:$("#from").val(),
             endTime:'2100-00-00 00:00',
             pageNumber:Math.ceil(params.offset/params.limit)+1,
@@ -195,7 +180,7 @@ function TableInit() {
         var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             // username:$("#queryMesUser").val(),
             username:$("#queryMesUser").val(),
-            mContent:$("#queryMesText").val(),
+            content:$("#queryMesText").val(),
             startTime:$("#from").val(),
             endTime:$("#to").val(),
             pageNumber:Math.ceil(params.offset/params.limit)+1,
@@ -213,16 +198,6 @@ function TableInit() {
 function addMesBtn(){
   //弹出框
   $('#addMessageBox').modal('show');
-  //弹出框确定按钮
-
-
-
-  // 判断文本框不能有特殊字符
-  // var num=0;
-  // $('.form-group.addMessage #addMes').on('input propertychange',function(){
-  //   console.log('改变了'+ ++num)
-  // })
-  // $('.form-group.addMessage #addMes').onkeypress
 
 }
 $('#addMessageBox #continue').on('click',function(){
@@ -233,12 +208,12 @@ $('#addMessageBox #continue').on('click',function(){
   var target=$('#addTarget').val();
   console.log(nTitle+'__'+mTitle+'__'+mContent+'__'+target);
   $.ajax({
-    url:pathurl+'messagepush/insert',
+    url:pathurl+'msgpush/insert',
     type:'post',
     data:{
       nTitle:nTitle,
       mTitle:mTitle,
-      mContent:mContent,
+      content:mContent,
       target:target
     },
     success:function(data){
@@ -248,7 +223,7 @@ $('#addMessageBox #continue').on('click',function(){
         $('#addMessageBox').modal('hide');
         $('#promptBox').modal('show');
         $('#modal-body-text').html('消息已推送')
-        $(".face-table").bootstrapTable('refresh');
+        $("#add-table").bootstrapTable('refresh');
 
       }else{
         //提示框
@@ -263,107 +238,107 @@ $('#addMessageBox #continue').on('click',function(){
     }
   })
 });
-// 删除按钮
-function deleteMes(mId){
-  console.log(mId);
-  $('#deleteBox #modal-body-text').html('确定是否删除');
-  $('#deleteBox').modal('show');
-
-  $('#promptBox #cancel').on('click',function(){
-    $('#promptBox').modal('show');
-    return;
-  });
-  $('#deleteBox #continue').on('click',function(){
-    $.ajax({
-      url:pathurl+'messagepush/delete',
-      // url:'./testJson/true.json',
-      data:{
-        id:mId
-      },
-      type:'post',
-      success:function(data){
-        if(data.code==200){
-          $('#addMessageBox').modal('hide');
-          $('#promptBox').modal('show');
-          $('#modal-body-text').html('删除成功');
-
-          $(".face-table").bootstrapTable('refresh');
-          oTable.Init();
-        }
-      }
-    })
-  });
-
-}
-//修改按钮
-$('.face-table').on('click','#reviseMessage',function(){
-
-  var parent=$(this).parents('tr');
-  var mId=parent.find('#mId').val();
-  $('#mId').val(mId);
-  $('#reviseMesTit').val(parent.find('#nTitle').val());
-  $('#reviseMesTitCon').val(parent.find('#mTitle').val());
-  $('#reviseMes').val(parent.find('.mContent').html());
-  $('#reviseTarget').find('option').eq(parent.find('#target').val()-1).prop('selected','selected');
-
-  $('#reviseMesBox').modal('show');
-
-  $('#reviseMesBox #cancel').on('click',function(){
-    $('#reviseMesBox').modal('hide');
-    $('#reviseMesTit').val('');
-    $('#reviseMesTitCon').val('');
-    $('#reviseMes').val('');
-  })
-
-
-})
-$('#reviseMesBox #continue').on('click',function(){
-  // $('#reviseTarget').val();
-  var mId=$('#mId').val();
-  var nTitle=$('#reviseMesTit').val();
-  var mTitle=$('#reviseMesTitCon').val();
-  var mContent=$('#reviseMes').val();
-  var target=$('#reviseTarget').val();
-  console.log(mId+'__'+nTitle+'__'+mTitle+'__'+mContent+'__'+target)
-
-
-  $.ajax({
-    url:pathurl+'messagepush/update',
-    // url:'./testJson/true.json',
-    type:'post',
-    data:{
-      id:mId,
-      nTitle:nTitle,
-      mTitle:mTitle,
-      mContent:mContent,
-      target:target
-    },
-    success:function(data){
-      if(data.code==200){
-        //提示框
-        $('#addMessageBox').modal('hide');
-        $('#promptBox').modal('show');
-        $('#modal-body-text').html('消息已修改')
-        $(".face-table").bootstrapTable('refresh');
-
-      }else{
-        //提示框
-        $('#promptBox').modal('show');
-        $('#modal-body-text').html(data.msg)
-        //提示框确认按钮
-      }
-      $('#reviseMesBox').modal('hide');
-      $('#reviseMesTit').val('');
-      $('#reviseMesTitCon').val('');
-      $('#reviseMes').val('');
-    },
-    error:function(){
-      $('#promptBox').modal('show');
-      $('#modal-body-text').html('服务器出错')
-    }
-  })
-})
-
+// // 删除按钮
+// function deleteMes(mId){
+//   console.log(mId);
+//   $('#deleteBox #modal-body-text').html('确定是否删除');
+//   $('#deleteBox').modal('show');
+//
+//   $('#promptBox #cancel').on('click',function(){
+//     $('#promptBox').modal('show');
+//     return;
+//   });
+//   $('#deleteBox #continue').on('click',function(){
+//     $.ajax({
+//       url:pathurl+'msgpush/delete',
+//       // url:'./testJson/true.json',
+//       data:{
+//         id:mId
+//       },
+//       type:'post',
+//       success:function(data){
+//         if(data.code==200){
+//           $('#addMessageBox').modal('hide');
+//           $('#promptBox').modal('show');
+//           $('#modal-body-text').html('删除成功');
+//
+//           $("#add-table").bootstrapTable('refresh');
+//           oTable.Init();
+//         }
+//       }
+//     })
+//   });
+//
+// }
+// //修改按钮
+// $('#add-table').on('click','#reviseMessage',function(){
+//
+//   var parent=$(this).parents('tr');
+//   var mId=parent.find('#mId').val();
+//   $('#mId').val(mId);
+//   $('#reviseMesTit').val(parent.find('#nTitle').val());
+//   $('#reviseMesTitCon').val(parent.find('#mTitle').val());
+//   $('#reviseMes').val(parent.find('.mContent').html());
+//   $('#reviseTarget').find('option').eq(parent.find('#target').val()-1).prop('selected','selected');
+//
+//   $('#reviseMesBox').modal('show');
+//
+//   $('#reviseMesBox #cancel').on('click',function(){
+//     $('#reviseMesBox').modal('hide');
+//     $('#reviseMesTit').val('');
+//     $('#reviseMesTitCon').val('');
+//     $('#reviseMes').val('');
+//   })
+//
+//
+// })
+// $('#reviseMesBox #continue').on('click',function(){
+//   // $('#reviseTarget').val();
+//   var mId=$('#mId').val();
+//   var nTitle=$('#reviseMesTit').val();
+//   var mTitle=$('#reviseMesTitCon').val();
+//   var mContent=$('#reviseMes').val();
+//   var target=$('#reviseTarget').val();
+//   console.log(mId+'__'+nTitle+'__'+mTitle+'__'+mContent+'__'+target)
+//
+//
+//   $.ajax({
+//     url:pathurl+'messegepush/update',
+//     // url:'./testJson/true.json',
+//     type:'post',
+//     data:{
+//       id:mId,
+//       nTitle:nTitle,
+//       mTitle:mTitle,
+//         content:mContent,
+//       target:target
+//     },
+//     success:function(data){
+//       if(data.code==200){
+//         //提示框
+//         $('#addMessageBox').modal('hide');
+//         $('#promptBox').modal('show');
+//         $('#modal-body-text').html('消息已修改')
+//         $("#add-table").bootstrapTable('refresh');
+//
+//       }else{
+//         //提示框
+//         $('#promptBox').modal('show');
+//         $('#modal-body-text').html(data.msg)
+//         //提示框确认按钮
+//       }
+//       $('#reviseMesBox').modal('hide');
+//       $('#reviseMesTit').val('');
+//       $('#reviseMesTitCon').val('');
+//       $('#reviseMes').val('');
+//     },
+//     error:function(){
+//       $('#promptBox').modal('show');
+//       $('#modal-body-text').html('服务器出错')
+//     }
+//   })
+// })
+//
 //弹出框取消按钮
 $('#addMessageBox #cancel').on('click',function(){
   $('#addMessageBox').modal('hide');
@@ -373,12 +348,12 @@ $('#promptBox #continue').on('click',function(){
   $('#promptBox').modal('hide');
 })
 
-// //提示框
+//提示框
 // $('#promptBox').modal('show');
-// //提示框确认按钮
-// $('#promptBox #continue').on('click',function(){
-//   $('#promptBox').modal('hide');
-// })
+//提示框确认按钮
+$('#promptBox #continue').on('click',function(){
+  $('#promptBox').modal('hide');
+})
 $('#queryreset').on('click',function(){
   $("#queryMesUser").val(''),
   $("#queryMesText").val(''),
@@ -397,4 +372,34 @@ function ButtonInit() {
         });
     };
     return oInit;
+}
+function info(state) {
+    //初始化table
+
+    $("#infoTable").bootstrapTable('destroy');
+    $("#infoTable").bootstrapTable({
+        method: "post",
+        url: pathurl + 'msgpush/msg',
+        queryParams: function (params) {
+            return {
+                pageSize: params.pageSize,
+                pageNumber: params.pageNumber,
+                username:$('#username').text()
+            }
+        },
+        pagination: true,
+        contentType: "application/x-www-form-urlencoded",
+        queryParamsType: " limit",
+        paginationDetailHAlign: "left",
+        showExport: true, //是否显示导出
+        exportDataType: "basic", //basic', 'all', 'selected'.
+        pageList: [4, 10, 25, 50, 100],
+        onLoadSuccess: function (data) {  //加载成功时执行
+            $('#infoModal').css('z-index', 1500);
+
+            $('#infoModal').modal();
+
+        }
+    });
+
 }

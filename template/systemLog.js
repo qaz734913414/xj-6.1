@@ -9,7 +9,7 @@ if (token) {
 }
 
 var oTable;
-$(function() {
+$(function () {
 
     //1.初始化Table
     oTable = new TableInit();
@@ -25,14 +25,14 @@ $(function() {
         inputMask: true,
     });
     $('#from').datetimepicker({
-      format: 'yyyy-mm-dd hh:ii',
-      language: 'zh-CN',
-      autoclose: true,
-      inputMask: true
-    }).on('changeDate',function(){
-      var startTime=$('#from').val();
-      $('#to').datetimepicker('setStartDate',startTime);
-      $('#to').datetimepicker('hide');
+        format: 'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        autoclose: true,
+        inputMask: true
+    }).on('changeDate', function () {
+        var startTime = $('#from').val();
+        $('#to').datetimepicker('setStartDate', startTime);
+        $('#to').datetimepicker('hide');
     });
 
 });
@@ -40,12 +40,12 @@ $(function() {
 function TableInit() {
     var oTableInit = {};
     //初始化Table
-    oTableInit.Init = function() {
+    oTableInit.Init = function () {
 
         $(".systemLog-table").bootstrapTable('destroy');
 
         $('.systemLog-table').bootstrapTable({
-            url: pathurl+'systemlog/initTable', //请求后台的URL（*）
+            url: pathurl + 'systemlog/initTable', //请求后台的URL（*）
             // url: './testJson/queryIdcardLog.json',
             method: 'post', //请求方式（*）
             toolbar: '.face-form', //工具按钮用哪个容器
@@ -58,8 +58,8 @@ function TableInit() {
             queryParams: oTableInit.queryParams, //传递参数（*）
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-            pageNumber:1, //初始化加载第一页，默认第一页
-            pageSize:4, //每页的记录行数（*）
+            pageNumber: 1, //初始化加载第一页，默认第一页
+            pageSize: 4, //每页的记录行数（*）
             pageList: [4, 10, 25, 50, 100], //可供选择的每页的行数（*）
             // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             // strictSearch: true,
@@ -75,15 +75,15 @@ function TableInit() {
             exportDataType: "basic", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
-            responseHandler: function(res) {
+            responseHandler: function (res) {
                 //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
                 //在ajax后我们可以在这里进行一些事件的处理
                 return res;
             },
-            onLoadSuccess: function(data) { //加载成功时执行
+            onLoadSuccess: function (data) { //加载成功时执行
                 console.log(data)
             },
-            rowAttributes: function(row, index) {
+            rowAttributes: function (row, index) {
                 return {
                     "data-idCard": row.idno
                 }
@@ -91,83 +91,97 @@ function TableInit() {
             columns: [{
                 field: 'id',
                 title: '序号',
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
                     return ++index;
                 }
             }, {
                 field: 'log_content',
                 title: '操作详情',
-                formatter: function(value) {
-                    return '<p>'+value+'</p>';
+                formatter: function (value) {
+                    return '<p>' + value + '</p>';
                 }
             }, {
                 field: 'log_user',
                 title: '操作人',
-                formatter: function(value) {
+                formatter: function (value) {
                     return value;
                 }
             }, {
                 field: 'log_menu',
                 title: '操作模块',
-                formatter: function(value) {
+                formatter: function (value) {
                     return value;
                 }
             }, {
                 field: 'createTime',
                 title: '操作时间',
-                formatter: function(value) {
+                formatter: function (value) {
                     return value;
                 }
             }, {
                 field: 'ip',
                 title: 'IP',
-                formatter: function(value) {
+                formatter: function (value) {
                     return value;
                 }
             }, {
                 field: 'type',
                 title: '类型',
-                formatter: function(value) {
-                    return value==0?'PC':'移动';
+                formatter: function (value) {
+                    return value == 0 ? 'PC' : '移动';
                 }
-            } ]
+            }]
         });
     };
 
     //得到查询的参数
-    oTableInit.queryParams = function(params) {
-      var logUser=$("#susername").val();
-      var startTime=$("#from").val();
-      var endTime=$("#to").val();
-      console.log(logUser=='')
-      console.log(startTime=='')
-      console.log(endTime=='')
-      if($("#from").val()==''&&$("#to").val()==''){
-        var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            pageSize: params.limit, //页面大小
-            pageNumber: params.offset/params.limit+1, //页码
-            logUser:$("#susername").val(),
-            // // startTime:$("#from").val(),
-            // endTime:$("#to").val()
-        };
-      }else if($("#from").val()!=''&&$("#to").val()==''){
-        var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            pageSize: params.limit, //页面大小
-            pageNumber: params.offset/params.limit+1, //页码
-            logUser:$("#susername").val(),
-            startTime:$("#from").val(),
-            endTime:'2100-00-00 00:00'
-        };
-      }else{
-        var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-            pageSize: params.limit, //页面大小
-            pageNumber: params.offset/params.limit+1, //页码
-            logUser:$("#susername").val(),
-            startTime:$("#from").val(),
-            endTime:$("#to").val()
-        };
-      }
-      return temp;
+    oTableInit.queryParams = function (params) {
+        var temp;
+        var logUser = $("#susername").val();
+
+        var startTime = $("#from").val();
+        var endTime = $("#to").val();
+        var unit = $("#unit").val();
+        var province = $("#distpicker select[name='province']").val();
+
+        var city = $("#distpicker select[name='city']").val();
+        var area = $("#distpicker select[name='area']").val();
+
+        if ($("#from").val() == '' && $("#to").val() == '') {
+            temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                pageSize: params.limit, //页面大小
+                pageNumber: params.offset / params.limit + 1, //页码
+                logUser: $("#susername").val(),
+                province: $("#distpicker select[name='province']").val(),
+                city: $("#distpicker select[name='city']").val(),
+                area: $("#distpicker select[name='area']").val()
+                // // startTime:$("#from").val(),
+                // endTime:$("#to").val()
+            };
+        } else if ($("#from").val() != '' && $("#to").val() == '') {
+            temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                pageSize: params.limit, //页面大小
+                pageNumber: params.offset / params.limit + 1, //页码
+                logUser: $("#susername").val(),
+                startTime: $("#from").val(),
+                endTime: '2100-00-00 00:00',
+                province: $("#distpicker select[name='province']").val(),
+                city: $("#distpicker select[name='city']").val(),
+                area: $("#distpicker select[name='area']").val()
+            };
+        } else {
+            temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                pageSize: params.limit, //页面大小
+                pageNumber: params.offset / params.limit + 1, //页码
+                logUser: $("#susername").val(),
+                startTime: $("#from").val(),
+                endTime: $("#to").val(),
+                province: $("#distpicker select[name='province']").val(),
+                city: $("#distpicker select[name='city']").val(),
+                area: $("#distpicker select[name='area']").val()
+            };
+        }
+        return temp;
 
     };
     return oTableInit;
@@ -178,12 +192,12 @@ function ButtonInit() {
     var oInit = {};
     var postdata = {};
 
-    oInit.Init = function() {
-        $("#btn-query").on("click", function() {
+    oInit.Init = function () {
+        $("#btn-query").on("click", function () {
             oTable.Init();
 
         });
-        $("#btn-reset").on("click", function() {
+        $("#btn-reset").on("click", function () {
             $(".face-form input,.face-form select").val("");
             oTable.Init();
         });

@@ -1,3 +1,35 @@
+if ($.cookie("bgc") == "" || $.cookie("bgc")==null)
+{
+    //6.不存在就把第一张设为默认背景
+    $(".first-box").css("background", "red");
+}
+else
+{
+    //6.如果存在就把$.cookie("bgc")传进去,上一次保存的值给它
+    $(".first-box").css("background",  $.cookie("bgc"));
+    //
+};
+$("#bgli").mouseenter(function () {
+    $(this).delay('300').toggleClass("open");
+    //5.页面打开之后判断它是否存在
+
+    //1.找到imgtiem下面的img标签，执行单击事件
+    $("#imglist li").click(function ()
+    {
+        //2.关键是要获取到当前图片的src的值,设为变量保存起来
+        var color = $(this).data("color");
+        //3.把它作为网页的背景样式
+        $(".first-box").css("background",color);
+        //4.保存状态
+        $.cookie("bgc", color, {expires:1});
+        $("#bgli").removeClass("open");
+    });
+});
+$("#bgli").mouseleave(function () {
+    $(this).delay('300').removeClass("open");
+    //5.页面打开之后判断它是否存在
+});
+
 
 
 jQuery.support.cors = true;
@@ -48,7 +80,21 @@ $(function(){
             secLvMenu(firstLevelData);
         }
     });
-
+    // 获取消息数量
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'msgpush/msg',
+        data: {
+            username:$('#username').text()
+        },
+        success: function (data) {
+            $('#msgs').text(data.total)
+        },
+        error: function () {
+            alert('错误')
+        },
+        dataType: 'json'
+    });
 
 })
 
@@ -100,36 +146,39 @@ function secLvMenu(firstLevelData){
             })
         })
     })
-}
+};
+
+
+
 
 
 //获取系统时间，将时间以指定格式显示到页面。
-function systemTime() {
-    //获取系统时间。
-    var dateTime = new Date();
-    var year = dateTime.getFullYear();
-    var month = dateTime.getMonth() + 1;
-    var day = dateTime.getDate();
-    var hh = dateTime.getHours();
-    var mm = dateTime.getMinutes();
-    var ss = dateTime.getSeconds();
-
-    //分秒时间是一位数字，在数字前补0。
-    mm = extra(mm);
-    ss = extra(ss);
-    month = extra(month);
-    day = extra(day);
-
-    //将时间显示到ID为time的位置，时间格式形如：19:18:02
-    document.getElementById("topDate").innerHTML = year + "-" + month +
-        "-" + day + " " + hh + ":" + mm + ":" + ss;
-
-    //每隔1000ms执行方法systemTime()。
-    setTimeout("systemTime()", 1000);
-}
-
-//补位函数。
-function extra(x) {
-    return x < 10 ? ("0" + x) : x;
-}
-systemTime();
+// function systemTime() {
+//     //获取系统时间。
+//     var dateTime = new Date();
+//     var year = dateTime.getFullYear();
+//     var month = dateTime.getMonth() + 1;
+//     var day = dateTime.getDate();
+//     var hh = dateTime.getHours();
+//     var mm = dateTime.getMinutes();
+//     var ss = dateTime.getSeconds();
+//
+//     //分秒时间是一位数字，在数字前补0。
+//     mm = extra(mm);
+//     ss = extra(ss);
+//     month = extra(month);
+//     day = extra(day);
+//
+//     //将时间显示到ID为time的位置，时间格式形如：19:18:02
+//     document.getElementById("topDate").innerHTML = year + "-" + month +
+//         "-" + day + " " + hh + ":" + mm + ":" + ss;
+//
+//     //每隔1000ms执行方法systemTime()。
+//     setTimeout("systemTime()", 1000);
+// }
+//
+// //补位函数。
+// function extra(x) {
+//     return x < 10 ? ("0" + x) : x;
+// }
+// systemTime();
