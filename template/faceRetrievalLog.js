@@ -114,6 +114,9 @@ function TableInit() {
             }, {
                 field: 'username',
                 title: '检索用户'
+            },{
+                field: 'dName',
+                title: '工作单位'
             }, {
                 field: 'url',
                 title: '检索图片',

@@ -369,3 +369,11 @@ footer copyright
 #topDate{
 	font-family: 'clock-font';
 }
+#infoModal #accordion a{
+	width: 100%;
+	display: inline-block;
+ }
+
+#infoModal #accordion .panel-body{
+	color: #000;
+}

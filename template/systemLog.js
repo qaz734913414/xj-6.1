@@ -36,7 +36,26 @@ $(function () {
     });
 
 });
+//组织机构初始化下拉框
+$.ajax({
+    type: 'POST',
+    url: pathurl+'department/initDeptList',
+    success: function(data) {
+        var data=data.list, len=data.length,str='';
+        for (var i = 0; i <len; i++) {
+            str+=' <option value=' + data[i].did +'>'+data[i].dname+'</option>'
 
+        };
+
+        $('#unit').append(str);
+
+
+    },
+    error: function() {
+        $("#modal-body-text").text("删除失败!");
+        $("#myModalLabel").modal();
+    }
+});
 function TableInit() {
     var oTableInit = {};
     //初始化Table

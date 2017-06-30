@@ -72,8 +72,8 @@ $(function() {
   $(".face-table-group button[title='Export data']").addClass(
       "face-button");
 });
-// 新增修改初始化下拉框
 
+// 新增修改组织机构初始化下拉框
 $.ajax({
     type: 'POST',
     url: pathurl+'department/initDeptList',
@@ -83,23 +83,8 @@ $.ajax({
             str+=' <option value=' + data[i].did +'>'+data[i].dname+'</option>'
 
         };
-        $('#modifyInfoModal #dPId').append(str)
 
-    },
-    error: function() {
-        $("#modal-body-text").text("删除失败!");
-        $("#myModalLabel").modal();
-    }
-});
-$.ajax({
-    type: 'POST',
-    url: pathurl+'department/initDeptList',
-    success: function(data) {
-        var data=data.list, len=data.length,str='';
-        for (var i = 0; i <len; i++) {
-            str+=' <option value=' + data[i].did +'>'+data[i].dname+'</option>'
-
-        };
+        $('#modifyInfoModal #dPId').append(str);
         $('#deptInfoModal #dPId').append(str)
 
     },
@@ -108,16 +93,7 @@ $.ajax({
         $("#myModalLabel").modal();
     }
 });
-//	function beforeClick(treeId, treeNode, clickFlag) {
-// 			if(treeNode.isParent){
-// 			$('.zTree li a ').css("cursor","pointer");
-// 			$('.zTree li a span').css("cursor","pointer");
-// 			}else{
-// 			$('.zTree li a').css("cursor","default");
-// 			$('.zTree li a span').css("cursor","default");
-// 			}
-//		return (!treeNode.isParent); //不能点击父节点
-//	};
+
 function onClick(event, treeId, treeNode) {
   var url;
   if (treeNode.isParent && treeNode.id != 1) {
@@ -220,65 +196,6 @@ function beforeRename(treeId, treeNode, newName, isCancel) {
   }
 }
 
-// function addHoverDom(treeId, treeNode) {
-//   var sObj = $("#" + treeNode.tId + "_span"); //获取删除修改span
-//   if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0)
-//     return;
-//   var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-//       + "' title='add node' onfocus='this.blur();'></span>"; //添加add  span
-//   sObj.after(addStr); // 把删除修改 span 放到 add 后面
-//   var btn = $("#addBtn_" + treeNode.tId);
-//   if (btn)
-//     btn.bind("click", function() {
-//       var nodes = zTree.addNodes(treeNode, {
-//         pId : treeNode.id,
-//         nodeName : "新建"
-//       });//前端添加成功
-//
-//       $
-//           .ajax({ //后端添加！！！！   必须有，要不数据库还是没添加，否则刷新页面后节点就会消失！
-//             url :pathurl+'department/addDepartment',
-//             data : {
-//               dPId : nodes[0].pId,
-//               dName : nodes[0].nodeName
-//             }, //传给后台当前节点的父Id和名称
-//             cache : false,
-//             type : 'post',
-//             dataType : 'JSON',
-//             success : function(data) {
-//               console.log(data.success);
-//               if (data.success == true) {
-//                 $("#modal-body-id").text("添加成功！");
-//                 $("#myModal").modal();
-//                 var node = treeNode.getParentNode();
-//                 zTree.reAsyncChildNodes(node, "refresh");
-//                 $("#deptTable").bootstrapTable('refresh');
-//               } else {
-//                 $("#modal-body-id").text(
-//                     "添加失败，同一级下该名称已存在，请尝试修改为其它名称！");
-//                 $("#myModal").modal();
-//                 zTree.updateNode(nodes[0]); //如果失败，则返回原始状态！
-//                 var node = treeNode.getParentNode();
-//                 zTree.reAsyncChildNodes(node, "refresh");
-//               }
-//             },
-//             error : function() {
-//               $("#modal-body-id").text(
-//                   "添加失败，同一级下该名称已存在，请尝试修改为其它名称！");
-//               $("#myModal").modal();
-//               zTree.updateNode(nodes[0]); //如果失败，则返回原始状态！
-//               var node = treeNode.getParentNode();
-//               zTree.reAsyncChildNodes(node, "refresh");
-//             }
-//           });
-//       return false;
-//     });
-// };
-//
-// function removeHoverDom(treeId, treeNode) { // 去除
-//   $("#addBtn_" + treeNode.tId).unbind().remove();
-// };
-//
 function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) { //这个函数仅仅是为了 初始化时展开 1级菜单
 
   if (!load) {

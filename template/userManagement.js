@@ -124,8 +124,11 @@ function init() {
                 roleStr += '<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>';
             }
             $('#adduserModal #uUnitId option').eq(0).after(unitStr);
+            $('#userdiv #uUnitId option').eq(0).after(unitStr);
+            $('#userdiv #uunitId').html(unitStr);
             $('#adduserModal #uunitId').html(unitStr);
             $('#adduserModal #uRoleId').html(roleStr);
+
             $('#modifyUserModal #uUnitId option').eq(0).after(unitStr);
             $('#modifyUserModal #uunitId').html(unitStr);
             $('#modifyUserModal #uRoleId').html(roleStr);

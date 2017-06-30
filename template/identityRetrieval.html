@@ -32,9 +32,22 @@
 
             </div>
 
-            <div class=" col-md-2 col-lg-1 text-center similar-box">
-                <canvas id="canvas" class="similar-canvas checkBtn" width="200" height="200"></canvas>
-                <div class="face-similar" style="margin-left: 44px; margin-top: 46.5px; display: none;">
+            <div class=" col-md-2 col-lg-2 text-center similar-box">
+                <!--["0云创","1依图","2旷视","3商汤"];-->
+                <label class="pull-left" style="margin-right: 15px">
+                    <input type="radio" name="options" id="radio1" value="0"> 通道一
+                </label>
+                <label class="pull-left" style="margin-right: 15px">
+                    <input type="radio" name="options" id="radio2" value="1"> 通道二
+                </label>
+                <label class="pull-left" style="margin-right: 15px">
+                    <input type="radio" name="options" id="radio3" value="2"> 通道三
+                </label>
+                <label class="pull-left" style="margin-right: 15px">
+                    <input type="radio" name="options" id="radio4" value="4"> 通道四
+                </label>
+
+                <div class="face-similar" style="margin-left: 44px; margin-top: 46.5px; display: none;border: 1px solid blue;padding:10px;">
                     <p>
                         <span>相似度</span>
                     </p>
@@ -45,7 +58,7 @@
             					</span>
                     </p>
                 </div>
-                <div class="face-type" style="margin-left: 56.5px; margin-top: 61.5px;"><span class="checkBtn">云创</span></div>
+                <div class="face-type" style="margin-left: 56.5px; margin-top: 61.5px;"><span class="checkBtn"></span></div>
             </div>
 
             <div class="col-md-3 col-lg-2 add-img-box">

@@ -194,7 +194,7 @@ function TableInit() {
     return oTableInit;
 }
 
-//添加
+//添加消息
 function addMesBtn(){
   //弹出框
   $('#addMessageBox').modal('show');
@@ -224,7 +224,7 @@ $('#addMessageBox #continue').on('click',function(){
         $('#promptBox').modal('show');
         $('#modal-body-text').html('消息已推送')
         $("#add-table").bootstrapTable('refresh');
-
+          mis ();
       }else{
         //提示框
         $('#promptBox').modal('show');

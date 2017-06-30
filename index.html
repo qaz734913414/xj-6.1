@@ -3,6 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
     <meta name="renderer" content="webkit">
     <meta http-equiv=”Access-Control-Allow-Origin” content=”*”>
     <title>人脸识别后台管理系统</title>
@@ -48,7 +50,7 @@
     <script src="js/common/tableCommon.js" charset="utf-8"></script>
 
     <!-- zTree -->
-    <script src="js/common/jquery.ztree.all-3.5.js"  charset="utf-8"></script>
+    <script src="js/common/jquery.ztree.all-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.all-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.core-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.exedit-3.5.js" charset="utf-8"></script>
@@ -88,8 +90,10 @@
                 <img src="./img/index/user.png" alt="人脸识别后台管理系统">
             </li>
             <li class="foot dropdown" id="bgli">
-                <a href="javascript:viod(0)" class="dropdown-toggle"   data-toggle="dropdown"><img title="皮肤" id="bgc" style=""  src="img/index/bgc.png"
-                                                                                                   class="img-responsive"/></a>
+                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><img title="皮肤" id="bgc"
+                                                                                                 style=""
+                                                                                                 src="img/index/bgc.png"
+                                                                                                 class="img-responsive"/></a>
 
                 <ul class="dropdown-menu" id="imglist">
                     <li class="imgitem" style="background:red;" data-color="red">红色</li>
@@ -101,7 +105,7 @@
             </li>
 
             <li class="foot" onclick="msg()">
-                <span href="#"  style="margin-right:10px;" class="badge"  title="消息" id="msgs">0</span>
+                <span href="#" style="margin-right:10px;" class="badge" title="未读消息" id="msgs">0</span>
             </li>
         </ul>
     </div>
@@ -164,29 +168,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title text-center" id="infoLabel">消息</h4>
+                <h4 class="modal-title text-center" id="infoLabel">推送消息</h4>
 
 
             </div>
             <div class="modal-body">
 
-                <table id="infoTable" data-side-pagination="server"
-                       class="table table-striped face-table table-hover">
-                    <thead>
-                    <tr>
-                        <th data-field="mId" data-halign="center" data-align="center" data-valign="middle">
-                            数量
-                        </th>
-                        <th data-field="content" data-halign="center" data-align="center" data-valign="middle">消息内容</th>
-                        <th data-field="name" data-halign="center" data-align="center" data-valign="middle">推送人</th>
-                        <th data-field="state" data-halign="center" data-align="center" data-formatter="stateFormatter"
-                            data-events="statusEvents" data-valign="middle">状态</th>
-                    </tr>
-                    </thead>
-                    <tbody id="infobody">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                    </tbody>
-                </table>
+                </div>
             </div>
             <div class="modal-footer" style="text-align:center;">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">知道了</button>
@@ -198,66 +188,7 @@
 <script src="js/index.js"></script>
 <script>
 
-//    function msg() {
-//        //初始化table
-//        $("#infoTable").bootstrapTable('destroy');
-//        $("#infoTable").bootstrapTable({
-//            method: "post",
-//            url: pathurl + 'msgpush/msg',
-//            queryParams: function (params) {
-//                return {
-//                    pageSize: params.pageSize,
-//                    pageNumber: params.pageNumber,
-//                    username:$('#username').text()
-//                }
-//            },
-//            pagination: true,
-//            contentType: "application/x-www-form-urlencoded",
-//            queryParamsType: " limit",
-//            paginationDetailHAlign: "left",
-//            pageList: [4, 10, 25, 50, 100],
-//            onLoadSuccess: function (data) {  //加载成功时执行
-//                $('#infoModal').css('z-index', 1500);
-//
-//                $('#infoModal').modal();
-//
-//            }
-//        });
-//
-//    };
-//    function stateFormatter(value) {
-//        if (value == 'Y') {
-//            return '<button type="button" id="reviseMessage" class="btn-sm disabled btn face-button">已读</button>';
-//        } else {
-//            return '<button type="button" id="reviseMessage" class="update btn-sm  btn  face-button2">未读</button>';
-//        }
-//    };
-//    //修改状态
-//    window.statusEvents = {
-//        'click .update': function (e, value, row, index) {
-//            updateStatus(row);  //修改状态
-//        }
-//    };
-    function updateStatus(row) {
-        $.ajax({
-            type: 'POST',
-            url: pathurl + 'msgpush/updatestate',
-            data: {
-                mId: row.mId,
-                username:$('#username').text()
-            },
-            success: function () {
-                $("#modal-body-id").text("用户状态已改变!");
-                $("#myModal").modal();
-                $("#infoTable").bootstrapTable('refresh');
-            },
-            error: function () {
-                $("#modal-body-id").text("处理失败!");
-                $("#myModal").modal();
-            },
-            dataType: 'json'
-        });
-    }
+    //顶部未读消息以上
     window.onload = function () {
         $('.second-box').on('click', "a:contains('人脸检索')", function () {
             $('#ajax-content').html('');
