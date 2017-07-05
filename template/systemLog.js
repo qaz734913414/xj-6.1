@@ -46,10 +46,7 @@ $.ajax({
             str+=' <option value=' + data[i].did +'>'+data[i].dname+'</option>'
 
         };
-
         $('#unit').append(str);
-
-
     },
     error: function() {
         $("#modal-body-text").text("删除失败!");

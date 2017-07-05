@@ -1,100 +1,103 @@
-
 <div class="container-fluid compare-box" style="margin-top: 231px;">
-        <div class="row vertical-center">
+    <div class="row vertical-center">
 
 
-            <div class="col-md-3 col-md-offset-2 col-lg-2 col-lg-offset-3 add-img-box">
+        <div class="col-md-3 col-md-offset-2 col-lg-2 col-lg-offset-3 add-img-box">
 
-                <div id="face-carousel" class="carousel slide" data-interval="false">
-                    <!-- 轮播（Carousel）指标 -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#face-carousel" data-slide-to="0" class="active"></li>
-                        <!-- <li data-target="#face-carousel" data-slide-to="1"></li>
-                        <li data-target="#face-carousel" data-slide-to="2"></li> -->
-                    </ol>
-                    <!-- 轮播（Carousel）项目 -->
-                    <div href="#" class="thumbnail add-img">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="./img/default_img.png" alt="First slide" style="height: 264.846px;">
-                            </div>
-
+            <div id="face-carousel" class="carousel slide" data-interval="false">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#face-carousel" data-slide-to="0" class="active"></li>
+                    <!-- <li data-target="#face-carousel" data-slide-to="1"></li>
+                    <li data-target="#face-carousel" data-slide-to="2"></li> -->
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div href="#" class="thumbnail add-img">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="./img/default_img.png" alt="First slide" style="height: 264.846px;">
                         </div>
+
                     </div>
-                    <!-- 轮播（Carousel）导航 -->
-                    <a class="carousel-control left" href="#face-carousel" data-slide="prev" style="padding-top: 132.5px;">‹</a>
-                    <a class="carousel-control right" href="#face-carousel" data-slide="next" style="padding-top: 132.5px;">›</a>
                 </div>
-
-                <input type="tel" class="form-control myinput" maxlength="18" id="idcard-input" placeholder="请输入身份证号">
-
-
-
+                <!-- 轮播（Carousel）导航 -->
+                <a class="carousel-control left" href="#face-carousel" data-slide="prev"
+                   style="padding-top: 132.5px;">‹</a>
+                <a class="carousel-control right" href="#face-carousel" data-slide="next" style="padding-top: 132.5px;">›</a>
             </div>
 
-            <div class=" col-md-2 col-lg-2 text-center similar-box">
-                <!--["0云创","1依图","2旷视","3商汤"];-->
-                <label class="pull-left" style="margin-right: 15px">
+            <input type="tel" class="form-control myinput" maxlength="18" id="idcard-input" placeholder="请输入身份证号">
+
+
+        </div>
+
+        <div class=" col-md-2 col-lg-2 text-center similar-box">
+            <!--["0云创","1依图","2旷视","3商汤"];-->
+            <p>
+                <label >
                     <input type="radio" name="options" id="radio1" value="0"> 通道一
                 </label>
-                <label class="pull-left" style="margin-right: 15px">
+                <label >
                     <input type="radio" name="options" id="radio2" value="1"> 通道二
-                </label>
-                <label class="pull-left" style="margin-right: 15px">
-                    <input type="radio" name="options" id="radio3" value="2"> 通道三
-                </label>
-                <label class="pull-left" style="margin-right: 15px">
-                    <input type="radio" name="options" id="radio4" value="4"> 通道四
-                </label>
+           </label></p> <p>
+            <label >
+                <input type="radio" name="options" id="radio3" value="2"> 通道三
+            </label>
+            <label >
+                <input type="radio" name="options" id="radio4" value="4"> 通道四
+            </label></p>
 
-                <div class="face-similar" style="margin-left: 44px; margin-top: 46.5px; display: none;border: 1px solid blue;padding:10px;">
-                    <p>
-                        <span>相似度</span>
-                    </p>
-                    <p>
+            <div class="face-similar"
+                 style="margin-left: 44px; margin-top: 46.5px; display: none;border: 1px solid blue;padding:10px;">
+                <p>
+                    <span>相似度</span>
+                </p>
+                <p>
             					<span>
                         <font>99.</font>
                         <font>55%</font>
             					</span>
-                    </p>
-                </div>
-                <div class="face-type" style="margin-left: 56.5px; margin-top: 61.5px;"><span class="checkBtn"></span></div>
+                </p>
             </div>
-
-            <div class="col-md-3 col-lg-2 add-img-box">
-
-                <div href="#" class="thumbnail add-img ">
-                    <img src="./img/default_img.png" style="height: 264.846px;">
-                </div>
-                <textarea id="remark" class="form-control hidden" rows="2" placeholder="请输入检索事由"></textarea>
-                <div id="add-image-button" class="btn btn-lg btn-block face-button" style="position: relative; overflow: hidden; direction: ltr;">
-                    <span class="fa fa-plus"></span>&nbsp;<span id="add-image-button-span">添加照片</span>
-                </div>
-
-
-            </div>
+            <div class="face-type" style="margin-left: 56.5px; margin-top: 61.5px;"><span class="checkBtn"></span></div>
         </div>
 
+        <div class="col-md-3 col-lg-2 add-img-box">
+
+            <div href="#" class="thumbnail add-img ">
+                <img src="./img/default_img.png" style="height: 264.846px;">
+            </div>
+            <textarea id="remark" class="form-control hidden" rows="2" placeholder="请输入检索事由"></textarea>
+            <div id="add-image-button" class="btn btn-lg btn-block face-button"
+                 style="position: relative; overflow: hidden; direction: ltr;">
+                <span class="fa fa-plus"></span>&nbsp;<span id="add-image-button-span">添加照片</span>
+            </div>
+
+
+        </div>
     </div>
-    <!-- 提示框开始 -->
-    	<div class="modal fade face-modal" id="myModal" tabindex="-1" role="dialog"
-    		aria-labelledby="myModalLabel" aria-hidden="true">
-    		<div class="modal-dialog" style="margin: 10% auto;width: 20%;">
-    			<div class="modal-content">
-    				<div class="modal-header">
-    					<button type="button" class="close" data-dismiss="modal"
-    						aria-hidden="true">&times;</button>
-    					<h4 class="modal-title" id="myModalLabel"></h4>
-    				</div>
-    				<div class="modal-body" style="text-align:center;"
-    					id="modal-body-id"></div>
-    				<div class="modal-footer" style="text-align:center;">
-    					<button type="button" class="btn btn-primary" data-dismiss="modal">知道了
-    					</button>
-    				</div>
-    			</div>
-    			<!-- /.modal-content -->
-    		</div>
-    		<!-- /.modal -->
-    	</div>
+
+</div>
+<!-- 提示框开始 -->
+<div class="modal fade face-modal" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin: 10% auto;width: 20%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body" style="text-align:center;"
+                 id="modal-body-id"></div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
 <script src="./template/identityRetrieval.js" charset="utf-8"></script>

@@ -12,7 +12,7 @@ $(function() {
     oButtonInit.Init();
 
     $(".mydate input").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd',
         language: 'zh-CN',
         autoclose: true,
         inputMask: true,
@@ -87,15 +87,16 @@ function TableInit() {
                 }
             }, {
                 field: 'company',
-                title: '厂商',
+                title: '算法',
                 formatter: function(value) {
                     switch (value) {
+                        <!--["0云创","1依图","2旷视","3商汤"];-->
                         case "0":
-                            return "云创";
+                            return "通道一";
                         case "1":
-                            return "依图";
+                            return "通道二";
                         case "2":
-                            return "旷视";
+                            return "通道三";
                     }
                 }
             }, {
@@ -145,7 +146,11 @@ function TableInit() {
             plat: $("#plat").val(),
             company: $("#company").val(),
             from: $("#from").val(),
-            to: $("#to").val()
+            to: $("#to").val(),
+            province: $("#distpicker select[name='province']").val(),
+
+            city: $("#distpicker select[name='city']").val(),
+            area: $("#distpicker select[name='area']").val(),
         };
         return temp;
     };

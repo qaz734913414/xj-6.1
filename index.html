@@ -60,6 +60,7 @@
     </script>
     <script src="js/common/jq.cookie.js"></script>
 
+
 </head>
 <body>
 <!-- 自定义一级导航栏 -->
@@ -74,7 +75,6 @@
                 <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="./login.html">切换账号</a></li>
-                    <li><a href="#">系统设置</a></li>
                 </ul>
             </li>
 
@@ -105,7 +105,11 @@
             </li>
 
             <li class="foot" onclick="msg()">
-                <span href="#" style="margin-right:10px;" class="badge" title="未读消息" id="msgs">0</span>
+
+                <span class="glyphicon glyphicon-volume-up"  style="margin-left: 25px"  title="消息推送" > <span id="msgs" class="badge">0</span> </span>
+            </li>
+            <li class="foot" onclick="ques()">
+                <span class="glyphicon glyphicon-question-sign" style="" aria-hidden="true"   title="问题反馈" ><span id="ques" class="badge">0</span></span>
             </li>
         </ul>
     </div>
@@ -190,75 +194,65 @@
 
     //顶部未读消息以上
     window.onload = function () {
-        $('.second-box').on('click', "a:contains('人脸检索')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/faceRetrieval.html');
-        });
-        $('.second-box').on('click', "a:contains('身份检索')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/identityRetrieval.html');
-        });
-        $('.second-box').on('click', "a:contains('人脸比对')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/faceMatching.html');
+        $('.second-box').on('click', "a", function () {
+            var value = $(this).text().trim()
+            $('#ajax-content').empty();
+//            console.log(value);
+            switch (value) {
+                case '人脸检索':
+                    $('#ajax-content').load('./template/faceRetrieval.html');
+                    break;
+                case '身份检索':
+                    $('#ajax-content').load('./template/identityRetrieval.html');
+                    break;
+                case '人脸比对':
+                    $('#ajax-content').load('./template/faceMatching.html');
+                    break;
+                case '人脸检索日志':
+                    $('#ajax-content').load('./template/faceRetrievalLog.html');
+                    break;
+                case '身份检索日志':
+                    $('#ajax-content').load('./template/identityRetrievalLog.html');
+                    break;
+                case '人脸比对日志':
+                    $('#ajax-content').load('./template/faceToFaceLog.html');
+                    break;
+                case '用户信息统计':
+                    $('#ajax-content').load('./template/userInformation.html');
+                    break;
+                case '检索记录统计':
+                    $('#ajax-content').load('./template/userOperations.html');
+                    break;
+                case '比中率统计':
+                    $('#ajax-content').load('./template/ratioStatistics.html');
+                    break;
+                case '人员信息查询':
+                    $('#ajax-content').load('./template/identityQuery.html');
+                    break;
+                case '用户管理':
+                    $('#ajax-content').load('./template/userManagement.html');
+                    break;
+                case '组织机构管理':
+                    $('#ajax-content').load('./template/organizationManagement.html');
+                    break;
+                case '角色管理':
+                    $('#ajax-content').load('./template/roleManagement.html');
+                    break;
+                case '系统设置':
+                    $('#ajax-content').load('./template/systemSettings.html');
+                    break;
+                case '消息推送':
+                    $('#ajax-content').load('./template/messagePush.html');
+                    break;
+                case '系统日志':
+                    $('#ajax-content').load('./template/systemLog.html');
+                    break;
+                case '问题反馈':
+                    $('#ajax-content').load('./template/problemFeedback.html');
+                    break;
+            }
         });
 
-        $('.second-box').on('click', "a:contains('人脸检索日志')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/faceRetrievalLog.html');
-        });
-        $('.second-box').on('click', "a:contains('身份检索日志')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/identityRetrievalLog.html');
-        });
-        $('.second-box').on('click', "a:contains('人脸比对日志')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/faceToFaceLog.html');
-        });
-
-        $('.second-box').on('click', "a:contains('用户信息统计')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/userInformation.html');
-        });
-        $('.second-box').on('click', "a:contains('用户操作统计')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/userOperations.html');
-        });
-        $('.second-box').on('click', "a:contains('比中率统计')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/ratioStatistics.html');
-        });
-        $('.second-box').on('click', "a:contains('人员信息查询')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/identityQuery.html');
-        });
-
-        $('.second-box').on('click', "a:contains('用户管理')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/userManagement.html');
-        });
-        $('.second-box').on('click', "a:contains('组织机构管理')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/organizationManagement.html');
-        });
-        $('.second-box').on('click', "a:contains('角色管理')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/roleManagement.html');
-        });
-        $('.second-box').on('click', "a:contains('系统设置')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/systemSettings.html');
-        });
-        $('.second-box').on('click', "a:contains('问题反馈')", function () {
-            $('#ajax-content').html('');
-            $('#ajax-content').load('./template/problemFeedback.html');
-        });
-        $('.second-box').on('click', "a:contains('消息推送')", function () {
-            $('#ajax-content').load('./template/messagePush.html');
-        });
-        $('.second-box').on('click', "a:contains('系统日志')", function () {
-            $('#ajax-content').load('./template/systemLog.html');
-        });
 
     }
 </script>

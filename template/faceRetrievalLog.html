@@ -10,33 +10,34 @@
             </div>
             <div class="form-group">
                 <select class="form-control" id="plat">
-                  <option value="">来源</option>
-                  <option value="0">pc</option>
-                  <option value="1">android</option>
-                  <option value="2">ios</option>
+                    <option value="">来源</option>
+                    <option value="0">pc</option>
+                    <option value="1">android</option>
+                    <option value="2">ios</option>
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control" id="company">
-                  <option value="">厂商</option>
-                  <option value="0">云创</option>
-                  <option value="1">依图</option>
-                  <option value="2">旷世</option>
+                    <!--["0云创","1依图","2旷视","3商汤"];-->
+                    <option value="">算法</option>
+                    <option value="0">通道一</option>
+                    <option value="1">通道二</option>
+                    <option value="2">通道三</option>
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control" id="chosen">
-                  <option value="">是否比中</option>
-                  <option value="1">是</option>
-                  <option value="2">否</option>
+                    <option value="">是否比中</option>
+                    <option value="1">是</option>
+                    <option value="2">否</option>
                 </select>
             </div>
             <div class="form-group">
                 <select class="form-control" id="harmful">
-                  <option value="">是否有害</option>
-                  <option value="1">是</option>
-                  <option value="2">否</option>
-                  <option value="3">未知</option>
+                    <option value="">是否有害</option>
+                    <option value="1">是</option>
+                    <option value="2">否</option>
+                    <option value="3">未知</option>
                 </select>
             </div>
             <div class="form-group">
@@ -51,8 +52,10 @@
                 <input type="text" class="form-control" id="to" placeholder="检索时间结束">
             </div>
             <div class="form-group button-group">
-                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>检索</button>
-                <button id="btn-reset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</button>
+                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>检索
+                </button>
+                <button id="btn-reset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置
+                </button>
             </div>
         </div>
     </div>
@@ -60,15 +63,35 @@
         <table class="face-table"></table>
     </div>
     <!--子页面开始 -->
-    <div class="modal fade face-modal" id="retrieveLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade face-modal" id="retrieveLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="fa fa-times" aria-hidden="true"></span></button>
                     <h4 class="modal-title">对比详情</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击用户弹窗 -->
+    <div class="modal fade face-modal" id="openinofModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title">用户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,5 +121,57 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+
+</script>
+
+<script id="openinfoTemp" type="text/x-jquery-tmpl">
+<table class="table table-bordered">
+
+                        <tr>
+                            <td> 姓名:{{= name}}</td>
+                            <td>
+                                性别：{{= sex=="0"?'男':'女'}}
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td>真实姓名：{{= realname}}</td>
+                            <td>证件号:{{= card}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>单位：{{= unit}}</td>
+                            <td>账户到期时间：{{= expireTime}}</td>
+                        </tr>
+                        <tr>
+                            <td>警号：{{= policynum}}</td>
+
+                            <td>手机号：{{= telephone}}</td>
+                        </tr>
+                        <tr>
+                            <td>职务：{{= duty}}</td>
+
+                            <td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>人脸检索（次数）：{{= retrieveCount}}</td>
+                            <td>人脸比对（次数）：{{= compareCount}}</td>
+                        </tr>
+                        <tr>
+                            <td>身份检索（次数）：{{= idCardCount}}</td>
+                            <td>登录（次数）：{{= loginCount}}</td>
+                        </tr>
+
+
+                        </table>
+
 </script>
 <script type="text/javascript" src="./template/faceRetrievalLog.js"></script>

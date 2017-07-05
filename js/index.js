@@ -125,6 +125,83 @@ function secLvMenu(firstLevelData) {
         })
     })
 };
+// 获取未读问题反馈数量
+var questr = '', quemsgs = [];
+function quesmis() {
+    quemsgs = [];
+    $.ajax({
+        type: 'POST',
+        cache: false,
+        url: pathurl + 'answer/appfeedback',
+        data: {
+            username: $('#username').text()
+        },
+        success: function (data) {
+
+            quemsgs = data.result;
+            $('#ques').text(data.count)
+
+        },
+        error: function () {
+            alert('错误')
+        },
+        dataType: 'json'
+    });
+
+}
+quesmis();
+
+//顶部未读点击
+function ques() {
+    questr = '';
+    $.each(quemsgs, function (i, item) {
+        if (item.readState == 'N') {
+            i += 1;
+            if(item.state=='Y'){
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-success">已回答</span> <span class="time">回复时间：'+item.answerTime+'。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            }else {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            }
+
+        }else if(item.readState == 'Y'){
+            i += 1;
+            if(item.state=='Y'){
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-success">已回答</span> <span class="time">回复时间：'+item.answerTime+'。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            }else {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            }
+        }
+    });
+    $('#infoModal #accordion').html(questr);
+    $('#infoModal #infoLabel').text('问题反馈');
+
+    $('#infoModal').modal();
+    $('#infoModal #accordion a').click(function () {
+        var that = this;
+        if($(this).text().indexOf('未读')==0){
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                url: pathurl + 'answer/updateReadStatus',
+                data: {
+                    id: $(this).find('input[name="id"]').val(),
+                    username: $('#username').text()
+                },
+                success: function () {
+                    $(that).find('.qa').text("已读反馈!");
+                    mis();
+                },
+                error: function () {
+                    $("#myModal").css('z-index', 1500);
+                    $("#modal-body-id").text("处理失败!");
+                    $("#myModal").modal();
+                },
+                dataType: 'json'
+            });
+        };
+
+    })
+};
 // 获取未读消息数量
 var str = '', msgs = [];
 function mis() {
@@ -164,7 +241,7 @@ function msg() {
         }
     });
     $('#infoModal #accordion').html(str);
-
+    $('#infoModal #infoLabel').text('消息推送');
     $('#infoModal').modal();
     $('#infoModal #accordion a').click(function () {
         var that = this;
@@ -174,7 +251,7 @@ function msg() {
                 cache: false,
                 url: pathurl + 'msgpush/updatestate',
                 data: {
-                    mId: $(this).find('input').val(),
+                    mId: $(this).find('input[name="mId"]').val(),
                     username: $('#username').text()
                 },
                 success: function () {

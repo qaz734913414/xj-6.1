@@ -20,6 +20,7 @@
       组织机构管理	   organizationManagement
       角色管理	       roleManagement
       系统设置	       systemSettings
-      问题反馈	       problemFeedback
+
       消息推送         messagePush
       系统日志         systemLog
+      问题反馈	       problemFeedback

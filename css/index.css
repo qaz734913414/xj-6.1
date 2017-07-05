@@ -134,6 +134,11 @@ ul.mynav-menu {
 	color:#9faab7;
 
 }
+.mynav-menu > li[class~=foot] .glyphicon {
+	display: inline-block;
+	position: relative;
+	font-size:24px;
+}
 
 .mynav-menu > li[class~=time] {
   margin-top: 18px;
@@ -377,3 +382,23 @@ footer copyright
 #infoModal #accordion .panel-body{
 	color: #000;
 }
+
+@-webkit-keyframes changeBgColor{
+	0%{
+		background: lightgreen;
+	}
+	100%{
+		background: lightblue;
+	}
+}
+@-webkit-keyframes changePosition{
+	0%{
+		background: lightgreen;
+	}
+	100%{
+		margin-left: 100%;
+		background: lightblue;
+	}
+}
+
+

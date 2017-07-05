@@ -149,7 +149,11 @@ function TableInit() {
             plat: $("#plat").val(),
             company: $("#company").val(),
             from: $("#from").val(),
-            to: $("#to").val()
+            to: $("#to").val(),
+            province: $("#distpicker select[name='province']").val(),
+
+            city: $("#distpicker select[name='city']").val(),
+            area: $("#distpicker select[name='area']").val(),
         };
         return temp;
     };

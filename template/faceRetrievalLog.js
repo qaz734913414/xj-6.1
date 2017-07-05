@@ -100,20 +100,25 @@ function TableInit() {
                 }
             }, {
                 field: 'company',
-                title: '厂商',
+                title: '算法',
                 formatter: function(value) {
+                    <!--["0云创","1依图","2旷视","3商汤"];-->
                     switch (value) {
                         case "0":
-                            return "云创";
+                            return "通道一";
                         case "1":
-                            return "依图";
+                            return "通道二";
                         case "2":
-                            return "旷视";
+                            return "通道三";
                     }
                 }
             }, {
                 field: 'username',
-                title: '检索用户'
+                title: '检索用户',
+                formatter:function(value,row,index){
+                    var e = '<span  onclick="openinfo(\''+ row.username + '\')">' + value + '</span> ';
+
+                    return e;}
             },{
                 field: 'dName',
                 title: '工作单位'
@@ -172,7 +177,11 @@ function TableInit() {
             chosen: $("#chosen").val(),
             harmful: $("#harmful").val(),
             from: $("#from").val(),
-            to: $("#to").val()
+            to: $("#to").val(),
+            province: $("#distpicker select[name='province']").val(),
+
+            city: $("#distpicker select[name='city']").val(),
+            area: $("#distpicker select[name='area']").val(),
         };
         console.log(temp)
         return temp;
@@ -197,13 +206,44 @@ function ButtonInit() {
     };
     return oInit;
 }
+// 点击用户查看信息
+function openinfo(username) {
+    var openinofDom = $("#openinofModal .modal-body");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl+'facelog/personInfo',
+        data: {
+            username:username
+        },
+        cache: false,
+        success: function(data) {
+            var dataresult =[], compareCount,idCardCount, loginCount,retrieveCount;
+            dataresult=data.result[0];
+            dataresult.compareCount=data.compareCount;
+            dataresult.idCardCount=data.idCardCount;
+            dataresult.loginCount=data.loginCount;
+            dataresult.retrieveCount=data.retrieveCount;
+            $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
 
+
+            $("#openinofModal").modal();
+
+
+        },
+
+        error: function() {
+            console.error("ajax error");
+        }
+
+    });
+}
 
 //页面展示详细信息
 $(".face-table").delegate(".thumbnail", "click", function() {
     var logid = $(this).parents("tr").attr('data-id');
     var imgsDom = $("#retrieveLogModal .modal-body .row");
-    console.log(logid)
+
     imgsDom.html("");
     $.ajax({
         type: 'post',
@@ -213,9 +253,8 @@ $(".face-table").delegate(".thumbnail", "click", function() {
         },
         cache: false,
         success: function(data) {
-            console.log(data);
+
             //取图片结果信息
-            console.log(data);
             $('#imgTemp').tmpl(data.result).appendTo(imgsDom);
 
 

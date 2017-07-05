@@ -151,12 +151,43 @@ select {
     /* width: 274px;
     height: 324px; */
     background: no-repeat center center !important;
-    border: 2px dashed #29599a;
-
     padding: 10px;
     margin: 0px;
-}
+    position: relative;
 
+}
+.topLine{
+    width: 0px;
+    height: 1px;
+    background: black;
+    position:absolute;
+    left: 0;
+    top: -1px;
+}
+.bottomLine{
+    width: 0px;
+    height: 1px;
+    background: black;
+    position:absolute;
+    left: 0;
+    bottom: -1px;
+}
+.leftLine{
+    width: 1px;
+    height: 0px;
+    background: black;
+    position:absolute;
+    left: -1px;
+    bottom: -1px;
+}
+.rightLine{
+    width: 1px;
+    height: 0px;
+    background: black;
+    position:absolute;
+    right: -1px;
+    top: -1px;
+}
 .mybackground {
     background-size: cover;
     -moz-background-size: cover;
@@ -574,6 +605,16 @@ p.focus-font {
 #retrieveModal .modal-body .show-results .right-btn {
     float: right;
 }
+#openinofModal .modal-body {
+
+    width:80%;
+}
+#openinofModal .modal-body table td{
+    word-break:keep-all;           /* 不换行 */
+    white-space:nowrap;          /* 不换行 */
+    overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
+}
+
 
 .face-modal {
     top: 10%;

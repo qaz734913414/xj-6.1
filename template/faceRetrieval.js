@@ -204,9 +204,9 @@ function winChange() {
     width = $("#retrieveModal .modal-body .similar-box").width();
     $("#retrieveModal .modal-body .similar-box").height(width);
     //按钮文字居中
-    console.info($("#retrieveModal .modal-body .similar-box").height() + "   " + $("#retrieveModal .modal-body .similar-box > p:first-child").height() + "   "
-        + $("#retrieveModal .modal-body .similar-box > p:last-child").height()
-    );
+    // console.info($("#retrieveModal .modal-body .similar-box").height() + "   " + $("#retrieveModal .modal-body .similar-box > p:first-child").height() + "   "
+    //     + $("#retrieveModal .modal-body .similar-box > p:last-child").height()
+    // );
 
     width = $(".add-img-box .thumbnail img").width();
     $(".add-img-box .thumbnail img").height(width * heightFactor);
@@ -241,8 +241,19 @@ function upload() {
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
+    
+        var $addimgthis=$('.add-img'),$w=$addimgthis.width(), $h=$addimgthis.height();
 
-    $('#loading').show();
+        $addimgthis.find(".topLine,.bottomLine").stop().animate({"width":$w});
+        $addimgthis.find(".rightLine,.leftLine").stop().animate({"height":$h});
+
+   setTimeout(function () {
+       $addimgthis.find(".topLine,.bottomLine").stop().animate({"width":"0px"});
+       $addimgthis.find(".rightLine,.leftLine").stop().animate({"height":"0px"});
+   },1500)
+
+   
+    // $('.loading').show();
     $.ajax({
         type: 'post',
         url: pathurl + 'face/retrieve/',
