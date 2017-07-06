@@ -43,21 +43,34 @@ function getPicture() {
             cache: false,
             dataType: "json",
             success: function (data) {
-                console.log(data);
                 if (data.code == 200) {
                     console.log(data);
+                    var imgarr=data.result.imgAddrs.toString().split(';')
                     var data = data.result;
                     imageInfo.name = data.name;
                     $("#face-carousel .carousel-indicators").html("");
                     $("#face-carousel .carousel-inner").html("");
                     if ($.type(data) == 'object') {
                         $("#face-carousel .carousel-indicators").append('<li data-target="#face-carousel" data-slide-to="' + '' + '" class="" ></li>');
-                        $("#face-carousel .carousel-inner").append('<div class="item active"><img src="' + data.imgAddrs + '"></div>');
+                        $.each(imgarr,function (index,item) {
+                            if (index==0){
+                                $("#face-carousel .carousel-inner").append('<div class="item active"><img src="' + imgarr[0] + '"></div>');
+                            }else {
+                                $("#face-carousel .carousel-inner").append('<div class="item"><img src="' + imgarr[index] + '"></div>');
+                            }
+                        })
+
                         getPictureUrl = data.imgAddrs;
                     } else if ($.type(data) == 'array') {
                         data.forEach(function (val, i) {
                             $("#face-carousel .carousel-indicators").append('<li data-target="#face-carousel" data-slide-to="' + i + '" class="' + (i != 0 ? '' : 'active') + '" ></li>');
-                            $("#face-carousel .carousel-inner").append('<div class="item ' + (i != 0 ? '' : 'active') + '"><img src="' + val.imgAddrs + '"></div>');
+                            $.each(imgarr,function (index,item) {
+                                if (index==0){
+                                    $("#face-carousel .carousel-inner").append('<div class="item active"><img src="' + imgarr[0] + '"></div>');
+                                }else {
+                                    $("#face-carousel .carousel-inner").append('<div class="item"><img src="' + imgarr[index] + '"></div>');
+                                }
+                            })
                         });
                     }
 
@@ -122,7 +135,7 @@ function IdentityCodeValid(code) {
     var tip = "";
     var pass = true;
 
-    if (!code || !/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/i.test(code)) {
+    if (!code || !/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(code)) {
         tip = "身份证号格式错误";
         pass = false;
     }
@@ -136,10 +149,9 @@ function IdentityCodeValid(code) {
     return pass;
 }
 
-$('.similar-box').on('click', function (ev) {
-    // console.log(ev);
-    // console.log(ev.target);
-    if (ev.target.nodeName == 'SPAN' || ev.target.nodeName == 'CANVAS') {
+$('.similar-box  input[name="options"],#face-carousel .carousel-control').on('click', function (ev) {
+    console.log(ev.target.nodeName);
+    if (ev.target.nodeName == 'INPUT'|| ev.target.nodeName == 'A') {
         upload();
     }
 });

@@ -4,20 +4,18 @@ $(function () {
      $(".face-table button[title='Export data']").addClass("face-button"); */
     init();
 });
+var dListData;
 function init() {
-    $('#u_unit_id')
-    $('#u_role_id')
-    u_role_id
+
     $.ajax({
         type: 'POST',
         url: pathurl + 'user/initDeptAndRole',
         success: function (data) {
-            console.log(data)
-            var dListData = data.result.dList;//dList    rName  rId
+
+             dListData = data.result.dList;//dList    rName  rId
             var rListData = data.result.rList;
-            console.log(data.result)
-            dname = dListData;
-            rname = rListData;
+
+
             for (var i = 0; i < dListData.length; i++) {
                 $('#u_unit_id').append('<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>');
             }
@@ -84,6 +82,23 @@ function statusFormatter(value) {
             return "停用用户";
     }
 }
+function sexFormatter(value) {
+    if (value == 0) {
+        return '男';
+    } else {
+        return '女';
+    }
+}
+function unitFormatter(value) {
+    var rn='';
+    $.each(dListData,function (index) {
+        if(value==dListData[index].did){
+            return  rn= dListData[index].dname;
+        }
+    })
+    return rn;
+}
+
 function reset() {
 // $("#u_unit_id").val();
 // $("#area_id").val();

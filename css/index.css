@@ -1,10 +1,5 @@
-@font-face {
-	font-family: 'clock-font';
-	src: url('./fonts/DS-DIGI.TTF');
 
-}
 body {
-  color: #525252;
   background-size:cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -136,10 +131,15 @@ ul.mynav-menu {
 }
 .mynav-menu > li[class~=foot] .glyphicon {
 	display: inline-block;
+	width:50px;
 	position: relative;
 	font-size:24px;
 }
-
+ .mynav-menu > li[class~=foot] .badge {
+	 position: absolute;
+	 background: red;
+	 top:-10px;
+ }
 .mynav-menu > li[class~=time] {
   margin-top: 18px;
     margin-right: 30px;
@@ -312,7 +312,7 @@ ul.mynav-menu {
 }
 
 .second-box > ul{
-	background:0 0 no-repeat;
+	background:#f8f8f8;
 
     height: 48px;
 

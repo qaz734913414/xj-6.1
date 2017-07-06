@@ -1,5 +1,5 @@
 var oTable;
-$(function() {
+$(function () {
 
     //1.初始化Table
     oTable = new TableInit();
@@ -30,17 +30,16 @@ function TableInit() {
             }
         });
     }
-    oTableInit.Init = function() {
+    oTableInit.Init = function () {
 
-        $(".face-table").bootstrapTable('destroy');
+        $("#face-table").bootstrapTable('destroy');
 
-        $('.face-table').bootstrapTable({
-            url: pathurl+'facelog/queryRetrieveLog', //请求后台的URL（*）
+        $('#face-table').bootstrapTable({
+            url: pathurl + 'facelog/queryRetrieveLog', //请求后台的URL（*）
 
             // url: './faceLog.json',
             method: 'post', //请求方式（*）
             toolbar: '.face-form', //工具按钮用哪个容器
-            striped: true, //是否显示行间隔色
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true, //是否显示分页（*）
             sortable: false, //是否启用排序
@@ -63,34 +62,32 @@ function TableInit() {
             // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false, //是否显示详细视图
             showExport: true, //是否显示导出
-            exportDataType : "basic", //basic', 'all', 'selected'.
+            exportDataType: "basic", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
-            responseHandler:function(res){
-              //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
-              //在ajax后我们可以在这里进行一些事件的处理
-              return res.result;
+            responseHandler: function (res) {
+                //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
+                //在ajax后我们可以在这里进行一些事件的处理
+                return res.result;
             },
-            onLoadSuccess: function(data){  //加载成功时执行
-              console.log(data)
+            onLoadSuccess: function (data) {  //加载成功时执行
+                console.log(data)
             },
-            rowAttributes:function(row,index) {
-              return {
-                  "data-id": row.id
-              }
+            rowAttributes: function (row, index) {
+                return {
+                    "data-id": row.id
+                }
             },
             columns: [{
                 field: 'id',
                 title: '序号',
-                formatter: function(value, row, index) {
+                formatter: function (value, row, index) {
                     return ++index;
-                    console.log(index)
                 }
             }, {
                 field: 'plat',
                 title: '平台',
-                formatter: function(value) {
-                  console.log(value)
+                formatter: function (value) {
                     switch (value) {
                         case "0":
                             return "App";
@@ -101,7 +98,7 @@ function TableInit() {
             }, {
                 field: 'company',
                 title: '算法',
-                formatter: function(value) {
+                formatter: function (value) {
                     <!--["0云创","1依图","2旷视","3商汤"];-->
                     switch (value) {
                         case "0":
@@ -115,30 +112,31 @@ function TableInit() {
             }, {
                 field: 'username',
                 title: '检索用户',
-                formatter:function(value,row,index){
-                    var e = '<span  onclick="openinfo(\''+ row.username + '\')">' + value + '</span> ';
+                formatter: function (value, row, index) {
+                    var e = '<span class="hov" onclick="openinfo(\'' + row.username + '\')">' + value + '</span> ';
 
-                    return e;}
-            },{
+                    return e;
+                }
+            }, {
                 field: 'dName',
                 title: '工作单位'
             }, {
                 field: 'url',
                 title: '检索图片',
-                formatter: function(value) {
+                formatter: function (value) {
 
                     return '<div class="thumbnail imgToDetail"><img src="' + value + '" /></div>';
                 }
             }, {
                 field: 'chosen',
                 title: '是否比中',
-                formatter: function(value) {
+                formatter: function (value) {
                     return value == "" || value == null ? "否" : "是";
                 }
             }, {
                 field: 'harmful',
                 title: '是否有害',
-                formatter: function(value) {
+                formatter: function (value) {
                     switch (value) {
                         case "1":
                             return "有害";
@@ -161,13 +159,13 @@ function TableInit() {
             }, {
                 field: 'laititude',
                 title: '纬度'
-            }, ]
+            },]
         });
     };
-// $('.face-table').bootstrapTable('hideColum', 'id');
+// $('#face-table').bootstrapTable('hideColum', 'id');
     //得到查询的参数
-    oTableInit.queryParams = function(params) {
-      console.log($("#username").val())
+    oTableInit.queryParams = function (params) {
+        console.log($("#username").val())
         var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit, //页面大小
             offset: params.offset, //页码
@@ -194,65 +192,91 @@ function ButtonInit() {
     var oInit = {};
     var postdata = {};
 
-    oInit.Init = function() {
-        $("#btn-query").on("click", function() {
+    oInit.Init = function () {
+        $("#btn-query").on("click", function () {
             oTable.Init();
 
         });
-        $("#btn-reset").on("click", function() {
+        $("#btn-reset").on("click", function () {
             $(".face-form input,.face-form select").val("");
             oTable.Init();
         });
     };
     return oInit;
 }
+var dListData;
+// 初始化单位数组
+function init() {
+
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'user/initDeptAndRole',
+        // url: './testJson/initDeptAndRole.json',
+        success: function (data) {
+
+            dListData = data.result.dList;
+            console.log('dListData'+dListData);
+        },
+        error: function () {
+            console.log('请求单位数组失败');
+        },
+        dataType: 'json'
+    });
+}
+init();
 // 点击用户查看信息
 function openinfo(username) {
     var openinofDom = $("#openinofModal .modal-body");
     openinofDom.html("");
     $.ajax({
         type: 'post',
-        url: pathurl+'facelog/personInfo',
+        url: pathurl + 'facelog/personInfo',
         data: {
-            username:username
+            username: username
         },
         cache: false,
-        success: function(data) {
-            var dataresult =[], compareCount,idCardCount, loginCount,retrieveCount;
-            dataresult=data.result[0];
-            dataresult.compareCount=data.compareCount;
-            dataresult.idCardCount=data.idCardCount;
-            dataresult.loginCount=data.loginCount;
-            dataresult.retrieveCount=data.retrieveCount;
+        success: function (data) {
+            var dataresult = [], compareCount, idCardCount, loginCount, retrieveCount;
+
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
             $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
+            var unittext= $("#openinofModal .modal-body").find('.unit').text();
 
-
+            $.each(dListData,function (index) {
+                if(unittext==dListData[index].did){
+                    return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
+                }
+            })
             $("#openinofModal").modal();
-
 
         },
 
-        error: function() {
+        error: function () {
             console.error("ajax error");
         }
 
     });
 }
 
+
 //页面展示详细信息
-$(".face-table").delegate(".thumbnail", "click", function() {
+$("#face-table").delegate(".thumbnail", "click", function () {
     var logid = $(this).parents("tr").attr('data-id');
     var imgsDom = $("#retrieveLogModal .modal-body .row");
 
     imgsDom.html("");
     $.ajax({
         type: 'post',
-        url: pathurl+'facelog/retrieveImage',
+        url: pathurl + 'facelog/retrieveImage',
         data: {
-            logid:logid
+            logid: logid
         },
         cache: false,
-        success: function(data) {
+        success: function (data) {
 
             //取图片结果信息
             $('#imgTemp').tmpl(data.result).appendTo(imgsDom);
@@ -263,9 +287,72 @@ $(".face-table").delegate(".thumbnail", "click", function() {
 
         },
 
-        error: function() {
+        error: function () {
             console.error("ajax error");
         }
 
     });
 });
+// 点击查看次数
+// 点击查看次数
+
+$('#openinofModal .modal-body').on('click', ' .count', function () {
+
+    var name = $('#openinofModal table .name').text().split(':')[1], index = $(this).index('.count');
+
+    countinfo(name, index)
+
+})
+function countinfo(n, i) {
+
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/getShow',
+        data: {
+            username: n
+        },
+        cache: false,
+        success: function (data) {
+            $('#countModal #countbody').html('');
+            var str='';
+            switch (i) {
+                case 0:
+                    var data=data.retrieveShow;
+                    $.each(data,function (index,item) {
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                    case 1:
+                    var data=data.compareShow;
+                    $.each(data,function (index,item) {
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                    case 2:
+                    var data=data.idCardShow;
+                    $.each(data,function (index,item) {
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break; 
+                    case 3:
+                    var data=data.loginShow;
+                    $.each(data,function (index,item) {
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+            }
+
+            $("#countModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
+}

@@ -62,13 +62,14 @@
         </div>
         <table id="userTable" data-side-pagination="server" class="table table-striped face-table">
             <thead>
+            <!--data-visible="false"-->
             <tr>
                 <th data-field="" data-checkbox="true"></th>
                 <th data-field="uId" data-halign="center" data-align="center" data-valign="middle" class="hidden">用户账号
                 </th>
                 <th data-field="uName" data-halign="center" data-align="center" data-valign="middle">用户名</th>
-                <th data-field="uRealName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
-                <th data-field="uRoleId" data-halign="center" data-align="center" data-valign="middle">角色</th>
+                <th data-field="uRealName"  data-halign="center" data-align="center" data-valign="middle">姓名</th>
+                <th data-field="uRoleId" data-halign="center" data-align="center" data-formatter="roleFormatter" data-valign="middle">角色</th>
                 <th data-field="uCardId" data-halign="center" data-align="center" data-valign="middle">身份证</th>
                 <th data-field="uDuty" data-halign="center" data-align="center" data-valign="middle">职务</th>
                 <th data-field="uPolicyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
@@ -558,22 +559,27 @@
                        class="table table-striped face-table table-hover">
                     <thead>
                     <tr>
-                        <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">到期时间
+                        <th data-field="name" data-halign="center" data-align="center" data-valign="middle">用户名</th>
+                        <th data-field="realName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
+                        <th data-field="rId" data-halign="center" data-align="center" data-formatter="roleFormatter" data-valign="middle">角色
                         </th>
-                        <th data-field="policyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
-                        <th data-field="phone" data-halign="center" data-align="center" data-valign="middle">座机</th>
-                        <th data-field="idCard" data-halign="center" data-align="center" data-valign="middle">身份证</th>
                         <th data-field="sex" data-halign="center" data-align="center" data-formatter="sexFormatter"
                             data-valign="middle">性别
                         </th>
-                        <th data-field="name" data-halign="center" data-align="center" data-valign="middle">用户名</th>
-                        <th data-field="realName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
-                        <th data-field="telephone" data-halign="center" data-align="center" data-valign="middle">手机号
+                        <th data-field="idCard" data-halign="center" data-align="center" data-valign="middle">身份证</th>
+
+
+                        <th data-field="telephone" data-halign="center" data-align="center" data-valign="middle">手机
                         </th>
+                        <th data-field="phone" data-halign="center" data-align="center" data-valign="middle">电话</th>
+
+                        <th data-field="policyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
+
+
                         <th data-field="unitId" data-halign="center" data-align="center" data-valign="middle">
                             单位
                         </th>
-                        <th data-field="rId" data-halign="center" data-align="center" data-valign="middle">角色
+                        <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间
                         </th>
 
 

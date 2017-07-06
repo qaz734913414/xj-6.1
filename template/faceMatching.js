@@ -33,7 +33,7 @@ function winChange(){
 $('.similar-box').on('click',function(ev){
   // console.log(ev);
   // console.log(ev.target);
-  if(ev.target.nodeName=='SPAN'||ev.target.nodeName=='CANVAS'){
+  if(ev.target.nodeName=='INPUT'||ev.target.nodeName=='CANVAS'){
     upload();
   }
 });

@@ -60,12 +60,12 @@
         </div>
     </div>
     <div class="row">
-        <table class="face-table"></table>
+        <table id="face-table" class="face-table"></table>
     </div>
     <!--子页面开始 -->
     <div class="modal fade face-modal" id="retrieveLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
@@ -86,11 +86,31 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                             class="fa fa-times" aria-hidden="true"></span></button>
-                    <h4 class="modal-title">用户信息</h4>
+                    <h4 class="modal-title text-center">用户信息</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击用户查询次数弹窗 -->
+    <div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title text-center">查询次数</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <table class="table table-bordered text-center"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
+
+                        </tbody></table>
                     </div>
                 </div>
             </div>
@@ -121,20 +141,11 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 </script>
-
 <script id="openinfoTemp" type="text/x-jquery-tmpl">
 <table class="table table-bordered">
-
-                        <tr>
-                            <td> 姓名:{{= name}}</td>
+                       <tr>
+                            <td class='name'> 姓名:{{= name}}</td>
                             <td>
                                 性别：{{= sex=="0"?'男':'女'}}
                             </td>
@@ -147,7 +158,7 @@
 
                         </tr>
                         <tr>
-                            <td>单位：{{= unit}}</td>
+                            <td>单位：<span class='unit'>{{= unit}}</span></td>
                             <td>账户到期时间：{{= expireTime}}</td>
                         </tr>
                         <tr>
@@ -162,16 +173,14 @@
                         </tr>
 
                         <tr>
-                            <td>人脸检索（次数）：{{= retrieveCount}}</td>
-                            <td>人脸比对（次数）：{{= compareCount}}</td>
+                            <td class='count'>人脸检索（次数）：{{= retrieveCount}}</td>
+                            <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
                         </tr>
                         <tr>
-                            <td>身份检索（次数）：{{= idCardCount}}</td>
-                            <td>登录（次数）：{{= loginCount}}</td>
+                            <td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+                            <td class='count'>登录（次数）：{{= loginCount}}</td>
                         </tr>
 
-
                         </table>
-
 </script>
 <script type="text/javascript" src="./template/faceRetrievalLog.js"></script>

@@ -156,38 +156,43 @@ select {
     position: relative;
 
 }
-.topLine{
+
+.topLine {
     width: 0px;
     height: 1px;
     background: black;
-    position:absolute;
+    position: absolute;
     left: 0;
     top: -1px;
 }
-.bottomLine{
+
+.bottomLine {
     width: 0px;
     height: 1px;
     background: black;
-    position:absolute;
+    position: absolute;
     left: 0;
     bottom: -1px;
 }
-.leftLine{
+
+.leftLine {
     width: 1px;
     height: 0px;
     background: black;
-    position:absolute;
+    position: absolute;
     left: -1px;
     bottom: -1px;
 }
-.rightLine{
+
+.rightLine {
     width: 1px;
     height: 0px;
     background: black;
-    position:absolute;
+    position: absolute;
     right: -1px;
     top: -1px;
 }
+
 .mybackground {
     background-size: cover;
     -moz-background-size: cover;
@@ -331,7 +336,7 @@ select {
 }
 
 .filter-box {
-    background: url(../img/bg_nav.png) 0 0 no-repeat;
+    background: #eee;
     background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -442,25 +447,20 @@ select {
 
 #retrieveModal .modal-dialog {
     width: 1200px;
-    color: #e3e3e3;
 }
 
 #retrieveModal .modal-dialog .modal-header {
-    background: url(../img/bg_nav.png) 0 0 no-repeat !important;
+    background: #eee;
     background-size: cover !important;
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
     -webkit-background-size: cover !important;
-    color: #e3e3e3;
+    color: #000;
     border-bottom-width: 0px;
 }
 
 #retrieveModal .modal-dialog .modal-header .close span {
-    color: #e3e3e3;
-}
-
-#retrieveModal .modal-dialog .modal-content {
-    background-color: rgba(50, 50, 50, 0.98) !important;
+    color: #000;
 }
 
 /*
@@ -532,7 +532,7 @@ p.focus-font {
 }
 
 #retrieveModal .modal-body .similar .similar-box {
-    background-color: #1f2327;
+
     border: 4px solid #5e6160;
     border-radius: 50%;
     width: 99px;
@@ -549,7 +549,7 @@ p.focus-font {
 }
 
 #retrieveModal .modal-body .similar .similar-box > p:last-child > span {
-    color: #fdda15;
+    color: red;
 }
 
 #retrieveModal .modal-body .similar .similar-box > p:last-child > span > font:first-child {
@@ -589,8 +589,8 @@ p.focus-font {
 
 #retrieveModal .modal-body .show-results button {
     margin-top: 5px;
-    background-color: #1f2327;
-    color: #e3e3e3;
+
+    color: #333;
 }
 
 #retrieveModal .modal-body .show-results button:hover {
@@ -605,16 +605,12 @@ p.focus-font {
 #retrieveModal .modal-body .show-results .right-btn {
     float: right;
 }
-#openinofModal .modal-body {
 
-    width:80%;
+#openinofModal .modal-body table td {
+    word-break: keep-all; /* 不换行 */
+    white-space: nowrap; /* 不换行 */
+    overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
 }
-#openinofModal .modal-body table td{
-    word-break:keep-all;           /* 不换行 */
-    white-space:nowrap;          /* 不换行 */
-    overflow:hidden;               /* 内容超出宽度时隐藏超出部分的内容 */
-}
-
 
 .face-modal {
     top: 10%;
@@ -623,25 +619,25 @@ p.focus-font {
 
 .face-modal .modal-dialog {
     width: 600px;
-    color: #e3e3e3;
+    color: #000;
 }
 
 .face-modal .modal-dialog .modal-header {
-    background: url(../img/bg_nav.png) 0 0 no-repeat !important;
+    background: #eee;
     background-size: cover !important;
     -moz-background-size: cover !important;
     -o-background-size: cover !important;
     -webkit-background-size: cover !important;
-    color: #e3e3e3;
+    color: #000;
     border-bottom-width: 0px;
 }
 
 .face-modal .modal-dialog .modal-header .close span {
-    color: #e3e3e3;
+    color: #000;
 }
 
 .face-modal .modal-dialog .modal-content {
-    background-color: rgba(50, 50, 50, 0.96) !important;
+
     border-bottom-width: 0px;
 }
 
@@ -718,8 +714,8 @@ p.focus-font {
 }
 
 .face-similar > p:first-child > span {
-    color: #e3e3e3;
-    font-size: 16px;
+
+    font-size: 18px;
 }
 
 .face-similar > p:last-child > span {
@@ -727,7 +723,7 @@ p.focus-font {
 }
 
 .face-similar > p:last-child > span > font:first-child {
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .face-table-group {
@@ -735,7 +731,6 @@ p.focus-font {
     padding-bottom: 10px;
     padding-left: 40px;
     padding-right: 40px;
-    background-color: #2d3030;
     min-height: calc(100% - 110px);
 }
 
@@ -794,17 +789,17 @@ p.focus-font {
 }
 
 .face-table {
-    color: #b1b6b7;
+    color: #fff;
     border: 0px !important;
 }
 
 .face-table-group .fixed-table-container {
-    border-color: #1f2222;
+    border-color: #e3e3e3;
 
 }
 
 .face-table-group .fixed-table-pagination {
-    color: #b1b6b7;
+    color: #000;
 }
 
 .face-table-group .fixed-table-pagination button[class~=dropdown-toggle] {
@@ -814,8 +809,8 @@ p.focus-font {
 }
 
 .face-table-group ul.pagination > li > a {
-    background-color: #393e3c;
-    color: #b1b6b7;
+    background-color: #eee;
+    color: #337ab7;
     border: 0px;
 }
 
@@ -844,8 +839,9 @@ p.focus-font {
 
 }
 
-.face-table-group .fixed-table-loading {
-    background-color: #393c3c;
+.hov:hover,.count:hover {
+    cursor: pointer;
+    color: #236bd4;
 }
 
 .face-table-group .fixed-table-body {
@@ -854,28 +850,15 @@ p.focus-font {
 }
 
 .face-table thead > tr > th {
-    background-color: #1f2222;
-    color: #e1eaea;
+    background-color: #eee;
+    color: #000;
     border: 0px !important;
 
 }
 
 .face-table tbody > tr > td {
     border: 0px;
-}
-
-.face-table tbody > tr:nth-child(odd) > td {
-    background-color: #393c3c;
-
-}
-
-.face-table tbody > tr:hover > td {
-    background-color: #2f3c4d;
-}
-
-.face-table thead > tr:nth-child(odd) > tr, .face-table .table-striped > thead > tr:nth-child(odd) > th {
-    background-color: #1f2222;
-    color: #e1eaea;
+    color: #000;
 }
 
 .face-table .thumbnail {
@@ -931,11 +914,6 @@ p.focus-font {
 .retrieve-log-thumbnail-box .thumbnail img {
     width: 243px;
     height: 304px;
-}
-
-.retrieve-log-thumbnail-box .thumbnail .caption {
-
-    color: #b1b6b7;
 }
 
 @media (max-width: 1380px) {
@@ -1294,20 +1272,6 @@ p.focus-font {
         color: #0ff;
     }
 
-    .face-table tbody > tr:nth-child(even) > td {
-        background-color: #2d3030 !important;
-    }
-
-    /*@media (max-width: 1380px){
-      .mContent p {
-          width: 400px;
-          margin-right:-100px;
-          text-align:center;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-      }
-    }*/
     @media (min-width: 768px) {
         #systemSetModal #systemSet_modal-body .form-group {
             margin-bottom: 20px;

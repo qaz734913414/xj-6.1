@@ -75,12 +75,13 @@
                 <th data-field="uRealName" data-halign="center" data-align="center"
                     data-valign="middle">姓名
                 </th>
-                <th  data-visible="false" data-field="uName" data-halign="center" data-align="center"
+                <!--data-visible="false"-->
+                <th   data-field="uName" data-halign="center" data-align="center"
                     data-valign="middle">用户名
                 </th>
 
                 <th data-field="uSex" data-halign="center" data-align="center"
-                    data-valign="middle">性别
+                    data-valign="middle" data-formatter="sexFormatter">性别
                 </th>
 
                 <th data-field="uCardId" data-halign="center" data-align="center"
@@ -88,7 +89,7 @@
                 </th>
 
                 <th data-field="uUnitId" data-halign="center" data-align="center"
-                    data-valign="middle">单位
+                    data-valign="middle" data-formatter="unitFormatter">单位
                 </th>
 
                 <th data-field="uDuty" data-halign="center" data-align="center"

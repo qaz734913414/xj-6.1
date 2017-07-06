@@ -3,7 +3,7 @@
       人脸检索       	 faceRetrieval
       身份检索	       identityRetrieval
       人脸比对	       faceMatching
-
+      人员信息查询      identityQuery
 人脸日志管理
       人脸检索日志	   faceRetrievalLog
       身份检索日志	   identityRetrievalLog
@@ -24,3 +24,5 @@
       消息推送         messagePush
       系统日志         systemLog
       问题反馈	       problemFeedback
+      服务状态	       serviceState
+      人脸库管理	       faceDatabase

@@ -1,6 +1,6 @@
 if ($.cookie("bgc") == "" || $.cookie("bgc") == null) {
     //6.不存在就把第一张设为默认背景
-    $(".first-box").css("background", "red");
+    $(".first-box").css("background", "green");
 }
 else {
     //6.如果存在就把$.cookie("bgc")传进去,上一次保存的值给它

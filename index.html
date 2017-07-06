@@ -96,17 +96,20 @@
                                                                                                  class="img-responsive"/></a>
 
                 <ul class="dropdown-menu" id="imglist">
-                    <li class="imgitem" style="background:red;" data-color="red">红色</li>
+
                     <li class="imgitem" style="background:blue;" data-color="blue">蓝色</li>
                     <li class="imgitem" style="background:green;" data-color="green">绿色</li>
                     <li class="imgitem" style="background:orange;" data-color="orange">橙色</li>
+                    <li class="imgitem" style="background:gold;" data-color="gold">金色</li>
+                    <li class="imgitem" style="background:red;" data-color="red">红色</li>
+                    
 
                 </ul>
             </li>
 
             <li class="foot" onclick="msg()">
 
-                <span class="glyphicon glyphicon-volume-up"  style="margin-left: 25px"  title="消息推送" > <span id="msgs" class="badge">0</span> </span>
+                <span class="glyphicon glyphicon-volume-up"  style="margin:0 25px"  title="消息推送" > <span id="msgs" class="badge">0</span> </span>
             </li>
             <li class="foot" onclick="ques()">
                 <span class="glyphicon glyphicon-question-sign" style="" aria-hidden="true"   title="问题反馈" ><span id="ques" class="badge">0</span></span>
@@ -196,8 +199,8 @@
     window.onload = function () {
         $('.second-box').on('click', "a", function () {
             var value = $(this).text().trim()
-            $('#ajax-content').empty();
-//            console.log(value);
+            $('#ajax-content').html('');
+
             switch (value) {
                 case '人脸检索':
                     $('#ajax-content').load('./template/faceRetrieval.html');
@@ -207,6 +210,9 @@
                     break;
                 case '人脸比对':
                     $('#ajax-content').load('./template/faceMatching.html');
+                    break;
+                case '人员信息查询':
+                    $('#ajax-content').load('./template/identityQuery.html');
                     break;
                 case '人脸检索日志':
                     $('#ajax-content').load('./template/faceRetrievalLog.html');
@@ -226,9 +232,7 @@
                 case '比中率统计':
                     $('#ajax-content').load('./template/ratioStatistics.html');
                     break;
-                case '人员信息查询':
-                    $('#ajax-content').load('./template/identityQuery.html');
-                    break;
+
                 case '用户管理':
                     $('#ajax-content').load('./template/userManagement.html');
                     break;
@@ -249,6 +253,12 @@
                     break;
                 case '问题反馈':
                     $('#ajax-content').load('./template/problemFeedback.html');
+                    break;
+                case '服务状态':
+                    $('#ajax-content').load('./template/serviceState.html');
+                    break;
+                    case '人脸库管理':
+                    $('#ajax-content').load('./template/faceDatabase.html');
                     break;
             }
         });

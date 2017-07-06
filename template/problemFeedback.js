@@ -41,9 +41,9 @@ function TableInit() {
     }
     oTableInit.Init = function() {
 
-        $(".face-table").bootstrapTable('destroy');
+        $("#problem").bootstrapTable('destroy');
 
-        $('.face-table').bootstrapTable({
+        $('#problem').bootstrapTable({
             url: pathurl+'answer/initTable', //请求后台的URL（*）
 
             // url: './testJson/answerInitTable.json',
@@ -164,7 +164,7 @@ function ButtonInit() {
 
         });
         $("#btn-reset").on("click", function() {
-            $(".face-form input,.face-form select").val("");
+            $("#problem input,#problem select").val("");
             oTable.Init();
         });
     };

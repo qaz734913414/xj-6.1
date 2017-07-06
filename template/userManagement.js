@@ -102,8 +102,10 @@ function addFormVali() {
         });
 }
 /*初始化单位和角色的下拉框 dList rList*/
+var  rListData;
+// 角色数组
 function init() {
-    var dname, rName;
+    var dname;
     $.ajax({
         type: 'POST',
         url: pathurl + 'user/initDeptAndRole',
@@ -113,16 +115,14 @@ function init() {
             var unitStr = '';
             var roleStr = '';
             var dListData = data.result.dList;//dList    rName  rId
-            var rListData = data.result.rList;
-            // console.log(data.result)
-            dname = dListData;
-            rname = rListData;
+             rListData = data.result.rList;
             for (var i = 0; i < dListData.length; i++) {
                 unitStr += '<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>';
             }
             for (var i = 0; i < rListData.length; i++) {
                 roleStr += '<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>';
             }
+
             $('#adduserModal #uUnitId option').eq(0).after(unitStr);
             $('#userdiv #uUnitId option').eq(0).after(unitStr);
             $('#userdiv #uunitId').html(unitStr);
@@ -760,4 +760,15 @@ function sexFormatter(value) {
     } else {
         return '女';
     }
+}
+
+
+function roleFormatter(value) {
+    var rn='';
+$.each(rListData,function (index) {
+    if(value==rListData[index].id){
+        return  rn= rListData[index].name;
+    }
+})
+    return rn;
 }

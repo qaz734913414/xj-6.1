@@ -68,7 +68,9 @@ $(function () {
         // console.log($(this).find('option')[0])
         $(this).find('option').eq(0).prop('selected','selected');
       })
+
       faceList();
+
       e.preventDefault();
 
     });
