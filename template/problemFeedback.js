@@ -89,27 +89,31 @@ function TableInit() {
                     return index+1;
                     console.log(index)
                 }
-            },{
-                title: '问题描述',
-                valign:'top',
-                class:'question',
-                formatter: function(value, row, index) {
-                    console.log(row);
-                    return  '<div><p>[提问人]：'+row.fName+'<span>'+row.qTime+'</span></p><p>'+row.fDetail+'</p></div>'
-                }
-            },{
-                field: 'company',
-                title: '回复详情',
-                valign:'top',
-                class:'answer',
-                formatter: function(value, row, index) {
-                    console.log(row);
-                    var aName=row.aName||'';
-                    var aDetail=row.aDetail||'';
-                    var aTime=row.aTime||'';
-                    return  '<div><p>[回复人]：'+aName+'<span>'+aTime+'</span></p><p>'+aDetail+'</p></div>'
-                }
-            },{
+            }, {
+                    field: 'fName',
+                    title: '提问人',
+
+                }, {
+                    field: 'qTime',
+                    title: '提问时间',
+
+                },{
+                    field: 'fDetail',
+                    title: '问题描述',
+
+                },{
+                    field: 'aName',
+                    title: '回复人',
+
+                },{
+                    field: 'aTime',
+                    title: '回复时间',
+
+                },{
+                    field: 'aDetail',
+                    title: '回复描述',
+
+                },{
                 field: 'status',
                 title: '问题状态',
                 formatter: function(value) {

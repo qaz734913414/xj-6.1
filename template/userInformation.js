@@ -32,7 +32,7 @@ function getTable1() {
     var  province=$("#distpicker select[name='province']").val();
     var  city= $("#distpicker select[name='city']").val();
     var area= $(" #distpicker select[name='area']").val();
-    var u_type = $("#u_type").val();
+
     var u_role_id = $("#u_role_id").val();
     var dateStatus = $("#dateStatus").val();
     var u_real_name = $("#u_real_name").val();
@@ -41,8 +41,7 @@ function getTable1() {
         {
             method: "post",
             url: pathurl + "user/selectUsers?u_unit_id=" + u_unit_id
-            + "&province=" + province + "&city=" + city + "&area=" + area + "&u_type=" + u_type
-            + "&u_role_id=" + u_role_id + "&dateStatus="
+            + "&province=" + province + "&city=" + city + "&area=" + area + "&u_role_id=" + u_role_id + "&dateStatus="
             + dateStatus + "&u_real_name=" + u_real_name
             + "&u_status=" + u_status,
             pagination: true,
@@ -102,7 +101,6 @@ function unitFormatter(value) {
 function reset() {
 // $("#u_unit_id").val();
 // $("#area_id").val();
-// $("#u_type").val();
 // $("#u_role_id").val();
 // $("#dateStatus").val();
 // $("#u_real_name").val();
