@@ -58,26 +58,84 @@
             </div>
         </div>
     </div>
+    <!--点击用户弹窗 -->
+    <div class="modal fade face-modal" id="openinofModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title text-center">用户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击用户查询次数弹窗 -->
+    <div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="fa fa-times" aria-hidden="true"></span></button>
+                    <h4 class="modal-title text-center">查询次数</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <table class="table table-bordered text-center"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
+
+                        </tbody></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script id="userDetial" type="text/x-jquery-tmpl">
- 	<div class="retrievelogBox">
-    <div class="userDetails">
-      <h4>用户信息</h4>
-      <p>
-      <b>
-      <span>姓</span>
-      <span>名</span>
-      </b>：<span>${name}</span></p>
-      <p><b><span>证</span> <span>件</span> <span>号</span></b>：<span>${card}</span></p>
-      <p><b>性别</b>：<span>{{= sex==1?'男':'女'}}</span></p>
-      <p><b>单位</b>：<span>${unit}</span></p>
-      <p><b>警号</b>：<span>${policynum}</span></p>
-      <p><b>职务</b>：<span>${duty}</span></p>
-      <p><b>账号级别</b>：<span>${usertype}</span></p>
-      <p><b>用户状态</b>：<span>{{= userstatus=='Y'?'正常':'停用'}}</span></p>
-      <p><b>账户到期时间</b>：<span>${expireTime}</span></p>
-    </div>
-	</div>
+<table class="table table-bordered">
+                       <tr>
+                            <td class='name'> 姓名:{{= name}}</td>
+                            <td>
+                                性别：{{= sex=="0"?'男':'女'}}
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td>证件号:{{= card}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>单位：<span class='unit'>{{= unit}}</span></td>
+                            <td>账户到期时间：{{= expireTime}}</td>
+                        </tr>
+                        <tr>
+                            <td>警号：{{= policynum}}</td>
+
+                            <td>账号级别：{{= usertype}}</td>
+                        </tr>
+                        <tr>
+                            <td>职务：{{= duty}}</td>
+
+                            <td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class='count'>人脸检索（次数）：{{= retrieveCount}}</td>
+                            <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
+                        </tr>
+                        <tr>
+                            <td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+                            <td class='count'>登录（次数）：{{= loginCount}}</td>
+                        </tr>
+
+                        </table>
 </script>
 <script type="text/javascript" src="./template/faceToFaceLog.js"></script>

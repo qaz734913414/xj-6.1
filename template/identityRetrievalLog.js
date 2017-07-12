@@ -2,7 +2,7 @@
 //??OK
 
 var oTable;
-$(function() {
+$(function () {
 
     //1.初始化Table
     oTable = new TableInit();
@@ -22,10 +22,10 @@ $(function() {
 function TableInit() {
     var oTableInit = {};
     //初始化Table
-    oTableInit.Init = function() {
+    oTableInit.Init = function () {
         $(".face-table").bootstrapTable('destroy');
         $('.face-table').bootstrapTable({
-            url: pathurl+'facelog/queryIdcardLog', //请求后台的URL（*）
+            url: pathurl + 'facelog/queryIdcardLog', //请求后台的URL（*）
             // url: './testJson/queryIdcardLog.json',
             method: 'post', //请求方式（*）
             toolbar: '.face-form', //工具按钮用哪个容器
@@ -55,40 +55,42 @@ function TableInit() {
             exportDataType: "basic", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
-            responseHandler:function(res){
-              //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
-              //在ajax后我们可以在这里进行一些事件的处理
-              return res.result;
+            responseHandler: function (res) {
+                //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
+                //在ajax后我们可以在这里进行一些事件的处理
+                return res.result;
             },
-            onLoadSuccess: function(data){  //加载成功时执行
-              console.log(data)
+            onLoadSuccess: function (data) {  //加载成功时执行
+                console.log(data)
             },
-            rowAttributes:function(row,index) {
-              return {
-                  "data-idCard": row.idno
-              }
+            rowAttributes: function (row, index) {
+                return {
+                    "data-idCard": row.idno
+                }
             },
             columns: [{
                 field: 'id',
                 title: '序号',
-                formatter: function(value, row, index)  {
-                  return ++index;
+                formatter: function (value, row, index) {
+                    return ++index;
                 }
             }, {
                 field: 'plat',
                 title: '来源平台',
-                formatter: function(value) {
+                formatter: function (value) {
                     switch (value) {
                         case "0":
-                            return "App";
+                            return "PC";
                         case "1":
-                            return "后台";
+                            return "android";
+                        case "2":
+                            return "IOS";
                     }
                 }
             }, {
                 field: 'company',
                 title: '算法',
-                formatter: function(value) {
+                formatter: function (value) {
                     switch (value) {
                         <!--["0云创","1依图","2旷视","3商汤"];-->
                         case "0":
@@ -102,20 +104,23 @@ function TableInit() {
             }, {
                 field: 'username',
                 title: '检索用户',
-                formatter: function(value) {
-                    return '<span id="logUsername"  class="logUsername">'+value+'</span>'
+                formatter: function (value) {
+                    return '<span id="logUsername"  class="logUsername">' + value + '</span>'
                 }
             }, {
+                field: 'dName',
+                title: '工作单位'
+            },  {
                 field: 'yurl',
                 title: '检索图片',
-                formatter: function(value) {
-                    return '<div class="thumbnail imgDetail"><img src="'+value+'" /></div>';
+                formatter: function (value) {
+                    return '<div class="thumbnail imgDetail"><img src="' + value + '" /></div>';
                 }
             }, {
                 field: 'url',
                 title: '对比',
-                formatter: function(value) {
-                    return '<div class="thumbnail"><img src="'+value+'" /></div>';
+                formatter: function (value) {
+                    return '<div class="thumbnail"><img src="' + value + '" /></div>';
                 }
             }, {
                 field: 'persent',
@@ -133,12 +138,12 @@ function TableInit() {
             }, {
                 field: 'laititude',
                 title: '纬度'
-            }, ]
+            },]
         });
     };
 
     //得到查询的参数
-    oTableInit.queryParams = function(params) {
+    oTableInit.queryParams = function (params) {
         var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit, //页面大小
             offset: params.offset, //页码
@@ -161,12 +166,12 @@ function TableInit() {
 function ButtonInit() {
     var oInit = {};
     var postdata = {};
-    oInit.Init = function() {
-        $("#btn-query").on("click", function() {
+    oInit.Init = function () {
+        $("#btn-query").on("click", function () {
             oTable.Init();
 
         });
-        $("#btn-reset").on("click", function() {
+        $("#btn-reset").on("click", function () {
             $(".face-form input,.face-form select").val("");
             oTable.Init();
         });
@@ -176,49 +181,117 @@ function ButtonInit() {
 
 
 //点击图片  弹出详情
-$(".face-table").delegate(".imgDetail", "click", function(){
-  var idcard = $(this).parents("tr").attr('data-idCard');
-  var imgsDom = $("#faceLogModal .modal-body .row");
-  $('.modal-title').html('检索人员详情');
-  console.log(imgsDom)
-  imgsDom.html("");
-  $.ajax({
-    type:'post',
-    url:pathurl+'face/getPicture',
-    // url:'./testJson/clickImage.json',
-    data:{
-      idcard:idcard
-    },
-    success:function(data){
-      console.log(data.result);
-      $('#imgDetial').tmpl(data.result).appendTo(imgsDom);
-      $("#faceLogModal").modal();
-    }
-  })
+$(".face-table").delegate(".imgDetail", "click", function () {
+    var idcard = $(this).parents("tr").attr('data-idCard');
+    var imgsDom = $("#faceLogModal .modal-body .row");
+    $('.modal-title').html('检索人员详情');
+    console.log(imgsDom)
+    imgsDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'face/getPicture',
+        // url:'./testJson/clickImage.json',
+        data: {
+            idcard: idcard
+        },
+        success: function (data) {
+            console.log(data.result);
+            $('#imgDetial').tmpl(data.result).appendTo(imgsDom);
+            $("#faceLogModal").modal();
+        }
+    })
 })
 //点击用户  弹出详情
-$(".face-table").delegate("#logUsername", "click", function(){
-  var username = $(this).parents("tr").find('#logUsername').html();
-  var imgsDom = $("#faceLogModal .modal-body .row");
-  imgsDom.html("");
-  $('.modal-title').html('检索用户详情');
-  $.ajax({
-    type:'post',
-    url:pathurl+'facelog/personInfo',
-    // url:'./testJson/clickUser.json',
-    data:{
-      username:username
-    },
-    success:function(data){
-      console.log(data);
-      $('#userDetial').tmpl(data.result).appendTo(imgsDom);
-      $("#faceLogModal").modal();
-    }
-  })
+$(".face-table").delegate("#logUsername", "click", function () {
+    var username = $(this).parents("tr").find('#logUsername').html();
+    var openinofDom = $("#openinofModal .modal-body .row");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/personInfo',
+        // url:'./testJson/clickUser.json',
+        data: {
+            username: username
+        },
+        success: function (data) {
+            var dataresult = [], compareCount, idCardCount, loginCount, retrieveCount;
+
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
+            $('#userDetial').tmpl(dataresult).appendTo(openinofDom);
+
+            $("#openinofModal").modal();
+
+        }
+    })
 })
-$('.face-table').on('mouseover','.logUsername',function(){
-  $(this).css('color','#0ff');
+// 点击查看次数
+
+$('#openinofModal .modal-body').on('click', ' .count', function () {
+
+    var name = $('#openinofModal table .name').text().split(':')[1], index = $(this).index('.count');
+
+    countinfo(name, index)
+
 })
-$('.face-table').on('mouseout','.logUsername',function(){
-  $(this).css('color','#b1b6b7');
-})
+function countinfo(n, i) {
+
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/getShow',
+        data: {
+            username: n
+        },
+        cache: false,
+        success: function (data) {
+            $('#countModal #countbody').html('');
+            var str='';
+            switch (i) {
+                case 0:
+                    var data=data.retrieveShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 1:
+                    var data=data.compareShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 2:
+                    var data=data.idCardShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 3:
+                    var data=data.loginShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+            }
+
+            $("#countModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
+}
+

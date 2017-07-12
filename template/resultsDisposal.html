@@ -1,0 +1,58 @@
+<script src="js/city/distpicker.data.js"></script>
+<script src="js/city/distpicker.js"></script>
+    <!-- 处置结果战果统计 以下-->
+<div id="backModel"></div>
+<div class="container-fluid face-table-group">
+    <div class="row">
+        <div class="form-inline face-form" style="margin-bottom:-44px;">
+            <div class="form-group">
+                <select id="timestatus" class="form-control" onchange="changeTime()">
+                    <option value="-1">统计方式</option>
+                    <option value="0">按年统计</option>
+                    <option value="1">按月统计</option>
+                    <option value="2">按天统计</option>
+
+                </select>
+            </div>
+            <div class="form-group mydate">
+                <input size="22" type="text" id="startDate" class="form-control"
+                       placeholder="开始时间">
+                <input size="22" type="text" id="endDate" class="form-control" placeholder="结束时间">
+            </div>
+            <div class="form-group button-group">
+                <a class="btn face-button" onclick="getMessage3()" id="btn-query"><span class="fa fa-search"
+                                                                                        aria-hidden="true"></span>搜索
+                </a>
+                <a class="btn face-button2" onclick="reset3()" id="btn-reset"><span class="fa fa-search"
+                                                                                    aria-hidden="true"></span>重置
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row tablediv">
+        <table id="proportion"
+
+               data-pagination="true" data-side-pagination="server"
+               data-page-list="[10, 20, 50, 100, ALL]" data-page-size="10"
+               class="table table-striped face-table">
+            <thead>
+            <tr>
+                <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
+                <th data-field="lzcount" data-halign="center" data-align="center" data-valign="middle">留置数</th>
+                <th data-field="pxcount" data-halign="center" data-align="center" data-valign="middle">培训数</th>
+                <th data-field="jgcount" data-halign="center" data-align="center" data-valign="middle">警告数</th>
+                <th data-field="wzcount" data-halign="center" data-align="center" data-valign="middle">未采取措施数</th>
+                <th data-field="xzcount" data-halign="center" data-align="center" data-valign="middle">行政处罚数</th>
+                <th data-field="cjcount" data-halign="center" data-align="center" data-valign="middle">培训数</th>
+                <th data-field="xjcount" data-halign="center" data-align="center" data-valign="middle">刑拘数</th>
+
+
+            </tr>
+            </thead>
+            <tbody >
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="./template/statisticsVictories.js" charset="utf-8"></script>

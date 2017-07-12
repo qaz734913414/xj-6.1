@@ -1,32 +1,17 @@
-if ($.cookie("bgc") == "" || $.cookie("bgc") == null) {
-    //6.不存在就把第一张设为默认背景
-    $(".first-box").css("background", "green");
-}
-else {
-    //6.如果存在就把$.cookie("bgc")传进去,上一次保存的值给它
-    $(".first-box").css("background", $.cookie("bgc"));
-    //
-}
-;
-$("#bgli").mouseenter(function () {
-    $(this).delay('300').toggleClass("open");
-    //5.页面打开之后判断它是否存在
-
-    //1.找到imgtiem下面的img标签，执行单击事件
-    $("#imglist li").click(function () {
-        //2.关键是要获取到当前图片的src的值,设为变量保存起来
-        var color = $(this).data("color");
-        //3.把它作为网页的背景样式
-        $(".first-box").css("background", color);
-        //4.保存状态
-        $.cookie("bgc", color, {expires: 1});
-        $("#bgli").removeClass("open");
-    });
+var $li = $("#skin li");
+$li.click(function(){
+    $("#"+this.id).addClass("selected")
+        .siblings().removeClass("selected");
+    $("#cssfile").attr("href","css/"+this.id+".css");
+    $.cookie("MyCssSkin",this.id,{ path :'/',expires: 10 });
 });
-$("#bgli").mouseleave(function () {
-    $(this).delay('300').removeClass("open");
-    //5.页面打开之后判断它是否存在
-});
+var cookie_skin = $.cookie("MyCssSkin");
+if(cookie_skin){
+    $("#"+cookie_skin).addClass("selected")
+        .siblings().removeClass("selected");
+    $("#cssfile").attr("href","css/"+cookie_skin+".css");
+    $.cookie("MyCssSkin",this.id,{ path :'/',expires: 10 });
+}
 
 
 jQuery.support.cors = true;

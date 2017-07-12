@@ -30,9 +30,11 @@
 <body class="login">
 <div class="content move">
 
-    <div class="login-form">
+    <div class="login-form center-block">
 
-        <img src="img/logo_login.png" height="87" width="276"/></div>
+        <p><img src="img/title.png" height="51" width="51"/></p>
+        <div style="color:blue;font-size:22px;text-align: center">人脸识别后台管理系统</div>
+    </div>
     <form id="userLoginForm" method="post" class="login-form ">
         <div class="alert-msg alert  hidden">
             <span id="alertMsgSpan"> </span>
@@ -45,18 +47,18 @@
         <div class="form-group">
             <div class="input-group">
 					<span class="input-group-addon"> <i class="fa fa-user"></i>
-					</span> <input type="text" class="form-control " id="username" name="username" placeholder="账号">
+					</span> <input type="text" class="form-control " id="username" name="username" placeholder="账号" value="admin">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group ">
 					<span class="input-group-addon"> <i class="fa fa-lock"></i>
-					</span> <input type="text" class="form-control " id="password" name="password" placeholder="密码" value="">
+					</span> <input type="text" class="form-control " id="password" name="password" placeholder="密码" value="123456">
             </div>
         </div>
         <div>
             <input type="checkbox" name="remember" id="remember"/>
-            <label for="remember" style="color: #bbb;font-size: 14px;">记住我一周</label>
+            <label for="remember" style="color: #333;font-size: 12px;">记住我一周</label>
         </div>
         <div class="input-group">
             <button class="btn btn-primary login-button ">

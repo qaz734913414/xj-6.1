@@ -743,10 +743,10 @@ function fileInfo(state) {
 
             }
             else if (state == 1) {
-                $('#fileInfoModal #fileInfoLabel').text('上传失败:' + data.total + '条')
+                $('#fileInfoModal #fileInfoLabel').html('上传失败:' + data.total + '条<br>失败原因：'+data.rows[0].reason)
             }
             if (state == 2) {
-                $('#fileInfoModal #fileInfoLabel').text('上传重复:' + data.total + '条')
+                $('#fileInfoModal #fileInfoLabel').html('上传重复:' + data.total + '条<br>重复原因：'+data.rows[0].reason)
             }
             $('#fileInfoModal').modal();
 

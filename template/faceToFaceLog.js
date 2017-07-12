@@ -84,9 +84,11 @@ function TableInit() {
                 formatter: function(value) {
                     switch (value) {
                         case "0":
-                            return "App";
+                            return "PC";
                         case "1":
-                            return "后台";
+                            return "android";
+                            case "2":
+                            return "IOS";
                     }
                 }
             }, {
@@ -109,6 +111,9 @@ function TableInit() {
                     return '<span id="logUsername"  class="logUsername">' + value + '</span>'
                 }
             }, {
+                field: 'dName',
+                title: '工作单位'
+            },  {
                 field: 'yurl',
                 title: '检索图片',
                 formatter: function(value) {
@@ -146,7 +151,7 @@ function TableInit() {
             limit: params.limit, //页面大小
             offset: params.offset, //页码
             username: $("#tusername").val(),
-            plat: $("#plat").val(),
+            plat: $.cookie('deviceType'),
             company: $("#company").val(),
             from: $("#from").val(),
             to: $("#to").val(),
@@ -177,31 +182,97 @@ function ButtonInit() {
     };
     return oInit;
 }
-//点击用户  弹出框
-$(".face-table").delegate("#logUsername", "click", function() {
+///点击用户  弹出详情
+$(".face-table").delegate("#logUsername", "click", function () {
     var username = $(this).parents("tr").find('#logUsername').html();
-    var imgsDom = $("#faceLogModal .modal-body .row");
-    console.log(username)
-    imgsDom.html("");
-    console.log(username);
-    $('.modal-title').html('检索用户详情');
+    var openinofDom = $("#openinofModal .modal-body .row");
+    openinofDom.html("");
     $.ajax({
         type: 'post',
-        url:pathurl+'facelog/personInfo',
-        // url: './testJson/clickUser.json',
+        url: pathurl + 'facelog/personInfo',
+        // url:'./testJson/clickUser.json',
         data: {
             username: username
         },
-        success: function(data) {
-            console.log(data);
-            $('#userDetial').tmpl(data.result).appendTo(imgsDom);
-            $("#faceLogModal").modal();
+        success: function (data) {
+            var dataresult = [], compareCount, idCardCount, loginCount, retrieveCount;
+
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
+            $('#userDetial').tmpl(dataresult).appendTo(openinofDom);
+
+            $("#openinofModal").modal();
+
         }
     })
 })
-$('.face-table').on('mouseover','.logUsername',function(){
-  $(this).css('color','#0ff');
+// 点击查看次数
+
+$('#openinofModal .modal-body').on('click', ' .count', function () {
+
+    var name = $('#openinofModal table .name').text().split(':')[1], index = $(this).index('.count');
+
+    countinfo(name, index)
+
 })
-$('.face-table').on('mouseout','.logUsername',function(){
-  $(this).css('color','#b1b6b7');
-})
+function countinfo(n, i) {
+
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/getShow',
+        data: {
+            username: n
+        },
+        cache: false,
+        success: function (data) {
+            $('#countModal #countbody').html('');
+            var str='';
+            switch (i) {
+                case 0:
+                    var data=data.retrieveShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 1:
+                    var data=data.compareShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 2:
+                    var data=data.idCardShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 3:
+                    var data=data.loginShow;
+                    $.each(data,function (index,item) {
+                        var index=index+1;
+                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+            }
+
+            $("#countModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
+}
+

@@ -133,7 +133,7 @@ function faceList(){
                 }
                 imgArr.push(imgObj);
               })
-              console.log(imgArr)
+              console.log(imgArr);
               $('#imgTemp').tmpl(imgArr).appendTo(imgsDom);
               console.log(imgs);
               winChange();//调整高宽
@@ -177,14 +177,10 @@ function faceList(){
                   });
                   winChange();
               });
-
           } else {
               $("#modal-body-id").text("操作失败，请重试");
               $("#myModal").modal();
-
           }
-
-
       },
       error: function () {
           console.error("ajax upload error");
@@ -195,7 +191,6 @@ function faceList(){
 //图片和文字宽高位置调整，初始化和窗口位置改变时调用
 function winChange() {
 
-
     //统一图片高度，防止不对齐
     var width = $(".result-box .thumbnail img").width();
     $(".result-box .thumbnail img").height(width * heightFactor);
@@ -205,10 +200,6 @@ function winChange() {
     //按钮置园
     width = $("#retrieveModal .modal-body .similar-box").width();
     $("#retrieveModal .modal-body .similar-box").height(width);
-    //按钮文字居中
-    // console.info($("#retrieveModal .modal-body .similar-box").height() + "   " + $("#retrieveModal .modal-body .similar-box > p:first-child").height() + "   "
-    //     + $("#retrieveModal .modal-body .similar-box > p:last-child").height()
-    // );
 
     width = $(".add-img-box .thumbnail img").width();
     $(".add-img-box .thumbnail img").height(width * heightFactor);
@@ -360,24 +351,23 @@ function upload() {
 
 
 function uploadChosen() {
-    var dataObj = new Object();
-    dataObj.logId = logId;
-    console.log(dataObj);
-    dataObj.phoneNo = $("#retrieveModal2 .modal-body #phoneNo").val();
-    dataObj.carNo = $("#retrieveModal2 #carNo").val();
-    dataObj.remark = $("#retrieveModal2 #modal-remark").val();
-    dataObj.dispose = $("#retrieveModal2 #dispose").val();
-    dataObj.harmful = $("#retrieveModal2 input[name='harmful']:checked").val();
-    dataObj.url = $("#retrieveModal .show-results .thumbnail img").attr("src");
+    var form_Data = new FormData();
     var name = $("#retrieveModal .caption > p:nth-child(2)").text();
     var idNo = $("#retrieveModal .caption > p:nth-child(6)").text();
-    dataObj.name = name.substring(name.indexOf("：") + 1);
-    dataObj.idNo = idNo.substring(idNo.indexOf("：") + 1);
-    console.info(idNo);
+    form_Data.append("logId", logId);
+    form_Data.append("phoneNo", $("#retrieveModal2 .modal-body #phoneNo").val());
+    form_Data.append("carNo", $("#retrieveModal2 #carNo").val());
+    form_Data.append("remark", $("#retrieveModal2 #modal-remark").val());
+    form_Data.append("dispose", $("#retrieveModal2 #dispose").val());
+    form_Data.append("harmful", $("#retrieveModal2 input[name='harmful']:checked").val());
+    form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
+    form_Data.append("name", name.substring(name.indexOf("：") + 1));
+    form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
+    console.log('form_Data'+form_Data);
     $.ajax({
         type: 'post',
         url: pathurl + 'facelog/insertChosenInfo/',
-        data: JSON.stringify(dataObj),
+        data: form_Data,
         cache: false,
         contentType: false,
         processData: false,

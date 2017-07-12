@@ -1,6 +1,6 @@
 ﻿
 人脸检索管理
-      人脸检索       	 faceRetrieval
+      人脸检索         faceRetrieval
       身份检索	       identityRetrieval
       人脸比对	       faceMatching
       人员信息查询      identityQuery
@@ -11,16 +11,16 @@
 
 统计分析管理
       用户信息统计	   userInformation
-      用户操作统计	   userOperations
-      比中率统计	      ratioStatistics
-      身份查询	       identityQuery
+      检索记录统计	   userOperations
+      比中率统计	       ratioStatistics
+      比中战果统计      statisticsVictories
+      处置结果战果统计  resultsDisposal
 
 配置中心
       用户管理	       userManagement
       组织机构管理	   organizationManagement
       角色管理	       roleManagement
       系统设置	       systemSettings
-
       消息推送         messagePush
       系统日志         systemLog
       问题反馈	       problemFeedback

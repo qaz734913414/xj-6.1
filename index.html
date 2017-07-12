@@ -21,9 +21,8 @@
     <!-- bootstrap日历样式文件 -->
     <link href="css/common/bootstrap-datetimepicker.css" rel="stylesheet"/>
     <!-- 主页样式文件 -->
-    <link href="./css/index.css" rel="stylesheet"/>
-    <!-- 人脸检索日志样式文件 -->
-    <link href="./css/style.css" rel="stylesheet"/>
+    <link href="css/index-red.css" rel="stylesheet" id="cssfile"/>
+
     <!-- zTree样式 -->
     <link href="css/common/zTreeStyle.css" rel="stylesheet"/>
     <link href="css/common/bootstrap-dialog.min.css" rel="stylesheet"/>
@@ -61,13 +60,13 @@
 
 
 </head>
-<body>
+<body >
 <!-- 自定义一级导航栏 -->
 <div class="mynav-box-blank">
     <div class="mynav-box first-box">
         <ul class="mynav-menu">
             <li class="logo">
-                <a href="javascript:void(0);"><img src="./img/index/logo_home.png" alt="人脸识别后台管理系统"></a>
+                <a href="javascript:void(0);"><img src="./img/title.png" alt="人脸识别后台管理系统"><span style="font-size:20px;">人脸识别后台管理系统</span></a>
             </li>
 
             <li class="foot dropdown">
@@ -94,14 +93,11 @@
                                                                                                  src="img/index/bgc.png"
                                                                                                  class="img-responsive"/></a>
 
-                <ul class="dropdown-menu" id="imglist">
+                <ul class="dropdown-menu" id="skin">
 
-                    <li class="imgitem" style="background:blue;" data-color="blue">蓝色</li>
-                    <li class="imgitem" style="background:green;" data-color="green">绿色</li>
-                    <li class="imgitem" style="background:orange;" data-color="orange">橙色</li>
-                    <li class="imgitem" style="background:gold;" data-color="gold">金色</li>
-                    <li class="imgitem" style="background:red;" data-color="red">红色</li>
-                    
+                    <li id="index-blue" style="background:blue;">蓝色</li>
+                    <li id="index-red" style="background:red;">红色</li>
+
 
                 </ul>
             </li>
@@ -230,6 +226,12 @@
                     break;
                 case '比中率统计':
                     $('#ajax-content').load('./template/ratioStatistics.html');
+                    break;
+                case '比中战果统计':
+                    $('#ajax-content').load('./template/statisticsVictories.html');
+                    break;
+                case '处置结果战果统计':
+                    $('#ajax-content').load('./template/resultsDisposal.html');
                     break;
 
                 case '用户管理':

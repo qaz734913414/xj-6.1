@@ -86,13 +86,15 @@ function TableInit() {
                 }
             }, {
                 field: 'plat',
-                title: '平台',
+                title: '来源平台',
                 formatter: function (value) {
                     switch (value) {
                         case "0":
-                            return "App";
+                            return "PC";
                         case "1":
-                            return "后台";
+                            return "android";
+                        case "2":
+                            return "IOS";
                     }
                 }
             }, {
@@ -130,19 +132,17 @@ function TableInit() {
             }, {
                 field: 'chosen',
                 title: '是否比中',
-                formatter: function (value) {
-                    return value == "" || value == null ? "否" : "是";
-                }
+
             }, {
                 field: 'harmful',
                 title: '是否有害',
                 formatter: function (value) {
                     switch (value) {
-                        case "1":
+                        case "0":
                             return "有害";
-                        case "2":
+                        case "1":
                             return "无害";
-                        case "3":
+                        case "2":
                             return "未知";
                     }
                 }
@@ -177,7 +177,6 @@ function TableInit() {
             from: $("#from").val(),
             to: $("#to").val(),
             province: $("#distpicker select[name='province']").val(),
-
             city: $("#distpicker select[name='city']").val(),
             area: $("#distpicker select[name='area']").val(),
         };
@@ -204,6 +203,33 @@ function ButtonInit() {
     };
     return oInit;
 }
+// 导出
+$("#btn-export").on("click", function () {
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'export/expretriveLog',
+        data:{
+            username: $("#rusername").val(),
+            plat: $("#plat").val(),
+            company: $("#company").val(),
+            chosen: $("#chosen").val(),
+            harmful: $("#harmful").val(),
+            from: $("#from").val(),
+            to: $("#to").val(),
+            province: $("#distpicker select[name='province']").val(),
+            city: $("#distpicker select[name='city']").val(),
+            area: $("#distpicker select[name='area']").val(),
+        },
+        success: function (data) {
+
+            console.log('export' + data);
+        },
+        error: function () {
+            console.log('export失败');
+        },
+        dataType: 'json'
+    });
+});
 var dListData;
 // 初始化单位数组
 function init() {
@@ -215,7 +241,7 @@ function init() {
         success: function (data) {
 
             dListData = data.result.dList;
-            console.log('dListData'+dListData);
+            console.log('dListData' + dListData);
         },
         error: function () {
             console.log('请求单位数组失败');
@@ -244,10 +270,10 @@ function openinfo(username) {
             dataresult.loginCount = data.loginCount;
             dataresult.retrieveCount = data.retrieveCount;
             $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
-            var unittext= $("#openinofModal .modal-body").find('.unit').text();
+            var unittext = $("#openinofModal .modal-body").find('.unit').text();
 
-            $.each(dListData,function (index) {
-                if(unittext==dListData[index].did){
+            $.each(dListData, function (index) {
+                if (unittext == dListData[index].did) {
                     return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
                 }
             })
@@ -314,33 +340,37 @@ function countinfo(n, i) {
         cache: false,
         success: function (data) {
             $('#countModal #countbody').html('');
-            var str='';
+            var str = '';
             switch (i) {
                 case 0:
-                    var data=data.retrieveShow;
-                    $.each(data,function (index,item) {
-                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    var data = data.retrieveShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
                     })
                     $('#countModal #countbody').append(str)
                     break;
-                    case 1:
-                    var data=data.compareShow;
-                    $.each(data,function (index,item) {
-                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                case 1:
+                    var data = data.compareShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
                     })
                     $('#countModal #countbody').append(str)
                     break;
-                    case 2:
-                    var data=data.idCardShow;
-                    $.each(data,function (index,item) {
-                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                case 2:
+                    var data = data.idCardShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
                     })
                     $('#countModal #countbody').append(str)
-                    break; 
-                    case 3:
-                    var data=data.loginShow;
-                    $.each(data,function (index,item) {
-                        str+='<tr><td>'+index+'</td><td>'+item.time+'</td></tr>'
+                    break;
+                case 3:
+                    var data = data.loginShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
                     })
                     $('#countModal #countbody').append(str)
                     break;
