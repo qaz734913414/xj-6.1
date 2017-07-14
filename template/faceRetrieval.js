@@ -234,7 +234,7 @@ function upload() {
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
-    
+
         var $addimgthis=$('.add-img'),$w=$addimgthis.width(), $h=$addimgthis.height();
 
         $addimgthis.find(".topLine,.bottomLine").stop().animate({"width":$w});
@@ -245,7 +245,7 @@ function upload() {
        $addimgthis.find(".rightLine,.leftLine").stop().animate({"height":"0px"});
    },1500)
 
-   
+
     // $('.loading').show();
     $.ajax({
         type: 'post',
@@ -348,7 +348,29 @@ function upload() {
         }
     });
 }
+// 初始化处置结果
+setTimeout(function () {
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'parameter/dispose',
+        dataType: 'json',
+        success: function (data) {
+            var data=data.result,str='';
+            $.each(data,function (index,item) {
+                str+='<option value="' + item.id + '">' + item.value + '</option>'
+            })
 
+            $('#dispose').html(str);
+        },
+        error: function () {
+            console.error("ajax upload error");
+
+        }
+    });
+},1000)
+
+
+// 提交比中
 
 function uploadChosen() {
     var form_Data = new FormData();

@@ -144,7 +144,7 @@ function getTable() {
         //		height:$(document).height()-130,
         buttonsClass: "face",
 
-        pageList: [4, 10, 25, 50, 100],
+        pageList: [10, 25, 50, 100],
         onLoadSuccess: function (data) {  //加载成功时执行
             console.log('初始化'+data)
         }

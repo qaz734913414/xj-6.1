@@ -1,7 +1,7 @@
 
 
 $(function(){
-    getMessage3();
+    getMessage4();
     $(".mydate input").datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
@@ -141,15 +141,15 @@ function getDateByDay() {
     });
 }
 
-function getMessage3() {
+function getMessage4() {
     var startDate = $("#startDate").val();
     var endDate = $("#endDate").val();
 
     var choesnType = $("#timestatus").find("option:selected").val();
 
-    getTable3(startDate, endDate,choesnType);
+    getTable4(startDate, endDate,choesnType);
 }
-function getTable3(startDate, endDate,choesnType) {
+function getTable4(startDate, endDate,choesnType) {
     $("#proportion").bootstrapTable('destroy');
     $("#proportion").bootstrapTable({
         method: "post",
@@ -170,8 +170,8 @@ function getTable3(startDate, endDate,choesnType) {
         },
     });
 }
-function reset3() {
+function reset4() {
     $(".face-form input").val("");
     $(".face-form select").val("-1");
-    getMessage3();
+    getMessage4();
 }

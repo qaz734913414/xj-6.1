@@ -1,6 +1,6 @@
-<script src="js/city/distpicker.data.js"></script>
+
 <script src="js/city/distpicker.js"></script>
-    <!-- 比中战果统计 以下-->
+<!-- 比中战果统计 以下-->
 <div id="backModel"></div>
 <div class="container-fluid face-table-group">
     <div class="row">
@@ -50,16 +50,59 @@
             <thead>
             <tr>
                 <th data-field="date" data-halign="center" data-align="center" data-valign="middle">起始时间</th>
-                <th data-field="harmcount" data-halign="center" data-align="center" data-valign="middle">有害</th>
-                <th data-field="unharmcount" data-halign="center" data-align="center" data-valign="middle">无害</th>
-                <th data-field="unknowncount" data-halign="center" data-align="center" data-valign="middle">未知</th>
+                <th data-field="harmcount" data-halign="center" data-events="harmDetail" data-align="center"
+                    data-valign="middle">有害
+                </th>
+                <th data-field="unharmcount" data-halign="center" data-events="unharmDetail" data-align="center"
+                    data-valign="middle">无害
+                </th>
+                <th data-field="unknowncount" data-halign="center" data-events="unknownDetail" data-align="center"
+                    data-valign="middle">未知
+                </th>
 
             </tr>
             </thead>
-            <tbody >
+            <tbody id="proportionbd">
             </tbody>
         </table>
     </div>
+</div>
+<!--点击查询次数弹窗 -->
+<div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="fa fa-times" aria-hidden="true"></span></button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                        <tr>
+                            <td>姓名</td>
+                            <td>证件号</td>
+                            <td>车牌号</td>
+                            <td>手机号</td>
+                            <td>是否有害</td>
+                            <td>处置方式</td>
+                            <td>比中者</td>
+                            <td>比中单位</td>
+                            <td>比中者所属区域</td>
+                            <td>比中时间</td>
+                        </tr>
+                        </thead>
+                        <tbody id="countbody">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script src="./template/statisticsVictories.js" charset="utf-8"></script>

@@ -7,14 +7,8 @@ if (token) {
         }
     });
 }
-$(function(){
-  getTable();
-})
-function parameterVal(){//查询
-  getTable();
 
-  // $('#querySystemSet').find('option').eq(0).prop('selected','selected');
-}
+getTable();
 // 	table
 function getTable() {   //表格初始化
   console.log('aaaaaaaaa')
@@ -29,7 +23,7 @@ function getTable() {   //表格初始化
     pagination: true, //是否显示分页（*）
     sortable: false, //是否启用排序
     sortOrder: "asc", //排序方式
-    pageList: [4, 10, 25, 50, 100],
+    pageList: [10, 25, 50, 100],
     // queryParamsType: "limit",
     queryParams: function (params) {//这个是设置查询时候的参数，我直接在源码中修改过，不喜欢offetset 我后台用的 是pageNo. 这样处理就比较的满足我的要求，其实也可以在后台改，麻烦！
       console.log(params)
@@ -53,8 +47,8 @@ function getTable() {   //表格初始化
     contentType: "application/x-www-form-urlencoded; charset=UTF-8",
     sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
     pageNumber: 1, //初始化加载第一页，默认第一页
-    pageSize: 4, //每页的记录行数（*）
-    pageList: [4, 10, 25, 50, 100], //可供选择的每页的行数（*）
+
+    pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
     // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
     // strictSearch: true,
     //  showColumns: true,                  //是否显示所有的列
@@ -89,15 +83,11 @@ function getTable() {   //表格初始化
         title: '参数类别',
         formatter: function(value) {
           if(value==0){
-            return '重点人员';
+            return '<span class="pKey">即将到期</span>';
           }else if(value==1){
-            return '数据来源';
+            return '<span class="pKey">比中返回照片数量</span>';
           }else if(value==2){
-            return '厂商';
-          }else if(value==3){
-            return '账户类别';
-          }else if(value==4){
-            return '到期状态';
+            return '<span class="pKey">处理结果</span>';
           }
 
         }
@@ -105,7 +95,7 @@ function getTable() {   //表格初始化
         field: 'pValue',
         title: '参数类别值',
         formatter: function(value) {
-            return value;
+            return '<span class="pvalue">'+value+'</span>';
         }
     },{
         title: '操作',
@@ -129,79 +119,82 @@ function getTable() {   //表格初始化
 
 
 
-function classChange(){
-  var parameter=[
-      ["是","否","未知"],
-      ["App","平台","网站"],
-      ["云创","依图","旷世","商汤"],
-      ["App","平台","通用"],
-      ["已到期","即将到期","未到期"]
-  ];
-  $('#parameterClassVal').html('');
-  if($('#parameterClass').val()==-1){
-    $('#parameterClassVal').append('<option value="-1">参数类别值</option>');
-    return;
-  }
-  //
-  var parameterClass=$('#parameterClass').val();
-  console.log(parameterClass)
-  var parameterClassVal=$('#parameterClassVal');
-  for(var i=0;i<parameter.length;i++){
-    if(parameterClass==i){
-      for(var j=0;j<parameter[i].length;j++){
-        parameterClassVal.append('<option value="'+parameter[i][j]+'">'+parameter[i][j]+'</option>');
-      }
-    }
-  }
+// function classChange(){
+//   var parameter=[
+//       ["是","否","未知"],
+//       ["App","平台","网站"],
+//       ["云创","依图","旷世","商汤"],
+//       ["App","平台","通用"],
+//       ["已到期","即将到期","未到期"]
+//   ];
+//   $('#parameterClassVal').html('');
+//   if($('#parameterClass').val()==-1){
+//     $('#parameterClassVal').append('<option value="-1">参数类别值</option>');
+//     return;
+//   }
+//   //
+//   var parameterClass=$('#parameterClass').val();
+//   console.log(parameterClass)
+//   var parameterClassVal=$('#parameterClassVal');
+//   for(var i=0;i<parameter.length;i++){
+//     if(parameterClass==i){
+//       for(var j=0;j<parameter[i].length;j++){
+//         parameterClassVal.append('<option value="'+parameter[i][j]+'">'+parameter[i][j]+'</option>');
+//       }
+//     }
+//   }
+//
+// }
 
-}
+// function addsystemSet(tit){
+//   var tit=tit||'新建参数';
+//   $('#systemSetModalLabel').html(tit);
+//   $('#systemSetModal').modal('show');
+//
+// }
+// $('#systemSetSubmit').on('click',function(){   //添加
+//
+//   var pkey=$('#parameterClass').val();
+//   var pvalue=$('#parameterClassVal').val();
+//   if(pkey==-1||pvalue==-1){
+//     $('#promptTit').html('提示');
+//     $('#prompt-text').html('请选择参数');
+//     $('#promptBox').modal('show');
+//     return;
+//   }
+//   $.ajax({
+//     url:pathurl+'parameter/add',
+//     // url:'./testJson/true.json',
+//     data:{
+//       pkey:pkey,
+//       pvalue:pvalue
+//     },
+//     type:'post',
+//     success:function(data){
+//       console.log(data.code)
+//       if(data.code==200){
+//         $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected','selected');//.eq(0).props('selected','selected');
+//         $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
+//         $("#systemSetting").bootstrapTable('refresh');
+//
+//         $('#systemSetModal').modal('hide');
+//         // promptBox promptTit prompt-text
+//         $('#promptTit').html('提示');
+//         $('#prompt-text').html('添加成功');
+//         $('#promptBox').modal('show');
+//       }else{
+//         console.log('hahahahah')
+//         $('#promptTit').html('提示');
+//         $('#prompt-text').html(data.result);
+//         $('#promptBox').modal('show');
+//       }
+//
+//     }
+//   })
+// })
+$(function () {
 
-function addsystemSet(tit){
-  var tit=tit||'新建参数';
-  $('#systemSetModalLabel').html(tit);
-  $('#systemSetModal').modal('show');
 
-}
-$('#systemSetSubmit').on('click',function(){   //添加
-
-  var pkey=$('#parameterClass').val();
-  var pvalue=$('#parameterClassVal').val();
-  if(pkey==-1||pvalue==-1){
-    $('#promptTit').html('提示');
-    $('#prompt-text').html('请选择参数');
-    $('#promptBox').modal('show');
-    return;
-  }
-  $.ajax({
-    url:pathurl+'parameter/add',
-    // url:'./testJson/true.json',
-    data:{
-      pkey:pkey,
-      pvalue:pvalue
-    },
-    type:'post',
-    success:function(data){
-      console.log(data.code)
-      if(data.code==200){
-        $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected','selected');//.eq(0).props('selected','selected');
-        $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
-        $("#systemSetting").bootstrapTable('refresh');
-
-        $('#systemSetModal').modal('hide');
-        // promptBox promptTit prompt-text
-        $('#promptTit').html('提示');
-        $('#prompt-text').html('添加成功');
-        $('#promptBox').modal('show');
-      }else{
-        console.log('hahahahah')
-        $('#promptTit').html('提示');
-        $('#prompt-text').html(data.result);
-        $('#promptBox').modal('show');
-      }
-
-    }
-  })
-})
 $('#systemSetting').on('click','.removeBtn',function(){   //删除按钮
   var pId=$(this).parents('tr').find('#pId').val();
   $('#pId').val(pId);
@@ -240,97 +233,84 @@ $('#delPromptBox #delPromptBtn').on('click',function(){
     }
   })
 });
-// 修改removeBtn
+// 修改Btn
 $('#systemSetting').on('click','.updateBtn',function(){
-  console.log('修改');
-  var pId=$(this).parents('tr').find('#pId').val();
-  var pkey=Number($(this).parents('tr').find('#pkey').val())+1;
-  var pvalue=$(this).parents('tr').find('#pvalue').val();
-  var pId=$('#pId').val();
+
+    var pId=$(this).parents('tr').find('#pId').val();
+    $('#pId').val(pId);
+
   $('#modifyModal #systemSetModalLabel').html('修改参数');
+  $('#modifyModal #parameterkey').val($(this).parents('tr').find('.pKey').text());
+  $('#modifyModal #parameterVal').val($(this).parents('tr').find('.pvalue').text());
   $('#modifyModal').modal('show');
-  console.log(pId+'__'+pkey+'__'+pvalue);
-  console.log($('#modifyModal #parameterClass').find('option').eq(pkey));
-  $('#modifyModal #parameterClass').find('option').eq(pkey).prop('selected','selected');
-  modifyClassChange();
-  $('#modifyModal #parameterClassVal').find('option').each(function(val,index){
-    if($(this).html()==pvalue){
-      $(this).prop('selected','selected');
-    }
-  });
-})
-function modifyClassChange(){
-  var parameter=[
-      ["是","否","未知"],
-      ["App","平台","网站"],
-      ["云创","依图","旷世","商汤"],
-      ["App","平台","通用"],
-      ["已到期","即将到期","未到期"]
-  ];
-  $('#modifyModal #parameterClassVal').html('');
-  if($('#modifyModal #parameterClass').val()==-1){
-    $('#modifyModal #parameterClassVal').append('<option value="-1">参数类别值</option>');
-    return;
-  }
-  //
-  var parameterClass=$('#modifyModal #parameterClass').val();
-  console.log(parameterClass)
-  var parameterClassVal=$('#modifyModal #parameterClassVal');
-  for(var i=0;i<parameter.length;i++){
-    if(parameterClass==i){
-      for(var j=0;j<parameter[i].length;j++){
-        parameterClassVal.append('<option value="'+parameter[i][j]+'">'+parameter[i][j]+'</option>');
-      }
-    }
-  }
+    var pkey=$('#modifyModal #parameterkey').val();
 
-}
-$('#modifyModal #modifySubmit').on('click',function(){
-  var pkey=$('#modifyModal #parameterClass').val();
-  var pvalue=$('#modifyModal #parameterClassVal').val();
-  var pId=$('#pId').val();
-  if(pkey==-1||pvalue==-1){
-    $('#promptTit').html('提示');
-    $('#prompt-text').html('请选择参数');
-    $('#promptBox').modal('show');
-    return;
-  }
+    $('#modifyModal #parameterVal').keyup(function () {
+        var pvalue=$('#modifyModal #parameterVal').val();
+        if(pkey=='即将到期'||pkey=='比中返回照片数量'){
+            if(!/^[0-9]*$/.test(pvalue) ){
+                $('#error').text('请输入数字');
+            }else {
+                $('#error').text('');
+            }
+        }else if(pkey=='处理结果'){
+            if(!/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(pvalue)){
+                $('#error').text('请输入文字');
+            }else {
+                $('#error').text('');
+            }
+        }
+    })
 
-  $.ajax({
-    url:pathurl+'parameter/doedit',
-    // url:'./testJson/true.json',
-    type:'post',
-    data:{
-      pid:pId,
-      pkey:pkey,
-      pvalue:pvalue
-    },
-    success:function(data){
-      console.log(data)
-      if(data.code==200){
-        $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected','selected');//.eq(0).props('selected','selected');
-        $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
-        $("#systemSetting").bootstrapTable('refresh');
-        $('#promptTit').html('提示');
-        $('#prompt-text').html('修改成功');
-        $('#promptBox').modal('show');
-      }else{
-        $('#promptTit').html('提示');
-        $('#prompt-text').html(data.msg);
-        $('#promptBox').modal('show');
-      }
-      $('#modifyModal').modal('hide');
-    },
-    error:function(){
-      $('#promptTit').html('提示');
-      $('#prompt-text').html('系统出错');
-      $('#promptBox').modal('show');
-    }
-  })
 })
-$('#systemSettingreset').on('click',function(){
-  $('#querySystemSet').val('-1');
-  getTable();
-  $('#systemSettingreset').button('reset');
-  $('#querySystemSet').find('option').eq(0).prop('selected','selected');
+
+    $('#modifyModal #modifySubmit').on('click', function () {
+        var pkey = $('#modifyModal #parameterkey').val();
+        var pvalue = $('#modifyModal #parameterVal').val();
+        var pId = $('#pId').val();
+        $('#modifyModal #parameterVal').blur(function () {
+            if (pkey == '即将到期' || pkey == '比中返回照片数量') {
+                if (!/^[0-9]*$/.test(pvalue)) {
+                    $('#error').text('请输入数字');
+                }
+            } else if (pkey == '处理结果') {
+                if (!/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(pvalue)) {
+                    $('#error').text('请输入文字');
+                }
+            }
+        })
+
+        $.ajax({
+            url: pathurl + 'parameter/doedit',
+            // url:'./testJson/true.json',
+            type: 'post',
+            data: {
+                pid: pId,
+                pkey: pkey,
+                pvalue: pvalue
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+                    $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected', 'selected');//.eq(0).props('selected','selected');
+                    $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
+                    $("#systemSetting").bootstrapTable('refresh');
+                    $('#promptTit').html('提示');
+                    $('#prompt-text').html('修改成功');
+                    $('#promptBox').modal('show');
+                } else {
+                    $('#promptTit').html('提示');
+                    $('#prompt-text').html(data.msg);
+                    $('#promptBox').modal('show');
+                }
+                $('#modifyModal').modal('hide');
+            },
+            error: function () {
+                $('#promptTit').html('提示');
+                $('#prompt-text').html('系统出错');
+                $('#promptBox').modal('show');
+            }
+        })
+    })
+
 })

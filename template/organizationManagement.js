@@ -113,7 +113,7 @@ function onClick(event, treeId, treeNode) {
     paginationDetailHAlign : "left",
     buttonsClass : "face",
     height : '',/*(document).height() - 202*/
-    pageList: [4, 10, 25, 50, 100]
+    pageList: [10, 25, 50, 100]
   // 			showExport : true, //是否显示导出
   // 			exportDataType : "basic"//basic', 'all', 'selected'.
   });

@@ -1,4 +1,9 @@
-
+.requred{
+    color: red;
+    position: relative;
+    top:5px;
+    font-size:16px;
+}
 body {
     background-size: cover;
     -moz-background-size: cover;
@@ -14,7 +19,6 @@ body {
     display: flex;
     flex-flow: column;
     min-height: 100vh;
-    background: url("../img/bg.png") center no-repeat;
 
 }
 
@@ -263,8 +267,7 @@ ul.mynav-menu {
 }
 
 .second-box-blank {
-    background: #cfd2d7;
-    color: #000;
+
     position: static;
     margin: 0;
     border: 0;
@@ -279,8 +282,8 @@ ul.mynav-menu {
     position: fixed;
     margin-top: 62px;
     margin-left: 0px;
-    background: 0 0 no-repeat;
-    background-color: #1f327;
+    background: #cfd2d7;
+    color: #000;
     border: 0;
     top: 0;
     left: 0;

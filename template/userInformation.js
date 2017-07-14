@@ -81,6 +81,9 @@ function statusFormatter(value) {
             return "停用用户";
     }
 }
+function nameformater(value,row) {
+    return '<span class="hov" onclick="openinfo(\'' + row.uName + '\')">' + value + '</span>'
+}
 function sexFormatter(value) {
     if (value == 0) {
         return '男';
@@ -99,13 +102,110 @@ function unitFormatter(value) {
 }
 
 function reset() {
-// $("#u_unit_id").val();
-// $("#area_id").val();
-// $("#u_role_id").val();
-// $("#dateStatus").val();
-// $("#u_real_name").val();
-// $("#u_status").val();
     $(".face-form select").val("-1");
     $('#u_status').val('Y');
     getTable1()
+}
+// 点击用户查看信息
+function openinfo(username) {
+    var openinofDom = $("#openinofModal .modal-body");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/personInfo',
+        data: {
+            username: username
+        },
+        cache: false,
+        success: function (data) {
+            var dataresult = [], compareCount, idCardCount, loginCount, retrieveCount;
+
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
+            $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
+            var unittext = $("#openinofModal .modal-body").find('.unit').text();
+
+            $.each(dListData, function (index) {
+                if (unittext == dListData[index].did) {
+                    return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
+                }
+            })
+            $("#openinofModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
+}
+// 点击查看次数
+
+$('#openinofModal .modal-body').on('click', ' .count', function () {
+
+    var name = $('#openinofModal table .name').text().split(':')[1], index = $(this).index('.count');
+
+    countinfo(name, index)
+
+})
+function countinfo(n, i) {
+
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/getShow',
+        data: {
+            username: n
+        },
+        cache: false,
+        success: function (data) {
+            $('#countModal #countbody').html('');
+            var str = '';
+            switch (i) {
+                case 0:
+                    var data = data.retrieveShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 1:
+                    var data = data.compareShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 2:
+                    var data = data.idCardShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+                case 3:
+                    var data = data.loginShow;
+                    $.each(data, function (index, item) {
+                        var index = index + 1;
+                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
+                    })
+                    $('#countModal #countbody').append(str)
+                    break;
+            }
+
+            $("#countModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
 }

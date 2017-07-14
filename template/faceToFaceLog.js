@@ -43,8 +43,8 @@ function TableInit() {
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1, //初始化加载第一页，默认第一页
-            pageSize: 4, //每页的记录行数（*）
-            pageList: [4, 10, 25, 50, 100], //可供选择的每页的行数（*）
+
+            pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
             // search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
             // strictSearch: true,
             //  showColumns: true,                  //是否显示所有的列
@@ -93,15 +93,15 @@ function TableInit() {
                 }
             }, {
                 field: 'company',
-                title: '厂商',
+                title: '算法',
                 formatter: function(value) {
                     switch (value) {
                         case "0":
-                            return "云创";
+                            return "通道一";
                         case "1":
-                            return "依图";
+                            return "通道二";
                         case "2":
-                            return "旷视";
+                            return "通道三";
                     }
                 }
             }, {
@@ -110,7 +110,11 @@ function TableInit() {
                 formatter: function(value) {
                     return '<span id="logUsername"  class="logUsername">' + value + '</span>'
                 }
-            }, {
+            },{
+                field: 'u_real_name',
+                title: '真实姓名',
+            },
+                {
                 field: 'dName',
                 title: '工作单位'
             },  {
@@ -165,7 +169,33 @@ function TableInit() {
     return oTableInit;
 }
 
+// 导出
+$("#btn-export").on("click", function () {
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'export/faceLog',
+        data:{
+            username: $("#rusername").val(),
+            plat: $("#plat").val(),
+            company: $("#company").val(),
+            chosen: $("#chosen").val(),
+            harmful: $("#harmful").val(),
+            from: $("#from").val(),
+            to: $("#to").val(),
+            province: $("#distpicker select[name='province']").val(),
+            city: $("#distpicker select[name='city']").val(),
+            area: $("#distpicker select[name='area']").val(),
+        },
+        success: function (data) {
 
+            console.log('export' + data);
+        },
+        error: function () {
+            console.log('export失败');
+        },
+        dataType: 'json'
+    });
+});
 function ButtonInit() {
     var oInit = {};
     var postdata = {};

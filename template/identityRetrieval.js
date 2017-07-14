@@ -144,8 +144,6 @@ function IdentityCodeValid(code) {
         tip = "地址编码错误";
         pass = false;
     }
-
-    // console.log(tip)
     return pass;
 }
 

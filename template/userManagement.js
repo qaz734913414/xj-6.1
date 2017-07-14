@@ -42,7 +42,7 @@ $(function () {
 });
 
 function addFormVali() {
-    $('#userForm')
+    $('#adduserModal #userForm')
         .bootstrapValidator({
             fields: {
                 uName: {
@@ -67,7 +67,7 @@ function addFormVali() {
                             message: '请输入身份证'
                         },
                         regexp: {
-                            regexp: /^\d{17}(\d|x)$/,
+                            regexp: /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
                             message: '身份证输入不正确，请输入18位正确格式的身份证'
                         }
 
@@ -101,8 +101,78 @@ function addFormVali() {
             }
         });
 }
+// 新增
+function addUser() {
+    $("#adduserModal #userForm")[0].reset();
+    $("#adduserModal .modal-title").html("添加用户");
+    $("#adduserModal").modal();
+    $("#adduserModal #cancel").off()
+    $("#adduserModal #cancel").click(function () {
+        $('#adduserModal').modal('hide');
+        $("#adduserModal #userForm")[0].reset();
+        $("#userTable").bootstrapTable('refresh');
+    });
+}
+$("#adduserModal #continue").off();
+
+
+$("#adduserModal .face-button").click(function () {
+    if (!$('#adduserModal #userForm').data('bootstrapValidator').isValid()) {
+        alert('没用通过验证，请填写全部')
+
+    } else {
+        //通过校验，可进行提交等操作
+        $.ajax({
+            type: 'post',
+            url: pathurl + 'user/new',
+            data: {
+                uName: $("#adduserModal #uName").val(),
+                uRealName: $("#adduserModal #urealName").val(),
+                uSex: $("#adduserModal input[name='uSex']:checked").val(),
+                uCardId: $("#adduserModal #uCardId").val(),
+
+                uStatus: $("#adduserModal #uStatus").val(),
+                uPhone: $("#adduserModal #uPhone").val(),
+                uTelephone: $("#adduserModal #uTelephone").val(),
+                uPolicyNum: $("#adduserModal #uPolicyNum").val(),
+                uDuty: $("#adduserModal #uDuty").val(),
+                uRoleId: $("#adduserModal #uRoleId").val(),
+                uUnitId: $("#adduserModal #uunitId").val(),
+                expireTime: $("#adduserModal #expireTimeVal").val(),
+                province: $("#adduserModal #distpicker select[name='province']").val(),
+
+                city: $("#adduserModal #distpicker select[name='city']").val(),
+                area: $("#adduserModal #distpicker select[name='area']").val(),
+                uVIP: $("#adduserModal #uVIP").is(':checked') ? '0' : '1'
+            },
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                if (data.code == 200) {
+                    $('#adduserModal').modal('hide');
+                    $("#modal-body-id").html('添加成功');
+                    $('#myModal').modal('show');
+                    $("#userForm")[0].reset();
+                    // LoadAjaxContent(pathurl+'user/list');
+                    $("#userTable").bootstrapTable('refresh');
+                } else {
+                    $("#deptModel").css("z-index", 1500);
+                    $("#myModalLabel").html("提示");
+                    $("#modal-body-text").html(data.msg);
+                    $('#deptModel').modal('show');
+                }
+            },
+            error: function () {
+                $("#myModalLabel").html("提示");
+                $("#modal-body-id").html('系统出错请稍后再试');
+                //	$('#myModal').modal('show');
+            }
+        });
+    }
+});
 /*初始化单位和角色的下拉框 dList rList*/
-var  rListData;
+var rListData;
 // 角色数组
 function init() {
     var dname;
@@ -115,7 +185,7 @@ function init() {
             var unitStr = '';
             var roleStr = '';
             var dListData = data.result.dList;//dList    rName  rId
-             rListData = data.result.rList;
+            rListData = data.result.rList;
             for (var i = 0; i < dListData.length; i++) {
                 unitStr += '<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>';
             }
@@ -170,9 +240,9 @@ function getTable() {
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "all", //basic', 'all', 'selected'.
-        pageList: [4, 10, 25, 50, 100],
+        pageList: [10, 25, 50, 100],
         onLoadSuccess: function (data) {  //加载成功时执行
-            console.log('初始化'+data)
+            console.log('初始化' + data)
         }
     });
 }
@@ -196,14 +266,14 @@ function statusFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-    if (row.bindType==0){
+    if (row.bindType == 0) {
         return [
             '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
             '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
             '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>',
             '<button type="button" class="unbind btn-sm btn face-button2" style="margin-right:15px;">解绑</button>'
         ].join('');
-    }else if(row.bindType==1){
+    } else if (row.bindType == 1) {
         return [
             '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>',
             '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">修改</button>',
@@ -211,14 +281,11 @@ function operateFormatter(value, row, index) {
             '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">已解绑</button>'
         ].join('');
     }
-
 }
-
 
 $('#userModal #cancel').on('click', function () {
     $('#userModal').modal('hide');
 })
-
 
 function updateStatus(row) {
     console.log(row.uId)
@@ -307,7 +374,7 @@ $("#unbindTModel #continue").off().click(function () { //done
             username: $('#username').val()
         },
         success: function (data) {
-            console.log('解绑'+data);
+            console.log('解绑' + data);
             $("#myModal #modal-body-id").text("解绑成功!");
             $("#myModal").modal();
             $("#unbindTModel").modal('hide');
@@ -393,9 +460,9 @@ $("#wrenchModal #continue").click(function () {
         url: pathurl + 'user/batchUpdate',
         data: {
             ids: $('#rowUId').val(),
-            expireTime:$('#wrenchModal #wrench #expireTimeVal').val(),
-            uRoleId:$('#wrenchModal #wrench #uRoleId').val(),
-            uUnitId:$('#wrenchModal #wrench #uunitId').val(),
+            expireTime: $('#wrenchModal #wrench #expireTimeVal').val(),
+            uRoleId: $('#wrenchModal #wrench #uRoleId').val(),
+            uUnitId: $('#wrenchModal #wrench #uunitId').val(),
         },
         success: function () {
 
@@ -487,8 +554,6 @@ function userEdit(row) {
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
     var uSex = row.uSex;
-    var uSex = row.uSex;
-    console.log(uSex);
     if (uSex == 0) {
         $("#modifyUserModal input[name='uSex'][value='0']").attr("checked", true);
         $("#modifyUserModal input[name='uSex'][value='1']")
@@ -509,7 +574,15 @@ function userEdit(row) {
             .attr("checked", false);
     }
 
-    console.log(row.expireTime);
+    var Area = row.uArea.split(',');
+    console.log('Area是：' + Area);
+    $(function () {
+        $("#distpicker2").distpicker({
+            province: '浙江省',
+            city: '杭州市',
+            district: '西湖区'
+        });
+    })
     $("#modifyUserModal #uCardId").val(row.uCardId);
     $("#modifyUserModal #uType").val(row.uType);
     $("#modifyUserModal #uStatus").val(row.uStatus);
@@ -600,69 +673,8 @@ function userEdit(row) {
     });
     // $("#userModal #continue").off();
 }
-// 新增
-function addUser() {
-    $("#userForm")[0].reset();
-    $("#adduserModal .modal-title").html("添加用户");
-    $("#adduserModal").modal();
-    $("#adduserModal #cancel").off()
-    $("#adduserModal #cancel").click(function () {
-        $('#adduserModal').modal('hide');
-        $("#userTable").bootstrapTable('refresh');
-    });
-}
-$("#adduserModal #continue").off();
-$("#adduserModal #continue").click(function (form) {
-    console.log(555555555);
 
-    $.ajax({
-        type: 'post',
-        url: pathurl + 'user/new',
-        data: {
-            uName: $("#adduserModal #uName").val(),
-            uRealName: $("#adduserModal #urealName").val(),
-            uSex: $("#adduserModal input[name='uSex']:checked").val(),
-            uCardId: $("#adduserModal #uCardId").val(),
 
-            uStatus: $("#adduserModal #uStatus").val(),
-            uPhone: $("#adduserModal #uPhone").val(),
-            uTelephone: $("#adduserModal #uTelephone").val(),
-            uPolicyNum: $("#adduserModal #uPolicyNum").val(),
-            uDuty: $("#adduserModal #uDuty").val(),
-            uRoleId: $("#adduserModal #uRoleId").val(),
-            uUnitId: $("#adduserModal #uunitId").val(),
-            expireTime: $("#adduserModal #expireTimeVal").val(),
-            province: $("#adduserModal #distpicker select[name='province']").val(),
-
-            city: $("#adduserModal #distpicker select[name='city']").val(),
-            area: $("#adduserModal #distpicker select[name='area']").val(),
-            uVIP: $("#adduserModal #uVIP").is(':checked') ? '0' : '1'
-        },
-        cache: false,
-        dataType: 'json',
-        success: function (data) {
-            console.log(data)
-            if (data.code == 200) {
-                $('#adduserModal').modal('hide');
-                $("#modal-body-id").html('添加成功');
-                $('#myModal').modal('show');
-                $("#userForm")[0].reset();
-                // LoadAjaxContent(pathurl+'user/list');
-                $("#userTable").bootstrapTable('refresh');
-            } else {
-                $("#deptModel").css("z-index", 1500);
-                $("#myModalLabel").html("提示");
-                $("#modal-body-text").html(data.msg);
-                $('#deptModel').modal('show');
-            }
-        },
-        error: function () {
-            $("#myModalLabel").html("提示");
-            $("#modal-body-id").html('系统出错请稍后再试');
-            //	$('#myModal').modal('show');
-        }
-    });
-});
 // setInterval(function(){
 //   data = new FormData()
 //   data.append('key1',"value1");
@@ -733,7 +745,7 @@ function fileInfo(state) {
         paginationDetailHAlign: "left",
         showExport: true, //是否显示导出
         exportDataType: "all", //basic', 'all', 'selected'.
-        pageList: [4, 10, 25, 50, 100],
+        pageList: [10, 25, 50, 100],
         onLoadSuccess: function (data) {  //加载成功时执行
             $('#fileInfoModal').css('z-index', 1500);
 
@@ -743,10 +755,10 @@ function fileInfo(state) {
 
             }
             else if (state == 1) {
-                $('#fileInfoModal #fileInfoLabel').html('上传失败:' + data.total + '条<br>失败原因：'+data.rows[0].reason)
+                $('#fileInfoModal #fileInfoLabel').html('上传失败:' + data.total + '条<br>失败原因：' + data.rows[0].reason)
             }
             if (state == 2) {
-                $('#fileInfoModal #fileInfoLabel').html('上传重复:' + data.total + '条<br>重复原因：'+data.rows[0].reason)
+                $('#fileInfoModal #fileInfoLabel').html('上传重复:' + data.total + '条<br>重复原因：' + data.rows[0].reason)
             }
             $('#fileInfoModal').modal();
 
@@ -764,11 +776,11 @@ function sexFormatter(value) {
 
 
 function roleFormatter(value) {
-    var rn='';
-$.each(rListData,function (index) {
-    if(value==rListData[index].id){
-        return  rn= rListData[index].name;
-    }
-})
+    var rn = '';
+    $.each(rListData, function (index) {
+        if (value == rListData[index].id) {
+            return rn = rListData[index].name;
+        }
+    })
     return rn;
 }

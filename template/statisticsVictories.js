@@ -1,6 +1,4 @@
-
-
-$(function(){
+$(function () {
     getMessage3();
     $(".mydate input").datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
@@ -9,7 +7,6 @@ $(function(){
         inputMask: true
     });
 })
-
 function changeTime() {
     var date = new Date();
     var y = date.getFullYear();
@@ -40,7 +37,7 @@ function changeTime() {
         $("#startDate").datetimepicker('remove');
         $("#endDate").datetimepicker('remove');
         getDateByDay(d);
-    }else {
+    } else {
         $("#startDate").datetimepicker('remove');
         $("#endDate").datetimepicker('remove');
         getDateByHour(h);
@@ -145,7 +142,7 @@ $.ajax({
     type: 'POST',
     url: pathurl + 'user/initDeptAndRole',
     success: function (data) {
-       var dListData = data.result.dList;//dList    rName  rId
+        var dListData = data.result.dList;//dList    rName  rId
         console.log(dListData);
         for (var i = 0; i < dListData.length; i++) {
             $('#u_unit_id').append('<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>');
@@ -158,16 +155,16 @@ function getMessage3() {
     var endDate = $("#endDate").val();
     var departname = $("#u_unit_id").find("option:selected").text();
     var choesnType = $("#timestatus").find("option:selected").val();
-    var  province=$("#distpicker select[name='province']").val();
-    var  city= $("#distpicker select[name='city']").val();
-    var area= $(" #distpicker select[name='area']").val();
-    getTable3(startDate, endDate,departname,choesnType,province,city,area);
+    var province = $("#distpicker select[name='province']").val();
+    var city = $("#distpicker select[name='city']").val();
+    var area = $(" #distpicker select[name='area']").val();
+    getTable3(startDate, endDate, departname, choesnType, province, city, area);
 }
-function getTable3(startDate, endDate,departname,choesnType,province,city,area) {
+function getTable3(startDate, endDate, departname, choesnType, province, city, area) {
     $("#proportion").bootstrapTable('destroy');
     $("#proportion").bootstrapTable({
         method: "post",
-        url: pathurl + "syslog/chosenresult?startDate=" + startDate + "&endDate=" + endDate + "&choesnType=" + choesnType+ "&departname=" + departname + "&province=" + province+ "&city=" + city + "&area=" + area,
+        url: pathurl + "syslog/chosenresult?startDate=" + startDate + "&endDate=" + endDate + "&choesnType=" + choesnType + "&departname=" + departname + "&province=" + province + "&city=" + city + "&area=" + area,
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: " limit",
@@ -177,9 +174,9 @@ function getTable3(startDate, endDate,departname,choesnType,province,city,area) 
         searchOnEnterKey: true,
         buttonsClass: "face",
         showExport: true, //是否显示导出
-        responseHandler:function(data){//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
+        responseHandler: function (data) {//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
             //在ajax后我们可以在这里进行一些事件的处理
-            var dataObj=data.result;
+            var dataObj = data.result;
             return dataObj;
         },
     });
@@ -189,3 +186,30 @@ function reset3() {
     $(".face-form select").val("-1");
     getMessage3();
 }
+$('#proportionbd').on('click', 'td', function () {
+    var text = $(this).text();
+    var index = $(this).index()
+    var date = $(this).siblings().first().text()
+    if (text == 0) {
+        return false;
+    } else {
+        $.ajax({
+            type: 'POST',
+            data: {
+                date: date,
+                type: index
+            },
+            url: pathurl + 'syslog/crDetails',
+            success: function (data) {
+                var dListData = data.result, str = '';
+                $.each(dListData, function (index, item) {
+                    str += '<tr><td>' + item.name + '</td><td>' + item.idno + '</td><td>' + item.carno + '</td><td>' + item.phoneno + '</td><td>' + item.harmful + '</td><td>' + item.dispose + '</td><td>' + item.username + '</td><td>' + item.userdepart + '</td><td>' + item.userorgan + '</td><td>' + item.creattime + '</td></tr>'
+                })
+                $('#countbody').html(str)
+            }
+        })
+        $('#countModal').modal()
+    }
+
+
+})
