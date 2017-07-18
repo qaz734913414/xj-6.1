@@ -1,5 +1,4 @@
 
-
 <script src="js/city/distpicker.js"></script>
 
 
@@ -17,7 +16,7 @@
                 <div class="bottomLine"></div>
                 <div class="leftLine"></div>
                 <img src="./img/default_img.png" class=""
-                                                         style="height: 270px;"></div>
+                     style="height: 270px;"></div>
             <textarea id="remark" class="form-control hidden" rows="2" placeholder="请输入检索事由"></textarea>
             <div id="add-image-button" class="btn  btn-lg btn-block face-button"
                  style="position: relative; overflow: hidden; direction: ltr;">
@@ -29,9 +28,6 @@
                 <div class="col-sm-12 col-md-12 col-lg-12">
 
 
-
-
-                    
                     <div id="btntype" class="btn-group btn-group-justified">
                         <p>
                             <label class="radio-inline">
@@ -197,17 +193,17 @@
                 <h4 class="modal-title">比中详情</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form id="uploadChosen" class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-4 control-label">手机号</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="phoneNo" placeholder="请填写手机号">
+                            <input type="text" name="phoneNo" class="form-control" id="phoneNo" placeholder="请填写手机号">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">车牌号</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="carNo" placeholder="请填写车牌号">
+                            <input type="text" name="carNo" class="form-control" id="carNo" placeholder="请填写车牌号">
                         </div>
                     </div>
                     <div class="form-group">
@@ -227,7 +223,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">处置结果</label>
                         <div class="col-sm-6">
-                            <select class="form-control" id="dispose">
+                            <select class="form-control" name="dispose" id="dispose">
 
                             </select>
                         </div>
@@ -235,7 +231,8 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">备注</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" id="modal-remark" rows="2" placeholder="请填写备注"></textarea>
+                            <textarea class="form-control" name="modal-remark" id="modal-remark" rows="2"
+                                      placeholder="请填写备注"></textarea>
                         </div>
                     </div>
 
@@ -254,32 +251,46 @@
 
 
     <script id="imgTemp" type="text/html">
-        <div class="col-sm-4 col-md-3 col-lg-2">
-            <div class="thumbnail {{= focus=='Y'?'focus':''}}">
-                <img src={{= url}} alt="...">
-                <div class="caption">
-                    <p><span>相似度：</span><span class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span>
-                    </p>
-                    <p>姓名：{{= name}}</p>
-                    <p>性别：{{= sex==0?'女':'男'}}</p>
-                    <p>民族：${nation}</p>
-                    <p>重点人员类型：${address}</p>
-                    <!--有修改-------------------------------------------->
-                    <p>身份证号：{{= idNo}}</p>
-                    <p>处置方式： {{= birthday}}</p>
-                    <!--有修改-------------------------------------------->
-                    {{if focus=="Y"}}
-                    <p class="hidden focus-font">重点人员情况：{{= "是"}}</p>
-                    {{/if}}
-                    {{if focus=="N"}}
-                    <p class="hidden focus-font">重点人员情况：{{= "否"}}</p>
-                    {{/if}}
-                    {{if focus=="W"}}
-                    <p class="hidden focus-font">重点人员情况：{{= "未知"}}</p>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2 thumbnail">
+            {{if focus=="0"}}
+            <div class="focus0">
+              {{/if}}
+            {{if focus=="1"}}
+                <div class="focus1">
+             {{/if}}
+            {{if focus=="2"}}
+            <div class="focus2">
+             {{/if}}
+           {{if focus=="3"}}
+           <div class="focus3">
+             {{/if}}
+                            <img src={{= url}} alt="...">
+                            <div class="caption">
+                                <p><span>相似度：</span><span
+                                        class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span>
+                                </p>
+                                <p>姓名：{{= name}}</p>
+                                <p>性别：{{= sex==0?'女':'男'}}</p>
+                                <p>民族：${nation}</p>
+
+                                <p>身份证号：{{= idNo}}</p>
+                                <p>处置方式： {{= distype}}</p>
+                                {{if focus=="0"}}
+                                <p class="hidden focus-font">人员情况：{{= "普通"}}</p>
+                                {{/if}}
+                                {{if focus=="1"}}
+                                <p class="hidden focus-font">人员情况：{{= "比中"}}</p>
+                                {{/if}}
+                                {{if focus=="2"}}
+                                <p class="hidden focus-font">人员情况：{{= "重点"}}</p>
+                                {{/if}}
+                                {{if focus=="3"}}
+                                <p class="hidden focus-font">人员情况：{{= "重点+比中"}}</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+
     </script>
 
 

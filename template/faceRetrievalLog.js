@@ -42,7 +42,7 @@ function TableInit() {
             toolbar: '.face-form', //工具按钮用哪个容器
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true, //是否显示分页（*）
-            sortable: false, //是否启用排序
+            sortable: true, //是否启用排序
             sortOrder: "asc", //排序方式
             // queryParamsType: "limit",
             queryParams: oTableInit.queryParams, //传递参数（*）
@@ -160,7 +160,7 @@ function TableInit() {
                 }
             }, {
                 field: 'createTime',
-                title: '检索时间'
+                title: '检索时间',
             }, {
                 field: 'remark',
                 title: '检索事由',
@@ -216,32 +216,34 @@ function ButtonInit() {
     return oInit;
 }
 // 导出
-$("#btn-export").on("click", function () {
-    $.ajax({
-        type: 'POST',
-        url: pathurl + 'export/expretriveLog',
-        data:{
-            username: $("#rusername").val(),
-            plat: $("#plat").val(),
-            company: $("#company").val(),
-            chosen: $("#chosen").val(),
-            harmful: $("#harmful").val(),
-            from: $("#from").val(),
-            to: $("#to").val(),
-            province: $("#distpicker select[name='province']").val(),
-            city: $("#distpicker select[name='city']").val(),
-            area: $("#distpicker select[name='area']").val(),
-        },
-        success: function (data) {
-
-            console.log('export' + data);
-        },
-        error: function () {
-            console.log('export失败');
-        },
-        dataType: 'json'
-    });
-});
+// var token = window.localStorage.getItem('token');
+// $("#btn-export").on("click", function () {
+//     window.open('http://192.168.0.239:8080/FaceManage/export/expretriveLog?x-access-token='+token)
+//     // $.ajax({
+//     //     type: 'POST',
+//     //     contentType: "application/msexcel; charset=utf-8",
+//     //     url: pathurl + 'export/expretriveLog',
+//     //     data:{
+//     //         username: $("#rusername").val(),
+//     //         plat: $("#plat").val(),
+//     //         company: $("#company").val(),
+//     //         chosen: $("#chosen").val(),
+//     //         harmful: $("#harmful").val(),
+//     //         from: $("#from").val(),
+//     //         to: $("#to").val(),
+//     //         province: $("#distpicker select[name='province']").val(),
+//     //         city: $("#distpicker select[name='city']").val(),
+//     //         area: $("#distpicker select[name='area']").val(),
+//     //     },
+//     //     success: function (data) {
+//     //
+//     //         // console.log('export' + data);
+//     //     },
+//     //     error: function () {
+//     //         console.log('export失败');
+//     //     },
+//     // });
+// });
 var dListData;
 // 初始化单位数组
 function init() {

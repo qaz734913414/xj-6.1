@@ -37,7 +37,8 @@ function TableInit() {
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true, //是否显示分页（*）
             sortable: false, //是否启用排序
-            sortOrder: "asc", //排序方式
+            sortName : 'persent',
+            sortOrder : 'asc',
             // queryParamsType: "limit",
             queryParams: oTableInit.queryParams, //传递参数（*）
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -131,7 +132,11 @@ function TableInit() {
                 }
             }, {
                 field: 'persent',
-                title: '相似度'
+                title: '相似度',
+                align: "center",
+                valign: "middle",
+                 sortable:true
+
             }, {
                 field: 'createTime',
                 title: '检索时间'
@@ -163,6 +168,8 @@ function TableInit() {
 
             city: $("#distpicker select[name='city']").val(),
             area: $("#distpicker select[name='area']").val(),
+            sortName:this.sortName,
+            sortOrder:this.sortOrder,
         };
         return temp;
     };
@@ -170,31 +177,10 @@ function TableInit() {
 }
 
 // 导出
+// 导出
+var token = window.localStorage.getItem('token');
 $("#btn-export").on("click", function () {
-    $.ajax({
-        type: 'POST',
-        url: pathurl + 'export/faceLog',
-        data:{
-            username: $("#rusername").val(),
-            plat: $("#plat").val(),
-            company: $("#company").val(),
-            chosen: $("#chosen").val(),
-            harmful: $("#harmful").val(),
-            from: $("#from").val(),
-            to: $("#to").val(),
-            province: $("#distpicker select[name='province']").val(),
-            city: $("#distpicker select[name='city']").val(),
-            area: $("#distpicker select[name='area']").val(),
-        },
-        success: function (data) {
-
-            console.log('export' + data);
-        },
-        error: function () {
-            console.log('export失败');
-        },
-        dataType: 'json'
-    });
+    window.open('http://192.168.0.239:8080/FaceManage/export/expretriveLog?x-access-token='+token)
 });
 function ButtonInit() {
     var oInit = {};

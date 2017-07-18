@@ -6,7 +6,7 @@
     <div class="row">
         <div class="form-inline face-form" id="userdiv">
             <div class="form-group">
-                <input type="text" placeholder="姓名" id="uRealName" class="form-control" style="width:150px;"></input>
+                <input type="text" placeholder="姓名" id="uRealName" class="form-control" style="width:150px;">
             </div>
             <div class="form-group">
                 <select id="uUnitId" class="form-control" path="uUnitId" name="uUnitId" style="width:100px;color:#555;">
@@ -35,27 +35,16 @@
             <thead>
             <tr>
                 <th data-field="" data-checkbox="true"></th>
-                <th data-field="uId" data-halign="center" data-align="center" data-valign="middle" class="hidden">用户账号
+                <th data-field="id" data-halign="center" data-align="center" data-valign="middle" class="hidden">序号
                 </th>
-                <th data-field="uName" data-halign="center" data-align="center" data-valign="middle">用户名</th>
-                <th data-field="uRealName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
-                <th data-field="uRoleId" data-halign="center" data-align="center" data-valign="middle">角色</th>
-                <th data-field="uCardId" data-halign="center" data-align="center" data-valign="middle">身份证</th>
-                <th data-field="uDuty" data-halign="center" data-align="center" data-valign="middle">职务</th>
-                <th data-field="uPolicyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
-                <th data-field="uStatus" data-halign="center" data-align="center" data-valign="middle"
-                    data-formatter="statusFormatter" data-events="statusEvents">用户状态
-                </th>
-                <th data-field="uUnitId" data-halign="center" data-align="center" data-valign="middle" class="hidden">
-                    单位
-                </th>
-                <th data-field="uSex" data-halign="center" data-align="center" data-valign="middle" class="hidden">性别
-                </th>
-                <th data-field="uType" data-halign="center" data-align="center" data-valign="middle" class="hidden">
-                    账户类别
-                </th>
-                <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间</th>
-                <th data-field="operate" data-halign="center" data-align="center" data-valign="middle"
+                <th data-field="dbname" data-halign="center" data-align="center" data-valign="middle">库名</th>
+                <th data-field="operate" data-halign="center" data-align="center" data-valign="middle">建库者</th>
+                <th data-field="type" data-halign="center" data-align="center"  data-formatter="typeFormatter" data-valign="middle">库类型</th>
+                <th data-field="count" data-halign="center" data-align="center" data-valign="middle">库容量</th>
+                <th data-field="organ" data-halign="center" data-align="center" data-valign="middle">库所属机构</th>
+                <th data-field="createtime" data-halign="center" data-align="center" data-valign="middle">建库时间</th>
+
+                <th  data-halign="center" data-align="center" data-valign="middle"
                     data-formatter="operateFormatter" data-events="operateEvents">操作
                 </th>
             </tr>
@@ -136,117 +125,14 @@
             <div class="modal-body">
                 <form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
                     <div class="form-inline face-form">
-                        <div class="form-group" style="margin-left:45px;">
-                            用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                        <div class="form-group" style="margin-left:85px;">
+                            库名称</div>
                         <div class="form-group" style="margin-left:5px;">
                             <input type="text" class="form-control" path="uName" name="uName" placeholder="用户名"
-                                   id="uName"></input>
-                        </div>
-                        <div class="form-group" style="margin-left:20px;">
-                            真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <input type="text" class="form-control" path="uRealName" name="uRealName" placeholder="真实姓名"
-                                   id="urealName"></input>
+                                   id="uName">
                         </div>
                     </div>
-                    <div class="form-inline face-form" style="margin-top:12px;">
-                        <div class="form-group" style="margin-left:45px;">
-                            性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <div class="radio-inline" style="margin-top:-10px;">
-                                <input type="radio" name="uSex" value="1"/>男
-                            </div>
-                            <div class="radio-inline" style="margin-top:-10px;">
-                                <input type="radio" name="uSex" value="0"/>女
-                            </div>
 
-                        </div>
-                        <div class="form-group" style="margin-left:120px;">
-                            身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <input type="text"  class="form-control" path="uCardId" id="uCardId"
-                                   name="uCardId" placeholder="身份证"></input>
-                        </div>
-                    </div>
-                    <div class="form-inline face-form" style="margin-top:12px;">
-
-                        <div class="form-group" style="margin-left:45px;">
-                            用&nbsp;&nbsp;户&nbsp;&nbsp;状&nbsp;&nbsp;态
-                        </div>
-                        <div class="form-group" style="margin-left:7px;">
-                            <select class="populate placeholder form-control" path="uStatus" id="uStatus" name="uStatus"
-                                    style="width:194px;">
-                                <option value="Y">正常</option>
-                                <option value="N">禁用</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-inline face-form" style="margin-top:12px;">
-                        <div class="form-group" style="margin-left:45px;">
-                            手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <input type="text" class="form-control" path="uPhone" id="uPhone" name="uPhone"
-                                   placeholder="手机"></input>
-                        </div>
-                        <div class="form-group" style="margin-left:20px;">
-                            座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-                        </div>
-                        <div class="form-group" style="margin-left:7px;">
-                            <input type="text" class="form-control" path="uTelephone" id="uTelephone" name="uTelephone"
-                                   placeholder="座机"></input>
-                        </div>
-                    </div>
-                    <div class="form-inline face-form" style="margin-top:12px;">
-                        <div class="form-group" style="margin-left:45px;">
-                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <input type="text" class="form-control" path="uPolicyNum" id="uPolicyNum" name="uPolicyNum"
-                                   placeholder="警号"></input>
-                        </div>
-                        <div class="form-group" style="margin-left:20px;">
-                            职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
-                        </div>
-                        <div class="form-group" style="margin-left:7px;">
-                            <input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty"
-                                   placeholder="职务"></input>
-                        </div>
-                    </div>
-                    <div class="form-inline face-form" style="margin-top:12px;">
-                        <div class="form-group" style="margin-left:45px;">
-                            角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
-                        </div>
-                        <div class="form-group" style="margin-left:5px;">
-                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
-                                    style="width:194px;"></select>
-                        </div>
-                        <div class="form-group" style="margin-left:15px;">
-                            单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
-                        </div>
-                        <div class="form-group" style="margin-left:7px;">
-
-                            <select class="form-control" path="uUnitId"
-                                    id="uunitId" name="uUnitId">
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-inline face-form " style="margin-top:12px; ">
-                        <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
-                        <div class="form-group " style="margin-left:1px; ">
-                            <input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control "
-                                   type="text "/>
-                        </div>
-                        <div class="form-group " style="margin-left:30px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-                        <div class="form-group " style="margin-left:1px; ">
-                            <input type="checkbox" value="0" path="uVIP" id="uVIP" name="uVIP" class="form-control">
-                        </div>
-
-                    </div>
                     <div class="form-inline face-form " style="margin-top:12px; ">
                         <div class="form-group " style="margin-left:45px; ">行政区域</div>
                         <div class="form-group " style="margin-left:30px; ">

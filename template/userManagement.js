@@ -80,13 +80,22 @@ function addFormVali() {
                         }
                     }
                 },
+
                 expireTime: {
                     validators: {
                         notEmpty: {
-                            message: '请输入账户过期时间'
+                            message: '请输入到期时间'
                         }
                     }
                 },
+                province: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入所在省市区'
+                        }
+                    }
+                },
+
                 uPhone: {
                     validators: {
                         notEmpty: {
@@ -118,7 +127,7 @@ $("#adduserModal #continue").off();
 
 $("#adduserModal .face-button").click(function () {
     if (!$('#adduserModal #userForm').data('bootstrapValidator').isValid()) {
-        alert('没用通过验证，请填写全部')
+       return ;
 
     } else {
         //通过校验，可进行提交等操作
@@ -547,13 +556,21 @@ $("#delUserTModel #continue").click(function () {
 
 // 修改
 function userEdit(row) {
+    var uVip = row.uVip;
+    if (uVip == 0) {
 
+        $("#modifyUserModal #uVIP").attr("checked", true);
+
+    } else if (uVip == 1) {
+        $("#modifyUserModal  #uVIP").attr("checked", false);
+    }
     $(".bs-checkbox input[name='btSelectItem']").attr("checked", false);
 
     //	$("#userForm")[0].reset();
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
     var uSex = row.uSex;
+
     if (uSex == 0) {
         $("#modifyUserModal input[name='uSex'][value='0']").attr("checked", true);
         $("#modifyUserModal input[name='uSex'][value='1']")
@@ -574,15 +591,30 @@ function userEdit(row) {
             .attr("checked", false);
     }
 
-    var Area = row.uArea.split(',');
-    console.log('Area是：' + Area);
-    $(function () {
-        $("#distpicker2").distpicker({
-            province: '浙江省',
-            city: '杭州市',
-            district: '西湖区'
-        });
-    })
+       var Area = row.uArea.split(',');
+        console.log('Area是：' + Area);
+    // Area是：“内蒙古自治区,呼和浩特市,新城区”
+    // 地区选择插件 设置为获取值
+            if (Area) {
+                $("#distpicker2").distpicker('destroy');
+                $("#distpicker2").distpicker({
+                    autoSelect: false,
+                    placeholder: true
+                });
+                var $province = $("#province");
+                $province.val(Area[0]);
+                $province.trigger("change");
+                var $city = $("#city");
+                $city.val(Area[1]);
+                $city.trigger("change");
+                var area = $("#area");
+                area.val(Area[2]);
+                area.trigger("change");
+            } else {
+                $.messager.alert("温馨提示", "error");
+            }
+
+
     $("#modifyUserModal #uCardId").val(row.uCardId);
     $("#modifyUserModal #uType").val(row.uType);
     $("#modifyUserModal #uStatus").val(row.uStatus);
@@ -621,31 +653,15 @@ function userEdit(row) {
             uRoleId: $("#modifyUserModal #uRoleId").val(),
             uUnitId: $("#modifyUserModal #uunitId").val(),
             expireTime: $("#modifyUserModal #expireTimeVal").val(),
-            province: $("#modifyUserModal #distpicker select[name='province']").val(),
-
-            city: $("#modifyUserModal #distpicker select[name='city']").val(),
-            area: $("#modifyUserModal #distpicker select[name='area']").val(),
+            province: $("#modifyUserModal  #province").val(),
+            city: $("#modifyUserModal #city").val(),
+            area: $("#modifyUserModal #area").val(),
         }
         console.log(data)
         $.ajax({
             type: 'post',
             url: pathurl + 'user/edit',
-            data: {
-                uId: uId,
-                uName: $("#modifyUserModal #uName").val(),
-                uRealName: $("#modifyUserModal #urealName").val(),
-                uSex: $("#modifyUserModal input[name='uSex']:checked").val(),
-                uCardId: $("#modifyUserModal #uCardId").val(),
-                uType: $("#modifyUserModal #uType").val(),
-                uStatus: $("#modifyUserModal #uStatus").val(),
-                uPhone: $("#modifyUserModal #uPhone").val(),
-                uTelephone: $("#modifyUserModal #uTelephone").val(),
-                uPolicyNum: $("#modifyUserModal #uPolicyNum").val(),
-                uDuty: $("#modifyUserModal #uDuty").val(),
-                uRoleId: $("#modifyUserModal #uRoleId").val(),
-                uUnitId: $("#modifyUserModal #uunitId").val(),
-                expireTime: $("#modifyUserModal #expireTimeVal").val()
-            },
+            data: data,
             cache: false,
             dataType: 'json',
             success: function (data) {

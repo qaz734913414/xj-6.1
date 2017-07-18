@@ -27,46 +27,28 @@ html,body{
 
 
 .login .content {
-	position: absolute;
-	top:-moz-calc(50% - 202px);
-	top:-webkit-calc(50% - 202px);
-	top: calc(50% - 202px);
-	left:-moz-calc(50% - 202px);
-	left:-webkit-calc(50% - 202px);
-	left: calc(50% - 202px);
-  width: 405px;
-/*   margin: 0 auto;
-  margin-bottom: 0px; */
-  /* margin-top: 12%; */
-  padding-left: 65px;
-  padding-right: 65px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+    position: absolute;
+    top: -moz-calc(50% - 202px);
+    top: -webkit-calc(50% - 202px);
+    top: calc(50% - 202px);
+    left: -moz-calc(50% - 202px);
+    left: -webkit-calc(50% - 202px);
+    left: calc(50% - 202px);
+    width: 405px;
+    /*   margin: 0 auto;
+      margin-bottom: 0px; */
+    /* margin-top: 12%; */
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 
-  border-radius: 4px;
-/*   border:1px solid #5e6160;  */
- /*  position: relative;  */
- /* top: 23.8%; */
-    border:1px solid #000;
-
-
-
-
-/*   opacity: 0.85;
-  filter: "alpha(opacity=85)";
-  filter: alpha(opacity=85);
-  -moz-opacity: 0.85;   */
-  /*  opacity: 1;
- filter: "alpha(opacity=100)";
- filter: alpha(opacity=100);
- -moz-opacity: 1;   */
+    border-radius: 4px;
+    /*   border:1px solid #5e6160;  */
+    /*  position: relative;  */
+    /* top: 23.8%; */
+    border: 1px solid #000;
 }
-
-/*   .login .content:hover{
-  background-color:rgba(100,100,100,0.35);
-  background-color:rgba(100,100,100,0);
-}  */
-
 .login .content:hover{
 	/* border:1px solid #5e6160; */
 	box-shadow: 20px 20px 20px #000000;

@@ -4,6 +4,9 @@
     top:5px;
     font-size:16px;
 }
+.glyphicon{
+    color: #fff;
+}
 body {
     background-size: cover;
     -moz-background-size: cover;
@@ -848,7 +851,23 @@ select {
     padding: 5px;
     margin: 5px;
 }
+.focus0 {
+    border: 2px solid #666 !important;
+}
 
+.focus1 {
+    border: 2px solid #1CD573 !important;
+}
+
+.focus2 {
+    border: 2px solid red !important;
+}
+
+.focus3 {
+    border: 2px solid #ca47bf !important;
+    -webkit-animation: sploosh 1.5s infinite linear;
+    animation: sploosh 1.5s infinite linear;
+}
 @-webkit-keyframes sploosh {
     0% {
         outline: rgba(202, 22, 22, 1) solid 2px;
@@ -873,21 +892,11 @@ select {
 
     100% {
         outline: rgba(202, 22, 22, 0) solid 2px;
-        box-shadow: 0 0 0 5px rgba(202, 22, 22, 0);
+
         outline-offset: 20px;
     }
 
 }
-
-div.focus {
-    -webkit-animation: sploosh 1.5s infinite linear;
-    animation: sploosh 1.5s infinite linear;
-}
-
-div.focus:hover {
-    border: 1px solid #CA1616 !important;
-}
-
 p.focus-font {
     color: #CA1616 !important;
 }
@@ -1258,7 +1267,7 @@ p.focus-font {
 }
  */
 #retrieveLogModal .modal-dialog {
-    width: 70%;
+    width: 65%;
 }
 
 .retrieve-log-thumbnail-box {

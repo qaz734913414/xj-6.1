@@ -1,9 +1,10 @@
-.requred{
+.requred {
     color: red;
     position: relative;
-    top:5px;
-    font-size:16px;
+    top: 5px;
+    font-size: 16px;
 }
+
 body {
     background-size: cover;
     -moz-background-size: cover;
@@ -18,7 +19,10 @@ body {
     display: flex;
     flex-flow: column;
     min-height: 100vh;
-    background: url("../img/bg.png") center no-repeat;
+}
+
+.glyphicon {
+    color: #fff;
 }
 
 .logo {
@@ -379,8 +383,6 @@ footer copyright
     }
 }
 
-
-
 body {
     font-size: 14px;
 }
@@ -429,7 +431,7 @@ b, strong {
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
-    font-size:18px;
+    font-size: 18px;
 }
 
 .glyphicon {
@@ -534,7 +536,7 @@ select {
     /* display: block; */
     /* width: 274px;
     height: 324px; */
-    background:#cfdff9 no-repeat center center !important;
+    background: #cfdff9 no-repeat center center !important;
     padding: 10px;
     margin: 0px;
     position: relative;
@@ -773,6 +775,7 @@ select {
     background: #f47372;
     color: #fff;
 }
+
 .result-box .container-fluid .row > div .thumbnail:hover p {
 
     color: #fff;
@@ -797,6 +800,7 @@ select {
     float: right;
     font-size: 16px;
 }
+
 .result-box .container-fluid .row > div .thumbnail:hover .caption > p > span:last-child {
     color: #fdda15;
     float: right;
@@ -848,6 +852,26 @@ select {
     margin: 5px;
 }
 
+
+
+
+.focus0 {
+    border: 2px solid #666 !important;
+}
+
+.focus1 {
+    border: 2px solid #1CD573 !important;
+}
+
+.focus2 {
+    border: 2px solid red !important;
+}
+
+.focus3 {
+    border: 2px solid #ca47bf !important;
+    -webkit-animation: sploosh 1.5s infinite linear;
+    animation: sploosh 1.5s infinite linear;
+}
 @-webkit-keyframes sploosh {
     0% {
         outline: rgba(202, 22, 22, 1) solid 2px;
@@ -872,21 +896,11 @@ select {
 
     100% {
         outline: rgba(202, 22, 22, 0) solid 2px;
-        box-shadow: 0 0 0 5px rgba(202, 22, 22, 0);
+
         outline-offset: 20px;
     }
 
 }
-
-div.focus {
-    -webkit-animation: sploosh 1.5s infinite linear;
-    animation: sploosh 1.5s infinite linear;
-}
-
-div.focus:hover {
-    border: 1px solid #CA1616 !important;
-}
-
 p.focus-font {
     color: #CA1616 !important;
 }
@@ -1023,19 +1037,22 @@ p.focus-font {
     color: #e3e3e3;
 }
 
-
 .face-button:visited {
     color: #00FF00
 }
-#add-image-button,#upload-button,#add-image-button1,#add-image-button2{
+
+#add-image-button, #upload-button, #add-image-button1, #add-image-button2 {
     background-color: #e76361;
 }
-#add-image-button:hover,#upload-button:hover,#add-image-button1:hover,#add-image-button2:hover{
+
+#add-image-button:hover, #upload-button:hover, #add-image-button1:hover, #add-image-button2:hover {
     background-color: #f47372;
 }
-#upload-button{
+
+#upload-button {
     background-color: #e76361;
 }
+
 .face-button2 {
     border-color: #f47372;
     background-color: #e76361;
@@ -1189,7 +1206,6 @@ p.focus-font {
     border: 0px;
 }
 
-
 .face-table-group .export .btn-face {
     background-color: #226ed4;
     color: #e1eaea;
@@ -1204,7 +1220,7 @@ p.focus-font {
 
 }
 
-.hov:hover,.count:hover {
+.hov:hover, .count:hover {
     cursor: pointer;
     color: #236bd4;
 }
@@ -1213,13 +1229,14 @@ p.focus-font {
     height: auto;
 
 }
-.face-table thead{
+
+.face-table thead {
     background: #c5c5c7;
 
-
 }
+
 .face-table thead > tr > th {
-    font-weight:normal;
+    font-weight: normal;
     color: #fff;
 
 }
@@ -1255,7 +1272,7 @@ p.focus-font {
 }
  */
 #retrieveLogModal .modal-dialog {
-    width: 70%;
+    width: 65%;
 }
 
 .retrieve-log-thumbnail-box {

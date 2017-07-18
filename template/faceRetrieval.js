@@ -49,7 +49,22 @@ $(function () {
         autoclose: true,
         inputMask: true
     });
-
+    $('#uploadChosen')
+        .bootstrapValidator({
+            fields: {
+                phoneNo: {
+                    validators: {
+                        notEmpty: {
+                            message: '手机号码不能为空'
+                        },
+                        regexp: {
+                            regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+                            message: '手机格式不正确'
+                        }
+                    }
+                }
+            }
+        });
     $("#chosen-button").bind("click", function () {
         uploadChosen();
 
@@ -84,7 +99,7 @@ function faceList(){
   var faceData = new FormData($('#retrievalFrom')[0]);
   $.ajax({
       type: 'post',
-      url: pathurl + 'face/retrieveSearch',
+      url: pathurl + 'face/retrieve',
       data: faceData,
       cache: false,
       contentType: false,
@@ -94,6 +109,7 @@ function faceList(){
           console.log(data)
           if (data.code == 200) {
               var data=data.result;
+              console.log('retrieveSearch:'+data);
               //alert("拿到了logId："+logId);
               $("#add-image-button-span").text("重新添加照片");
               $("#add-image-button").removeClass("hidden");
@@ -107,7 +123,7 @@ function faceList(){
               $(".vertical-center").removeClass("vertical-center");
               $(".add-img-box").css("margin-top", "0px");
               $(".filter-box").removeClass("hidden");
-              //展示图片
+             // /展示图片
               $(".result-box .container-fluid .row").html("");//清空
 
               var imgs = data;
@@ -116,26 +132,8 @@ function faceList(){
               imgs.sort(function (a, b) {
                   return b.percent - a.percent;
               });
-              var imgArr=[];
-              imgs.forEach(function(val,i){
-                console.log(val+'__'+i);
-                var imgObj={
-                        address:val.province+val.city+val.county,
-                        birthday:val.birthday,
-                        focus:val.ispoint,
-                        idNo:val.idno,
-                        logId:'',
-                        name:val.username,
-                        nation:val.nation,
-                        percent:val.percent,
-                        sex:val.sex,
-                        url:val.url
-                }
-                imgArr.push(imgObj);
-              })
-              console.log(imgArr);
-              $('#imgTemp').tmpl(imgArr).appendTo(imgsDom);
-              console.log(imgs);
+              $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
+
               winChange();//调整高宽
               //绑定图片点击事件
               $(".result-box .thumbnail").bind('click', function () {
@@ -249,7 +247,7 @@ function upload() {
     // $('.loading').show();
     $.ajax({
         type: 'post',
-        url: pathurl + 'face/retrieve/',
+        url: pathurl + 'face/retrieve',
         data: form_Data,
         cache: false,
         contentType: false,
@@ -282,7 +280,6 @@ function upload() {
                 imgs.sort(function (a, b) {
                     return b.percent - a.percent;
                 });
-                console.log(imgs);
                 $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
 
 
@@ -373,46 +370,51 @@ setTimeout(function () {
 // 提交比中
 
 function uploadChosen() {
-    var form_Data = new FormData();
-    var name = $("#retrieveModal .caption > p:nth-child(2)").text();
-    var idNo = $("#retrieveModal .caption > p:nth-child(6)").text();
-    form_Data.append("logId", logId);
-    form_Data.append("phoneNo", $("#retrieveModal2 .modal-body #phoneNo").val());
-    form_Data.append("carNo", $("#retrieveModal2 #carNo").val());
-    form_Data.append("remark", $("#retrieveModal2 #modal-remark").val());
-    form_Data.append("dispose", $("#retrieveModal2 #dispose").val());
-    form_Data.append("harmful", $("#retrieveModal2 input[name='harmful']:checked").val());
-    form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
-    form_Data.append("name", name.substring(name.indexOf("：") + 1));
-    form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
-    console.log('form_Data'+form_Data);
-    $.ajax({
-        type: 'post',
-        url: pathurl + 'facelog/insertChosenInfo/',
-        data: form_Data,
-        cache: false,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        success: function (data) {
-          console.log(data)
-            if (data.msg == "SUCCESS") {
-                $("#modal-body-id").text("比中成功");
-                $("#myModal").modal();
-                $("#retrieveModal2").modal("hide");
-            } else {
-                $("#modal-body-id").text("操作失败，请重试");
-                $("#myModal").modal();
+    if (!$('#uploadChosen').data('bootstrapValidator').isValid()) {
+        alert('请正确填写');
+        return;
+
+    } else {
+        var form_Data = new FormData();
+        var name = $("#retrieveModal .caption > p:nth-child(2)").text();
+        var idNo = $("#retrieveModal .caption > p:nth-child(6)").text();
+        form_Data.append("logId", logId);
+        form_Data.append("phoneNo", $("#retrieveModal2 .modal-body #phoneNo").val());
+        form_Data.append("carNo", $("#retrieveModal2 #carNo").val());
+        form_Data.append("remark", $("#retrieveModal2 #modal-remark").val());
+        form_Data.append("dispose", $("#retrieveModal2 #dispose").val());
+        form_Data.append("harmful", $("#retrieveModal2 input[name='harmful']:checked").val());
+        form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
+        form_Data.append("name", name.substring(name.indexOf("：") + 1));
+        form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
+        console.log('form_Data' + form_Data);
+        $.ajax({
+            type: 'post',
+            url: pathurl + 'facelog/insertChosenInfo/',
+            data: form_Data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                if (data.msg == "SUCCESS") {
+                    $("#modal-body-id").text("比中成功");
+                    $("#myModal").modal();
+                    $("#retrieveModal2").modal("hide");
+                } else {
+                    $("#modal-body-id").text("操作失败，请重试");
+                    $("#myModal").modal();
+                }
+            },
+            error: function () {
+                console.error("ajax upload error");
+
             }
-        },
-        error: function () {
-            console.error("ajax upload error");
+        });
 
-        }
-    });
-
+    }
 }
-
 function bindUploadFileComponent(buttonid) {
     return new qq.FineUploaderBasic({
         button: $("#" + buttonid)[0],
@@ -421,7 +423,7 @@ function bindUploadFileComponent(buttonid) {
             method: "POST"
         },
         validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','zip'],
         },
         debug: true,
         multiple: false,
@@ -445,7 +447,7 @@ function bindUploadFileComponent(buttonid) {
                     alert("请选择图片或重新选择图片");
             },
             onSubmit: function (id, filename) {
-                console.log(filename, '文件开始提交');
+                alert(filename, '文件开始提交');
                 var self = this;
 
                 $("#add-image-button").addClass("hidden");

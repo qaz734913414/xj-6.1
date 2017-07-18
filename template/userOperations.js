@@ -1,11 +1,12 @@
-getMessage2();
-$(".mydate input").datetimepicker({
-    format: 'yyyy-mm-dd hh:ii',
-    language: 'zh-CN',
-    autoclose: true,
-    inputMask: true
-});
-
+$(function () {
+    getMessage3();
+    $(".mydate input").datetimepicker({
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        autoclose: true,
+        inputMask: true
+    });
+})
 function changeTime() {
     var date = new Date();
     var y = date.getFullYear();
@@ -24,6 +25,7 @@ function changeTime() {
     var d = date.getFullYear() + seperator1 + month + seperator1 + strDate;
     var h = date.getFullYear() + seperator1 + month + seperator1 + strDate + seperator1 + hour;
     var s = $("#timestatus").find("option:selected").val();
+
     if (s == 0) {
         $("#startDate").datetimepicker('remove');
         $("#endDate").datetimepicker('remove');
@@ -36,84 +38,9 @@ function changeTime() {
         $("#startDate").datetimepicker('remove');
         $("#endDate").datetimepicker('remove');
         getDateByDay(d);
-    } else {
-        $("#startDate").datetimepicker('remove');
-        $("#endDate").datetimepicker('remove');
-        getDateByHour(h);
     }
 }
-function changeTable() {
-    var f = $("#fashion").find("option:selected").val();
-    if (f == 0) {
-        $("#first").bootstrapTable('destroy');
-        $("#third").bootstrapTable('destroy');
-        $("#four").bootstrapTable('destroy');
-        $("#five").bootstrapTable('destroy');
-        $("#second").css("display", "");
-        $("#first").css("display", "none");
-        $("#third").css("display", "none");
-        $("#four").css("display", "none");
-        $("#five").css("display", "none");
-    } else if (f == 1) {
-        $("#first").bootstrapTable('destroy');
-        $("#second").bootstrapTable('destroy');
-        $("#four").bootstrapTable('destroy');
-        $("#five").bootstrapTable('destroy');
-        $("#third").css("display", "");
-        $("#first").css("display", "none");
-        $("#second").css("display", "none");
-        $("#four").css("display", "none");
-        $("#five").css("display", "none");
-    } else if (f == 2) {
-        $("#first").bootstrapTable('destroy');
-        $("#third").bootstrapTable('destroy');
-        $("#second").bootstrapTable('destroy');
-        $("#five").bootstrapTable('destroy');
-        $("#four").css("display", "");
-        $("#first").css("display", "none");
-        $("#second").css("display", "none");
-        $("#third").css("display", "none");
-        $("#five").css("display", "none");
-    } else if (f == 3) {
-        $("#first").bootstrapTable('destroy');
-        $("#third").bootstrapTable('destroy');
-        $("#four").bootstrapTable('destroy');
-        $("#second").bootstrapTable('destroy');
-        $("#five").css("display", "");
-        $("#first").css("display", "none");
-        $("#second").css("display", "none");
-        $("#third").css("display", "none");
-        $("#four").css("display", "none");
-    } else {
-        $("#second").bootstrapTable('destroy');
-        $("#third").bootstrapTable('destroy');
-        $("#four").bootstrapTable('destroy');
-        $("#five").bootstrapTable('destroy');
-        $("#first").css("display", "");
-        $("#second").css("display", "none");
-        $("#third").css("display", "none");
-        $("#four").css("display", "none");
-        $("#five").css("display", "none");
-    }
-}
-function getMessage2() {
-    changeTable();
-    var start = $("#startDate").val();
-    var end = $("#endDate").val();
-    var type = $("#timestatus").find("option:selected").val();
-    var fash = $("#fashion").find("option:selected").val();
-    if (fash == 0) {
-        SecondTable($("#second"), start, end, type, 0);
-    } else if (fash == 1) {
-        SecondTable($("#third"), start, end, type, 1);
-    } else if (fash == 2) {
-        SecondTable($("#four"), start, end, type, 2);
-    } else if (fash == 3) {
-        SecondTable($("#five"), start, end, type, 3);
-    } else {
-        SecondTable($("#first"), start, end, type, -1);
-    }
-}
+changeTime()
 function getDateByMonth() {
     //按月查询
     //$("#startDate").datetimepicker().format();
@@ -144,10 +71,10 @@ function getDateByMonth() {
         var end = $('#endDate').val();
         $('#startDate').datetimepicker('setEndDate', new Date());
         $('#endDate').datetimepicker('setStartDate', new Date());
+        $('#endDate').datetimepicker('hide');
     });
 }
-
-function getDateByYear(y) {
+function getDateByYear() {
     //按年查询
     $("#startDate").datetimepicker({
         format: "yyyy",
@@ -161,10 +88,7 @@ function getDateByYear(y) {
         minView: 'decade',
         //todayBtn:true,
     });
-    /*.on("changeYear",function(ev){
-     $("#startDate").datetimepicker('setStartDate',y-10);
-     $("#startDate").datetimepicker('setEndDate',$('#endDate').val());
-     })*/
+
     $("#endDate").datetimepicker({
         format: "yyyy",
         startView: 'decade',
@@ -172,13 +96,15 @@ function getDateByYear(y) {
         autoclose: true,
         language: 'zh-CN',
         minView: 'decade',
-        todayBtn: true,
+
     }).on("change", function (ev) {
         var end = $('#endDate').val();
         $('#endDate').datetimepicker('setStartDate', $('#startDate').val());
         $('#endDate').datetimepicker('setEndDate', y);
+        $('#endDate').datetimepicker('hide');
     });
 }
+
 function getDateByDay() {
     //按天查询
     $("#startDate").datetimepicker({
@@ -189,7 +115,7 @@ function getDateByDay() {
         autoclose: true,
         language: 'zh-CN',
         minView: 2,
-        todayBtn: true,
+
     }).on("change", function (ev) {
         var start = $('#startDate').val();
         $('#endDate').datetimepicker('setStartDate', start);
@@ -201,65 +127,109 @@ function getDateByDay() {
         autoclose: true,
         language: 'zh-CN',
         minView: 2,
-        todayBtn: true,
+
     }).on("change", function (ev) {
         var end = $('#endDate').val();
         $('#startDate').datetimepicker('setEndDate', new Date());
         $('#endDate').datetimepicker('setStartDate', new Date());
+        $('#endDate').datetimepicker('hide');
     });
 }
-function getDateByHour() {
-    //按小时查询
-    $("#startDate").datetimepicker({
-        format: "yyyy-mm-dd-hh",
-        todayHighlight: true,
-        showMeridian: true,
-        autoclose: true,
-        inputMask: true,
-        language: 'zh-CN',
-        minView: 1,
-        todayBtn: true,
-    }).on("change", function (ev) {
-        var start = $('#startDate').val();
-        $('#endDate').datetimepicker('setStartDate', start);
-        $('#startDate').datetimepicker('hide');
-    });
-    $("#endDate").datetimepicker({
-        format: "yyyy-mm-dd-hh",
-        showMeridian: true,
-        autoclose: true,
-        language: 'zh-CN',
-        minView: 1,
-        todayBtn: true,
-    }).on("change", function (ev) {
-        var end = $('#endDate').val();
-        $('#startDate').datetimepicker('setEndDate', new Date());
-        $('#endDate').datetimepicker('setStartDate', new Date());
-    });
+
+function getMessage3() {
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+
+    var choesnType = $("#timestatus").find("option:selected").val();
+    var province = $("#distpicker select[name='province']").val();
+    var city = $("#distpicker select[name='city']").val();
+    var area = $(" #distpicker select[name='area']").val();
+    getTable3(startDate, endDate, choesnType, province, city, area);
 }
-function SecondTable(t, start, end, type, fash) {
-    t.bootstrapTable('destroy');
-    t.bootstrapTable({
+function QueryString(key) {
+
+    var reg = new RegExp(key + "=([^&#]*)", "i");
+
+    var value = reg.exec(window.location.href);
+
+    if (value == null)return null;
+    if (value == "undefined")return "";
+    return decodeURI(value[1]);
+}
+    function getTable3(startDate, endDate, choesnType, province, city, area) {
+    $("#proportion").bootstrapTable('destroy');
+    $("#proportion").bootstrapTable({
         method: "post",
-        url: pathurl + "syslog/count?startDate=" + start + "&endDate=" + end + "&dateType=" + type + "&fashion=" + fash,
+        url: pathurl + "systemlog/count?startDate=" + startDate + "&endDate=" + endDate + "&type=" + choesnType + "&province=" + province + "&city=" + city + "&area=" + area,
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: " limit",
         paginationDetailHAlign: "left",
-        buttonsClass: "face",
         //paginationPreText : "上一页",
         //paginationNextText : "下一页",
+        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber:1, //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+
         searchOnEnterKey: true,
+        buttonsClass: "face",
         showExport: true, //是否显示导出
-        responseHandler:function(data){//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
-                                        //在ajax后我们可以在这里进行一些事件的处理
-          var dataObj=data.result;
-          return dataObj;
+        onLoadSuccess: function (data){//远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
+            // 在ajax后我们可以在这里进行一些事件的处理
+
         },
     });
-}
-function reset2() {
+};
+// function numSort(a, b) {
+//     return b-a;
+// }
+// function percentSort(a, b) {
+//     var value_a = a.substr(0, a.length-1)
+//     var value_b = b.substr(0, b.length-1)
+//     return value_b-value_a;
+// }
+function reset3() {
     $(".face-form input").val("");
     $(".face-form select").val("-1");
-    getMessage2();
+    getMessage3();
+}
+
+
+// $('#proportionbd').on('click', 'td', function () {
+//     var text = $(this).text();
+//     var index = $(this).index()
+//     var date = $(this).siblings().first().text()
+//     if (text == 0) {
+//         return false;
+//     } else {
+//         $.ajax({
+//             type: 'POST',
+//             data: {
+//                 date: date,
+//                 type: index
+//             },
+//             url: pathurl + 'syslog/crDetails',
+//             success: function (data) {
+//                 var dListData = data.result, str = '';
+//                 $.each(dListData, function (index, item) {
+//                     str += '<tr><td>' + item.name + '</td><td>' + item.idno + '</td><td>' + item.carno + '</td><td>' + item.phoneno + '</td><td>' + item.harmful + '</td><td>' + item.dispose + '</td><td>' + item.username + '</td><td>' + item.userdepart + '</td><td>' + item.userorgan + '</td><td>' + item.creattime + '</td></tr>'
+//                 })
+//                 $('#countbody').html(str)
+//             }
+//         })
+//         $('#countModal').modal()
+//     }
+//
+// })
+function typeformatter(value) {
+    if (value == 0) {
+        return '人脸检索管理';
+    } else if(value == 1){
+        return '人脸日志管理';
+    }else if(value == 2){
+        return '统计分析管理';
+    }else if(value == 3){
+        return '配置中心';
+    }
 }

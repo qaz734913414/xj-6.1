@@ -32,7 +32,7 @@ function TableInit() {
             striped: true, //是否显示行间隔色
             cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             pagination: true, //是否显示分页（*）
-            sortable: false, //是否启用排序
+            sortable: true, //是否启用排序
             sortOrder: "asc", //排序方式
             // queryParamsType: "limit",
             queryParams: oTableInit.queryParams, //传递参数（*）
@@ -59,13 +59,14 @@ function TableInit() {
                 //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
                 //在ajax后我们可以在这里进行一些事件的处理
                 return res.result;
+                
             },
             onLoadSuccess: function (data) {  //加载成功时执行
                 console.log(data)
             },
             rowAttributes: function (row, index) {
                 return {
-                    "data-idCard": row.idno
+                    "data-idCard": row.id
                 }
             },
             columns: [{
@@ -127,10 +128,10 @@ function TableInit() {
                 }
             }, {
                 field: 'persent',
-                title: '相似度'
+                title: '相似度',
             }, {
                 field: 'createTime',
-                title: '检索时间'
+                title: '检索时间',
             }, {
                 field: 'remark',
                 title: '检索事由',
@@ -164,33 +165,11 @@ function TableInit() {
     };
     return oTableInit;
 }
-// 导出
-$("#btn-export").on("click", function () {
-    $.ajax({
-        type: 'POST',
-        url: pathurl + 'export/idCardLog',
-        data:{
-            username: $("#rusername").val(),
-            plat: $("#plat").val(),
-            company: $("#company").val(),
-            chosen: $("#chosen").val(),
-            harmful: $("#harmful").val(),
-            from: $("#from").val(),
-            to: $("#to").val(),
-            province: $("#distpicker select[name='province']").val(),
-            city: $("#distpicker select[name='city']").val(),
-            area: $("#distpicker select[name='area']").val(),
-        },
-        success: function (data) {
-
-            console.log('export' + data);
-        },
-        error: function () {
-            console.log('export失败');
-        },
-        dataType: 'json'
-    });
-});
+// // 导出
+// var token = window.localStorage.getItem('token');
+// $("#btn-export").on("click", function () {
+//     window.open('http://192.168.0.239:8080/FaceManage/export/expretriveLog?x-access-token='+token)
+// });
 
 function ButtonInit() {
     var oInit = {};

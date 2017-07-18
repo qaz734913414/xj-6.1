@@ -144,6 +144,8 @@ function IdentityCodeValid(code) {
         tip = "地址编码错误";
         pass = false;
     }
+
+    // console.log(tip)
     return pass;
 }
 
@@ -168,7 +170,7 @@ function upload() {
     //防止同时多次提交
     $("#upload").attr("disabled", "disabled");
 
-    if (!!getPictureUrl) {
+    if (!!getPictureUrl&&!!uploadFile) {
         $.ajax({
             type: 'post',
             url: pathurl + 'face/idcard/',
@@ -214,6 +216,8 @@ function upload() {
                 $("#upload").removeAttr("disabled");
             }
         });
+    }else {
+        return;
     }
 
 }
