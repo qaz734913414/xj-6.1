@@ -18,17 +18,19 @@ $(function() {
     var oButtonInit = new ButtonInit();
     oButtonInit.Init();
 
-    $(".mydate input").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+    $("input#from,input#to").datetimepicker({
+        format: 'yyyy-mm-dd',
         language: 'zh-CN',
+        minView: 2,
         autoclose: true,
-        inputMask: true,
+        inputMask: true
     });
     $('#from').datetimepicker({
-      format: 'yyyy-mm-dd hh:ii',
-      language: 'zh-CN',
-      autoclose: true,
-      inputMask: true
+        format: 'yyyy-mm-dd',
+        language: 'zh-CN',
+        minView: 2,
+        autoclose: true,
+        inputMask: true
     }).on('changeDate',function(){
       var startTime=$('#from').val();
       $('#to').datetimepicker('setStartDate',startTime);

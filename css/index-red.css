@@ -723,7 +723,7 @@ select {
 }
 
 .filter-box {
-    background: #eee;
+
     background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -751,7 +751,7 @@ select {
 }
 
 .result-box .container-fluid {
-    margin: 10px;
+    background: #eef1f0;
 }
 
 .result-box .container-fluid .row > div {
@@ -760,7 +760,12 @@ select {
     margin: 0px;
 
 }
-
+tbody>tr:nth-of-type(odd) {
+    background-color: #f8f8f8;
+}
+tbody>tr:nth-of-type(even) {
+    background-color: #f1f1f1;
+}
 .result-box .container-fluid .row > div .thumbnail {
     border: 1px solid #5e6160;
     padding: 5px;
@@ -853,22 +858,20 @@ select {
 }
 
 
-
-
 .focus0 {
-    border: 2px solid #666 !important;
+    border: 1px solid #d2d9df!important;
 }
 
 .focus1 {
-    border: 2px solid #1CD573 !important;
+    box-shadow: 0px 0px 60px #ffd59f inset;  border: 1px solid #d2d9df;
 }
 
 .focus2 {
-    border: 2px solid red !important;
+    box-shadow: 0px 0px 60px #a494ef inset;  border: 1px solid #d2d9df;
 }
 
 .focus3 {
-    border: 2px solid #ca47bf !important;
+    box-shadow: 0px 0px 60px #ff918b inset; border: 1px solid #d2d9df;
     -webkit-animation: sploosh 1.5s infinite linear;
     animation: sploosh 1.5s infinite linear;
 }
@@ -900,9 +903,6 @@ select {
         outline-offset: 20px;
     }
 
-}
-p.focus-font {
-    color: #CA1616 !important;
 }
 
 #retrieveModal .modal-body .thumbnail img {
@@ -1033,13 +1033,21 @@ p.focus-font {
 }
 
 .face-button {
-    background-color: #6aa1f4;
+    background-color: #257dfe;
+    border-color: #357ebd;
     color: #e3e3e3;
 }
 
-.face-button:visited {
-    color: #00FF00
+.face-button:hover {
+
+    border-color: #257dfe!important;
+    background-color: #6aa1f4 !important;
+    color: #e3e3e3;
 }
+
+/*.face-button:visited {*/
+    /*color: #00FF00*/
+/*}*/
 
 #add-image-button, #upload-button, #add-image-button1, #add-image-button2 {
     background-color: #e76361;
@@ -1146,9 +1154,9 @@ p.focus-font {
 }
 
 .face-form input {
-    background-color: #99a3ab;
+
     color: #202020;
-    border: 0px;
+    border: 1px solid #c4c5c7;
 }
 
 .face-form input:focus {
@@ -1165,9 +1173,9 @@ p.focus-font {
 }
 
 .face-form select {
-    background-color: #99a3ab;
+
     cursor: pointer;
-    border: 0px;
+    border: 1px solid #c4c5c7;
 }
 
 .face-form select:focus {

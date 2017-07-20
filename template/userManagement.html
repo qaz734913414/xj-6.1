@@ -251,6 +251,10 @@
                                 <option value="N">禁用</option>
                             </select>
                         </div>
+                        <div class="form-group " style="margin-left:15px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
+                        <div class="form-group " style="margin-left:1px; ">
+                            <input type="radio"  path="uVIP" id="uVIP" name="uVIP" class="form-control">
+                        </div>
                     </div>
                     <div class="form-inline face-form" style="margin-top:12px;">
                         <div class="form-group" style="margin-left:45px;">
@@ -309,10 +313,7 @@
                             <input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control "
                                    type="text "/>
                         </div>
-                        <div class="form-group " style="margin-left:30px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-                        <div class="form-group " style="margin-left:1px; ">
-                            <input type="checkbox" value="0" path="uVIP" id="uVIP" name="uVIP" class="form-control">
-                        </div>
+
 
                     </div>
                     <div class="form-inline face-form " style="margin-top:12px; ">
@@ -394,6 +395,10 @@
                                 <option value="N">禁用</option>
                             </select>
                         </div>
+                        <div class="form-group " style="margin-left:10px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
+                        <div class="form-group " style="margin-left:1px; ">
+                            <input type="radio"  path="uVIP" id="VIP" name="uVIP" class="form-control">
+                        </div>
                     </div>
                     <div class="form-inline face-form" style="margin-top:12px;">
                         <div class="form-group" style="margin-left:45px;">
@@ -452,10 +457,7 @@
                             <input path="expireTime " name="expireTime" id="expireTimeVal" class="form-control "
                                    type="text "/>
                         </div>
-                        <div class="form-group " style="margin-left:30px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-                        <div class="form-group " style="margin-left:1px; ">
-                            <input type="checkbox" value="0" path="uVIP" id="uVIP" name="uVIP" class="form-control">
-                        </div>
+
 
                     </div>
                     <div class="form-inline face-form " style="margin-top:12px; ">
@@ -548,7 +550,7 @@
 <!-- 文件导入后信息 -->
 <div class="modal fade face-modal" id="fileInfoModal" tabindex="-1" role="dialog" aria-labelledby="fileInfoLabel"
 >
-    <div class="modal-dialog" style="width:800px;">
+    <div class="modal-dialog" style="width:900px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
@@ -564,7 +566,7 @@
                     <tr>
                         <th data-field="name" data-halign="center" data-align="center" data-valign="middle">用户名</th>
                         <th data-field="realName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
-                        <th data-field="rId" data-halign="center" data-align="center" data-valign="middle">角色
+                        <th data-field="rName" data-halign="center" data-align="center" data-valign="middle">角色
                         </th>
                         <th data-field="sex" data-halign="center" data-align="center"
                             data-valign="middle">性别
@@ -586,6 +588,8 @@
                             单位
                         </th>
                         <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间
+                        </th>
+                        <th data-field="reason" data-halign="center" data-align="center" data-valign="middle">失败原因
                         </th>
 
 

@@ -8,13 +8,13 @@ $(function () {
     var oButtonInit = new ButtonInit();
     oButtonInit.Init();
 
-    $(".mydate input").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+    $("input#from,input#to").datetimepicker({
+        format: 'yyyy-mm-dd',
         language: 'zh-CN',
+        minView: 2,
         autoclose: true,
-        inputMask: true,
+        inputMask: true
     });
-
 
 });
 
@@ -61,7 +61,7 @@ function TableInit() {
             uniqueId: "ID", //每一行的唯一标识，一般为主键列
             // showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
             cardView: false, //是否显示详细视图
-            showExport: true, //是否显示导出
+            // showExport: true, //是否显示导出
             exportDataType: "basic", //basic', 'all', 'selected'.
             detailView: false, //是否显示父子表
             buttonsClass: "face",
@@ -109,6 +109,8 @@ function TableInit() {
                             return "通道二";
                         case "2":
                             return "通道三";
+                         case "3":
+                            return "通道四";
                     }
                 }
             }, {
@@ -216,9 +218,9 @@ function ButtonInit() {
     return oInit;
 }
 // 导出
-// var token = window.localStorage.getItem('token');
-// $("#btn-export").on("click", function () {
-//     window.open('http://192.168.0.239:8080/FaceManage/export/expretriveLog?x-access-token='+token)
+var token = window.localStorage.getItem('token');
+$("#btn-export").on("click", function () {
+    window.open('http://192.168.0.169:8080/FaceManage/export/expretriveLog?x-access-token='+token)
 //     // $.ajax({
 //     //     type: 'POST',
 //     //     contentType: "application/msexcel; charset=utf-8",
@@ -243,7 +245,7 @@ function ButtonInit() {
 //     //         console.log('export失败');
 //     //     },
 //     // });
-// });
+});
 var dListData;
 // 初始化单位数组
 function init() {

@@ -109,7 +109,6 @@ function reset() {
 // 点击用户查看信息
 function openinfo(username) {
     var openinofDom = $("#openinofModal .modal-body");
-    openinofDom.html("");
     $.ajax({
         type: 'post',
         url: pathurl + 'facelog/personInfo',

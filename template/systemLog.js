@@ -17,16 +17,17 @@ $(function () {
     //2.初始化Button的点击事件
     var oButtonInit = new ButtonInit();
     oButtonInit.Init();
-
-    $(".mydate input").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+    $("input#from,input#to").datetimepicker({
+        format: 'yyyy-mm-dd',
         language: 'zh-CN',
+        minView: 2,
         autoclose: true,
-        inputMask: true,
+        inputMask: true
     });
     $('#from').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd',
         language: 'zh-CN',
+        minView: 2,
         autoclose: true,
         inputMask: true
     }).on('changeDate', function () {

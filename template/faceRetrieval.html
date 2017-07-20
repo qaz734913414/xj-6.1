@@ -79,7 +79,6 @@
                             <option value="">性别</option>
                             <option value="1">男</option>
                             <option value="0">女</option>
-                            <option value="2">未知</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-top: 10px;margin-bottom: 10px;">
@@ -195,7 +194,7 @@
             <div class="modal-body">
                 <form id="uploadChosen" class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">手机号</label>
+                        <label class="col-sm-4 control-label">手机号 <span class="requred">*</span> </label>
                         <div class="col-sm-6">
                             <input type="text" name="phoneNo" class="form-control" id="phoneNo" placeholder="请填写手机号">
                         </div>
@@ -221,7 +220,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">处置结果</label>
+                        <label class="col-sm-4 control-label">处置结果<span class="requred">*</span> </label>
                         <div class="col-sm-6">
                             <select class="form-control" name="dispose" id="dispose">
 
@@ -251,41 +250,41 @@
 
 
     <script id="imgTemp" type="text/html">
-        <div class="col-sm-4 col-md-3 col-lg-2 thumbnail">
+        <div class="col-sm-4 col-md-3 col-lg-2">
             {{if focus=="0"}}
-            <div class="focus0">
+            <div class="thumbnail focus0">
               {{/if}}
             {{if focus=="1"}}
-                <div class="focus1">
+                <div class="thumbnail focus1">
              {{/if}}
             {{if focus=="2"}}
-            <div class="focus2">
+            <div class="thumbnail focus2">
              {{/if}}
            {{if focus=="3"}}
-           <div class="focus3">
+           <div class="thumbnail focus3">
              {{/if}}
                             <img src={{= url}} alt="...">
                             <div class="caption">
                                 <p><span>相似度：</span><span
                                         class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span>
                                 </p>
-                                <p>姓名：{{= name}}</p>
-                                <p>性别：{{= sex==0?'女':'男'}}</p>
-                                <p>民族：${nation}</p>
+                                <p >姓名：{{= name}}</p>
+                                <p class="hidden">性别：{{= sex==0?'女':'男'}}</p>
+                                <p class="hidden">民族：${nation}</p>
 
                                 <p>身份证号：{{= idNo}}</p>
                                 <p>处置方式： {{= distype}}</p>
                                 {{if focus=="0"}}
-                                <p class="hidden focus-font">人员情况：{{= "普通"}}</p>
+                                <p class="focus-font">人员情况：{{= "普通"}}</p>
                                 {{/if}}
                                 {{if focus=="1"}}
-                                <p class="hidden focus-font">人员情况：{{= "比中"}}</p>
+                                <p class="focus-font">人员情况：{{= "比中"}}</p>
                                 {{/if}}
                                 {{if focus=="2"}}
-                                <p class="hidden focus-font">人员情况：{{= "重点"}}</p>
+                                <p class="focus-font">人员情况：{{= "重点"}}</p>
                                 {{/if}}
                                 {{if focus=="3"}}
-                                <p class="hidden focus-font">人员情况：{{= "重点+比中"}}</p>
+                                <p class="focus-font">人员情况：{{= "重点+比中"}}</p>
                                 {{/if}}
                             </div>
                         </div>

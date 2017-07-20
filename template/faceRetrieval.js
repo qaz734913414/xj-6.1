@@ -63,6 +63,7 @@ $(function () {
                         }
                     }
                 }
+
             }
         });
     $("#chosen-button").bind("click", function () {
@@ -99,7 +100,7 @@ function faceList(){
   var faceData = new FormData($('#retrievalFrom')[0]);
   $.ajax({
       type: 'post',
-      url: pathurl + 'face/retrieve',
+      url: pathurl + 'face/retrieveSearch',
       data: faceData,
       cache: false,
       contentType: false,
@@ -371,13 +372,14 @@ setTimeout(function () {
 
 function uploadChosen() {
     if (!$('#uploadChosen').data('bootstrapValidator').isValid()) {
-        alert('请正确填写');
+        alert('请填写手机号等');
         return;
 
     } else {
         var form_Data = new FormData();
         var name = $("#retrieveModal .caption > p:nth-child(2)").text();
-        var idNo = $("#retrieveModal .caption > p:nth-child(6)").text();
+        var idNo = $("#retrieveModal .caption > p:nth-child(5)").text();
+
         form_Data.append("logId", logId);
         form_Data.append("phoneNo", $("#retrieveModal2 .modal-body #phoneNo").val());
         form_Data.append("carNo", $("#retrieveModal2 #carNo").val());
@@ -386,7 +388,8 @@ function uploadChosen() {
         form_Data.append("harmful", $("#retrieveModal2 input[name='harmful']:checked").val());
         form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
         form_Data.append("name", name.substring(name.indexOf("：") + 1));
-        form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
+        form_Data.append("idNo", idNo.substring(idNo.indexOf(": ") + 1));
+        console.log( idNo.substring(idNo.indexOf(": ") + 1));
         console.log('form_Data' + form_Data);
         $.ajax({
             type: 'post',
@@ -447,7 +450,7 @@ function bindUploadFileComponent(buttonid) {
                     alert("请选择图片或重新选择图片");
             },
             onSubmit: function (id, filename) {
-                alert(filename, '文件开始提交');
+               console.log(filename, '文件开始提交');
                 var self = this;
 
                 $("#add-image-button").addClass("hidden");

@@ -410,8 +410,8 @@ function toRemove() {
         $("#delUsersTModel #modal-body-text").text("删除后数据不可恢复，确定要删除吗?");
         $("#delUsersTModel").modal('show');
     } else {
-        $("#delUsersTModel #modal-body-text").text("请选择一条数据进行操作!");
-        $("#delUsersTModel").modal('show');
+        $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
+        $("#myModal").modal('show');
     }
 }
 //表格批量解绑
@@ -423,8 +423,8 @@ function toUnbind() {
         $("#unbindTModel").modal('show');
 
     } else {
-        $("#unbindTModel #unbind-text").text("请选择一条数据进行操作!");
-        $("#unbindTModel").modal('show');
+        $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
+        $("#myModal").modal('show');
     }
 }
 $("#unbindTModel #continue").click(function () {
@@ -458,8 +458,8 @@ function toWrench() {
         $("#wrenchModal").modal('show');
 
     } else {
-        $("#unbindTModel #unbind-text").text("请选择一条数据进行操作!");
-        $("#unbindTModel").modal('show');
+        $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
+        $("#myModal").modal('show');
     }
 }
 $("#wrenchModal #continue").click(function () {
@@ -556,37 +556,24 @@ $("#delUserTModel #continue").click(function () {
 
 // 修改
 function userEdit(row) {
-    var uVip = row.uVip;
-    if (uVip == 0) {
 
-        $("#modifyUserModal #uVIP").attr("checked", true);
-
-    } else if (uVip == 1) {
-        $("#modifyUserModal  #uVIP").attr("checked", false);
-    }
-    $(".bs-checkbox input[name='btSelectItem']").attr("checked", false);
-
-    //	$("#userForm")[0].reset();
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
     var uSex = row.uSex;
+    var uVip = row.uVip;
+    if (uVip == "0") {
+        $("#modifyUserModal #VIP").attr("checked", true);
 
-    if (uSex == 0) {
+    } else {
+        $("#modifyUserModal  #VIP").attr("checked", false);
+    }
+    if (uSex == "0") {
         $("#modifyUserModal input[name='uSex'][value='0']").attr("checked", true);
         $("#modifyUserModal input[name='uSex'][value='1']")
             .attr("checked", false);
-        $("#modifyUserModal input[name='uSex'][value='2']")
-            .attr("checked", false);
-    } else if (uSex == 1) {
+
+    } else if (uSex == "1") {
         $("#modifyUserModal input[name='uSex'][value='1']").attr("checked", true);
-        $("#modifyUserModal input[name='uSex'][value='0']")
-            .attr("checked", false);
-        $("#modifyUserModal input[name='uSex'][value='2']")
-            .attr("checked", false);
-    } else {
-        $("#modifyUserModal input[name='uSex'][value='2']").attr("checked", true);
-        $("#modifyUserModal input[name='uSex'][value='1']")
-            .attr("checked", false);
         $("#modifyUserModal input[name='uSex'][value='0']")
             .attr("checked", false);
     }
@@ -626,7 +613,10 @@ function userEdit(row) {
     $("#modifyUserModal #uunitId").val(row.uUnitId);
     $("#modifyUserModal #expireTimeVal").val(row.expireTime);
     $("#modifyUserModal .modal-title").html("修改用户");
-    $("#modifyUserModal").modal('show');
+    setTimeout(function () {
+        $("#modifyUserModal").modal('show');
+    },0)
+
     $("#modifyUserModal #cancel").off();
     $("#modifyUserModal #cancel").click(function () {
         $('#modifyUserModal').modal('hide');
@@ -771,10 +761,10 @@ function fileInfo(state) {
 
             }
             else if (state == 1) {
-                $('#fileInfoModal #fileInfoLabel').html('上传失败:' + data.total + '条<br>失败原因：' + data.rows[0].reason)
+                $('#fileInfoModal #fileInfoLabel').html('上传失败:' + data.total + '条')
             }
             if (state == 2) {
-                $('#fileInfoModal #fileInfoLabel').html('上传重复:' + data.total + '条<br>重复原因：' + data.rows[0].reason)
+                $('#fileInfoModal #fileInfoLabel').html('上传重复:' + data.total + '条')
             }
             $('#fileInfoModal').modal();
 

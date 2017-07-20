@@ -130,7 +130,15 @@ function quesmis() {
         success: function (data) {
 
             quemsgs = data.result;
-            $('#ques').text(data.count)
+            var count=data.count;
+            if(count>1){
+                $('#ques').parents('li').show();
+                $('#ques').text(data.count);
+            }else {
+                $('#ques').parents('li').hide();
+                $('#ques').text(data.count);
+            }
+
 
         },
         error: function () {
@@ -207,7 +215,16 @@ function mis() {
         success: function (data) {
 
             msgs = data.rows;
-            $('#msgs').text(data.count)
+            var count=data.count;
+            if(count>1){
+                $('#msgs').parents('li').show();
+                $('#msgs').text(data.count);
+
+            }else {
+                $('#msgs').parents('li').hide();
+                $('#msgs').text(data.count);
+
+            }
 
         },
         error: function () {
