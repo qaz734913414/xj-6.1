@@ -245,22 +245,15 @@ $('#systemSetting').on('click','.updateBtn',function(){
   $('#modifyModal').modal('show');
     var pkey=$('#modifyModal #parameterkey').val();
 
-    $('#modifyModal #parameterVal').keyup(function () {
+
         var pvalue=$('#modifyModal #parameterVal').val();
         if(pkey=='即将到期'||pkey=='比中返回照片数量'){
-            if(!/^[0-9]*$/.test(pvalue) ){
-                $('#error').text('请输入数字');
-            }else {
-                $('#error').text('');
-            }
+            $('#error').text('请输入数字');
+
         }else if(pkey=='处理结果'){
-            if(!/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(pvalue)){
-                $('#error').text('请输入文字');
-            }else {
-                $('#error').text('');
-            }
+            $('#error').text('请输入文字');
+
         }
-    })
 
 })
 
@@ -268,49 +261,85 @@ $('#systemSetting').on('click','.updateBtn',function(){
         var pkey = $('#modifyModal #parameterkey').val();
         var pvalue = $('#modifyModal #parameterVal').val();
         var pId = $('#pId').val();
-        $('#modifyModal #parameterVal').blur(function () {
+
             if (pkey == '即将到期' || pkey == '比中返回照片数量') {
                 if (!/^[0-9]*$/.test(pvalue)) {
                     $('#error').text('请输入数字');
+                    return;
+                }else {
+                    $.ajax({
+                        url: pathurl + 'parameter/doedit',
+                        // url:'./testJson/true.json',
+                        type: 'post',
+                        data: {
+                            pid: pId,
+                            pkey: pkey,
+                            pvalue: pvalue
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data.code == 200) {
+                                $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected', 'selected');//.eq(0).props('selected','selected');
+                                $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
+                                $("#systemSetting").bootstrapTable('refresh');
+                                $('#promptTit').html('提示');
+                                $('#prompt-text').html('修改成功');
+                                $('#promptBox').modal('show');
+                            } else {
+                                $('#promptTit').html('提示');
+                                $('#prompt-text').html(data.msg);
+                                $('#promptBox').modal('show');
+                            }
+                            $('#modifyModal').modal('hide');
+                        },
+                        error: function () {
+                            $('#promptTit').html('提示');
+                            $('#prompt-text').html('系统出错');
+                            $('#promptBox').modal('show');
+                        }
+                    })
                 }
             } else if (pkey == '处理结果') {
                 if (!/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(pvalue)) {
                     $('#error').text('请输入文字');
+                    return;
+                }else {
+                    $.ajax({
+                        url: pathurl + 'parameter/doedit',
+                        // url:'./testJson/true.json',
+                        type: 'post',
+                        data: {
+                            pid: pId,
+                            pkey: pkey,
+                            pvalue: pvalue
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data.code == 200) {
+                                $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected', 'selected');//.eq(0).props('selected','selected');
+                                $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
+                                $("#systemSetting").bootstrapTable('refresh');
+                                $('#promptTit').html('提示');
+                                $('#prompt-text').html('修改成功');
+                                $('#promptBox').modal('show');
+                            } else {
+                                $('#promptTit').html('提示');
+                                $('#prompt-text').html(data.msg);
+                                $('#promptBox').modal('show');
+                            }
+                            $('#modifyModal').modal('hide');
+                        },
+                        error: function () {
+                            $('#promptTit').html('提示');
+                            $('#prompt-text').html('系统出错');
+                            $('#promptBox').modal('show');
+                        }
+                    })
                 }
             }
-        })
 
-        $.ajax({
-            url: pathurl + 'parameter/doedit',
-            // url:'./testJson/true.json',
-            type: 'post',
-            data: {
-                pid: pId,
-                pkey: pkey,
-                pvalue: pvalue
-            },
-            success: function (data) {
-                console.log(data)
-                if (data.code == 200) {
-                    $('#systemSetModal #parameterClass').find('option').eq(0).prop('selected', 'selected');//.eq(0).props('selected','selected');
-                    $('#parameterClassVal').html('<option value="-1">参数类别值</option>');
-                    $("#systemSetting").bootstrapTable('refresh');
-                    $('#promptTit').html('提示');
-                    $('#prompt-text').html('修改成功');
-                    $('#promptBox').modal('show');
-                } else {
-                    $('#promptTit').html('提示');
-                    $('#prompt-text').html(data.msg);
-                    $('#promptBox').modal('show');
-                }
-                $('#modifyModal').modal('hide');
-            },
-            error: function () {
-                $('#promptTit').html('提示');
-                $('#prompt-text').html('系统出错');
-                $('#promptBox').modal('show');
-            }
-        })
+
+
     })
 
 })

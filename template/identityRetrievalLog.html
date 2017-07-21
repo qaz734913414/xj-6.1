@@ -1,12 +1,12 @@
 
 <script src="js/city/distpicker.js"></script>
-<!-- 人脸日志检索 -->
+<!-- 人脸日志搜索 -->
 <div id="backModel"></div>
 <div class="container-fluid face-table-group">
     <div class="row">
         <div class="form-inline face-form">
             <div class="form-group">
-                <input type="text" class="form-control" id="iusername" placeholder="检索用户">
+                <input type="text" class="form-control" id="iusername" placeholder="搜索用户">
             </div>
             <div class="form-group">
 
@@ -34,12 +34,12 @@
                 </div>
             </div>
             <div class="form-group mydate">
-                <input type="text" class="form-control" id="from" placeholder="检索时间开始"> —
-                <input type="text" class="form-control" id="to" placeholder="检索时间结束">
+                <input type="text" class="form-control" id="from" placeholder="搜索时间开始"> —
+                <input type="text" class="form-control" id="to" placeholder="搜索时间结束">
             </div>
             <div class="form-group button-group">
-                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>检索</button>
-                <button id="btn-reset" class="btn face-button2"><span class="fa fa-search" aria-hidden="true"></span>重置</button>
+                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>搜索</button>
+                <button id="btn-reset" class="btn face-button2"><i class="glyphicon glyphicon-repeat" aria-hidden="true"></i>重置</button>
                 <a id="btn-export" href="http://192.168.0.169:8080/FaceManage/export/expretriveLog" target="_blank" class="btn face-button"><span class="fa fa-external-link-square" aria-hidden="true">导出</a>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-                    <h4 class="modal-title">检索人员详情</h4>
+                    <h4 class="modal-title">搜索人员详情</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -83,7 +83,7 @@
     </div>
     <!--点击用户查询次数弹窗 -->
     <div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" >
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -93,7 +93,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <table class="table table-bordered text-center"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
+                        <table data-side-pagination="server" class="table table-bordered" id="counttable2"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
 
                         </tbody></table>
                     </div>
@@ -149,11 +149,11 @@
                         </tr>
 
                         <tr>
-                            <td class='count'>人脸检索（次数）：{{= retrieveCount}}</td>
+                            <td class='count'>人脸搜索（次数）：{{= retrieveCount}}</td>
                             <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
                         </tr>
                         <tr>
-                            <td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+                            <td class='count'>身份搜索（次数）：{{= idCardCount}}</td>
                             <td class='count'>登录（次数）：{{= loginCount}}</td>
                         </tr>
 

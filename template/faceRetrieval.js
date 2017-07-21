@@ -1,24 +1,39 @@
-
 var uploadFile;
 var heightFactor = 1.2;//图片高度宽度比例
 var logId;//全局调用
 $('.nation').html('<option value="">民族</option>');
 var national = [
-            "汉族", "壮族", "满族", "回族", "苗族", "维吾尔族", "土家族", "彝族", "蒙古族", "藏族", "布依族", "侗族", "瑶族", "朝鲜族", "白族", "哈尼族",
-            "哈萨克族", "黎族", "傣族", "畲族", "傈僳族", "仡佬族", "东乡族", "高山族", "拉祜族", "水族", "佤族", "纳西族", "羌族", "土族", "仫佬族", "锡伯族",
-            "柯尔克孜族", "达斡尔族", "景颇族", "毛南族", "撒拉族", "布朗族", "塔吉克族", "阿昌族", "普米族", "鄂温克族", "怒族", "京族", "基诺族", "德昂族", "保安族",
-            "俄罗斯族", "裕固族", "乌孜别克族", "门巴族", "鄂伦春族", "独龙族", "塔塔尔族", "赫哲族", "珞巴族"
+    "汉族", "壮族", "满族", "回族", "苗族", "维吾尔族", "土家族", "彝族", "蒙古族", "藏族", "布依族", "侗族", "瑶族", "朝鲜族", "白族", "哈尼族",
+    "哈萨克族", "黎族", "傣族", "畲族", "傈僳族", "仡佬族", "东乡族", "高山族", "拉祜族", "水族", "佤族", "纳西族", "羌族", "土族", "仫佬族", "锡伯族",
+    "柯尔克孜族", "达斡尔族", "景颇族", "毛南族", "撒拉族", "布朗族", "塔吉克族", "阿昌族", "普米族", "鄂温克族", "怒族", "京族", "基诺族", "德昂族", "保安族",
+    "俄罗斯族", "裕固族", "乌孜别克族", "门巴族", "鄂伦春族", "独龙族", "塔塔尔族", "赫哲族", "珞巴族"
 ];
 
 $(function () {
+    $('#retrieveModal2 #uploadChosen')
+        .bootstrapValidator({
+            fields: {
+                phoneNo: {
+                    validators: {
+                        notEmpty: {
+                            message: '手机号码不能为空'
+                        },
+                        regexp: {
+                            regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+                            message: '手机格式不正确'
+                        }
+                    }
+                }
 
-    national.forEach(function(val,i){
-      $('.nation').append('<option value="'+val+'">'+val+'</option>');
+            }
+        });
+    national.forEach(function (val, i) {
+        $('.nation').append('<option value="' + val + '">' + val + '</option>');
     });
 
     var $distpicker = $('#distpicker');
-    $('#distpicker select').each(function(i,val){
-      $(this).find('option').eq(0).prop('selected','selected');
+    $('#distpicker select').each(function (i, val) {
+        $(this).find('option').eq(0).prop('selected', 'selected');
     })
 
     $('#reset').click(function () {
@@ -49,24 +64,9 @@ $(function () {
         autoclose: true,
         inputMask: true
     });
-    $('#uploadChosen')
-        .bootstrapValidator({
-            fields: {
-                phoneNo: {
-                    validators: {
-                        notEmpty: {
-                            message: '手机号码不能为空'
-                        },
-                        regexp: {
-                            regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
-                            message: '手机格式不正确'
-                        }
-                    }
-                }
 
-            }
-        });
-    $("#chosen-button").bind("click", function () {
+    $("#retrieveModal2 .face-button").on("click", function () {
+        $('#retrieveModal2 #uploadChosen').data('bootstrapValidator').validate();
         uploadChosen();
 
 
@@ -79,113 +79,113 @@ $(function () {
     });
 
 
-    $('#faceReset').on('click',function(e){
-      $('.form-group select').each(function(i,val){
-        // console.log($(this).find('option')[0])
-        $(this).find('option').eq(0).prop('selected','selected');
-      })
+    $('#faceReset').on('click', function (e) {
+        $('.form-group select').each(function (i, val) {
+            // console.log($(this).find('option')[0])
+            $(this).find('option').eq(0).prop('selected', 'selected');
+        })
 
-      faceList();
+        faceList();
 
-      e.preventDefault();
+        e.preventDefault();
 
     });
-      $('#faceRetrieval').on('click',function(e){
+    $('#faceRetrieval').on('click', function (e) {
         faceList()
         e.preventDefault();
-      })
+    })
 
 });
-function faceList(){
-  var faceData = new FormData($('#retrievalFrom')[0]);
-  $.ajax({
-      type: 'post',
-      url: pathurl + 'face/retrieveSearch',
-      data: faceData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: 'json',
-      success: function (data) {
-          console.log(data)
-          if (data.code == 200) {
-              var data=data.result;
-              console.log('retrieveSearch:'+data);
-              //alert("拿到了logId："+logId);
-              $("#add-image-button-span").text("重新添加照片");
-              $("#add-image-button").removeClass("hidden");
-              $(".select-button").addClass("hidden");
-              $(".add-img-box")
-                  .removeClass(
-                      "col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-4 col-lg-2 col-lg-offset-5");
-              $(".add-img-box").addClass(
-                  "col-sm-4 col-md-3 col-lg-2 mybackground ");
+function faceList() {
+    var faceData = new FormData($('#retrievalFrom')[0]);
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'face/retrieveSearch',
+        data: faceData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data)
+            if (data.code == 200) {
+                var data = data.result;
+                console.log('retrieveSearch:' + data);
+                //alert("拿到了logId："+logId);
+                $("#add-image-button-span").text("重新添加照片");
+                $("#add-image-button").removeClass("hidden");
+                $(".select-button").addClass("hidden");
+                $(".add-img-box")
+                    .removeClass(
+                        "col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-4 col-lg-2 col-lg-offset-5");
+                $(".add-img-box").addClass(
+                    "col-sm-4 col-md-3 col-lg-2 mybackground ");
 
-              $(".vertical-center").removeClass("vertical-center");
-              $(".add-img-box").css("margin-top", "0px");
-              $(".filter-box").removeClass("hidden");
-             // /展示图片
-              $(".result-box .container-fluid .row").html("");//清空
+                $(".vertical-center").removeClass("vertical-center");
+                $(".add-img-box").css("margin-top", "0px");
+                $(".filter-box").removeClass("hidden");
+                // /展示图片
+                $(".result-box .container-fluid .row").html("");//清空
 
-              var imgs = data;
-              var imgsDom = $(".result-box .container-fluid .row");
-              //排序
-              imgs.sort(function (a, b) {
-                  return b.percent - a.percent;
-              });
-              $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
+                var imgs = data;
+                var imgsDom = $(".result-box .container-fluid .row");
+                //排序
+                imgs.sort(function (a, b) {
+                    return b.percent - a.percent;
+                });
+                $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
 
-              winChange();//调整高宽
-              //绑定图片点击事件
-              $(".result-box .thumbnail").bind('click', function () {
-                  $("#retrieveModal").modal();
-                  //赋值
-                  showImageOnModal($(this));
-                  //设置当前图片dom的索引，以便左右翻图
-                  var imageDom = $(this);
-                  //绑定左右切换事件
-                  $("#retrieveModal .right-btn").bind("click", function () {
-                      if (!imageDom.parent().next().find(".thumbnail img").attr("src")) {
-                          return;
-                      }
-                      imageDom = imageDom.parent().next().find(".thumbnail");
-                      showImageOnModal(imageDom);
-                  });
+                winChange();//调整高宽
+                //绑定图片点击事件
+                $(".result-box .thumbnail").bind('click', function () {
+                    $("#retrieveModal").modal();
+                    //赋值
+                    showImageOnModal($(this));
+                    //设置当前图片dom的索引，以便左右翻图
+                    var imageDom = $(this);
+                    //绑定左右切换事件
+                    $("#retrieveModal .right-btn").bind("click", function () {
+                        if (!imageDom.parent().next().find(".thumbnail img").attr("src")) {
+                            return;
+                        }
+                        imageDom = imageDom.parent().next().find(".thumbnail");
+                        showImageOnModal(imageDom);
+                    });
 
-                  $("#retrieveModal .left-btn").bind("click", function () {
-                      if (!imageDom.parent().prev().find(".thumbnail img").attr("src")) {
-                          return;
-                      }
-                      imageDom = imageDom.parent().prev().find(".thumbnail");
-                      console.info(imageDom);
-                      showImageOnModal(imageDom);
-                  });
-                  //绑定按钮事件
-                  $("#retrieveModal .similar-box").bind("mouseover", function () {
-                      $("#retrieveModal .similar-box > p:last-child").hide();
-                      $("#retrieveModal .similar-box > p:first-child span").text("比 中");
-                      $("#retrieveModal .similar-box").addClass("selected");
+                    $("#retrieveModal .left-btn").bind("click", function () {
+                        if (!imageDom.parent().prev().find(".thumbnail img").attr("src")) {
+                            return;
+                        }
+                        imageDom = imageDom.parent().prev().find(".thumbnail");
+                        console.info(imageDom);
+                        showImageOnModal(imageDom);
+                    });
+                    //绑定按钮事件
+                    $("#retrieveModal .similar-box").bind("mouseover", function () {
+                        $("#retrieveModal .similar-box > p:last-child").hide();
+                        $("#retrieveModal .similar-box > p:first-child span").text("比 中");
+                        $("#retrieveModal .similar-box").addClass("selected");
 
-                  });
+                    });
 
-                  $("#retrieveModal .similar-box").bind("mouseout", function () {
-                      $("#retrieveModal .similar-box > p:last-child").show();
-                      $("#retrieveModal .similar-box > p:first-child span").text("相似度");
-                      $("#retrieveModal .similar-box").removeClass("selected");
+                    $("#retrieveModal .similar-box").bind("mouseout", function () {
+                        $("#retrieveModal .similar-box > p:last-child").show();
+                        $("#retrieveModal .similar-box > p:first-child span").text("相似度");
+                        $("#retrieveModal .similar-box").removeClass("selected");
 
-                  });
-                  winChange();
-              });
-          } else {
-              $("#modal-body-id").text("操作失败，请重试");
-              $("#myModal").modal();
-          }
-      },
-      error: function () {
-          console.error("ajax upload error");
+                    });
+                    winChange();
+                });
+            } else {
+                $("#modal-body-id").text("操作失败，请重试");
+                $("#myModal").modal();
+            }
+        },
+        error: function () {
+            console.error("ajax upload error");
 
-      }
-  });
+        }
+    });
 }
 //图片和文字宽高位置调整，初始化和窗口位置改变时调用
 function winChange() {
@@ -234,15 +234,15 @@ function upload() {
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
 
-        var $addimgthis=$('.add-img'),$w=$addimgthis.width(), $h=$addimgthis.height();
+    var $addimgthis = $('.add-img'), $w = $addimgthis.width(), $h = $addimgthis.height();
 
-        $addimgthis.find(".topLine,.bottomLine").stop().animate({"width":$w});
-        $addimgthis.find(".rightLine,.leftLine").stop().animate({"height":$h});
+    $addimgthis.find(".topLine,.bottomLine").stop().animate({"width": $w});
+    $addimgthis.find(".rightLine,.leftLine").stop().animate({"height": $h});
 
-   setTimeout(function () {
-       $addimgthis.find(".topLine,.bottomLine").stop().animate({"width":"0px"});
-       $addimgthis.find(".rightLine,.leftLine").stop().animate({"height":"0px"});
-   },1500)
+    setTimeout(function () {
+        $addimgthis.find(".topLine,.bottomLine").stop().animate({"width": "0px"});
+        $addimgthis.find(".rightLine,.leftLine").stop().animate({"height": "0px"});
+    }, 1500)
 
 
     // $('.loading').show();
@@ -258,7 +258,7 @@ function upload() {
             console.log(data);
             if (data.code == 200) {
                 logId = data.logId;
-                var data=data.result;
+                var data = data.result;
                 //alert("拿到了logId："+logId);
                 $("#add-image-button-span").text("重新添加照片");
                 $("#add-image-button").removeClass("hidden");
@@ -282,7 +282,7 @@ function upload() {
                     return b.percent - a.percent;
                 });
                 $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
-
+                $('#examples').show();
 
                 winChange();//调整高宽
                 $('#loading').hide();
@@ -353,9 +353,9 @@ setTimeout(function () {
         url: pathurl + 'parameter/dispose',
         dataType: 'json',
         success: function (data) {
-            var data=data.result,str='';
-            $.each(data,function (index,item) {
-                str+='<option value="' + item.id + '">' + item.value + '</option>'
+            var data = data.result, str = '';
+            $.each(data, function (index, item) {
+                str += '<option value="' + item.id + '">' + item.value + '</option>'
             })
 
             $('#dispose').html(str);
@@ -365,14 +365,14 @@ setTimeout(function () {
 
         }
     });
-},1000)
+}, 1000)
 
 
 // 提交比中
 
 function uploadChosen() {
     if (!$('#uploadChosen').data('bootstrapValidator').isValid()) {
-        alert('请填写手机号等');
+
         return;
 
     } else {
@@ -388,8 +388,8 @@ function uploadChosen() {
         form_Data.append("harmful", $("#retrieveModal2 input[name='harmful']:checked").val());
         form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
         form_Data.append("name", name.substring(name.indexOf("：") + 1));
-        form_Data.append("idNo", idNo.substring(idNo.indexOf(": ") + 1));
-        console.log( idNo.substring(idNo.indexOf(": ") + 1));
+        form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
+        console.log(idNo.substring(idNo.indexOf("：") + 1));
         console.log('form_Data' + form_Data);
         $.ajax({
             type: 'post',
@@ -418,6 +418,9 @@ function uploadChosen() {
 
     }
 }
+$("#retrieveModal2").on("hidden.bs.modal", function() {
+    $("#retrieveModal2 #uploadChosen").data('bootstrapValidator').resetForm();
+});
 function bindUploadFileComponent(buttonid) {
     return new qq.FineUploaderBasic({
         button: $("#" + buttonid)[0],
@@ -426,7 +429,7 @@ function bindUploadFileComponent(buttonid) {
             method: "POST"
         },
         validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','zip'],
+            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'zip'],
         },
         debug: true,
         multiple: false,
@@ -450,7 +453,7 @@ function bindUploadFileComponent(buttonid) {
                     alert("请选择图片或重新选择图片");
             },
             onSubmit: function (id, filename) {
-               console.log(filename, '文件开始提交');
+                console.log(filename, '文件开始提交');
                 var self = this;
 
                 $("#add-image-button").addClass("hidden");

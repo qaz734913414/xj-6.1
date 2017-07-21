@@ -861,47 +861,64 @@ tbody>tr:nth-of-type(even) {
 }
 
 .focus1 {
-    box-shadow: 0px 0px 60px #ffd59f inset;  border: 1px solid #d2d9df;
+    box-shadow: 0px 0px 80px #ffd59f inset;  border: 1px solid #d2d9df;
 
 }
 
 .focus2 {
-    box-shadow: 0px 0px 60px #a494ef inset;  border: 1px solid #d2d9df;
+    box-shadow: 0px 0px 80px #a494ef inset;  border: 1px solid #d2d9df;
 }
 
 .focus3 {
-    box-shadow: 0px 0px 60px #ff918b inset; border: 1px solid #d2d9df;
+
     -webkit-animation: sploosh 1.5s infinite linear;
     animation: sploosh 1.5s infinite linear;
+    box-shadow: 0px 0px 80px #ff918b inset!important;
+    border: 1px solid #d2d9df;
 
+}
+.example{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    float: left;
+    text-align: center;
 }
 @-webkit-keyframes sploosh {
     0% {
-        outline: rgba(202, 22, 22, 1) solid 2px;
-        box-shadow: 0 0 0 0px rgba(202, 22, 22, 0.8);
-        outline-offset: 0px;
+
+        box-shadow: 0 0 0 50px rgba(202, 22, 22, 0.8) inset;
+
     }
 
-    100% {
-        outline: rgba(202, 22, 22, 0) solid 2px;
-        box-shadow: 0 0 0 5px rgba(202, 22, 22, 0);
-        outline-offset: 20px;
+   50% {
+
+        box-shadow: 0 0 0 30px rgba(202, 22, 22, 0) inset;
+
+    } 100% {
+
+        box-shadow: 0 0 0 10px rgba(202, 22, 22, 0) inset;
+
     }
 
 }
 
 @keyframes sploosh {
     0% {
-        outline: rgba(202, 22, 22, 1) solid 2px;
-        box-shadow: 0 0 0 0px rgba(202, 22, 22, 0.8);
-        outline-offset: 0px;
+
+        box-shadow: 0 0 0 50px rgba(202, 22, 22, 0.8) inset;
+
     }
 
-    100% {
-        outline: rgba(202, 22, 22, 0) solid 2px;
+    50% {
 
-        outline-offset: 20px;
-    }
+        box-shadow: 0 0 0 30px rgba(202, 22, 22, 0) inset;
+
+    } 100% {
+
+          box-shadow: 0 0 0 10px rgba(202, 22, 22, 0) inset;
+
+      }
 
 }
 

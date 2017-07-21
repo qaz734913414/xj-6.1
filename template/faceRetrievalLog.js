@@ -109,7 +109,7 @@ function TableInit() {
                             return "通道二";
                         case "2":
                             return "通道三";
-                         case "3":
+                        case "3":
                             return "通道四";
                     }
                 }
@@ -121,7 +121,7 @@ function TableInit() {
 
                     return e;
                 }
-            },{
+            }, {
                 field: 'u_real_name',
                 title: '真实姓名',
             }, {
@@ -220,7 +220,7 @@ function ButtonInit() {
 // 导出
 var token = window.localStorage.getItem('token');
 $("#btn-export").on("click", function () {
-    window.open('http://192.168.0.169:8080/FaceManage/export/expretriveLog?x-access-token='+token)
+    window.open(pathurl + 'export/expretriveLog?x-access-token=' + token)
 //     // $.ajax({
 //     //     type: 'POST',
 //     //     contentType: "application/msexcel; charset=utf-8",
@@ -347,58 +347,115 @@ $('#openinofModal .modal-body').on('click', ' .count', function () {
 })
 function countinfo(n, i) {
 
-    $.ajax({
-        type: 'post',
-        url: pathurl + 'facelog/getShow',
-        data: {
-            username: n
-        },
-        cache: false,
-        success: function (data) {
-            $('#countModal #countbody').html('');
-            var str = '';
-            switch (i) {
-                case 0:
-                    var data = data.retrieveShow;
-                    $.each(data, function (index, item) {
-                        var index = index + 1;
-                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
-                    })
-                    $('#countModal #countbody').append(str)
-                    break;
-                case 1:
-                    var data = data.compareShow;
-                    $.each(data, function (index, item) {
-                        var index = index + 1;
-                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
-                    })
-                    $('#countModal #countbody').append(str)
-                    break;
-                case 2:
-                    var data = data.idCardShow;
-                    $.each(data, function (index, item) {
-                        var index = index + 1;
-                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
-                    })
-                    $('#countModal #countbody').append(str)
-                    break;
-                case 3:
-                    var data = data.loginShow;
-                    $.each(data, function (index, item) {
-                        var index = index + 1;
-                        str += '<tr><td>' + index + '</td><td>' + item.time + '</td></tr>'
-                    })
-                    $('#countModal #countbody').append(str)
-                    break;
-            }
+    $("#counttable").bootstrapTable('destroy');
+    switch (i) {
+        case 0:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/retrieveShow?username='+n, //请求后台的URL（*）
 
-            $("#countModal").modal();
+                pagination: true,
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 1:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/compareShow?username='+n, //请求后台的URL（*）
 
-        },
+                pagination: true,
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 2:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/idCardShow?username='+n, //请求后台的URL（*）
 
-        error: function () {
-            console.error("ajax error");
-        }
 
-    });
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 3:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/loginShow?username='+n, //请求后台的URL（*）
+
+                // url: './faceLog.json',
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+    }
+
+    $("#countModal").modal();
+
+
 }

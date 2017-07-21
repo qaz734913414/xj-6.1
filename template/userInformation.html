@@ -11,6 +11,16 @@
                 </select>
             </div>
             <div class="form-group">
+                <input type="text" placeholder="用户名" id="u_real_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <!--  <label for>角色</label>-->
+                <select id="u_role_id" class="form-control" style="width:110px;">
+                    <option value="-1">角色</option>
+
+                </select>
+            </div>
+            <div class="form-group">
 
                 <div data-toggle="distpicker" id="distpicker">
                     <select class="form-control" name="province"></select>
@@ -19,13 +29,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <!--  <label for>角色</label>-->
-                <select id="u_role_id" class="form-control" style="width:110px;">
-                    <option value="-1">角色</option>
 
-                </select>
-            </div>
             <div class="form-group">
                 <select id="dateStatus" class="form-control">
                     <option value="-1">到期状态</option>
@@ -42,9 +46,7 @@
                     <option value="N">停用用户</option>
                 </select>
             </div>
-            <div class="form-group">
-                <input type="text" placeholder="用户名" id="u_real_name" class="form-control">
-            </div>
+
             <div class="form-group">
                 <a class="btn face-button" onclick="getTable1()" style="background:#226ed4">
                     <span class="glyphicon glyphicon-search"></span>
@@ -132,7 +134,7 @@
 </div>
 <!--点击用户查询次数弹窗 -->
 <div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -142,7 +144,9 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <table class="table table-bordered text-center"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
+                    <table
+                            data-pagination="true"
+                            data-side-pagination="server" class="table table-striped" id="counttable"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
 
                     </tbody></table>
                 </div>

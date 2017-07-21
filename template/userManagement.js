@@ -112,7 +112,7 @@ function addFormVali() {
 }
 // 新增
 function addUser() {
-    $("#adduserModal #userForm")[0].reset();
+
     $("#adduserModal .modal-title").html("添加用户");
     $("#adduserModal").modal();
     $("#adduserModal #cancel").off()
@@ -120,6 +120,9 @@ function addUser() {
         $('#adduserModal').modal('hide');
         $("#adduserModal #userForm")[0].reset();
         $("#userTable").bootstrapTable('refresh');
+        $("#adduserModal #userForm").removeClass("has-feedback has-success has-error");//移除所有class="form-group"属性的所有div
+        $(".help-block").hide();//隐藏所有class="help-block"的提示元素
+
     });
 }
 $("#adduserModal #continue").off();
@@ -127,7 +130,8 @@ $("#adduserModal #continue").off();
 
 $("#adduserModal .face-button").click(function () {
     if (!$('#adduserModal #userForm').data('bootstrapValidator').isValid()) {
-       return ;
+
+        return ;
 
     } else {
         //通过校验，可进行提交等操作
@@ -152,7 +156,7 @@ $("#adduserModal .face-button").click(function () {
 
                 city: $("#adduserModal #distpicker select[name='city']").val(),
                 area: $("#adduserModal #distpicker select[name='area']").val(),
-                uVIP: $("#adduserModal #uVIP").is(':checked') ? '0' : '1'
+                uVIP: $("#adduserModal input[name='uVIP']:checked").val()
             },
             cache: false,
             dataType: 'json',
@@ -179,6 +183,12 @@ $("#adduserModal .face-button").click(function () {
             }
         });
     }
+});
+$("#adduserModal").on("hidden.bs.modal", function() {
+    $("#adduserModal #userForm").data('bootstrapValidator').resetForm();
+});
+$("#modifyUserModal").on("hidden.bs.modal", function() {
+    $("#modifyUserModal #userForm")[0].reset();
 });
 /*初始化单位和角色的下拉框 dList rList*/
 var rListData;
@@ -235,7 +245,11 @@ function getTable() {
                 pageSize: params.pageSize,
                 pageNumber: params.pageNumber,
                 uRealName: $("#uRealName").val(),
-                uUnitId: $("#uUnitId").val()
+                uUnitId: $("#uUnitId").val(),
+                province: $("#distpicker select[name='province']").val(),
+                city: $("#distpicker select[name='city']").val(),
+                area: $("#distpicker select[name='area']").val(),
+                uVIP: $("#adduserModal input[name='uVIP']:checked").val()
             }
         },
         pagination: true,
@@ -259,6 +273,7 @@ function getTable() {
 function reset() {
     $("#uUnitId").val(0);
     $("#uRealName").val("");
+    $('select').val("");
     // var aa=$('#uUnitId option').eq(0).props('selected','selected')
     // console.log(aa);
     getTable();
@@ -556,51 +571,53 @@ $("#delUserTModel #continue").click(function () {
 
 // 修改
 function userEdit(row) {
-
-    $("#modifyUserModal #uName").val(row.uName);
-    $("#modifyUserModal #urealName").val(row.uRealName);
     var uSex = row.uSex;
     var uVip = row.uVip;
     if (uVip == "0") {
-        $("#modifyUserModal #VIP").attr("checked", true);
+        $("#modifyUserModal #userForm #vip").attr("checked", true);
+        $("#modifyUserModal #novip")
+            .attr("checked", false);
 
     } else {
-        $("#modifyUserModal  #VIP").attr("checked", false);
+        $("#modifyUserModal #novip").attr("checked", true);
+        $("#modifyUserModal #vip")
+            .attr("checked", false);
     }
     if (uSex == "0") {
-        $("#modifyUserModal input[name='uSex'][value='0']").attr("checked", true);
-        $("#modifyUserModal input[name='uSex'][value='1']")
+        $("#modifyUserModal #man").attr("checked", true);
+        $("#modifyUserModal #woman")
             .attr("checked", false);
 
     } else if (uSex == "1") {
-        $("#modifyUserModal input[name='uSex'][value='1']").attr("checked", true);
-        $("#modifyUserModal input[name='uSex'][value='0']")
+        $("#modifyUserModal #woman").attr("checked", true);
+        $("#modifyUserModal #man")
             .attr("checked", false);
     }
-
-       var Area = row.uArea.split(',');
-        console.log('Area是：' + Area);
+    var Area = row.uArea.split(',');
+    console.log('Area是：' + Area);
     // Area是：“内蒙古自治区,呼和浩特市,新城区”
     // 地区选择插件 设置为获取值
-            if (Area) {
-                $("#distpicker2").distpicker('destroy');
-                $("#distpicker2").distpicker({
-                    autoSelect: false,
-                    placeholder: true
-                });
-                var $province = $("#province");
-                $province.val(Area[0]);
-                $province.trigger("change");
-                var $city = $("#city");
-                $city.val(Area[1]);
-                $city.trigger("change");
-                var area = $("#area");
-                area.val(Area[2]);
-                area.trigger("change");
-            } else {
-                $.messager.alert("温馨提示", "error");
-            }
+    if (Area) {
+        $("#distpicker2").distpicker('destroy');
+        $("#distpicker2").distpicker({
+            autoSelect: false,
+            placeholder: true
+        });
+        var $province = $("#province");
+        $province.val(Area[0]);
+        $province.trigger("change");
+        var $city = $("#city");
+        $city.val(Area[1]);
+        $city.trigger("change");
+        var area = $("#area");
+        area.val(Area[2]);
+        area.trigger("change");
+    } else {
+        $.messager.alert("温馨提示", "error");
+    }
 
+    $("#modifyUserModal #uName").val(row.uName);
+    $("#modifyUserModal #urealName").val(row.uRealName);
 
     $("#modifyUserModal #uCardId").val(row.uCardId);
     $("#modifyUserModal #uType").val(row.uType);
@@ -613,14 +630,18 @@ function userEdit(row) {
     $("#modifyUserModal #uunitId").val(row.uUnitId);
     $("#modifyUserModal #expireTimeVal").val(row.expireTime);
     $("#modifyUserModal .modal-title").html("修改用户");
+
     setTimeout(function () {
         $("#modifyUserModal").modal('show');
-    },0)
+    },100)
 
     $("#modifyUserModal #cancel").off();
     $("#modifyUserModal #cancel").click(function () {
         $('#modifyUserModal').modal('hide');
         $("#userTable").bootstrapTable('refresh');
+        $("#userForm")[0].reset();
+    });
+    $("#modifyUserModal").on("hidden.bs.modal", function() {
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
@@ -633,6 +654,7 @@ function userEdit(row) {
             uName: $("#modifyUserModal #uName").val(),
             uRealName: $("#modifyUserModal #urealName").val(),
             uSex: $("#modifyUserModal input[name='uSex']:checked").val(),
+            uVip: $("#modifyUserModal input[name='uVip']:checked").val(),
             uCardId: $("#modifyUserModal #uCardId").val(),
             uType: $("#modifyUserModal #uType").val(),
             uStatus: $("#modifyUserModal #uStatus").val(),
@@ -749,6 +771,7 @@ function fileInfo(state) {
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: " limit",
         paginationDetailHAlign: "left",
+        buttonsClass: "face btn-face",
         showExport: true, //是否显示导出
         exportDataType: "all", //basic', 'all', 'selected'.
         pageList: [10, 25, 50, 100],
@@ -779,7 +802,9 @@ function sexFormatter(value) {
         return '女';
     }
 }
-
+function nameformater(value,row) {
+    return '<span class="hov" onclick="openinfo(\'' + row.uName + '\')">' + value + '</span>'
+}
 
 function roleFormatter(value) {
     var rn = '';
@@ -789,4 +814,185 @@ function roleFormatter(value) {
         }
     })
     return rn;
+}
+
+var dListData;
+$.ajax({
+    type: 'POST',
+    url: pathurl + 'user/initDeptAndRole',
+    success: function (data) {
+
+        dListData = data.result.dList;//dList    rName  rId
+        var rListData = data.result.rList;
+
+
+        for (var i = 0; i < dListData.length; i++) {
+            $('#u_unit_id').append('<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>');
+        }
+        for (var i = 0; i < rListData.length; i++) {
+            $('#u_role_id').append('<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>');
+        }
+
+    }
+})
+// 点击用户查看信息
+function openinfo(username) {
+
+    var openinofDom = $("#openinofModal .modal-body");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/personInfo',
+        data: {
+            username: username
+        },
+        cache: false,
+        success: function (data) {
+            var dataresult = [], compareCount, idCardCount, loginCount, retrieveCount;
+
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
+            $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
+            var unittext = $("#openinofModal .modal-body").find('.unit').text();
+
+            $.each(dListData, function (index) {
+                if (unittext == dListData[index].did) {
+                    return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
+                }
+            })
+            $("#openinofModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
+}
+// 点击查看次数
+
+$('#openinofModal .modal-body').on('click', ' .count', function () {
+
+    var name = $('#openinofModal table .name').text().split(':')[1], index = $(this).index('.count');
+
+    countinfo(name, index)
+
+})
+function countinfo(n, i) {
+
+    $("#counttable").bootstrapTable('destroy');
+    switch (i) {
+        case 0:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/retrieveShow?username='+n, //请求后台的URL（*）
+
+                pagination: true,
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 1:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/compareShow?username='+n, //请求后台的URL（*）
+
+                pagination: true,
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 2:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/idCardShow?username='+n, //请求后台的URL（*）
+
+
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+        case 3:
+            $('#counttable').bootstrapTable({
+                url: pathurl + 'facelog/loginShow?username='+n, //请求后台的URL（*）
+
+                // url: './faceLog.json',
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder:'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) {  //加载成功时执行
+                    console.log(data)
+                },
+                columns: [{
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return ++index;
+                    }
+                },  {
+                    field: 'time',
+                    title: '时间'
+                },]
+            });
+            break;
+    }
+
+    $("#countModal").modal();
+
+
 }

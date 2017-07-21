@@ -131,11 +131,11 @@ function quesmis() {
 
             quemsgs = data.result;
             var count=data.count;
-            if(count>1){
-                $('#ques').parents('li').show();
+            if(count>0){
+                $('#ques').show();
                 $('#ques').text(data.count);
             }else {
-                $('#ques').parents('li').hide();
+                $('#ques').hide();
                 $('#ques').text(data.count);
             }
 
@@ -216,12 +216,12 @@ function mis() {
 
             msgs = data.rows;
             var count=data.count;
-            if(count>1){
-                $('#msgs').parents('li').show();
+            if(count>0){
+                $('#msgs').show();
                 $('#msgs').text(data.count);
 
             }else {
-                $('#msgs').parents('li').hide();
+                $('#msgs').hide();
                 $('#msgs').text(data.count);
 
             }
