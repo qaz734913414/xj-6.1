@@ -144,10 +144,6 @@ function TableInit() {
                 field: 'createTime',
                 title: '检索时间'
             }, {
-                field: 'remark',
-                title: '检索事由',
-                width: 150
-            }, {
                 field: 'longtutide',
                 title: '经度'
             }, {

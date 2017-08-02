@@ -1,6 +1,5 @@
 var oTable;
 $(function () {
-
     //1.初始化Table
     oTable = new TableInit();
     oTable.Init();
@@ -71,7 +70,7 @@ function TableInit() {
                 return res.result;
             },
             onLoadSuccess: function (data) {  //加载成功时执行
-                console.log(data)
+                // console.log(data)
             },
             rowAttributes: function (row, index) {
                 return {
@@ -194,7 +193,7 @@ function TableInit() {
             city: $("#distpicker select[name='city']").val(),
             area: $("#distpicker select[name='area']").val(),
         };
-        console.log(temp)
+        // console.log(temp)
         return temp;
     };
     return oTableInit;

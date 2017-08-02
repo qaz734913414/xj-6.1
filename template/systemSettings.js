@@ -101,8 +101,8 @@ function getTable() {   //表格初始化
         title: '操作',
         formatter: function(value, row, index) {
           return [
-              '<button type="button" class="updateBtn btn-sm btn face-button" style="margin-right:15px;">修改</button>',
-              '<button type="button" class="removeBtn btn-sm btn face-button2" style="margin-right:15px;">删除</button>' ]
+              '<button type="button" data-id="button1" class="pcode updateBtn btn-sm btn face-button" style="margin-right:15px;">修改</button>',
+              '<button type="button" data-id="button2" class="pcode removeBtn btn-sm btn face-button2" style="margin-right:15px;">删除</button>' ]
               .join('');
         }
     },{

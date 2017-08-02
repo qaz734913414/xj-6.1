@@ -95,15 +95,16 @@ function secLvMenu(firstLevelData) {
                     var secondLevelData = secondLevelData.result;
                     var str = '';
                     for (var i = 0; i < secondLevelData.length; i++) {
-                        str += '<li><a href="javascript:void(0);">' + secondLevelData[i].name + '</a></li>';
+                        str += '<li><span hidden id="pid">'+secondLevelData[i].id+'</span><a href="javascript:void(0);">' + secondLevelData[i].name + '</a></li>';
                     }
                     $('.second-box .mynav-menu').html(str);
                     $('.second-box .mynav-menu').find('a').eq(0).attr('class', 'active-second');
 
                     $('.second-box .mynav-menu li').each(function (i) {
-                        $(this).on('click', function () {
+                        $(this).on('click', function (i) {
                             $(this).find('a').attr('class', 'active-second');
                             $(this).siblings().find('a').removeAttr('class', 'active-second');
+
                             // $('#ajax-content>div').eq($(this).index()).show().siblings().hide();
 
                         })
@@ -130,11 +131,11 @@ function quesmis() {
         success: function (data) {
 
             quemsgs = data.result;
-            var count=data.count;
-            if(count>0){
+            var count = data.count;
+            if (count > 0) {
                 $('#ques').show();
                 $('#ques').text(data.count);
-            }else {
+            } else {
                 $('#ques').hide();
                 $('#ques').text(data.count);
             }
@@ -156,18 +157,18 @@ function ques() {
     $.each(quemsgs, function (i, item) {
         if (item.readState == 'N') {
             i += 1;
-            if(item.state=='Y'){
-                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-success">已回答</span> <span class="time">回复时间：'+item.answerTime+'。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
-            }else {
-                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            if (item.state == 'Y') {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：' + item.qDetail + '？</span><span class="label label-success">已回答</span> <span class="time">回复时间：' + item.answerTime + '。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            } else {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">未读反馈</span>' + i + ' <span class="q">问题：' + item.qDetail + '？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
             }
 
-        }else if(item.readState == 'Y'){
+        } else if (item.readState == 'Y') {
             i += 1;
-            if(item.state=='Y'){
-                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-success">已回答</span> <span class="time">回复时间：'+item.answerTime+'。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
-            }else {
-                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：'+item.qDetail+'？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            if (item.state == 'Y') {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：' + item.qDetail + '？</span><span class="label label-success">已回答</span> <span class="time">回复时间：' + item.answerTime + '。</span> <input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
+            } else {
+                questr += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:green;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne"><span class="qa">已读反馈</span>' + i + ' <span class="q">问题：' + item.qDetail + '？</span><span class="label label-default">未回答</span><input type="hidden" name="id" value=' + item.id + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body"><p>回复内容</p>' + item.aDetail + ' </div></div></div>'
             }
         }
     });
@@ -177,7 +178,7 @@ function ques() {
     $('#infoModal').modal();
     $('#infoModal #accordion a').click(function () {
         var that = this;
-        if($(this).text().indexOf('未读')==0){
+        if ($(this).text().indexOf('未读') == 0) {
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -197,7 +198,8 @@ function ques() {
                 },
                 dataType: 'json'
             });
-        };
+        }
+        ;
 
     })
 };
@@ -208,19 +210,19 @@ function mis() {
     $.ajax({
         type: 'POST',
         cache: false,
-        url: pathurl + 'msgpush/msg'+ "?timeStamp=" + Math.random(),
+        url: pathurl + 'msgpush/msg' + "?timeStamp=" + Math.random(),
         data: {
             username: $('#username').text()
         },
         success: function (data) {
 
             msgs = data.rows;
-            var count=data.count;
-            if(count>0){
+            var count = data.count;
+            if (count > 0) {
                 $('#msgs').show();
                 $('#msgs').text(data.count);
 
-            }else {
+            } else {
                 $('#msgs').hide();
                 $('#msgs').text(data.count);
 
@@ -243,7 +245,7 @@ function msg() {
         if (item.state == 'N') {
             i += 1;
             str += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button " style="color:red;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne">未读消息' + i + ' <input type="hidden" name="mId" value=' + item.mId + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body">' + item.content + ' </div></div></div>'
-        }else if(item.state == 'Y'){
+        } else if (item.state == 'Y') {
             i += 1;
             str += '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading' + i + '"><h4 class="panel-title"><a role="button" style="color:#00B83F;" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapseOne">已读消息' + i + ' <input type="hidden" name="mId" value=' + item.mId + '></a></h4> </div> <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '"><div class="panel-body">' + item.content + ' </div></div></div>'
         }
@@ -253,7 +255,7 @@ function msg() {
     $('#infoModal').modal();
     $('#infoModal #accordion a').click(function () {
         var that = this;
-        if($(this).text().indexOf('未读')==0){
+        if ($(this).text().indexOf('未读') == 0) {
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -273,7 +275,8 @@ function msg() {
                 },
                 dataType: 'json'
             });
-        };
+        }
+        ;
 
     })
 };

@@ -6,10 +6,9 @@
         <div class="form-inline face-form" style="margin-bottom:-44px;">
             <div class="form-group">
                 <select id="timestatus" class="form-control" onchange="changeTime()">
-                    <option value="-1">统计方式</option>
                     <option value="0">按年统计</option>
                     <option value="1">按月统计</option>
-                    <option value="2">按天统计</option>
+                    <option  value="2">按日统计</option>
                 </select>
             </div>
             <div class="form-group mydate">
@@ -31,13 +30,13 @@
         <table id="proportion" class="table table-striped face-table" data-toggle="table">
             <thead>
             <tr>
-                <th data-field="date" data-sortable="true">起始时间</th>
-                <th data-field="plat" data-sortable="true">平台比中数</th>
-                <th data-field="platcount" data-sortable="true">平台比对数</th>
-                <th data-field="platper" data-sortable="true">平台准确率</th>
-                <th data-field="app" data-sortable="true">app比中数</th>
-                <th data-field="appcount" data-sortable="true">app比对量</th>
-                <th data-field="appper" data-sortable="true">app准确率</th>
+                <th data-field="date" >起始时间</th>
+                <th data-field="plat" >平台比中数</th>
+                <th data-field="platcount" >平台比对数</th>
+                <th data-field="platper" >平台准确率</th>
+                <th data-field="app" >app比中数</th>
+                <th data-field="appcount" >app比对量</th>
+                <th data-field="appper" >app准确率</th>
             </tr>
             </thead>
             <tbody id="countBody3">

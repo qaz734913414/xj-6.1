@@ -219,11 +219,6 @@ ul.mynav-menu {
 
 }
 
-#uCardId {
-    display: inline-block;
-    width: 170px !important;
-}
-
 .mynav-menu > li[class~=dropdown] {
     margin-top: 20px;
     width: 50px;

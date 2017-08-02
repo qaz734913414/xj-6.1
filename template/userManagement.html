@@ -11,7 +11,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="text" placeholder="用户名" id="u_real_name" class="form-control">
+                <input type="text" style="width:150px;" placeholder="用户名" id="u_real_name" class="form-control">
             </div>
             <div class="form-group">
                 <!--  <label for>角色</label>-->
@@ -39,23 +39,23 @@
                 </button>
             </div>
             <div class="form-group">
-                <button class="btn face-button"
+                <button data-id="button0" class="pcode btn face-button"
                         onclick="addUser()" type="button" id="new">
                     <i class="fa fa-plus"></i> 新建
                 </button>
             </div>
             <div class="form-group">
-                <button class="btn face-button2" onclick="toRemove()" id="remove">
+                <button data-id="button8" class="pcode btn face-button2" onclick="toRemove()" id="remove">
                     <i class="fa fa-times"></i> 批量删除
                 </button>
             </div>
             <div class="form-group">
-                <button class="btn face-button2" onclick="toUnbind()" id="unbind">
+                <button data-id="button9" class="pcode btn face-button2" onclick="toUnbind()" id="unbind">
                     <i class="fa fa-unlock"></i> 批量解绑
                 </button>
             </div>
             <div class="form-group">
-                <button class="btn face-button" onclick="toWrench()" id="wrench">
+                <button data-id="button7" class="pcode btn face-button" onclick="toWrench()" id="wrench">
                     <i class="fa fa-wrench"></i> 批量修改
                 </button>
             </div>
@@ -64,10 +64,10 @@
                 <form id="uploadForm" enctype="multipart/form-data" class="form-horizontal">
                     <div class="form-group" style="margin: 0 0 0 15px;">
                         <div class="form-group">
-                            <input type="file" accept=".xlsx" name="file" class="form-control"/>
+                            <input type="file" style="width:200px;" accept=".xlsx" name="file" class="form-control"/>
                         </div>
                         <div class="form-group" style="margin-left:5px;">
-                            <button class="btn face-button" onclick="doUpload()" type="button">
+                            <button data-id="button4" class="pcode btn face-button" onclick="doUpload()" type="button">
                                 <i class="fa fa-arrow-up"></i> 导入
                             </button>
                         </div>
@@ -75,7 +75,7 @@
                 </form>
             </div>
         </div>
-        <table id="userTable" data-side-pagination="server" class="table table-striped face-table">
+        <table id="userTable1"   class="table table-striped face-table">
             <thead>
             <!--data-visible="false"-->
             <tr>
@@ -89,13 +89,16 @@
                 <th data-field="uRoleId" data-halign="center" data-align="center" data-formatter="roleFormatter"
                     data-valign="middle">角色
                 </th>
+                <th data-field="uUnitId" data-halign="center" data-align="center" data-formatter="unitFormatter"
+                    data-valign="middle">单位
+                </th>
                 <th data-field="uCardId" data-halign="center" data-align="center" data-valign="middle">身份证</th>
                 <th data-field="uDuty" data-halign="center" data-align="center" data-valign="middle">职务</th>
                 <th data-field="uPolicyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
                 <th data-field="uStatus" data-halign="center" data-align="center" data-valign="middle"
                     data-formatter="statusFormatter" data-events="statusEvents">用户状态
                 </th>
-                <th data-field="uUnitId" data-halign="center" data-align="center" data-valign="middle" class="hidden">
+                <th data-field="uUnitId" data-formatter="unitFormatter" data-halign="center" data-align="center" data-valign="middle" class="hidden">
                     单位
                 </th>
                 <th data-field="uSex" data-halign="center" data-align="center" data-valign="middle" class="hidden">性别
@@ -103,7 +106,7 @@
                 <th data-field="uType" data-halign="center" data-align="center" data-valign="middle" class="hidden">
                     账户类别
                 </th>
-                <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间</th>
+                <th data-field="expireTime" data-halign="center"  data-sortable="true" data-align="center" data-valign="middle">账户到期时间</th>
                 <th data-field="operate" data-halign="center" data-align="center" data-valign="middle"
                     data-formatter="operateFormatter" data-events="operateEvents">操作
                 </th>
@@ -322,13 +325,13 @@
                             <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
                                     style="width:194px;"></select>
                         </div>
-                        <div class="form-group" style="margin-left:15px;">
+                        <div class="form-group" style="margin-left:20px;">
                             单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
                         </div>
                         <div class="form-group" style="margin-left:10px;">
 
                             <select class="form-control" path="uUnitId"
-                                    id="uunitId" name="uUnitId">
+                                    id="uunitId" name="uUnitId" style="width:194px;">
 
                             </select>
                         </div>
@@ -475,13 +478,13 @@
                             <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
                                     style="width:194px;"></select>
                         </div>
-                        <div class="form-group" style="margin-left:15px;">
+                        <div class="form-group" style="margin-left:20px;">
                             单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
                         </div>
                         <div class="form-group" style="margin-left:10px;">
 
                             <select class="form-control" path="uUnitId"
-                                    id="uunitId" name="uUnitId">
+                                    id="uunitId" name="uUnitId" style="width:194px;">
 
                             </select>
                         </div>
@@ -524,7 +527,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title text-center" id="wrenchLabel"></h4>
+                <h4 class="modal-title text-center" id="wrenchLabel">批量修改</h4>
             </div>
             <div class="modal-body">
                 <form id="wrench" modelAttribute="user" class="form-horizontal" role="form">

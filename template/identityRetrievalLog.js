@@ -135,11 +135,7 @@ function TableInit() {
             }, {
                 field: 'createTime',
                 title: '检索时间',
-            }, {
-                field: 'remark',
-                title: '检索事由',
-                width: 150
-            }, {
+            },  {
                 field: 'longtutide',
                 title: '经度'
             }, {
@@ -196,7 +192,6 @@ $(".face-table").delegate(".imgDetail", "click", function () {
     var idcard = $(this).parents("tr").attr('data-idCard');
     var imgsDom = $("#faceLogModal .modal-body .row");
     $('.modal-title').html('检索人员详情');
-    console.log(imgsDom)
     imgsDom.html("");
     $.ajax({
         type: 'post',
@@ -212,6 +207,8 @@ $(".face-table").delegate(".imgDetail", "click", function () {
         }
     })
 })
+
+
 //点击用户  弹出详情
 $(".face-table").delegate("#logUsername", "click", function () {
     var username = $(this).parents("tr").find('#logUsername').html();

@@ -38,16 +38,17 @@ $(function () {
 
 });
 //组织机构初始化下拉框
+var unitlist=[];
 $.ajax({
     type: 'POST',
     url: pathurl+'department/initDeptList',
     success: function(data) {
-        var data=data.list, len=data.length,str='';
+         unitlist=data.list, len=unitlist.length,str='';
         for (var i = 0; i <len; i++) {
-            str+=' <option value=' + data[i].did +'>'+data[i].dname+'</option>'
+            str+=' <option value=' + unitlist[i].did +'>'+unitlist[i].dname+'</option>'
 
         };
-        $('#unit').append(str);
+        $('#uUnit').append(str);
     },
     error: function() {
         $("#modal-body-text").text("删除失败!");
@@ -118,6 +119,11 @@ function TableInit() {
                     return '<p>' + value + '</p>';
                 }
             }, {
+                field: 'uUnit',
+                title: '单位',
+                formatter: unitFormatter
+
+            },{
                 field: 'log_user',
                 title: '操作人',
                 formatter: function (value) {
@@ -171,7 +177,8 @@ function TableInit() {
                 logUser: $("#susername").val(),
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
-                area: $("#distpicker select[name='area']").val()
+                area: $("#distpicker select[name='area']").val(),
+                uUnit:$('#uUnit').val()
                 // // startTime:$("#from").val(),
                 // endTime:$("#to").val()
             };
@@ -184,7 +191,8 @@ function TableInit() {
                 endTime: '2100-00-00 00:00',
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
-                area: $("#distpicker select[name='area']").val()
+                area: $("#distpicker select[name='area']").val(),
+                uUnit:$('#uUnit').val()
             };
         } else {
             temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
@@ -195,7 +203,8 @@ function TableInit() {
                 endTime: $("#to").val(),
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
-                area: $("#distpicker select[name='area']").val()
+                area: $("#distpicker select[name='area']").val(),
+                uUnit:$('#uUnit').val()
             };
         }
         return temp;
@@ -220,4 +229,13 @@ function ButtonInit() {
         });
     };
     return oInit;
+}
+function unitFormatter(value) {
+    var rn='';
+    $.each(dListData,function (index) {
+        if(value==dListData[index].did){
+            return  rn= dListData[index].dname;
+        }
+    })
+    return rn;
 }

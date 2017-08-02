@@ -1,4 +1,3 @@
-jQuery.support.cors = true;
 
 $(function () {
 
@@ -33,13 +32,13 @@ $(function () {
             console.log('移动端')
             return '1';
         }
-        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-           return 
-        } else if (/(Android)/i.test(navigator.userAgent)) {
-            window.location.href ="https://itunes.apple.com/cn/app/1hao-yao-dian/id727578007?mt=8";
-        } else {
-            window.location.href ="http://www.111.com.cn/";
-        };
+        // if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+        //    return
+        // } else if (/(Android)/i.test(navigator.userAgent)) {
+        //     window.location.href ="https://itunes.apple.com/cn/app/1hao-yao-dian/id727578007?mt=8";
+        // } else {
+        //     window.location.href ="http://www.111.com.cn/";
+        // };
     }
 
     // browserRedirect();
@@ -138,5 +137,12 @@ $(function () {
         });
         // e.preventDefault();
     })
+    document.onkeydown = function(e){
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) {
+
+            $('button').trigger('click')
+        }
+    }
 
 })

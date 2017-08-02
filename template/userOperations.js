@@ -2,12 +2,15 @@ $(function () {
     getMessage3();
     $(".mydate input").datetimepicker({
         format: 'yyyy-mm-dd',
-        language: 'zh-CN',
+        showMeridian: true,
         autoclose: true,
-        inputMask: true
+        language: 'zh-CN',
+        minView: 2
     });
 })
 function changeTime() {
+    $("#startDate").datetimepicker('remove');
+    $("#endDate").datetimepicker('remove');
     var date = new Date();
     var y = date.getFullYear();
     var seperator1 = "-";
@@ -27,16 +30,13 @@ function changeTime() {
     var s = $("#timestatus").find("option:selected").val();
 
     if (s == 0) {
-        $("#startDate").datetimepicker('remove');
-        $("#endDate").datetimepicker('remove');
+
         getDateByYear(y);
     } else if (s == 1) {
-        $("#startDate").datetimepicker('remove');
-        $("#endDate").datetimepicker('remove');
+
         getDateByMonth(m);
     } else if (s == 2) {
-        $("#startDate").datetimepicker('remove');
-        $("#endDate").datetimepicker('remove');
+
         getDateByDay(d);
     }
 }
@@ -49,14 +49,13 @@ function getDateByMonth() {
         startView: 3,
         startDate: 3,
         todayHighlight: true,
-        //showMeridian :true,
         autoclose: true,
         language: 'zh-CN',
         minView: 4,
         todayBtn: true,
     }).on("change", function (ev) {
         var start = $('#startDate').val();
-        $('#endDate').datetimepicker('setStartDate', start);
+
         $('#startDate').datetimepicker('hide');
     });
     $("#endDate").datetimepicker({
@@ -69,10 +68,11 @@ function getDateByMonth() {
         todayBtn: true,
     }).on("change", function (ev) {
         var end = $('#endDate').val();
-        $('#startDate').datetimepicker('setEndDate', new Date());
-        $('#endDate').datetimepicker('setStartDate', new Date());
+
         $('#endDate').datetimepicker('hide');
     });
+    $('#startDate').datetimepicker('update', new Date());
+    $('#endDate').datetimepicker('update', new Date());
 }
 function getDateByYear() {
     //按年查询
@@ -86,7 +86,7 @@ function getDateByYear() {
         autoclose: true,
         language: 'zh-CN',
         minView: 'decade',
-        //todayBtn:true,
+        endDate: new Date()
     });
 
     $("#endDate").datetimepicker({
@@ -95,14 +95,14 @@ function getDateByYear() {
         showMeridian: true,
         autoclose: true,
         language: 'zh-CN',
-        minView: 'decade',
+        minView: 'decade'
 
     }).on("change", function (ev) {
-        var end = $('#endDate').val();
-        $('#endDate').datetimepicker('setStartDate', $('#startDate').val());
-        $('#endDate').datetimepicker('setEndDate', y);
-        $('#endDate').datetimepicker('hide');
+
+        $(this).datetimepicker('hide');
     });
+    $('#startDate').datetimepicker('update', new Date());
+    $('#endDate').datetimepicker('update', new Date());
 }
 
 function getDateByDay() {
@@ -117,9 +117,7 @@ function getDateByDay() {
         minView: 2,
 
     }).on("change", function (ev) {
-        var start = $('#startDate').val();
-        $('#endDate').datetimepicker('setStartDate', start);
-        $('#startDate').datetimepicker('hide');
+        $('#endDate').datetimepicker('hide');
     });
     $("#endDate").datetimepicker({
         format: "yyyy-mm-dd",
@@ -130,10 +128,11 @@ function getDateByDay() {
 
     }).on("change", function (ev) {
         var end = $('#endDate').val();
-        $('#startDate').datetimepicker('setEndDate', new Date());
-        $('#endDate').datetimepicker('setStartDate', new Date());
+
         $('#endDate').datetimepicker('hide');
     });
+    $('#startDate').datetimepicker('update', new Date());
+    $('#endDate').datetimepicker('update', new Date());
 }
 
 function getMessage3() {

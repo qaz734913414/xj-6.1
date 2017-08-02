@@ -85,21 +85,19 @@ function statusFormatter(value) {
 function nameformater(value,row) {
     return '<span class="hov" onclick="openinfo(\'' + row.uName + '\')">' + value + '</span>'
 }
+function unitFormatter(value,row) {
+    for (var m = 0; m < dListData.length; m++) {
+        if (value == dListData[m].did) {
+            return dListData[m].dname;
+        }
+    }
+}
 function sexFormatter(value) {
     if (value == 0) {
         return '男';
     } else {
         return '女';
     }
-}
-function unitFormatter(value) {
-    var rn='';
-    $.each(dListData,function (index) {
-        if(value==dListData[index].did){
-            return  rn= dListData[index].dname;
-        }
-    })
-    return rn;
 }
 
 function reset() {

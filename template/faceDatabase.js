@@ -16,10 +16,14 @@ if (token) {
         }
     });
 }
-
+var uploader;
+//保存最后上传的图片
+var uploadFile;
 $(function () {
-    national.forEach(function(val,i){
-        $('#nation').append('<option value="'+val+'">'+val+'</option>');
+    uploader = uploadFile($("#add-image-button"));
+    uploadFile = null;//重置
+    national.forEach(function (val, i) {
+        $('#nation').append('<option value="' + val + '">' + val + '</option>');
     });
     getTable();
 
@@ -105,7 +109,7 @@ function getTable() {
             return {
                 pageSize: params.pageSize,
                 pageNumber: params.pageNumber,
-                dbname:$('#dbname').val()
+                dbname: $('#dbname').val()
             }
         },
         pagination: true,
@@ -120,7 +124,7 @@ function getTable() {
 
         pageList: [10, 25, 50, 100],
         onLoadSuccess: function (data) {  //加载成功时执行
-            console.log('初始化'+data)
+            console.log('初始化' + data)
         }
     });
 }
@@ -144,12 +148,12 @@ function typeFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-        return [
+    return [
 
-            '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">清空</button>',
-            '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>',
+        '<button type="button" class="update btn-sm btn face-button " style="margin-right:15px;">清空</button>',
+        '<button type="button" class="delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>',
 
-        ].join('');
+    ].join('');
 
 }
 
@@ -158,39 +162,85 @@ function openFormatter(value, row, index) {
 }
 // 点击建库者查看信息
 function openinfo(username) {
-    var openinofDom = $("#openinofModal .modal-body");
-    // openinofDom.html("");
-    // $.ajax({
-    //     type: 'post',
-    //     url: pathurl + 'facelog/personInfo',
-    //     data: {
-    //         username: username
-    //     },
-    //     cache: false,
-    //     success: function (data) {
 
-            $("#openinofModal").modal();
+    $("#libPicList").bootstrapTable('destroy');
 
-    //     },
-    //
-    //     error: function () {
-    //         console.error("ajax error");
-    //     }
-    //
-    // });
+    $('#libPicList').bootstrapTable({
+        url: pathurl + 'library/libPicList?dbname=' + username,
+        method: 'post', //请求方式（*）
+        cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true, //是否显示分页（*）
+        queryParamsType: "limit",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        responseHandler: function (res) {
+            //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
+            //在ajax后我们可以在这里进行一些事件的处理
+            return res.result;
+        },
+        onLoadSuccess: function (data) {
+
+        },
+        columns: [{
+            field: 'id',
+            title: '序号',
+            formatter: function (value, row, index) {
+                return ++index;
+            }
+        }, {
+            field: 'dbname',
+            title: '库名',
+            // formatter: function (value) {
+            //     return '<span class="dbname">'+value+'</span>';
+            // }
+        }, {
+            field: 'name',
+            title: '姓名',
+
+        }, {
+            field: 'sex',
+            title: '性别',
+            formatter: function (value) {
+
+                switch (value) {
+                    case 0:
+                        return "男";
+                    case 1:
+                        return "女";
+                }
+            }
+        }, {
+            field: 'birthday',
+            title: '生日',
+        }, {
+            field: 'idcard',
+            title: '身份证号'
+        }, {
+            field: 'url',
+            title: '检索图片',
+            formatter: function (value) {
+                return '<img width="150" height="150" alt="" src=' + value + '>'
+            }
+        }, {
+            field: 'imageid',
+            title: '图片id',
+        }]
+    });
+    $("#libPicList").bootstrapTable('hideColumn', 'imageid');
+    $('#openinofModal #dn').html(username);
+    $("#openinofModal").modal();
 }
-function doUpload() {
-    $("#modal-text").text("请上传后缀为'.zip'的文件");
+function doUpload2() {
+    $("#fileinputModal #modal-text").text("请上传后缀为'.zip'的文件");
     $("#fileinputModal").modal();
-
-
 }
-$("#fileinputModal #continue").click(function () {
-    var formData = new FormData($("#uploadForm")[0]);
-    console.log('formData.get("file"):'+formData.get("file"));
+$("#fileinputModal #continue2").click(function () {
+    var formData = new FormData($("#uploadForm2")[0]);
+    console.log('formData.get("file"):' + formData.get("file"));
+         var name=$('#dn').text();
     if (formData.get("file").name) {
         $.ajax({
-            url: pathurl + 'fileUpload',
+            url: pathurl + 'library/libPicZipAdd?dbname=' + name,
             type: 'POST',
             data: formData,
             async: false,
@@ -198,14 +248,10 @@ $("#fileinputModal #continue").click(function () {
             contentType: false,
             processData: false,
             success: function (data) {
-
+                console.log(data);
                 if (data.code == 200) {
-                    $("#modal-body-id").empty();
-                    var text = '';
-                    text += '<p onclick="fileInfo(0) "><a>上传成功:' + data.success + '</a> </p ><p onclick="fileInfo(1)"><a>上传失败:' + data.fail + '</a> </p><p onclick="fileInfo(2)"><a>上传重复:' + data.repeat + '</a> </p>';
-                    $("#modal-body-id").append(text);
+                    $("#modal-body-id").text('上传成功!');
                     $("#myModal").modal('show');
-                    $("#userTable").bootstrapTable('refresh');
                 } else {
                     $("#modal-body-id").text('上传文件失败,请重新尝试!');
                     $("#myModal").modal();
@@ -216,26 +262,18 @@ $("#fileinputModal #continue").click(function () {
                 $("#myModal").modal();
             }
         });
-    } else {
-        $("#modal-body-id").text('请选择要上传的文件');
-        $("#myModal").modal();
-
+    }else {
+        alert('请选择文件再上传');
+        return false;
     }
+
+
+
 
 });
-// 上传图片
-function preview(file){
-    if (file.files && file.files[0]){
-        var reader = new FileReader();
-        reader.onload = function(evt){
-            $('#img0').attr('src',evt.target.result);
-        }
-        reader.readAsDataURL(file.files[0]);
-    }else{
-        $('#img0').removeAttr('src');
-        $('#img0')[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + file.value + "\")"
-    }
-}
+$("#myModal").on("hidden.bs.modal", function () {
+    $("#uploadForm2")[0].reset();
+});
 window.operateEvents = {//done
 
     'click .update': function (e, value, row, index) { //清空库
@@ -363,22 +401,32 @@ function add() {
     $("#addModal #cancel").click(function () {
         $('#addModal').modal('hide');
         $("#facedataTable").bootstrapTable('refresh');
+
     });
 }
+$("#addModal").on("hidden.bs.modal", function () {
+    $("#addModal #addForm").data('bootstrapValidator').resetForm();
+});
 $("#addModal #continue").off();
-$("#addModal #continue").click(function (form) {
+$("#addModal #continue").click(function () {
 
+    var form_Data = new FormData($("#addForm"));
+    form_Data.append("file", uploadFile);
+    form_Data.append("dbname", $('#dn').text());
+    form_Data.append("name", $("#addModal #name").val());
+    form_Data.append("nation", $("#addModal #nation").val());
+    form_Data.append("idcard", $("#addModal #uCardId").val());
+    form_Data.append("remark", $("#addModal #remark").val());
+    form_Data.append("telphone", $("#addModal #uPhone").val());
+    form_Data.append("address", $("#addModal #distpicker2 select").val());
+    console.log(form_Data);
     $.ajax({
         type: 'post',
-        url: pathurl + 'library/addlibrary',
-        data: {
-            dbname: $("#addModal #uName").val(),
-            province: $("#addModal #distpicker select[name='province']").val(),
-            city: $("#addModal #distpicker select[name='city']").val(),
-            area: $("#addModal #distpicker select[name='area']").val(),
-            uVIP: $("#addModal #uVIP").is(':checked') ? '0' : '1'
-        },
+        url: pathurl + 'library/libPicAdd',
+        data: form_Data,
         cache: false,
+        contentType: false,
+        processData: false,
         dataType: 'json',
         success: function (data) {
             console.log(data)
@@ -386,14 +434,13 @@ $("#addModal #continue").click(function (form) {
                 $('#addModal').modal('hide');
                 $("#modal-body-id").html('添加成功');
                 $('#myModal').modal('show');
-                $("#userForm")[0].reset();
+                $("#addForm")[0].reset();
                 // LoadAjaxContent(pathurl+'user/list');
                 $("#facedataTable").bootstrapTable('refresh');
             } else {
-                $("#deptModel").css("z-index", 1500);
-                $("#myModalLabel").html("提示");
-                $("#modal-body-text").html(data.msg);
-                $('#deptModel').modal('show');
+                $("#myModal").css("z-index", 1550);
+                $("#modal-body-id").text("请正确输入");
+                $("#myModal").modal();
             }
         },
         error: function () {
@@ -404,3 +451,59 @@ $("#addModal #continue").click(function (form) {
     });
 });
 
+function uploadFile(button) {
+    return new qq.FineUploaderBasic(
+        {
+            button: button[0],
+            request: {
+                endpoint: pathurl + 'library/libPicAdd',
+                method: "POST"
+            },
+            validation: {
+                allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+            },
+            debug: true,
+            multiple: false,
+            autoUpload: false,
+            editFilename: {
+                enable: false
+            },
+            messages: {
+                noFilesError: '没有选中文件'
+            },
+            text: {
+                formatProgress: "{percent}% of {total_size}",
+                failUpload: "上传失败",
+                waitingForResponse: "上传中...",
+                paused: "暂停"
+            },
+            callbacks: {
+                onError: function (id, filename, message, xhr) {
+                    console.log(id, filename, '上传失败', message);
+                    if (filename === undefined)
+                        alert("请选择图片或重新选择图片");
+                },
+                onSubmit: function (id, filename) {
+                    console.log(filename, '文件开始提交');
+                    var self = this;
+                    button.text("重新添加照片");
+                    //画框展示
+                    this.drawThumbnail(id, button.prev('#img0')[0]);
+                    //由于上传完成后文件会自动清空，需要保存到uploadFiles
+                    if (button.attr("id") == "add-image-button") {
+                        uploadFile = self.getFile(id);
+                    }
+                },
+                onComplete: function (id, filename, responseJSON, xhr) {
+                    console.log(id, filename, '上传成功，返回信息为：',
+                        responseJSON);
+                    //object可以如下初始化表格
+                    /* if (imagetable)
+                     imagetable.fnDestroy(false);
+                     imageTable(responseJSON.images);
+                     var self = this; */
+                    // self.clearStoredFiles();
+                }
+            }
+        });
+}

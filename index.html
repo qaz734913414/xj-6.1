@@ -53,15 +53,16 @@
     <script src="js/common/jquery.ztree.core-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.exedit-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.excheck-3.5.js" charset="utf-8"></script>
+    <script src="js/common/jq.cookie.js"></script>
 
     <script>
-        var pathurl = 'http://192.168.0.169:8080/FaceManage/';
+        var pathurl = 'http://192.168.0.239:8080/FaceManage/';
     </script>
-    <script src="js/common/jq.cookie.js"></script>
+
 
 
 </head>
-<body >
+<body>
 <!-- 自定义一级导航栏 -->
 <div class="mynav-box-blank">
     <div class="mynav-box first-box">
@@ -105,10 +106,12 @@
 
             <li class="foot" onclick="msg()">
 
-                <span class="glyphicon glyphicon-volume-up"  style="margin:0 25px"  title="消息推送" > <span id="msgs" class="badge">0</span> </span>
+                <span class="glyphicon glyphicon-volume-up" style="margin:0 25px" title="消息推送"> <span id="msgs"
+                                                                                                      class="badge">0</span> </span>
             </li>
             <li class="foot" onclick="ques()">
-                <span class="glyphicon glyphicon-question-sign" style="" aria-hidden="true"   title="问题反馈" ><span id="ques" class="badge">0</span></span>
+                <span class="glyphicon glyphicon-question-sign" style="" aria-hidden="true" title="问题反馈"><span id="ques"
+                                                                                                               class="badge">0</span></span>
             </li>
         </ul>
     </div>
@@ -194,7 +197,8 @@
     //顶部未读消息以上
     window.onload = function () {
         $('.second-box').on('click', "a", function () {
-            var value = $(this).text().trim()
+            var value = $(this).text().trim();
+            var that = this;
             $('#ajax-content').html('');
 
             switch (value) {
@@ -259,10 +263,38 @@
                 case '服务状态':
                     $('#ajax-content').load('./template/serviceState.html');
                     break;
-                    case '人脸库管理':
+                case '人脸库管理':
                     $('#ajax-content').load('./template/faceDatabase.html');
                     break;
             }
+            ;
+            setTimeout(function () {
+                $('.export ').data('id','button5').addClass('.pcode')
+
+                // 按钮权限
+                $.ajax({
+                    url: pathurl + 'menu/getButton',
+                    data: {
+                        pid: $(that).prev('#pid').text().trim()
+                    },
+                    type: 'post',
+                    success: function (data) {
+                        var $pcode = $('.pcode');
+                        var plist = data.result;
+                        $.each($pcode,function (index,item) {
+                            $(item).hide();
+                        });
+                        $.each(plist, function (index, item) {
+                            $.each($pcode,function (index2,item2) {
+                                if (('button'+item.pcode) == $(item2).data('id')) {
+                                    $(item2).show();
+                                }
+                            })
+
+                        })
+                    }
+                })
+            }, 1000)
         });
 
 

@@ -95,7 +95,11 @@ function TableInit() {
                     field: 'fName',
                     title: '提问人',
 
-                }, {
+                },{
+                field: 'telephone',
+                title: '提问人手机号',
+
+            }, {
                     field: 'qTime',
                     title: '提问时间',
 
@@ -132,7 +136,7 @@ function TableInit() {
                     if(row.status=='Y'){
                       return '<button type="button" class="btn-sm btn face-button" disabled="disabled" style="margin-right:15px;">已回复</button>';
                     }else{
-                      return '<button type="button" class="btn-sm btn face-button" onclick="problemCompany('+row.aId+')" style="margin-right:15px;">回复</button>'
+                      return '<button type="button" data-id="button6" class="pcode btn-sm btn face-button" onclick="problemCompany('+row.aId+')" style="margin-right:15px;">回&#12288;复</button>'
                     }
 
                 }
