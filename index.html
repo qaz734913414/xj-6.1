@@ -21,7 +21,11 @@
     <link href="css/common/bootstrap-datetimepicker.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/common/bootstrapValidator.min.css">
     <!-- 主页样式文件 -->
+    <link rel="stylesheet" href="css/common/iconfont.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.css">
     <link href="css/index-red.css" rel="stylesheet" id="cssfile"/>
+
+
     <!-- zTree样式 -->
     <link href="css/common/zTreeStyle.css" rel="stylesheet"/>
     <link href="css/common/bootstrap-dialog.min.css" rel="stylesheet"/>
@@ -54,11 +58,126 @@
     <script src="js/common/jquery.ztree.exedit-3.5.js" charset="utf-8"></script>
     <script src="js/common/jquery.ztree.excheck-3.5.js" charset="utf-8"></script>
     <script src="js/common/jq.cookie.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.7.0/metisMenu.min.js"></script>
 
     <script>
-        var pathurl = 'http://192.168.0.239:8080/FaceManage/';
+        var pathurl = 'http://192.168.0.169:8080/FaceTest/';
     </script>
 
+    <style>
+
+        #accordion1 {
+
+            position: absolute;
+            margin-top: 62px;
+            width: 242px;
+            height: -webkit-calc(100% - 62px);
+            height: calc(100% - 62px);
+            background: #224e9c;
+            left:-245px;
+            z-index:10000;
+        }
+
+        .leftopen {
+            position: absolute;
+            right: -35px;
+            top: 50%;
+        }
+
+        .leftopen i {
+            font-size: 25px;
+            color: #ffd59f;
+            z-index: 1000001;
+        }
+
+        #ajax-content {
+            position: relative;
+            float: right;
+            width: 100%;
+        }
+
+        .welcome {
+
+        }
+
+        .metismenu {
+            background: #2661c5;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            margin-top: 30px;
+
+        }
+
+        .metismenu > li {
+            /*    -webkit-box-flex: 1;
+                -ms-flex: 1 1 0%;
+                flex: 1 1 0%;*/
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            position: relative;
+            color: #fff;
+
+        }
+
+        .metismenu a {
+            position: relative;
+            display: block;
+            padding: 13px 15px;
+            color: #fff;
+            outline-width: 0;
+            transition: all .3s ease-out;
+        }
+
+        .metismenu ul a {
+            padding: 10px 15px 10px 30px;
+        }
+
+        .metismenu li ul a {
+            padding: 10px 15px 10px 45px;
+            color: #adb5bd;
+        }
+
+        .metismenu li ul {
+            background: #152d59;
+        }
+
+        .metismenu a:hover,
+        .metismenu a:focus,
+        .metismenu a:active {
+            color: #f8f9fa;
+            text-decoration: none;
+            background: #0b7285;
+        }
+
+        .icon-pifu {
+            font-size: 36px;
+            line-height: 90px;
+            color: #fff;
+
+        }
+
+        .iconfont {
+            padding-right: 10px;
+        }
+
+        .leftsecondc {
+            background: #0e1d3a !important;
+            border-left: 4px solid #2661c5 !important;
+        }
+        #main{
+            float: left;
+        }
+    </style>
 
 
 </head>
@@ -90,15 +209,13 @@
                 <img src="./img/index/user.png" alt="人脸识别后台管理系统">
             </li>
             <li class="foot dropdown" id="bgli">
-                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><img title="皮肤" id="bgc"
-                                                                                                 style=""
-                                                                                                 src="img/index/bgc.png"
-                                                                                                 class="img-responsive"/></a>
+                <a href="javascript:viod(0)" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="iconfont icon-pifu" id="bgc"></i></a>
 
                 <ul class="dropdown-menu" id="skin">
 
-                    <li id="index-blue" style="background:blue;">蓝色</li>
-                    <li id="index-red" style="background:red;">红色</li>
+                    <li id="index-blue" style="background:blue;">blue</li>
+                    <li id="index-red" style="background:red;">red</li>
 
 
                 </ul>
@@ -123,12 +240,21 @@
     </div>
 </div>
 
-<div class="welcome">
-    <h3 class="text-center" style="color:#000;padding-top: 10%">欢迎登陆人脸识别后台管理系统!</h3>
+
+<div id="accordion1" class="clearfix" style="">
+    <div class="leftopen"><i  title="展开侧边导航" class="iconfont icon-open"></i><i hidden title="隐藏侧边导航" class="iconfont icon-putaway"></i></div>
+    <ul class="metismenu list-unstyled" id="menu1">
+
+    </ul>
 </div>
-<div id="ajax-content">
+<div id="main">
+    <div class="welcome">
+        <h3 class="text-center" style="color:#000;padding-top: 10%">欢迎登陆人脸识别后台管理系统!</h3>
+    </div>
+    <div id="ajax-content" class="clearfix">
       <!-- 各页面引入 -->
     </div>
+</div>
 <!--提示框开始-->
 <div class="modal fade face-modal in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="false">
@@ -196,8 +322,15 @@
 
     //顶部未读消息以上
     window.onload = function () {
-        $('.second-box').on('click', "a", function () {
+        $('#accordion1 #menu1').metisMenu();
+        $('.second-box,#accordion1 #menu1').on('click', "a", function () {
             var value = $(this).text().trim();
+            $('.second-box,#accordion1 #menu1 li ul li a').removeClass('leftsecondc');
+            if ($(this).hasClass("leftsecond")) {
+                $(this).addClass('leftsecondc');
+            }
+            ;
+
             var that = this;
             $('#ajax-content').html('');
 
@@ -269,7 +402,7 @@
             }
             ;
             setTimeout(function () {
-                $('.export ').data('id','button5').addClass('.pcode')
+                $('.export ').data('id', 'button5').addClass('.pcode')
 
                 // 按钮权限
                 $.ajax({
@@ -281,12 +414,12 @@
                     success: function (data) {
                         var $pcode = $('.pcode');
                         var plist = data.result;
-                        $.each($pcode,function (index,item) {
+                        $.each($pcode, function (index, item) {
                             $(item).hide();
                         });
                         $.each(plist, function (index, item) {
-                            $.each($pcode,function (index2,item2) {
-                                if (('button'+item.pcode) == $(item2).data('id')) {
+                            $.each($pcode, function (index2, item2) {
+                                if (('button' + item.pcode) == $(item2).data('id')) {
                                     $(item2).show();
                                 }
                             })

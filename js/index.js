@@ -57,15 +57,57 @@ $.ajax({
     success: function (firstLevelData) {
 
         var firstLevelData = firstLevelData.result;
-        var str = '';
+        var str = '', leftstr = '';
+       for (var i = 0; i < firstLevelData.length; i++) {
+            str += '<li class="firstLvMenu"><a href="javascript:void(0)">' + firstLevelData[i] .name + '</a></li>';
+        }
         for (var i = 0; i < firstLevelData.length; i++) {
-            str += '<li class="firstLvMenu"><a href="javascript:void(0)">' + firstLevelData[i].name + '</a></li>';
+            leftstr+='<li><a class="has-arrow" href="#" aria-expanded="false"><i class="iconfont icon-'+i+'"></i></span>' + firstLevelData[i].name + '</a><ul aria-expanded="false" class="collapse list-unstyled"></ul></li>'
         }
         $('.first-box .mynav-menu').find('li').eq(1).after(str);
+        $('#accordion1 #menu1').append(leftstr);
         secLvMenu(firstLevelData);
+        leftMenu(firstLevelData);
     }
 });
 
+function leftMenu(firstLevelData) {
+    $('.welcome').hide();
+    $('.second-box-blank').hide();
+    $('#accordion1 #menu1>li>a').each(function (i) {
+        $(this).on('click', function (ev) {
+            var $this=$(this);
+            var index = $(this).parent().index();
+
+            $.ajax({
+                url: pathurl + 'menu/secondLevelMenu',
+                // url:'./testJson/secLvMenu.json',
+                type: 'post',
+                data: {
+                    pid: firstLevelData[i].id
+                },
+                success: function (secondLevelData) {
+                    $('#ajax-content').empty();
+                    var secondLevelData = secondLevelData.result;
+                    var leftsecondstr = '';
+
+                    for (var i = 0; i < secondLevelData.length; i++) {
+                        leftsecondstr += '<li><span hidden id="pid">' + secondLevelData[i].id + '</span><a class="leftsecond"  href="javascript:void(0);"><i class="iconfont icon-dian"></i>' + secondLevelData[i].name + '</a></li>';
+                    };
+
+                    $('#accordion1 #menu1>li').eq(index).find('ul').html(leftsecondstr);
+
+
+                }
+            });
+            setTimeout(function () {
+               $this.parent().toggleClass('active').find('ul').toggleClass('in');
+                $this.parent().siblings().removeClass('active').find('ul').removeClass('in');
+            },0);
+
+        })
+    })
+}
 
 function secLvMenu(firstLevelData) {
 
@@ -77,8 +119,6 @@ function secLvMenu(firstLevelData) {
             $('.second-box-blank').show();
             $(this).find('a').attr('class', 'active');
             $(this).siblings().find('a').removeAttr('class', 'active');
-            // var _href=$(this).find('a').attr('href');
-            // var _url=$(this).find('a').attr('href').substr(_href.indexOf('/')+1);
 
             var nowIndex = $(this).index() - 2;
 
@@ -95,7 +135,7 @@ function secLvMenu(firstLevelData) {
                     var secondLevelData = secondLevelData.result;
                     var str = '';
                     for (var i = 0; i < secondLevelData.length; i++) {
-                        str += '<li><span hidden id="pid">'+secondLevelData[i].id+'</span><a href="javascript:void(0);">' + secondLevelData[i].name + '</a></li>';
+                        str += '<li><span hidden id="pid">' + secondLevelData[i].id + '</span><a href="javascript:void(0);">' + secondLevelData[i].name + '</a></li>';
                     }
                     $('.second-box .mynav-menu').html(str);
                     $('.second-box .mynav-menu').find('a').eq(0).attr('class', 'active-second');
@@ -104,9 +144,7 @@ function secLvMenu(firstLevelData) {
                         $(this).on('click', function (i) {
                             $(this).find('a').attr('class', 'active-second');
                             $(this).siblings().find('a').removeAttr('class', 'active-second');
-
                             // $('#ajax-content>div').eq($(this).index()).show().siblings().hide();
-
                         })
                     });
 
@@ -117,8 +155,28 @@ function secLvMenu(firstLevelData) {
         })
     })
 };
+
+$('.leftopen .icon-putaway').on('click',function () {
+    $('#accordion1').css('left','-245px');
+    $('.leftopen .icon-putaway').hide();
+    $('.leftopen .icon-open').show();
+    $('.first-box .firstLvMenu').show();
+    $('.second-box').show();
+    $('#ajax-content').html('');
+    $('#main').css('marginLeft',0)
+});
+$('.leftopen .icon-open').on('click',function () {
+    $('#accordion1').css('left',0);
+    $('.leftopen .icon-putaway').show();
+    $('.leftopen .icon-open').hide();
+    $('.first-box .firstLvMenu').hide();
+    $('.second-box').hide();
+    $('#ajax-content').html('');
+    $('#main').css('marginLeft','250px')
+})
 // 获取未读问题反馈数量
 var questr = '', quemsgs = [];
+
 function quesmis() {
     quemsgs = [];
     $.ajax({
@@ -149,6 +207,7 @@ function quesmis() {
     });
 
 }
+
 quesmis();
 
 //顶部未读点击
@@ -205,6 +264,7 @@ function ques() {
 };
 // 获取未读消息数量
 var str = '', msgs = [];
+
 function mis() {
     msgs = [];
     $.ajax({
@@ -236,6 +296,7 @@ function mis() {
     });
 
 }
+
 mis();
 
 //顶部未读点击

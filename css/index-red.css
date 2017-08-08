@@ -186,7 +186,7 @@ ul.mynav-menu {
 #bgc {
     position: relative;
     top: -33px;
-    padding: 5px;
+    left:-25px;
 }
 
 #bgc:hover {
