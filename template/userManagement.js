@@ -57,7 +57,7 @@ function getTable() {
         queryParamsType: " limit",
         paginationDetailHAlign: "left",
         clickToSelect: true,
-        searchOnEnterKey: true,
+        search:true,
         //		height:$(document).height()-130,
         buttonsClass: "face",
         showExport: true, //是否显示导出
@@ -72,7 +72,9 @@ function getTable() {
             console.log('初始化' + data)
         }
     });
+
 }
+
 function addFormVali() {
     $('#adduserModal #userForm')
         .bootstrapValidator({
