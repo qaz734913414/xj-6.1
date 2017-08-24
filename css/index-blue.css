@@ -280,7 +280,7 @@ ul.mynav-menu {
     position: fixed;
     margin-top: 62px;
     margin-left: 0px;
-    background: #cfd2d7;
+    background: #e8e4e4;
     color: #000;
     border: 0;
     top: 0;
@@ -1243,7 +1243,7 @@ tbody>tr:nth-of-type(even) {
 
 }
 .face-table thead{
-    background: #c5c5c7;
+    background: #85858a;
 
 
 }
@@ -1703,7 +1703,7 @@ tbody>tr:nth-of-type(even) {
 }
 #accordion1 {
 
-    position: absolute;
+    position: fixed;
     margin-top: 62px;
     width: 242px;
     height: -webkit-calc(100% - 62px);
@@ -1812,4 +1812,7 @@ tbody>tr:nth-of-type(even) {
 }
 #main{
     float: left;
+}
+.count{
+    color: #2aabd2;
 }

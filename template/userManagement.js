@@ -36,18 +36,27 @@ $(function () {
         language: 'zh-CN',
         minView: 2
     });
+
+    $('#expireTime').change(function () {
+        if ($(this).val() == 4) {
+            $('#expireTimeVal').css('visibility', 'visible')
+        } else {
+            $('#expireTimeVal').css('visibility', 'hidden')
+        }
+    });
     addFormVali();
     init();
     /*初始化单位和角色的下拉框 dList rList*/
 });
+
 //初始化table
 function getTable() {
-    var  uRealName=$("#userForm #uRealName").val()||'',
-        uUnitId= $("#userForm #uUnitId").val()||'',
-        province=$("#userForm #distpicker select[name='province']").val()||'',
-        city=$("#userForm #distpicker select[name='city']").val()||'',
-        area= $("#userForm #distpicker select[name='area']").val()||'',
-        uVIP=$("#userForm #adduserModal input[name='uVIP']:checked").val()||'';
+    var uRealName = $("#userForm #uRealName").val() || '',
+        uUnitId = $("#userForm #uUnitId").val() || '',
+        province = $("#userForm #distpicker select[name='province']").val() || '',
+        city = $("#userForm #distpicker select[name='city']").val() || '',
+        area = $("#userForm #distpicker select[name='area']").val() || '',
+        uVIP = $("#userForm #adduserModal input[name='uVIP']:checked").val() || '';
     $("#userTable1").bootstrapTable('destroy');
     $("#userTable1").bootstrapTable({
         method: "post",
@@ -57,15 +66,15 @@ function getTable() {
         queryParamsType: " limit",
         paginationDetailHAlign: "left",
         clickToSelect: true,
-        search:true,
+        search: true,
         //		height:$(document).height()-130,
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "basic", //basic', 'all', 'selected'.
         sortable: true, //是否启用排序
-        sortOrder:'desc',
+        sortOrder: 'desc',
         sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-        pageNumber:1, //初始化加载第一页，默认第一页
+        pageNumber: 1, //初始化加载第一页，默认第一页
         pageSize: 10, //每页的记录行数（*）
         pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
         onLoadSuccess: function (data) {  //加载成功时执行
@@ -144,6 +153,7 @@ function addFormVali() {
             }
         });
 }
+
 // 新增
 function addUser() {
 
@@ -159,16 +169,41 @@ function addUser() {
 
     });
 }
+
 $("#adduserModal #continue").off();
-
-
+$('#adduserModal #uCardId').blur(function () {
+    $(this).val($('#adduserModal #uCardId').val().toString().toUpperCase())
+})
 $("#adduserModal .face-button").click(function () {
     if (!$('#adduserModal #userForm').data('bootstrapValidator').isValid()) {
 
-        return ;
+        return;
 
     } else {
-        //通过校验，可进行提交等操作
+        //通过校验，可进行提交等操作toUpperCase()
+        var expireTime = dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+        $('#expireTime').change(function () {
+            var dateval = $(this).val();
+            switch (dateval) {
+                case 0:
+                    expireTime = dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+                    break;
+                case 1:
+                    expireTime = dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
+                    break;
+                case 2:
+                    expireTime = dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
+                    break;
+                case 3:
+                    expireTime = dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
+                    break;
+                case 4:
+                    expireTime = $('#expireTimeVal').val();
+                    break;
+            }
+        });
+
+        // uCardId=$('#adduserModal #uCardId').val().toString().toUpperCase();
         $.ajax({
             type: 'post',
             url: pathurl + 'user/new',
@@ -176,7 +211,7 @@ $("#adduserModal .face-button").click(function () {
                 uName: $("#adduserModal #uName").val(),
                 uRealName: $("#adduserModal #urealName").val(),
                 uSex: $("#adduserModal input[name='uSex']:checked").val(),
-                uCardId: $("#adduserModal #uCardId").val(),
+                uCardId: $('#adduserModal #uCardId').val(),
 
                 uStatus: $("#adduserModal #uStatus").val(),
                 uPhone: $("#adduserModal #uPhone").val(),
@@ -185,7 +220,7 @@ $("#adduserModal .face-button").click(function () {
                 uDuty: $("#adduserModal #uDuty").val(),
                 uRoleId: $("#adduserModal #uRoleId").val(),
                 uUnitId: $("#adduserModal #uunitId").val(),
-                expireTime: $("#adduserModal #expireTimeVal").val(),
+                expireTime:expireTime,
                 province: $("#adduserModal #distpicker select[name='province']").val(),
 
                 city: $("#adduserModal #distpicker select[name='city']").val(),
@@ -218,14 +253,17 @@ $("#adduserModal .face-button").click(function () {
         });
     }
 });
-$("#adduserModal").on("hidden.bs.modal", function() {
+$("#adduserModal").on("hidden.bs.modal", function () {
     $("#adduserModal #userForm").data('bootstrapValidator').resetForm();
+    $("#adduserModal #userForm")[0].reset();
+    $('#expireTimeVal').css('visibility', 'hidden');
 });
-$("#modifyUserModal").on("hidden.bs.modal", function() {
+$("#modifyUserModal").on("hidden.bs.modal", function () {
     $("#modifyUserModal #userForm")[0].reset();
 });
 /*初始化单位和角色的下拉框 dList rList*/
 var rListData;
+
 // 角色数组
 function init() {
     var dname;
@@ -277,6 +315,7 @@ function reset() {
     // console.log(aa);
     getTable();
 }
+
 function statusFormatter(value, row, index) {
 
     if (row.uStatus == 'Y') {
@@ -330,6 +369,7 @@ function updateStatus(row) {
         dataType: 'json'
     });
 }
+
 //修改状态
 window.statusEvents = {
     'click .reset': function (e, value, row, index) {
@@ -428,6 +468,7 @@ function toRemove() {
         $("#myModal").modal('show');
     }
 }
+
 //表格批量解绑
 function toUnbind() {
     var ids = getSelectedRowsIds('userTable1');
@@ -441,6 +482,7 @@ function toUnbind() {
         $("#myModal").modal('show');
     }
 }
+
 $("#unbindTModel #continue").click(function () {
     $("#unbindTModel").modal('hide')
     $.ajax({
@@ -464,6 +506,7 @@ $("#unbindTModel #continue").click(function () {
         }
     });
 });
+
 //表格批量修改
 function toWrench() {
     var ids = getSelectedRowsIds('userTable1');
@@ -476,6 +519,7 @@ function toWrench() {
         $("#myModal").modal('show');
     }
 }
+
 $("#wrenchModal #cancel").click(function () {
     $("#wrenchModal").modal('hide')
     $("#userTable1").bootstrapTable('refresh');
@@ -637,7 +681,7 @@ function userEdit(row) {
 
     setTimeout(function () {
         $("#modifyUserModal").modal('show');
-    },100)
+    }, 100)
 
     $("#modifyUserModal #cancel").off();
     $("#modifyUserModal #cancel").click(function () {
@@ -645,7 +689,7 @@ function userEdit(row) {
         $("#userTable1").bootstrapTable('refresh');
         $("#userForm")[0].reset();
     });
-    $("#modifyUserModal").on("hidden.bs.modal", function() {
+    $("#modifyUserModal").on("hidden.bs.modal", function () {
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
@@ -720,6 +764,7 @@ function doUpload() {
     });
 
 }
+
 $("#fileinputModal #continue").click(function () {
     var formData = new FormData($("#uploadForm")[0]);
     console.log(formData.get("file"));
@@ -758,6 +803,7 @@ $("#fileinputModal #continue").click(function () {
     }
 
 });
+
 function fileInfo(state) {
     //初始化table
 
@@ -799,6 +845,7 @@ function fileInfo(state) {
     });
 
 }
+
 function sexFormatter(value) {
     if (value == 0) {
         return '男';
@@ -806,7 +853,8 @@ function sexFormatter(value) {
         return '女';
     }
 }
-function nameformater(value,row) {
+
+function nameformater(value, row) {
     return '<span class="hov" onclick="openinfo(\'' + row.uName + '\')">' + value + '</span>'
 }
 
@@ -821,13 +869,15 @@ function roleFormatter(value) {
 }
 
 var dListData;
-function unitFormatter(value,row) {
+
+function unitFormatter(value, row) {
     for (var m = 0; m < dListData.length; m++) {
         if (value == dListData[m].did) {
             return dListData[m].dname;
         }
     }
 }
+
 $.ajax({
     type: 'POST',
     url: pathurl + 'user/initDeptAndRole',
@@ -846,6 +896,7 @@ $.ajax({
 
     }
 })
+
 // 点击用户查看信息
 function openinfo(username) {
 
@@ -884,6 +935,7 @@ function openinfo(username) {
 
     });
 }
+
 // 点击查看次数
 
 $('#openinofModal .modal-body').on('click', ' .count', function () {
@@ -893,19 +945,20 @@ $('#openinofModal .modal-body').on('click', ' .count', function () {
     countinfo(name, index)
 
 })
+
 function countinfo(n, i) {
 
     $("#counttable").bootstrapTable('destroy');
     switch (i) {
         case 0:
             $('#counttable').bootstrapTable({
-                url: pathurl + 'facelog/retrieveShow?username='+n, //请求后台的URL（*）
+                url: pathurl + 'facelog/retrieveShow?username=' + n, //请求后台的URL（*）
 
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
-                sortOrder:'desc',
+                sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
                 pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
                 onLoadSuccess: function (data) {  //加载成功时执行
@@ -916,7 +969,7 @@ function countinfo(n, i) {
                     formatter: function (value, row, index) {
                         return ++index;
                     }
-                },  {
+                }, {
                     field: 'time',
                     title: '时间'
                 },]
@@ -924,13 +977,13 @@ function countinfo(n, i) {
             break;
         case 1:
             $('#counttable').bootstrapTable({
-                url: pathurl + 'facelog/compareShow?username='+n, //请求后台的URL（*）
+                url: pathurl + 'facelog/compareShow?username=' + n, //请求后台的URL（*）
 
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
-                sortOrder:'desc',
+                sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
                 pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
                 onLoadSuccess: function (data) {  //加载成功时执行
@@ -941,7 +994,7 @@ function countinfo(n, i) {
                     formatter: function (value, row, index) {
                         return ++index;
                     }
-                },  {
+                }, {
                     field: 'time',
                     title: '时间'
                 },]
@@ -949,7 +1002,7 @@ function countinfo(n, i) {
             break;
         case 2:
             $('#counttable').bootstrapTable({
-                url: pathurl + 'facelog/idCardShow?username='+n, //请求后台的URL（*）
+                url: pathurl + 'facelog/idCardShow?username=' + n, //请求后台的URL（*）
 
 
                 pagination: true,
@@ -957,7 +1010,7 @@ function countinfo(n, i) {
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
-                sortOrder:'desc',
+                sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
                 pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
                 onLoadSuccess: function (data) {  //加载成功时执行
@@ -968,7 +1021,7 @@ function countinfo(n, i) {
                     formatter: function (value, row, index) {
                         return ++index;
                     }
-                },  {
+                }, {
                     field: 'time',
                     title: '时间'
                 },]
@@ -976,7 +1029,7 @@ function countinfo(n, i) {
             break;
         case 3:
             $('#counttable').bootstrapTable({
-                url: pathurl + 'facelog/loginShow?username='+n, //请求后台的URL（*）
+                url: pathurl + 'facelog/loginShow?username=' + n, //请求后台的URL（*）
 
                 // url: './faceLog.json',
                 pagination: true,
@@ -984,7 +1037,7 @@ function countinfo(n, i) {
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
-                sortOrder:'desc',
+                sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
                 pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
                 onLoadSuccess: function (data) {  //加载成功时执行
@@ -995,7 +1048,7 @@ function countinfo(n, i) {
                     formatter: function (value, row, index) {
                         return ++index;
                     }
-                },  {
+                }, {
                     field: 'time',
                     title: '时间'
                 },]
@@ -1006,4 +1059,77 @@ function countinfo(n, i) {
     $("#countModal").modal();
 
 
+}
+
+var uploader;
+//保存最后上传的图片
+var uploadFile;
+$(function () {
+    uploader = uploadFile($("#add-image-button"));
+    uploadFile = null;//重置
+    national.forEach(function (val, i) {
+        $('#nation').append('<option value="' + val + '">' + val + '</option>');
+    });
+    getTable();
+
+    addFormVali();
+    init();
+    /*初始化单位和角色的下拉框 dList rList*/
+});
+
+function uploadFile(button) {
+    return new qq.FineUploaderBasic(
+        {
+            button: button[0],
+            request: {
+                endpoint: pathurl + 'library/libPicAdd',
+                method: "POST"
+            },
+            validation: {
+                allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+            },
+            debug: true,
+            multiple: false,
+            autoUpload: false,
+            editFilename: {
+                enable: false
+            },
+            messages: {
+                noFilesError: '没有选中文件'
+            },
+            text: {
+                formatProgress: "{percent}% of {total_size}",
+                failUpload: "上传失败",
+                waitingForResponse: "上传中...",
+                paused: "暂停"
+            },
+            callbacks: {
+                onError: function (id, filename, message, xhr) {
+                    console.log(id, filename, '上传失败', message);
+                    if (filename === undefined)
+                        alert("请选择图片或重新选择图片");
+                },
+                onSubmit: function (id, filename) {
+                    console.log(filename, '文件开始提交');
+                    var self = this;
+                    button.text("重新添加照片");
+                    //画框展示
+                    this.drawThumbnail(id, button.prev('#img0')[0]);
+                    //由于上传完成后文件会自动清空，需要保存到uploadFiles
+                    if (button.attr("id") == "add-image-button") {
+                        uploadFile = self.getFile(id);
+                    }
+                },
+                onComplete: function (id, filename, responseJSON, xhr) {
+                    console.log(id, filename, '上传成功，返回信息为：',
+                        responseJSON);
+                    //object可以如下初始化表格
+                    /* if (imagetable)
+                     imagetable.fnDestroy(false);
+                     imageTable(responseJSON.images);
+                     var self = this; */
+                    // self.clearStoredFiles();
+                }
+            }
+        });
 }
