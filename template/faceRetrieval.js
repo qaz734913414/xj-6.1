@@ -389,8 +389,6 @@ function uploadChosen() {
         form_Data.append("url", $("#retrieveModal .show-results .thumbnail img").attr("src"));
         form_Data.append("name", name.substring(name.indexOf("：") + 1));
         form_Data.append("idNo", idNo.substring(idNo.indexOf("：") + 1));
-        console.log(idNo.substring(idNo.indexOf("：") + 1));
-        console.log('form_Data' + form_Data);
         $.ajax({
             type: 'post',
             url: pathurl + 'facelog/insertChosenInfo/',

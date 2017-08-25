@@ -73,27 +73,30 @@ $(function () {
 });
 
 // 新增修改组织机构初始化下拉框
-$.ajax({
-    type: 'POST',
-    url: pathurl + 'department/initDeptList',
+function xiala() {
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'department/initDeptList',
 
-    success: function (data) {
-        var data = data.list, len = data.length, str = '';
-        for (var i = 0; i < len; i++) {
-            str += ' <option value=' + data[i].did + '>' + data[i].dname + '</option>'
+        success: function (data) {
+            var data = data.list, len = data.length, str = '';
+            for (var i = 0; i < len; i++) {
+                str += ' <option value=' + data[i].did + '>' + data[i].dname + '</option>'
 
+            }
+            ;
+
+            $('#modifyInfoModal #dPId').append(str);
+            $('#deptInfoModal #dPId').append(str)
+
+        },
+        error: function () {
+            $("#modal-body-text").text("删除失败!");
+            $("#myModalLabel").modal();
         }
-        ;
-
-        $('#modifyInfoModal #dPId').append(str);
-        $('#deptInfoModal #dPId').append(str)
-
-    },
-    error: function () {
-        $("#modal-body-text").text("删除失败!");
-        $("#myModalLabel").modal();
-    }
-});
+    });
+}
+xiala();
 
 function onClick(event, treeId, treeNode) {
     var url, code = $('#u_depart').val(),
@@ -339,6 +342,7 @@ function deptEdit(row) {
     });
 }
 function addDepartment() {
+    xiala();
     $("#deptInfoModal .modal-title").html("添加");
     $("#deptInfoModal").modal();
     $("#deptInfoModal #name").val('');

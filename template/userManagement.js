@@ -8,8 +8,20 @@ if (token) {
         }
     });
 }
-
+var uploader;
+//保存最后上传的图片
+var uploadFile1;
 $(function () {
+    uploader = uploadFile($("#add-image-button"));
+    uploadFile1 = null;//重置
+    national.forEach(function (val, i) {
+        $('#nation').append('<option value="' + val + '">' + val + '</option>');
+    });
+
+    addFormVali();
+    init();
+    /*初始化单位和角色的下拉框 dList rList*/
+
     getTable();
     $(".face-table-group button[title='Export data']").removeClass(
         "btn-default");
@@ -44,9 +56,7 @@ $(function () {
             $('#expireTimeVal').css('visibility', 'hidden')
         }
     });
-    addFormVali();
-    init();
-    /*初始化单位和角色的下拉框 dList rList*/
+
 });
 
 //初始化table
@@ -208,11 +218,13 @@ $("#adduserModal .face-button").click(function () {
             type: 'post',
             url: pathurl + 'user/new',
             data: {
+                approval: $("#adduserModal #approval").val(),
+                policeType: $("#adduserModal #policeType").val(),
                 uName: $("#adduserModal #uName").val(),
                 uRealName: $("#adduserModal #urealName").val(),
                 uSex: $("#adduserModal input[name='uSex']:checked").val(),
                 uCardId: $('#adduserModal #uCardId').val(),
-
+                file:uploadFile1,
                 uStatus: $("#adduserModal #uStatus").val(),
                 uPhone: $("#adduserModal #uPhone").val(),
                 uTelephone: $("#adduserModal #uTelephone").val(),
@@ -1061,21 +1073,7 @@ function countinfo(n, i) {
 
 }
 
-var uploader;
-//保存最后上传的图片
-var uploadFile;
-$(function () {
-    uploader = uploadFile($("#add-image-button"));
-    uploadFile = null;//重置
-    national.forEach(function (val, i) {
-        $('#nation').append('<option value="' + val + '">' + val + '</option>');
-    });
-    getTable();
 
-    addFormVali();
-    init();
-    /*初始化单位和角色的下拉框 dList rList*/
-});
 
 function uploadFile(button) {
     return new qq.FineUploaderBasic(
@@ -1117,7 +1115,7 @@ function uploadFile(button) {
                     this.drawThumbnail(id, button.prev('#img0')[0]);
                     //由于上传完成后文件会自动清空，需要保存到uploadFiles
                     if (button.attr("id") == "add-image-button") {
-                        uploadFile = self.getFile(id);
+                        uploadFile1 = self.getFile(id);
                     }
                 },
                 onComplete: function (id, filename, responseJSON, xhr) {

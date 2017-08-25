@@ -236,7 +236,7 @@
                                  style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
                                 点击上传
 
-                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="qqfile"
+                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file"
                                        style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
                             </div>
 
@@ -251,10 +251,10 @@
                                 </div>
                             </div>
                             <div class="form-inline face-form">
-                                <div class="form-group" style="margin-left:40px;">
+                                <div class="form-group" style="margin-left:45px;">
                                     真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
                                 </div>
-                                <div class="form-group" style="margin-left:10px;">
+                                <div class="form-group" style="margin-left:7px;">
                                     <input type="text" class="form-control" path="uRealName" name="uRealName"
                                            placeholder="真实姓名"
                                            id="urealName">
@@ -264,7 +264,7 @@
                                 <div class="form-group" style="margin-left:45px;">
                                     性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
                                 </div>
-                                <div class="form-group" style="margin-left:10px;">
+                                <div class="form-group" style="margin-left:7px;">
                                     <div class="radio-inline" style="margin-top:-10px;">
                                         <input type="radio" name="uSex" value="1"/>男
                                     </div>
@@ -276,7 +276,7 @@
                             </div>
                             <div class="form-inline face-form">
                                 <div class="form-group " style="margin-left:45px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-                                <div class="form-group" style="margin-left:10px;">
+                                <div class="form-group" style="margin-left:8px;">
                                     <div class="radio-inline" id="uVIP" style="margin-top:-10px;">
                                         <input type="radio" path="uVIP" name="uVIP">是
                                     </div>
@@ -312,6 +312,17 @@
 
 
                             </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人
+                                </div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="approval" id="approval"
+                                           name="approval" placeholder="审批人">
+                                </div>
+
+
+                            </div>
                         </div>
                     </div>
                     <div class="form-inline face-form" style="margin-top:12px;">
@@ -340,12 +351,13 @@
                                    placeholder="警号">
                         </div>
                         <div class="form-group" style="margin-left:20px;">
-                            职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
+                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
                         </div>
                         <div class="form-group" style="margin-left:7px;">
-                            <input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty"
-                                   placeholder="职务">
+                            <input type="text" class="form-control" path="policeType" id="policeType" name="policeType"
+                                   placeholder="警种">
                         </div>
+
                     </div>
                     <div class="form-inline face-form" style="margin-top:12px;">
                         <div class="form-group" style="margin-left:45px;">
@@ -369,22 +381,22 @@
                     <div class="form-inline face-form " style="margin-top:12px; ">
                         <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
                         <div class="form-group " style="margin-left:2px; ">
-                            <select path="expireTime " name="expireTime " id="expireTime" class="form-control ">
+                            <select  id="expireTime" class="form-control ">
                                 <option value="0">7天</option>
                                 <option value="1">30天</option>
                                 <option value="2">6个月</option>
                                 <option value="3">一年</option>
                                 <option value="4">自定义</option>
                             </select>
-                            <input path="expireTime2" name="expireTime2" style="width:100px;visibility: hidden" id="expireTimeVal" class="form-control "
+                            <input  style="width:100px;visibility: hidden" id="expireTimeVal" class="form-control "
                                    type="text "/>
                         </div>
                         <div class="form-group" style="margin-left:15px;">
-                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
+                            职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
                         </div>
                         <div class="form-group" style="margin-left:7px;">
-                            <input type="text" class="form-control" path="uPolicyz" id="uPolicyz" name="uPolicyz"
-                                   placeholder="警种">
+                            <input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty"
+                                   placeholder="职务">
                         </div>
 
                     </div>
@@ -392,7 +404,7 @@
                         <div class="form-group "
                              style="margin-left:45px; ">行&nbsp;&nbsp;政&nbsp;&nbsp;区&nbsp;&nbsp;域</div>
                         <div class="form-group " style="margin-left:10px; ">
-                            <div data-toggle="distpicker" id="distpicker" path="uArea" name="uArea">
+                            <div data-toggle="distpicker" id="distpicker">
                                 <select class="form-control" name="province"></select>
                                 <select class="form-control" name="city"></select>
                                 <select class="form-control" name="area"></select>
@@ -774,12 +786,12 @@
                         </tr>
 
                         <tr>
-                            <td class='count'> 人脸检索（次数）：{{= retrieveCount}} <small>详情</small></td>
-                            <td class='count'>人脸比对（次数）：{{= compareCount}} <s>详情</s></td>
+                            <td class='count'> 人脸检索（次数）：{{= retrieveCount}} </td>
+                            <td class='count'>人脸比对（次数）：{{= compareCount}} </td>
                         </tr>
                         <tr>
-                            <td class='count'>身份检索（次数）：{{= idCardCount}}<s>详情</s></td>
-                            <td class='count'>登录（次数）：{{= loginCount}}<s>详情</s></td>
+                            <td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+                            <td class='count'>登录（次数）：{{= loginCount}}</td>
                         </tr>
 
                         </table>
