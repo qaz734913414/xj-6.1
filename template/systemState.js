@@ -10,8 +10,6 @@ $('#systemStateTable').bootstrapTable({
   queryParamsType: " limit",
   paginationPreText: "上一页",
   paginationNextText: "下一页",
-  showColumns:true,
-  showRefresh:true,
   striped: true,
   pagination: true, //是否显示分页（*）
   pageNumber: 1, //初始化加载第一页，默认第一页
