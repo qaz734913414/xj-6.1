@@ -72,6 +72,7 @@ function TableInit() {
             pagination: true, //是否显示分页（*）
             sortable: true, //是否启用排序
             sortOrder: "desc", //排序方式asc  desc
+            search:true,
             // queryParamsType: "limit",
             queryParams: oTableInit.queryParams, //传递参数（*）
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -161,7 +162,7 @@ function TableInit() {
     oTableInit.queryParams = function (params) {
         var temp;
         var logUser = $("#susername").val();
-
+		console.log(params)
         var startTime = $("#from").val();
         var endTime = $("#to").val();
         var unit = $("#unit").val();
@@ -178,7 +179,8 @@ function TableInit() {
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
                 area: $("#distpicker select[name='area']").val(),
-                uUnit:$('#uUnit').val()
+                uUnit:$('#uUnit').val(),
+                search:params.search
                 // // startTime:$("#from").val(),
                 // endTime:$("#to").val()
             };
@@ -192,7 +194,8 @@ function TableInit() {
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
                 area: $("#distpicker select[name='area']").val(),
-                uUnit:$('#uUnit').val()
+                uUnit:$('#uUnit').val(),
+                search:params.search
             };
         } else {
             temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
@@ -204,7 +207,8 @@ function TableInit() {
                 province: $("#distpicker select[name='province']").val(),
                 city: $("#distpicker select[name='city']").val(),
                 area: $("#distpicker select[name='area']").val(),
-                uUnit:$('#uUnit').val()
+                uUnit:$('#uUnit').val(),
+                search:params.search
             };
         }
         return temp;
