@@ -106,9 +106,13 @@ $(function () {
                     success: function (data) {
                         console.log(data)
                         if (data.code == 0) {
-                            //    console.log(data.token);
+                                  console.log(data);
                             // alert('登陆成功');
-                            localStorage.setItem('username', data.result);
+                            var userMes={}
+                            userMes.username=data.result;
+                            userMes.roleid=data.roleid;
+                            localStorage.setItem('userMes', JSON.stringify(userMes));
+                            localStorage.setItem('token', data.token);
                             localStorage.setItem('token', data.token);
                             var cUsername = $('#username').val();
                             var cPassword = $('#password').val();

@@ -1840,3 +1840,14 @@ tbody>tr:nth-of-type(even) {
 .count{
     color: #2aabd2;
 }
+.fixed-table-container thead th .both{
+	background-image: url(../img/bootstraptableimg/updown.png);
+}
+.fixed-table-container thead th .desc{
+	background-image: url(../img/bootstraptableimg/down.png);
+}
+.fixed-table-container thead th .asc{
+	background-image: url(../img/bootstraptableimg/up.png);
+}
+
+

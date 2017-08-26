@@ -121,8 +121,7 @@ function getTable() {
     
         uUnitId = $("#userdiv #uUnitId").val() || '',
         uRoleId = $("#userdiv #uRoleId").val() || '';
-        policeType=$("#userdiv #policeType").val() || '',
-        approval=$("#userdiv #approval").val() || '';
+        policeType=$("#userdiv #policeType").val() || '';
         var areacodeArr=[],areanameArr=[];
         
         var pr = $("#userdiv input[name='userProvinceId']").val() || '';
@@ -162,7 +161,7 @@ function getTable() {
     $("#userTable1").bootstrapTable('destroy');
     $("#userTable1").bootstrapTable({
         method: "post",
-        url: pathurl + "user/usersList?uRealName=" + uRealName + "&uUnitId=" + uUnitId + "&uRoleId=" + uRoleId + "&areacode=" +areacode+"&policeType="+policeType+'&approval='+approval,
+        url: pathurl + "user/usersList?uRealName=" + uRealName + "&uUnitId=" + uUnitId + "&uRoleId=" + uRoleId + "&areacode=" +areacode+"&policeType="+policeType,
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

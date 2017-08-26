@@ -21,9 +21,9 @@ if (cookie_skin) {
     $.cookie("MyCssSkin", this.id, {path: '/', expires: 10});
 }
 jQuery.support.cors = true;
-var user = localStorage.getItem('username');
+var userMes =JSON.parse(localStorage.getItem('userMes'));
 
-if (!user) {
+if (!userMes) {
     $('#loginModal #myModalLabel').html('请登录!');
     $('#loginModal').modal('show');
 }
@@ -33,8 +33,7 @@ $('#loginModal button').on('click', function () {
 
 
 var token = window.localStorage.getItem('token');
-var username = window.localStorage.getItem('username');
-$('#username').html(username);
+$('#username').html(userMes.username);
 
 if (token) {
     $.ajaxSetup({
