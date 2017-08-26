@@ -7,10 +7,14 @@ $(function () {
         language: 'zh-CN',
         minView: 2
     });
+
+$('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
 })
 function changeTime() {
     $("#startDate").datetimepicker('remove');
     $("#endDate").datetimepicker('remove');
+    $("#startQDate").datepicker('remove');
+    $("#endQDate").datetimepicker('remove');
     var date = new Date();
     var y = date.getFullYear();
     var seperator1 = "-";
@@ -30,50 +34,26 @@ function changeTime() {
     var s = $("#timestatus").find("option:selected").val();
 
     if (s == 0) {
-
+		$('.mydate').show()
+		$('.mydateQ').hide()
         getDateByYear(y);
+    } else if (s == 3) {
+    	$('.mydate').hide()
+		$('.mydateQ').show()
+		
+        getDateByQuarter(y,month);
     } else if (s == 1) {
-
+		$('.mydate').show()
+		$('.mydateQ').hide()
         getDateByMonth(m);
     } else if (s == 2) {
-
+		$('.mydate').show()
+		$('.mydateQ').hide()
         getDateByDay(d);
     }
 }
 changeTime()
-function getDateByMonth() {
-    //按月查询
-    //$("#startDate").datetimepicker().format();
-    $("#startDate").datetimepicker({
-        format: "yyyy-mm",
-        startView: 3,
-        startDate: 3,
-        todayHighlight: true,
-        autoclose: true,
-        language: 'zh-CN',
-        minView: 4,
-        todayBtn: true,
-    }).on("change", function (ev) {
-        var start = $('#startDate').val();
 
-        $('#startDate').datetimepicker('hide');
-    });
-    $("#endDate").datetimepicker({
-        format: "yyyy-mm",
-        startView: 3,
-        showMeridian: true,
-        autoclose: true,
-        language: 'zh-CN',
-        minView: 4,
-        todayBtn: true,
-    }).on("change", function (ev) {
-        var end = $('#endDate').val();
-
-        $('#endDate').datetimepicker('hide');
-    });
-    $('#startDate').datetimepicker('update', new Date());
-    $('#endDate').datetimepicker('update', new Date());
-}
 function getDateByYear() {
     //按年查询
     $("#startDate").datetimepicker({
@@ -87,6 +67,10 @@ function getDateByYear() {
         language: 'zh-CN',
         minView: 'decade',
         endDate: new Date()
+    }).on('changeDate',function(){
+      var startTime=$(this).val();
+      $("#endDate").datetimepicker('setStartDate',startTime);
+      $("#endDate").datetimepicker('hide');
     });
 
     $("#endDate").datetimepicker({
@@ -104,7 +88,112 @@ function getDateByYear() {
     $('#startDate').datetimepicker('update', new Date());
     $('#endDate').datetimepicker('update', new Date());
 }
+function getDateByQuarter(y,month) {
+	$.fn.datepicker.dates['qtrs'] = {
+	  days: ["Sunday", "Moonday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+	  daysShort: ["Sun", "Moon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+	  daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+	  months: ["一季度", "二季度", "三季度", "四季度", "", "", "", "", "", "", "", ""],
+	  monthsShort: ["一季度", "二季度", "三季度", "四季度", "", "", "", "", "", "", "", ""],
+	  today: "Today",
+	  clear: "Clear",
+	  format: "mm/dd/yyyy",
+	  titleFormat: "MM yyyy",
+	  /* Leverages same syntax as 'format' */
+	  weekStart: 0
+	};
+//	$('.mydateQ input').datepicker('remove');
+	$('#QDate').datepicker({
+	  format: "yyyy MM",
+	  minViewMode: 1,
+	  autoclose: true,
+	  language: "qtrs",
+	  endDate: new Date(),
+	  forceParse: false
+	}).on("show", function(event) {
+	  
+	  $(".month").each(function(index, element) {
+	    if (index > 3) $(element).hide();
+	  });
+	  
+	}).on("change", function (ev) {
+		console.log()
+		qFormat(this,$(this).val(),month)
+        $(this).datepicker('hide');
+    });
+	var date = new Date();
+	  var y = date.getFullYear();
+	  var month=month
+	  if(month>=1&&month<=3){
+	  	$('#QDate').val(y+' 一季度')
+	  }else if(month>=4&&month<=6){
+	  	$('#QDate').val(y+' 二季度')
+	  }else if(month>=7&&month<=9){
+	  	$('#QDate').val(y+' 三季度')
+	  }else if(month>=10&&month<=12){
+	  	$('#QDate').val(y+' 四季度')
+	  }
+	  qFormat($('#QDate'),$('#QDate').val(),month)
+    function qFormat(el,val,month){
+    	console.log(val)
+    	console.log(month)
+    	if(!!val){
+    		var qArr=val.split(' ');
+	    	console.log(qArr)
+	    	var qVal='';
+	    	if(qArr[1]=="一季度"){
+	    		qVal=qArr[0]+'-01'+' '+qArr[0]+'-03';
+	    	}else if(qArr[1]=="二季度"){
+	    		qVal=qArr[0]+'-04'+' '+qArr[0]+'-06';
+	    	}else if(qArr[1]=="三季度"){
+	    		qVal=qArr[0]+'-07'+' '+qArr[0]+'-09';
+	    	}else if(qArr[1]=="四季度"){
+	    		qVal=qArr[0]+'-10'+' '+qArr[0]+'-12';
+	    	}
+			$(el).attr('data-q',qVal)
+    	}else{
+    		$(el).attr('data-q',month+' '+month)
+    	}
+    	
+    }
+}
+function getDateByMonth() {
+    //按月查询
+    //$("#startDate").datetimepicker().format();
+    $("#startDate").datetimepicker({
+        format: "yyyy-mm",
+        startView: 3,
+        startDate: 3,
+        todayHighlight: true,
+        autoclose: true,
+        language: 'zh-CN',
+        minView: 4,
+        todayBtn: true,
+    }).on("change", function (ev) {
+        var start = $('#startDate').val();
 
+        $('#startDate').datetimepicker('hide');
+    }).on('changeDate',function(){
+      var startTime=$(this).val();
+      $("#endDate").datetimepicker('setStartDate',startTime);
+      $("#endDate").datetimepicker('hide');
+    });
+    $("#endDate").datetimepicker({
+        format: "yyyy-mm",
+        startView: 3,
+        showMeridian: true,
+        autoclose: true,
+        language: 'zh-CN',
+        minView: 4,
+        todayBtn: true,
+    }).on("change", function (ev) {
+        var end = $('#endDate').val();
+
+        $('#endDate').datetimepicker('hide');
+    });
+    $('#startDate').datetimepicker('update', new Date());
+    $('#endDate').datetimepicker('update', new Date());
+}
 function getDateByDay() {
     //按天查询
     $("#startDate").datetimepicker({
@@ -118,6 +207,10 @@ function getDateByDay() {
 
     }).on("change", function (ev) {
         $('#endDate').datetimepicker('hide');
+    }).on('changeDate',function(){
+      var startTime=$(this).val();
+      $("#endDate").datetimepicker('setStartDate',startTime);
+      $("#endDate").datetimepicker('hide');
     });
     $("#endDate").datetimepicker({
         format: "yyyy-mm-dd",
@@ -136,10 +229,18 @@ function getDateByDay() {
 }
 
 function getMessage3() {
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
-
-    var choesnType = $("#timestatus").find("option:selected").val();
+	if($(".mydateQ").is(':hidden')){
+		var choesnType = $("#timestatus").find("option:selected").val();
+		var startDate = $("#startDate").val();
+	    var endDate = $("#endDate").val();
+	}else{
+		console.log($('#QDate').attr('data-q'))
+		var choesnType = 1;
+		var QDate=$('#QDate').attr('data-q').split(' ');
+		var startDate = QDate[0];
+	    var endDate = QDate[1];
+	}
+    
     var province = $("#distpicker select[name='province']").val();
     var city = $("#distpicker select[name='city']").val();
     var area = $(" #distpicker select[name='area']").val();
@@ -190,7 +291,9 @@ function QueryString(key) {
 // }
 function reset3() {
     $(".face-form input").val("");
-    $(".face-form select").val("-1");
+    $(".face-form select").val("0");
+    $('.mydate').show()
+	$('.mydateQ').hide()
     getMessage3();
 }
 
