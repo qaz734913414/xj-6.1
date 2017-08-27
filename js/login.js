@@ -1,7 +1,7 @@
 
 $(function () {
 
-    localStorage.setItem('username', '');
+    localStorage.setItem('userMes', '');
     localStorage.setItem('token', '');
 
     if (!!$.cookie('username') && !!$.cookie('password')) {
@@ -111,6 +111,8 @@ $(function () {
                             var userMes={}
                             userMes.username=data.result;
                             userMes.roleid=data.roleid;
+                            userMes.uid=data.uId;
+                            userMes.safecode=data.safecode;
                             localStorage.setItem('userMes', JSON.stringify(userMes));
                             localStorage.setItem('token', data.token);
                             localStorage.setItem('token', data.token);

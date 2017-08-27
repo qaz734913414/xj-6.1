@@ -1,3 +1,8 @@
+
+var userMes=JSON.parse(localStorage.getItem('userMes'))
+console.log(userMes)
+
+
 //初始化Table
 var token = window.localStorage.getItem('token');
 // console.log(token)
@@ -73,7 +78,7 @@ $('#userdiv a.selector-name').on('click', function() {
 
 //初始化table
 function getTable() {
-  var uRealName = $("#userdiv #uRealName").val() || '',
+  var uName = $("#userdiv #uRealName").val() || '',
 
     uUnitId = $("#userdiv #uUnitId").val() || '',
     uRoleId = $("#userdiv #uRoleId").val() || '';
@@ -113,7 +118,7 @@ function getTable() {
   $("#userTable1").bootstrapTable('destroy');
   $("#userTable1").bootstrapTable({
     method: "post",
-    url: pathurl + "user/usersList?uRealName=" + uRealName + "&uUnitId=" + uUnitId + "&uRoleId=" + uRoleId + "&areacode=" + areacode + "&policeType=" + policeType + '&approval=' + approval,
+    url: pathurl + "user/usersList?uName=" + uName + "&uUnitId=" + uUnitId + "&uRoleId=" + uRoleId + "&areacode=" + areacode + "&policeType=" + policeType + '&approval=' + approval,
     pagination: true,
     contentType: "application/x-www-form-urlencoded",
     queryParamsType: "limit",
@@ -273,8 +278,12 @@ $('#adduserModal #expireTime').change(function() {
 });
 
 $("#adduserModal #continue").click(function() {
-  if (!$('#adduserModal #userForm').data('bootstrapValidator').isValid()) {
-
+  //触发全部验证
+   $('#adduserModal #userForm').data("bootstrapValidator").validate();
+   // 获取当前表单验证状态
+    // flag = true/false
+  var flag = $('#adduserModal #userForm').data("bootstrapValidator").isValid();
+ if (!flag) {
     return;
 
   } else {
@@ -476,11 +485,29 @@ function statusFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-  if (row.bindType == 0) {
-    return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
-  } else if (row.bindType == 1) {
-    return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+  if(userMes.uid==row.uId){   //登陆的用户和列表的用户相同   ：不现实删除按钮   登录用户不能删除自己
+    if(userMes.uid==1){
+      if (row.bindType == 0) {
+        return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
+      } else if (row.bindType == 1) {
+        return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+      }
+    }else{
+      if (row.bindType == 0) {
+        return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
+      } else if (row.bindType == 1) {
+        return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+      }
+    }
+
+  }else{
+    if (row.bindType == 0) {
+      return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
+    } else if (row.bindType == 1) {
+      return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+    }
   }
+
 }
 
 $('#userModal #cancel').on('click', function() {
@@ -516,6 +543,11 @@ window.statusEvents = {
 };
 
 window.operateEvents = { //done
+  'click .resetSafetyCode': function(e, value, row, index) { //安全吗重置
+    resetSafetyCodeValidator()
+    $('#resetSafetyCodeModal').modal('show');
+    $('#rowUId').val(row.uId);
+  },
   'click .resetPwd': function(e, value, row, index) { //密码重置
     $("#resetTModel #modal-body-text").text("确定将密码重置为123456吗?");
     $("#resetTModel").modal('show');
@@ -592,6 +624,83 @@ $("#unbindTModel #continue").off().click(function() { //done
   });
 });
 
+function resetSafetyCodeValidator(){
+  var oldPassword=userMes.safecode;
+  var oldPd=$('#resetSafetyCodeModal #oldPd').val();
+  var newPd=$('#resetSafetyCodeModal #newPd').val();
+  var twiceNewPd=$('#resetSafetyCodeModal #twiceNewPd').val();
+
+  $('#resetSafetyCodeForm').bootstrapValidator({
+    fields: {
+      oldPd: {
+        trigger:"change",
+        validators: {
+          notEmpty: {
+            message: '请输入原始密码'
+          },
+          callback: {
+               message: '密码错误',
+               callback: function(value, validator) {
+                 console.log(md5(value).toUpperCase())
+                 console.log(oldPassword)
+                  return md5(value).toUpperCase()==oldPassword;
+               }
+           }
+        },
+
+      },
+      newPd: {
+        trigger:"change",
+        validators: {
+
+          notEmpty: {
+            message: '请输入新密码'
+          },
+          identical: {
+              field: 'twiceNewPd',
+              message: '两次输入的密码不相符'
+          }
+        }
+      },
+      twiceNewPd: {
+        trigger:"change",
+        validators: {
+          notEmpty: {
+            message: '请再次输入新密码'
+          },
+          identical: {
+              field: 'newPd',
+              message: '两次输入的密码不相符'
+          }
+        }
+      }
+    }
+  });
+
+}
+//安全码重置
+$("#resetSafetyCodeModal #resetSubmit").on('click',function(){
+$('#resetSafetyCodeForm').data('bootstrapValidator').validate();
+  var twiceNewPd=$('#resetSafetyCodeModal #twiceNewPd').val();
+  if($('#resetSafetyCodeForm').data('bootstrapValidator').isValid()){
+    console.log('验证通过')
+    $.ajax({
+      type: 'POST',
+      url: pathurl + 'user/resetsafepwd',
+      data: {
+        safecode:md5(twiceNewPd).toUpperCase()
+      },
+      success: function(data) {
+        if(data.code==200){
+          $("#myModal #modal-body-id").text("重置成功!");
+          $("#myModal").modal();
+          $("#resetSafetyCodeModal").modal('hide');
+        }
+      }
+    })
+  }
+
+})
 //表格批量删除
 function toRemove() {
   var ids = getSelectedRowsIds('userTable1');
@@ -724,8 +833,11 @@ $("#delUserTModel #cancel").click(function() {
   $("#userTable1").bootstrapTable('refresh');
 });
 // 删除用户
+
 $("#delUserTModel #continue").off();
 $("#delUserTModel #continue").click(function() {
+
+
   $("#delUserTModel").modal('hide');
   $.ajax({
     type: 'POST',
