@@ -16,6 +16,14 @@
 		text-decoration: none;
 		line-height: 34px;
 	}
+	/*#resetSafetyCodeForm .form-group{
+		position: relative;
+	}*/
+	#resetSafetyCodeForm .form-group small{
+		text-align: center;
+    width: 220px;
+    float: right;
+	}
 </style>
 <!--<script src="js/city/distpicker.js"></script>-->
 <!-- 用户管理 -->
@@ -785,19 +793,18 @@
 				<h4 class="modal-title text-center">安全码重置</h4>
 			</div>
 			<div class="modal-body">
-				<div class="row">
 					<form id="resetSafetyCodeForm">
-						<div class="form-inline face-form">
-								<div class="form-group" style="margin-bottom: 20px;">
-										<label>请输入原始密码</label>
+						<div class="form-inline face-form" style="width:100%;">
+								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+										<label style="display:inline-block;width:120px;">请输入原始密码</label>
 										<input class="form-control" id="oldPd" name="oldPd" type="text" placeholder="请输入原始密码">
 								</div>
-								<div class="form-group">
-										<label>请输入新密码</label>
+								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+										<label style="display:inline-block;width:120px;">请输入新密码</label>
 										<input class="form-control" id="newPd" name="newPd" type="text" placeholder="请输入新密码">
 								</div>
-								<div class="form-group">
-										<label>请再次输入新密码</label>
+								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+										<label style="display:inline-block;width:120px;">请再次输入新密码</label>
 										<input class="form-control" id="twiceNewPd" name="twiceNewPd" type="text" placeholder="请再次输入新密码">
 								</div>
 						</div>
@@ -806,8 +813,6 @@
 							<button type="button" class="btn face-button" id="resetSubmit">确定</button>
 						</div>
 					</form>
-
-				</div>
 			</div>
 		</div>
 	</div>

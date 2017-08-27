@@ -1,6 +1,5 @@
 
 var userMes=JSON.parse(localStorage.getItem('userMes'))
-console.log(userMes)
 
 
 //初始化Table
@@ -17,15 +16,15 @@ var uploader1;
 var uploader2;
 //保存最后上传的图片
 var uploadFile1;
+var uploadFile2;
 $(function() {
   var select = $('#city-picker-search').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
   var select1 = $('#city-picker-search1').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
   var select2 = $('#city-picker-search2').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
 
-  uploader1 = uploadFile($("#add-image-button1"));
-  uploader2 = uploadFile($("#add-image-button2"));
-  uploadFile1 = null; //重置
-  uploadFile2 = null; //重置
+
+
+
   national.forEach(function(val, i) {
     $('#nation').append('<option value="' + val + '">' + val + '</option>');
   });
@@ -124,25 +123,37 @@ function getTable() {
     queryParamsType: "limit",
     paginationDetailHAlign: "left",
     clickToSelect: true,
-    //      queryParams: function (params) {//这个是设置查询时候的参数，我直接在源码中修改过，不喜欢offetset 我后台用的 是pageNo. 这样处理就比较的满足我的要求，其实也可以在后台改，麻烦！
-    //	      console.log(params)
-    ////	      var querySystemSet=$('#querySystemSet').val();
-    ////	      if(querySystemSet==-1){
-    ////	        var temp={
-    ////	          // type:'',
-    ////	          pageNumber:params.offset/params.limit+1,
-    ////	          pageSize:params.limit
-    ////	        }
-    ////	      }else{
-    ////	        var temp={
-    ////	          type:$('#querySystemSet').val(),
-    ////	          pageNumber:params.offset/params.limit+1,
-    ////	          pageSize:params.limit
-    ////	        }
-    ////	      }
-    ////
-    ////	      return temp;
-    //	    },
+   queryParams: function (params) {
+      var obj={}
+      obj.limit=params.limit;
+      obj.offset=params.offset;
+      obj.limit=params.limit;
+      obj.order=params.order;
+      if(params.sort){
+        obj.sort=params.sort;
+      }
+      if(params.search){
+        obj.search=params.search;
+      }
+      return obj
+      console.log(params)
+//	      var querySystemSet=$('#querySystemSet').val();
+//	      if(querySystemSet==-1){
+//	        var temp={
+//	          // type:'',
+//	          pageNumber:params.offset/params.limit+1,
+//	          pageSize:params.limit
+//	        }
+//	      }else{
+//	        var temp={
+//	          type:$('#querySystemSet').val(),
+//	          pageNumber:params.offset/params.limit+1,
+//	          pageSize:params.limit
+//	        }
+//	      }
+//
+//	      return temp;
+    },
     //      search: true,
     //		height:$(document).height()-130,
     buttonsClass: "face",
@@ -234,7 +245,8 @@ function addFormVali() {
 
 // 新增
 function addUser() {
-
+  uploadFile1=null
+  uploader1 = uploadFile($("#add-image-button1"));
   $("#adduserModal .modal-title").html("添加用户");
   $("#adduserModal").modal();
   $("#adduserModal #cancel").off()
@@ -277,7 +289,15 @@ $('#adduserModal #expireTime').change(function() {
 
 });
 
+
+$('#adduserModal #userForm').on('hide.bs.modal', function () {
+  $('#adduserModal #userForm')[0].reset();
+
+  $('#adduserModal #userForm').data('bootstrapValidator').resetForm();
+ });
+
 $("#adduserModal #continue").click(function() {
+
   //触发全部验证
    $('#adduserModal #userForm').data("bootstrapValidator").validate();
    // 获取当前表单验证状态
@@ -373,6 +393,7 @@ $("#adduserModal #continue").click(function() {
           $("#modal-body-id").html('添加成功');
           $('#myModal').modal('show');
           $("#userForm")[0].reset();
+          uploadFile1 = null; //重置
           // LoadAjaxContent(pathurl+'user/list');
           $("#userTable1").bootstrapTable('refresh');
         } else {
@@ -555,6 +576,8 @@ window.operateEvents = { //done
   },
   'click .update': function(e, value, row, index) { //修改用户
     userEdit(row);
+    uploadFile2=null
+    uploader2 = uploadFile($("#add-image-button2"));
   },
   'click .delete': function(e, value, row, index) { //删除用户
     // deleteUser(row);
@@ -625,15 +648,9 @@ $("#unbindTModel #continue").off().click(function() { //done
 });
 
 function resetSafetyCodeValidator(){
-  var oldPassword=userMes.safecode;
-  var oldPd=$('#resetSafetyCodeModal #oldPd').val();
-  var newPd=$('#resetSafetyCodeModal #newPd').val();
-  var twiceNewPd=$('#resetSafetyCodeModal #twiceNewPd').val();
-
   $('#resetSafetyCodeForm').bootstrapValidator({
     fields: {
       oldPd: {
-        trigger:"change",
         validators: {
           notEmpty: {
             message: '请输入原始密码'
@@ -641,9 +658,21 @@ function resetSafetyCodeValidator(){
           callback: {
                message: '密码错误',
                callback: function(value, validator) {
-                 console.log(md5(value).toUpperCase())
-                 console.log(oldPassword)
-                  return md5(value).toUpperCase()==oldPassword;
+                 var oldPassword;
+                 $.ajax({
+                   type: 'POST',
+                   async:false,
+                   url: pathurl + 'user/getsafepwd',
+                   success: function(data) {
+                    //  console.log(data)
+                     if(data.code==200){
+                       oldPassword=data.result
+                     }
+                   }
+                 })
+                //  console.log(md5(value).toUpperCase())
+                //   console.log(oldPassword)
+                return md5(value).toUpperCase()==oldPassword;
                }
            }
         },
@@ -676,14 +705,19 @@ function resetSafetyCodeValidator(){
       }
     }
   });
-
+  $('#resetSafetyCodeForm').data('bootstrapValidator').validate();
 }
 //安全码重置
+$('#resetSafetyCodeModal').on('hide.bs.modal', function () {
+  $('#resetSafetyCodeForm')[0].reset();
+  $('#resetSafetyCodeForm').data('bootstrapValidator').resetForm();
+ });
 $("#resetSafetyCodeModal #resetSubmit").on('click',function(){
-$('#resetSafetyCodeForm').data('bootstrapValidator').validate();
+
   var twiceNewPd=$('#resetSafetyCodeModal #twiceNewPd').val();
   if($('#resetSafetyCodeForm').data('bootstrapValidator').isValid()){
     console.log('验证通过')
+    console.log(md5(twiceNewPd).toUpperCase())
     $.ajax({
       type: 'POST',
       url: pathurl + 'user/resetsafepwd',
@@ -693,6 +727,7 @@ $('#resetSafetyCodeForm').data('bootstrapValidator').validate();
       success: function(data) {
         if(data.code==200){
           $("#myModal #modal-body-id").text("重置成功!");
+          $('#resetSafetyCodeForm')[0].reset();
           $("#myModal").modal();
           $("#resetSafetyCodeModal").modal('hide');
         }
@@ -865,7 +900,17 @@ $("#delUserTModel #continue").click(function() {
 });
 
 // 修改
+$('#modifyUserModal #userForm').on('hide.bs.modal', function () {
+  $('#modifyUserModal #userForm')[0].reset();
+  uploadFile2 = null; //重置
+  $('#modifyUserModal #userForm').data('bootstrapValidator').resetForm();
+ });
 function userEdit(row) {
+  console.log(uploadFile2)
+
+uploadFile2 = null; //重置
+
+
   console.log(row);
   var uSex = row.uSex;
   var uVip = row.uVip;
@@ -912,6 +957,7 @@ function userEdit(row) {
   var select2 = $('#city-picker-search2').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
   $("#modifyUserModal #uName").val(row.uName);
   $("#modifyUserModal #urealName").val(row.uRealName);
+
   if(row.picurl){
     $('#modifyUserModal #img0').attr('src',row.picurl)
   }
@@ -919,8 +965,9 @@ function userEdit(row) {
 
   var areanameArr=row.uArea.split('-')
   var areacodeArr=row.areacode.split('-')
-  console.log(areanameArr)
-  console.log(areacodeArr)
+
+  // console.log(areanameArr)
+  // console.log(areacodeArr)
   for(var i=0;i<areacodeArr.length;i++){
     var obj={}
     obj.id=areacodeArr[i];
@@ -999,9 +1046,12 @@ function userEdit(row) {
 
     var faceDatas = new FormData();
     expireTime=$('#expireTimeVal2').val()
-    console.log(expireTime)
+
     faceDatas.append('uId', uId);
-    faceDatas.append('file', uploadFile2);
+    if(uploadFile2){
+      faceDatas.append('file', uploadFile2);
+    }
+
     faceDatas.append('uName', $("#modifyUserModal #uName").val());
     faceDatas.append('policeType', $("#modifyUserModal #policeType").val());
     // faceDatas.append('uVIP', $("#modifyUserModal #uVIP").val());
