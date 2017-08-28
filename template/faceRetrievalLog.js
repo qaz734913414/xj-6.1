@@ -80,7 +80,7 @@ function getTable() {
 
     $('#face-table').bootstrapTable({
         url: pathurl + 'facelog/queryRetrieveLog?areacode=' + areacode +  '&username=' + username+'&plat=' + plat + '&company=' + company + '&chosen=' + chosen + '&harmful=' + harmful + '&from=' + from+ '&to=' + to,
-
+        method: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

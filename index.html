@@ -308,7 +308,7 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
                     data: {
                         pid: $(that).prev('#pid').text().trim()
                     },
-                    type: 'post',
+                    method:'post',
                     success: function (data) {
                         var $pcode = $('.pcode');
                         var plist = data.result;
@@ -330,7 +330,13 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
 
 
     };
-
+//    //绑定beforeunload事件
+//    window.addEventListener('beforeunload', function(event) {
+//        $.post(url:'+ pathurl + '/logout',{},function(result){
+//            console.log('result:'+result);
+//        });
+//        console.log('I am the 1st one.');
+//    });
 </script>
 
 </html>

@@ -53,7 +53,7 @@ function getTable(){
 	$('#systemStateTable').bootstrapTable("destroy");
 	$('#systemStateTable').bootstrapTable({
 	  url: pathurl + 'facelog/queryFaceLog?areacode=' + areacode, /*还未开发的*/
-
+        type: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

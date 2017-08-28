@@ -303,6 +303,7 @@ function getTable3(startDate, endDate, departname, choesnType, areacode) {
     $("#proportion").bootstrapTable({
         method: "post",
         url: pathurl + "syslog/chosenresult?startDate=" + startDate + "&endDate=" + endDate + "&choesnType=" + choesnType + "&departname=" + departname + "&areacode=" + areacode,
+        type: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

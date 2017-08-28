@@ -84,6 +84,7 @@ function getTable() {
         + "&areacode=" + areacode + "&u_role_id=" + u_role_id + "&dateStatus="
         + dateStatus + "&u_real_name=" + u_real_name
         + "&u_status=" + u_status,
+        type: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

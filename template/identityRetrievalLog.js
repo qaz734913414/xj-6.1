@@ -70,6 +70,7 @@ function getTable() {
     $('.ft2').bootstrapTable({
         url: pathurl + 'facelog/queryIdcardLog?areacode=' + areacode + '&username=' + username + '&plat=' + plat + '&company=' + company + '&chosen=' + chosen + '&harmful=' + harmful + '&from=' + from + '&to=' + to,
         // url: './testJson/queryIdcardLog.json',
+        type: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

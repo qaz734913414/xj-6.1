@@ -47,7 +47,7 @@ if (token) {
 $('.second-box-blank').hide();
 // $('#ajax-content>div').hide();
 $.ajax({
-    type: 'post',
+    method:'post',
     url: pathurl + 'menu/firstLevelMenu',
     // url:'./testJson/firstLvMenu.json',
     xhrFields: {
@@ -82,7 +82,7 @@ function leftMenu(firstLevelData) {
             $.ajax({
                 url: pathurl + 'menu/secondLevelMenu',
                 // url:'./testJson/secLvMenu.json',
-                type: 'post',
+                method:'post',
                 data: {
                     pid: firstLevelData[i].id
                 },
@@ -126,7 +126,7 @@ function secLvMenu(firstLevelData) {
             $.ajax({
                 url: pathurl + 'menu/secondLevelMenu',
                 // url:'./testJson/secLvMenu.json',
-                type: 'post',
+                method:'post',
                 data: {
                     pid: firstLevelData[i].id
                 },
