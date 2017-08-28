@@ -2,14 +2,13 @@ var uploadFile;
 var heightFactor = 1.2;//图片高度宽度比例
 var logId;//全局调用
 $('.nation').html('<option value="">民族</option>');
-var national = [
-    "汉族", "壮族", "满族", "回族", "苗族", "维吾尔族", "土家族", "彝族", "蒙古族", "藏族", "布依族", "侗族", "瑶族", "朝鲜族", "白族", "哈尼族",
-    "哈萨克族", "黎族", "傣族", "畲族", "傈僳族", "仡佬族", "东乡族", "高山族", "拉祜族", "水族", "佤族", "纳西族", "羌族", "土族", "仫佬族", "锡伯族",
-    "柯尔克孜族", "达斡尔族", "景颇族", "毛南族", "撒拉族", "布朗族", "塔吉克族", "阿昌族", "普米族", "鄂温克族", "怒族", "京族", "基诺族", "德昂族", "保安族",
-    "俄罗斯族", "裕固族", "乌孜别克族", "门巴族", "鄂伦春族", "独龙族", "塔塔尔族", "赫哲族", "珞巴族"
-];
-
 $(function () {
+    var select = $('#city-picker-search').cityPicker({
+        dataJson: cityData,
+        renderMode: true,
+        search: true,
+        linkage: false
+    });
     $('#retrieveModal2 #uploadChosen')
         .bootstrapValidator({
             fields: {
@@ -31,22 +30,6 @@ $(function () {
         $('.nation').append('<option value="' + val + '">' + val + '</option>');
     });
 
-    var $distpicker = $('#distpicker');
-    $('#distpicker select').each(function (i, val) {
-        $(this).find('option').eq(0).prop('selected', 'selected');
-    })
-
-    $('#reset').click(function () {
-        $distpicker.distpicker('reset');
-    });
-
-    $('#reset-deep').click(function () {
-        $distpicker.distpicker('reset', true);
-    });
-
-    $('#destroy').click(function () {
-        $distpicker.distpicker('destroy');
-    });
 
     // logId = null;
     var uploader = bindUploadFileComponent("add-image-button");
@@ -68,8 +51,6 @@ $(function () {
     $("#retrieveModal2 .face-button").on("click", function () {
         $('#retrieveModal2 #uploadChosen').data('bootstrapValidator').validate();
         uploadChosen();
-
-
     });
 
     winChange();
@@ -83,7 +64,12 @@ $(function () {
         $('.form-group select').each(function (i, val) {
             // console.log($(this).find('option')[0])
             $(this).find('option').eq(0).prop('selected', 'selected');
-        })
+        });
+        $(".face-form input,.face-form select").val("");
+        $('#city-picker-search .province a').html('请选择省份')
+        $('#city-picker-search .city a').html('请选择省份')
+        $('#city-picker-search .district a').html('请选择区县')
+        $('#city-picker-search input').val("");
 
         faceList();
 
@@ -96,8 +82,57 @@ $(function () {
     })
 
 });
+$('#retrievalFrom input').on('input propertychange', function () {
+    faceList()
+})
+$('#retrievalFrom select').on('input propertychange', function () {
+    faceList()
+})
+$('#retrievalFrom .selector-item').on('input propertychange', function () {
+    faceList()
+})
+
+$('#retrievalFrom a.selector-name').on('click', function () {
+    $('#retrievalFrom .selector-item ul li').each(function (i, val) {
+        $(val).on('click', function () {
+            setTimeout(function () {
+                faceList()
+            })
+        })
+    })
+})
 function faceList() {
-    var faceData = new FormData($('#retrievalFrom')[0]);
+    // 地区选择编码
+    var areacodeArr = [], areanameArr = [];
+    var pr = $("#retrievalFrom input[name='userProvinceId']").val() || '';
+    areacodeArr.push(pr)
+    var ci = $("#retrievalFrom input[name='userCityId']").val() || '';
+    areacodeArr.push(ci)
+    var di = $("#retrievalFrom input[name='userDistrictId']").val() || '';
+    areacodeArr.push(di)
+
+
+    var prn = $("#retrievalFrom .province>a").text() || '';
+    areanameArr.push(prn)
+    var cin = $("#retrievalFrom .city>a").text() || '';
+    areanameArr.push(cin)
+    var din = $("#retrievalFrom .district>a").text() || '';
+    areanameArr.push(din)
+    var areacode = regk(areacodeArr).substr(1);
+    var areaname = regk(areanameArr).substr(1);
+
+    var nation=$('#retrievalFrom .nation').val();
+    var sex=$('#retrievalFrom .sex').val();
+    var ispoint=$('#retrievalFrom .ispoint').val();
+    var startbirth=$('#from').val();
+    var endbirth=$('#to').val();
+    var faceData = new FormData();
+    faceData.append('areacode',areacode);
+    faceData.append('nation',nation);
+    faceData.append('ispoint',ispoint);
+    faceData.append('sex',sex);
+    faceData.append('startbirth',startbirth);
+    faceData.append('endbirth',endbirth);
     $.ajax({
         type: 'post',
         url: pathurl + 'face/retrieveSearch',

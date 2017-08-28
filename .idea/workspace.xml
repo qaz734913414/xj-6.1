@@ -1,37 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="c362cfdb-8639-494d-a776-52a56e8f35c7" name="Default" comment="">
+    <list default="true" readonly="true" id="c362cfdb-8639-494d-a776-52a56e8f35c7" name="Default" comment="人脸检索 页面 联想搜素">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Explain.text" afterPath="$PROJECT_DIR$/Explain.text" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index-blue.css" afterPath="$PROJECT_DIR$/css/index-blue.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/index-red.css" afterPath="$PROJECT_DIR$/css/index-red.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/citylist/city-picker.css" afterPath="$PROJECT_DIR$/js/citylist/city-picker.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/common.js" afterPath="$PROJECT_DIR$/js/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/index.js" afterPath="$PROJECT_DIR$/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceDatabase.html" afterPath="$PROJECT_DIR$/template/faceDatabase.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceDatabase.js" afterPath="$PROJECT_DIR$/template/faceDatabase.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrieval.html" afterPath="$PROJECT_DIR$/template/faceRetrieval.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrievalLog.html" afterPath="$PROJECT_DIR$/template/faceRetrievalLog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrievalLog.js" afterPath="$PROJECT_DIR$/template/faceRetrievalLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceToFaceLog.html" afterPath="$PROJECT_DIR$/template/faceToFaceLog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceToFaceLog.js" afterPath="$PROJECT_DIR$/template/faceToFaceLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityRetrieval.html" afterPath="$PROJECT_DIR$/template/identityRetrieval.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityRetrievalLog.html" afterPath="$PROJECT_DIR$/template/identityRetrievalLog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityRetrievalLog.js" afterPath="$PROJECT_DIR$/template/identityRetrievalLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/statisticsVictories.html" afterPath="$PROJECT_DIR$/template/statisticsVictories.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/statisticsVictories.js" afterPath="$PROJECT_DIR$/template/statisticsVictories.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/systemLog.html" afterPath="$PROJECT_DIR$/template/systemLog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/systemLog.js" afterPath="$PROJECT_DIR$/template/systemLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/systemState.html" afterPath="$PROJECT_DIR$/template/systemState.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/systemState.js" afterPath="$PROJECT_DIR$/template/systemState.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userInformation.html" afterPath="$PROJECT_DIR$/template/userInformation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userInformation.js" afterPath="$PROJECT_DIR$/template/userInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrieval.js" afterPath="$PROJECT_DIR$/template/faceRetrieval.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userManagement.html" afterPath="$PROJECT_DIR$/template/userManagement.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userManagement.js" afterPath="$PROJECT_DIR$/template/userManagement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userOperations.html" afterPath="$PROJECT_DIR$/template/userOperations.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userOperations.js" afterPath="$PROJECT_DIR$/template/userOperations.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,21 +19,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
+      <file leaf-file-name="faceRetrieval.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/template/faceRetrieval.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="296" column="29" lean-forward="true" selection-start-line="296" selection-start-column="29" selection-end-line="296" selection-end-column="29" />
+            <state relative-caret-position="450">
+              <caret line="48" column="7" lean-forward="true" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="systemState.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/systemState.html">
+      <file leaf-file-name="faceRetrieval.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/faceRetrieval.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="34" column="10" lean-forward="false" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+            <state relative-caret-position="347">
+              <caret line="99" column="31" lean-forward="false" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#div#4;n#form#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faceRetrievalLog.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="50" column="89" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="50" selection-end-column="89" />
               <folding />
             </state>
           </provider>
@@ -68,8 +54,8 @@
       <file leaf-file-name="systemState.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/systemState.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
-              <caret line="54" column="75" lean-forward="true" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
+            <state relative-caret-position="180">
+              <caret line="6" column="7" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="6" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -78,8 +64,8 @@
       <file leaf-file-name="faceToFaceLog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="108" column="39" lean-forward="true" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
+            <state relative-caret-position="420">
+              <caret line="223" column="43" lean-forward="true" selection-start-line="220" selection-start-column="4" selection-end-line="223" selection-end-column="43" />
               <folding>
                 <marker date="1503910523028" expanded="false" signature="6774:8167" ph="{...}" />
               </folding>
@@ -90,39 +76,21 @@
       <file leaf-file-name="Explain.text" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Explain.text">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="420">
               <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="systemLog.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/systemLog.html">
+      <file leaf-file-name="faceRetrievalLog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="33" column="14" lean-forward="true" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="systemLog.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template/systemLog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="36" column="14" lean-forward="false" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="statisticsVictories.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/statisticsVictories.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="352" column="43" lean-forward="false" selection-start-line="352" selection-start-column="43" selection-end-line="352" selection-end-column="43" />
-              <folding />
+            <state relative-caret-position="300">
+              <caret line="10" column="23" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="10" selection-end-column="23" />
+              <folding>
+                <element signature="n#!!block;n#openinfo#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,18 +98,28 @@
       <file leaf-file-name="userOperations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/userOperations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="349" column="43" lean-forward="true" selection-start-line="346" selection-start-column="4" selection-end-line="349" selection-end-column="43" />
+            <state relative-caret-position="210">
+              <caret line="345" column="25" lean-forward="true" selection-start-line="344" selection-start-column="3" selection-end-line="345" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userOperations.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/userOperations.html">
+      <file leaf-file-name="identityRetrievalLog.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="56" />
+            <state relative-caret-position="257">
+              <caret line="206" column="52" lean-forward="true" selection-start-line="206" selection-start-column="4" selection-end-line="206" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userManagement.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/userManagement.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="398" column="69" lean-forward="false" selection-start-line="398" selection-start-column="69" selection-end-line="398" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -151,17 +129,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>data-idCard</find>
-      <find>$(&quot;#countModal&quot;).modal()</find>
-      <find>thumbnail</find>
-      <find>$(&quot;#countModal&quot;).modal();</find>
-      <find>switch (i)</find>
       <find>#counttable'</find>
-      <find>distpicker</find>
       <find>id=&quot;distpicker&quot;</find>
       <find>counttable</find>
       <find>#userdiv</find>
-      <find>city-picker-search</find>
       <find>areaname</find>
       <find>#userdiv</find>
       <find>userProvinceId</find>
@@ -174,23 +145,36 @@
       <find>.face-table</find>
       <find>openinfo</find>
       <find>oTableInit</find>
-      <find>userdiv</find>
-      <find>reset</find>
       <find>regk</find>
       <find>getMessage3</find>
       <find>datepicker</find>
-      <find>#face-table</find>
       <find>getTable3</find>
+      <find>str</find>
+      <find>city-picker-selector</find>
+      <find>distpicker</find>
+      <find>faceRetrieval</find>
+      <find>userdiv</find>
+      <find>#face-table</find>
+      <find>datetimepicker</find>
+      <find>city-picker-search</find>
+      <find>reset</find>
+      <find>mydate</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>.ft2</replace>
       <replace>userdiv1</replace>
       <replace>counttable2</replace>
+      <replace>retrievalFrom</replace>
       <replace>#face-table2</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="liucongjun &lt;1196631658@qq.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -204,11 +188,9 @@
         <option value="$PROJECT_DIR$/login.html" />
         <option value="$PROJECT_DIR$/template/faceDatabase.js" />
         <option value="$PROJECT_DIR$/template/identityRetrieval.html" />
-        <option value="$PROJECT_DIR$/template/faceRetrieval.html" />
         <option value="$PROJECT_DIR$/template/faceDatabase.html" />
         <option value="$PROJECT_DIR$/css/index-red.css" />
         <option value="$PROJECT_DIR$/css/index-blue.css" />
-        <option value="$PROJECT_DIR$/template/userManagement.html" />
         <option value="$PROJECT_DIR$/js/citylist/city-picker.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/index.js" />
@@ -231,6 +213,9 @@
         <option value="$PROJECT_DIR$/template/systemState.js" />
         <option value="$PROJECT_DIR$/template/systemLog.html" />
         <option value="$PROJECT_DIR$/template/systemLog.js" />
+        <option value="$PROJECT_DIR$/template/userManagement.html" />
+        <option value="$PROJECT_DIR$/template/faceRetrieval.js" />
+        <option value="$PROJECT_DIR$/template/faceRetrieval.html" />
       </list>
     </option>
   </component>
@@ -424,25 +409,33 @@
       <updated>1496285430322</updated>
       <workItem from="1496285431838" duration="25000" />
       <workItem from="1496285474543" duration="3131000" />
-      <workItem from="1503881921989" duration="25027000" />
+      <workItem from="1503881921989" duration="30390000" />
     </task>
+    <task id="LOCAL-00001" summary="所有点击用户名 弹窗查看次数修改，&#10;所有页面省市区搜素 替换联想搜素">
+      <created>1503912252741</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1503912252741</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28187000" />
+    <option name="totallyTimeSpent" value="33550000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12486828" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1459431" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.115342766" sideWeight="0.5021075" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32910052" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.04461371" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24156693" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.022850925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.022850925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -491,13 +484,15 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="所有点击用户名 弹窗查看次数修改，&#10;所有页面省市区搜素 替换联想搜素" />
+    <option name="LAST_COMMIT_MESSAGE" value="所有点击用户名 弹窗查看次数修改，&#10;所有页面省市区搜素 替换联想搜素" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/compare.html" />
-    <entry file="file://$PROJECT_DIR$/useropera.html" />
     <entry file="file://$PROJECT_DIR$/prolist.html" />
     <entry file="file://$PROJECT_DIR$/countInfo.html" />
     <entry file="file://$PROJECT_DIR$/identityquery.html" />
@@ -571,14 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceRetrieval.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/faceDatabase.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
@@ -619,14 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/userManagement.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7634">
-          <caret line="401" column="70" lean-forward="false" selection-start-line="401" selection-start-column="56" selection-end-line="401" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1790">
@@ -660,60 +639,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3840">
-          <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="15" />
-          <folding>
-            <element signature="n#!!block;n#openinfo#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/userManagement.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3750">
           <caret line="139" column="28" lean-forward="true" selection-start-line="139" selection-start-column="28" selection-end-line="139" selection-end-column="28" />
-          <folding>
-            <element signature="e#46822#59988#0" expanded="false" />
-            <marker date="1503906727290" expanded="true" signature="16852:16870" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="16977:16995" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17322:17340" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17430:17448" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17559:17577" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17686:17704" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17707:17715" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17884:17902" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="17992:18010" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18121:18139" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18232:18250" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18440:18458" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18569:18587" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18696:18714" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18717:18725" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="18887:18905" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19016:19034" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19127:19145" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19334:19352" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19463:19481" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19590:19608" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19717:19735" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19738:19746" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="19900:19918" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="20029:20047" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="20156:20174" ph="..." />
-            <marker date="1503906727290" expanded="true" signature="20267:20285" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -737,14 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -781,44 +703,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Explain.text">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/userOperations.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="108" column="39" lean-forward="true" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
-          <folding>
-            <marker date="1503910523028" expanded="false" signature="6774:8167" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/systemState.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="54" column="75" lean-forward="true" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/userOperations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="349" column="43" lean-forward="true" selection-start-line="346" selection-start-column="4" selection-end-line="349" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -833,8 +721,102 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/systemLog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="36" column="14" lean-forward="false" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        <state relative-caret-position="-150">
+          <caret line="22" column="19" lean-forward="true" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/userManagement.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="398" column="69" lean-forward="false" selection-start-line="398" selection-start-column="69" selection-end-line="398" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/systemState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="6" column="7" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="6" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="223" column="43" lean-forward="true" selection-start-line="220" selection-start-column="4" selection-end-line="223" selection-end-column="43" />
+          <folding>
+            <marker date="1503910523028" expanded="false" signature="6774:8167" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="206" column="52" lean-forward="true" selection-start-line="206" selection-start-column="4" selection-end-line="206" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/resultsDisposal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="271" column="15" lean-forward="false" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/userOperations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="345" column="25" lean-forward="true" selection-start-line="344" selection-start-column="3" selection-end-line="345" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Explain.text">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="10" column="23" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="10" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!block;n#openinfo#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="50" column="89" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="50" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/faceRetrieval.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="99" column="31" lean-forward="false" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#div#4;n#form#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/faceRetrieval.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="48" column="7" lean-forward="true" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
           <folding />
         </state>
       </provider>
