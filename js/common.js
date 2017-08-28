@@ -143,24 +143,19 @@ var dateUtil = {
 }
 // 使用案例  var newDate = DateAdd("d ", 5, now);
 // console.log(dateUtil.dateAdd('m ', 6, new Date));
+// 去掉地区选择插件的请选择
+function regk(data) {
+    var str = ''
+    for (var i = 0; i < data.length; i++) {
 
-// 普通用户注销退出
-$("#logout_btn").on("click", function() {
-	window.location.href = basePath + "/logout";
-});
+        if (!data[i] || !data[i].search(/请选择/g)) { //为空就进来
 
-$("#modifyPass").on("click", function() {
-	LoadAjaxContent(basePath + "/userinfo");
-});
-
-$("#admin_modifyPass").on("click", function() {
-	LoadAjaxContent(basePath + "/admin/info");
-});
-
-//管理员注销退出
-$("#admin_logout_btn").on("click", function() {
-	window.location.href = basePath + "/adminLogout";
-});
+        } else {
+            str += '-' + data[i]
+        }
+    }
+    return str || ''
+}
 
 function compareDate(strDate1, strDate2){
 	if (new Date(strDate1.replace(/\-/g, "\/")) >= new Date(strDate2.replace(/\-/g, "\/"))) {

@@ -163,72 +163,49 @@ function openFormatter(value, row, index) {
 // 点击建库者查看信息
 function openinfo(username) {
 
-    $("#libPicList").bootstrapTable('destroy');
-
-    $('#libPicList').bootstrapTable({
-        url: pathurl + 'library/libPicList?dbname=' + username,
-        method: 'post', //请求方式（*）
-        cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-        pagination: true, //是否显示分页（*）
-        queryParamsType: "limit",
-        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
-        responseHandler: function (res) {
-            //远程数据加载之前,处理程序响应数据格式,对象包含的参数: 我们可以对返回的数据格式进行处理
-            //在ajax后我们可以在这里进行一些事件的处理
-            return res.result;
+    var openinofDom = $("#openinofModal .modal-body");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'facelog/personInfo',
+        data: {
+            username: username
         },
-        onLoadSuccess: function (data) {
+        cache: false,
+        success: function (data) {
+            var dataresult = [],
+                compareCount,
+                idCardCount,
+                loginCount,
+                retrieveCount,
+                appCount,
+                importCount;
 
-        },
-        columns: [{
-            field: 'id',
-            title: '序号',
-            formatter: function (value, row, index) {
-                return ++index;
-            }
-        }, {
-            field: 'dbname',
-            title: '库名',
-            // formatter: function (value) {
-            //     return '<span class="dbname">'+value+'</span>';
-            // }
-        }, {
-            field: 'name',
-            title: '姓名',
 
-        }, {
-            field: 'sex',
-            title: '性别',
-            formatter: function (value) {
+            dataresult = data.result[0];
+            dataresult.compareCount = data.compareCount;
+            dataresult.idCardCount = data.idCardCount;
+            dataresult.loginCount = data.loginCount;
+            dataresult.retrieveCount = data.retrieveCount;
+            dataresult.appCount = data.appCount;
+            dataresult.importCount = data.importCount;
+            $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
+            var unittext = $("#openinofModal .modal-body").find('.unit').text();
 
-                switch (value) {
-                    case 0:
-                        return "男";
-                    case 1:
-                        return "女";
+            $.each(dListData, function (index) {
+                if (unittext == dListData[index].did) {
+                    return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
                 }
-            }
-        }, {
-            field: 'birthday',
-            title: '生日',
-        }, {
-            field: 'idcard',
-            title: '身份证号'
-        }, {
-            field: 'url',
-            title: '检索图片',
-            formatter: function (value) {
-                return '<img width="150" height="150" alt="" src=' + value + '>'
-            }
-        }, {
-            field: 'imageid',
-            title: '图片id',
-        }]
+            })
+            $("#openinofModal").modal();
+
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
     });
-    $("#libPicList").bootstrapTable('hideColumn', 'imageid');
-    $('#openinofModal #dn').html(username);
-    $("#openinofModal").modal();
 }
 function doUpload2() {
     $("#fileinputModal #modal-text").text("请上传后缀为'.zip'的文件");

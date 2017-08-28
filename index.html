@@ -225,9 +225,7 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
             $('.second-box,#accordion1 #menu1 li ul li a').removeClass('leftsecondc');
             if ($(this).hasClass("leftsecond")) {
                 $(this).addClass('leftsecondc');
-            }
-            ;
-
+            };
             var that = this;
             $('#ajax-content').html('');
 
@@ -265,7 +263,7 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
                 case '比中战果统计':
                     $('#ajax-content').load('./template/statisticsVictories.html');
                     break;
-                case '处置结果战果统计':
+                case '重点人员比对统计':
                     $('#ajax-content').load('./template/resultsDisposal.html');
                     break;
 
@@ -331,6 +329,8 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
         });
 
 
-    }
+    };
+
 </script>
+
 </html>

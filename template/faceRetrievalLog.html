@@ -1,64 +1,69 @@
-
-<script src="js/city/distpicker.js"></script>
 <!-- 人脸日志搜索 -->
 <div id="backModel"></div>
 <div class="container-fluid face-table-group">
     <div class="row">
-        <div class="form-inline face-form">
-            <div class="form-group">
-                <input type="text" class="form-control" value="" id="rusername" placeholder="搜索用户">
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="plat">
-                    <option value="">平台</option>
-                    <option value="0">pc</option>
-                    <option value="1">android</option>
-                    <option value="2">ios</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="company">
-                    <!--["0云创","1依图","2旷视","3商汤"];-->
-                    <option value="">算法</option>
-                    <option value="0">通道一</option>
-                    <option value="1">通道二</option>
-                    <option value="2">通道三</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="chosen">
-                    <option value="">是否比中</option>
-                    <option value="0">是</option>
-                    <option value="1">否</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <select class="form-control" id="harmful">
-                    <option value="">是否有害</option>
-                    <option value="0">是</option>
-                    <option value="1">否</option>
-                    <option value="2">未知</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <div data-toggle="distpicker" id="distpicker">
-                    <select class="form-control" name="province"></select>
-                    <select class="form-control" name="city"></select>
-                    <select class="form-control" name="area"></select>
+        <div class="form-inline face-form" id="userdiv">
+            <div class="form-inline face-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" value="" id="iusername" placeholder="搜索用户">
                 </div>
-            </div>
-            <div class="form-group mydate">
-                <input type="text" class="form-control" id="from" placeholder="搜索时间开始"> —
-                <input type="text" class="form-control" id="to" placeholder="搜索时间结束">
-            </div>
-            <div class="form-group button-group">
-                <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>搜索
-                </button>
-                <button id="btn-reset" class="btn face-button2"><i class="glyphicon glyphicon-repeat" aria-hidden="true"></i>重置
-                </button>
-                <!--<button id="btn-export" class="btn face-button2"><span class="fa fa-external-link-square" aria-hidden="true"></span>导出-->
-                <!--</button>-->
-                <button id="btn-export"  data-id="button5"  href="http://192.168.0.169:8080/FaceManage/export/expretriveLog" target="_blank" class="pcode btn face-button"><span class="fa fa-external-link-square" aria-hidden="true"></span>导出</button>
+                <div class="form-group">
+                    <select class="form-control" id="plat">
+                        <option value="">平台</option>
+                        <option value="0">pc</option>
+                        <option value="1">android</option>
+                        <option value="2">ios</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="company">
+                        <!--["0云创","1依图","2旷视","3商汤"];-->
+                        <option value="">算法</option>
+                        <option value="0">通道一</option>
+                        <option value="1">通道二</option>
+                        <option value="2">通道三</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="chosen">
+                        <option value="">是否比中</option>
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="harmful">
+                        <option value="">是否有害</option>
+                        <option value="0">是</option>
+                        <option value="1">否</option>
+                        <option value="2">未知</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="city-picker-selector form-group" id="city-picker-search">
+                        <div class="selector-item storey" data-index="0"></div>
+                        <div class="selector-item storey" data-index="1"></div>
+                        <div class="selector-item storey" data-index="2"></div>
+                    </div>
+                </div>
+                <div class="form-group mydate">
+                    <input type="text" class="form-control" id="from" placeholder="搜索时间开始"> —
+                    <input type="text" class="form-control" id="to" placeholder="搜索时间结束">
+                </div>
+                <div class="form-group button-group">
+                    <button id="btn-query" class="btn face-button"><span class="fa fa-search" aria-hidden="true"></span>搜索
+                    </button>
+                    <button id="btn-reset" class="btn face-button2"><i class="glyphicon glyphicon-repeat"
+                                                                       aria-hidden="true"></i>重置
+                    </button>
+                    <!--<button id="btn-export" class="btn face-button2"><span class="fa fa-external-link-square" aria-hidden="true"></span>导出-->
+                    <!--</button>-->
+                    <button id="btn-export" data-id="button5"
+                            href="http://192.168.0.169:8080/FaceManage/export/expretriveLog" target="_blank"
+                            class="pcode btn face-button"><span class="fa fa-external-link-square"
+                                                                aria-hidden="true"></span>导出
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +106,7 @@
     </div>
     <!--点击用户查询次数弹窗 -->
     <div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true" >
+         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,9 +118,17 @@
                     <div class="row">
                         <table
                                 data-pagination="true"
-                               data-side-pagination="server" class="table table-bordered" id="counttable"><thead><tr><td>次数</td><td>时间</td></tr></thead><tbody id="countbody">
+                                data-side-pagination="server" class="table table-bordered" id="counttable">
+                            <thead>
+                            <tr>
+                                <td>次数</td>
+                                <td>时间</td>
+                            </tr>
+                            </thead>
+                            <tbody id="countbody">
 
-                        </tbody></table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -146,46 +159,57 @@
 			</div>
 		</div>
 	</div>
+
 </script>
-<script id="openinfoTemp" type="text/x-jquery-tmpl" >
-<table class="table table-bordered">
-                       <tr>
-                            <td class='name'> 姓名:{{= name}}</td>
-                            <td>
-                                性别：{{= sex=="0"?'男':'女'}}
-                            </td>
-                        </tr>
+<script id="openinfoTemp" type="text/x-jquery-tmpl">
+	<table class="table table-bordered">
+		<tr>
+			<td class='name'> 姓名:{{= name}}</td>
+			<td>
+				性别：{{= sex=="0"?'男':'女'}}
+			</td>
+		</tr>
 
-                        <tr>
+		<tr>
 
-                            <td>真实姓名：{{= realname}}</td>
-                            <td>证件号:{{= card}}</td>
+			<td>真实姓名：{{= realname}}</td>
+			<td>证件号:{{= card}}</td>
 
-                        </tr>
-                        <tr>
-                            <td>单位：<span class='unit'>{{= unit}}</span></td>
-                            <td>账户到期时间：{{= expireTime}}</td>
-                        </tr>
-                        <tr>
-                            <td>警号：{{= policynum}}</td>
+		</tr>
+		<tr>
+			<td>单位：<span class='unit'>{{= unit}}</span></td>
+			<td>账户到期时间：{{= expireTime}}</td>
+		</tr>
+		<tr>
+			<td>警号：{{= policynum}}</td>
 
-                            <td>手机号：{{= telephone}}</td>
-                        </tr>
-                        <tr>
-                            <td>职务：{{= duty}}</td>
+			<td>手机号：{{= telephone}}</td>
+		</tr>
+		<tr>
+			<td>职务：{{= duty}}</td>
 
-                            <td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
-                        </tr>
+			<td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
+		</tr>
 
-                        <tr>
-                            <td class='count'>人脸搜索次数）：{{= retrieveCount}}</td>
-                            <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
-                        </tr>
-                        <tr>
-                            <td class='count'>身份搜索（次数）：{{= idCardCount}}</td>
-                            <td class='count'>登录（次数）：{{= loginCount}}</td>
-                        </tr>
+		<tr>
+			<td class='count'> 人脸检索（次数）：{{= retrieveCount}} </td>
+			<td class='count'>人脸比对（次数）：{{= compareCount}} </td>
+		</tr>
+		<tr>
+			<td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+			<td class='count'>登录（次数）：{{= loginCount}}</td>
+		</tr>
+		<tr>
+			<td class='count'>app登陆（次数）：{{= appCount}}</td>
+			<td class='count'>重点人员反馈记录（次数）：{{= importCount}}</td>
+		</tr>
 
-                        </table>
+	</table>
+
+
+
+
+
+
 </script>
 <script type="text/javascript" src="./template/faceRetrievalLog.js"></script>

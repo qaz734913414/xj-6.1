@@ -1,821 +1,861 @@
-<style type="text/css">
-	.form-inline.face-form .city-picker-selector {
-		height: 34px;
-	}
-
-	.form-inline.face-form .selector-item {
-		width: 120px;
-		height: 100%;
-		border-radius: 4px;
-	}
-
-	.form-inline.face-form .selector-item .selector-name {
-		color: #333;
-		height: 100%;
-		font-size: 14px;
-		text-decoration: none;
-		line-height: 34px;
-	}
-	/*#resetSafetyCodeForm .form-group{
-		position: relative;
-	}*/
-	#resetSafetyCodeForm .form-group small{
-		text-align: center;
-    width: 220px;
-    float: right;
-	}
-</style>
-<!--<script src="js/city/distpicker.js"></script>-->
 <!-- 用户管理 -->
 <div id="backModel"></div>
 <div class="container-fluid face-table-group">
-	<div class="row">
-		<div class="form-inline face-form" id="userdiv">
-			<div class="form-group">
-				<select id="uUnitId" class="form-control">
-            <option value="">单位名称</option>
-        </select>
-			</div>
-			<div class="form-group">
-				<input type="text" style="width:150px;" placeholder="用户名" id="uRealName" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="text" style="width:150px;" placeholder="警种" id="policeType" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="text" style="width:150px;" placeholder="审批人" id="approval" class="form-control">
-			</div>
-			<div class="form-group">
-				<!--  <label for>角色</label>-->
-				<select id="uRoleId" class="form-control" style="width:110px;">
-            <option value="">角色</option>
-        </select>
-			</div>
-			<div class="city-picker-selector form-group" id="city-picker-search">
-				<div class="selector-item storey" data-index="0"></div>
-				<div class="selector-item storey" data-index="1"></div>
-				<div class="selector-item storey" data-index="2"></div>
-			</div>
-			<div class="form-group">
-				<button class="btn  face-button" onclick="getTable()" id="search">
-            <span class="fa fa-search"></span> 搜索
-        </button>
-			</div>
-			<div class="form-group">
-				<button class="btn face-button2" onclick="reset()" id="reset">
-            <span class="fa fa-repeat"></span> 重置
-        </button>
-			</div>
-			<div class="form-group">
-				<button data-id="button0" class="pcode btn face-button" onclick="addUser()" type="button" id="new">
-            <i class="fa fa-plus"></i> 新建
-        </button>
-			</div>
-			<div class="form-group">
-				<button data-id="button8" class="pcode btn face-button2" onclick="toRemove()" id="remove">
-            <i class="fa fa-times"></i> 批量删除
-        </button>
-			</div>
-			<div class="form-group">
-				<button data-id="button9" class="pcode btn face-button2" onclick="toUnbind()" id="unbind">
-            <i class="fa fa-unlock"></i> 批量解绑
-        </button>
-			</div>
-			<div class="form-group">
-				<button data-id="button7" class="pcode btn face-button" onclick="toWrench()" id="wrench">
-            <i class="fa fa-wrench"></i> 批量修改
-        </button>
-			</div>
+    <div class="row">
+        <div class="form-inline face-form" id="userdiv">
+            <div class="form-group">
+                <select id="uUnitId" class="form-control">
+                    <option value="">单位名称</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" style="width:150px;" placeholder="用户名" id="uRealName" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" style="width:150px;" placeholder="警种" id="policeType" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="text" style="width:150px;" placeholder="审批人" id="approval" class="form-control">
+            </div>
+            <div class="form-group">
+                <!--  <label for>角色</label>-->
+                <select id="uRoleId" class="form-control" style="width:110px;">
+                    <option value="">角色</option>
+                </select>
+            </div>
+            <div class="city-picker-selector form-group" id="city-picker-search">
+                <div class="selector-item storey" data-index="0"></div>
+                <div class="selector-item storey" data-index="1"></div>
+                <div class="selector-item storey" data-index="2"></div>
+            </div>
+            <div class="form-group">
+                <button class="btn  face-button" onclick="getTable()" id="search">
+                    <span class="fa fa-search"></span> 搜索
+                </button>
+            </div>
+            <div class="form-group">
+                <button class="btn face-button2" onclick="reset()" id="reset">
+                    <span class="fa fa-repeat"></span> 重置
+                </button>
+            </div>
+            <div class="form-group">
+                <button data-id="button0" class="pcode btn face-button" onclick="addUser()" type="button" id="new">
+                    <i class="fa fa-plus"></i> 新建
+                </button>
+            </div>
+            <div class="form-group">
+                <button data-id="button8" class="pcode btn face-button2" onclick="toRemove()" id="remove">
+                    <i class="fa fa-times"></i> 批量删除
+                </button>
+            </div>
+            <div class="form-group">
+                <button data-id="button9" class="pcode btn face-button2" onclick="toUnbind()" id="unbind">
+                    <i class="fa fa-unlock"></i> 批量解绑
+                </button>
+            </div>
+            <div class="form-group">
+                <button data-id="button7" class="pcode btn face-button" onclick="toWrench()" id="wrench">
+                    <i class="fa fa-wrench"></i> 批量修改
+                </button>
+            </div>
 
-			<div class="form-group">
-				<form id="uploadForm" enctype="multipart/form-data" class="form-horizontal">
-					<div class="form-group" style="margin: 0 0 0 15px;">
-						<div class="form-group">
-							<input type="file" style="width:200px;" accept=".xlsx" name="file" class="form-control" />
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<button data-id="button4" class="pcode btn face-button" onclick="doUpload()" type="button">
-                  <i class="fa fa-arrow-up"></i> 导入
-              </button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<table id="userTable1" class="table table-striped face-table">
-			<thead>
-				<!--data-visible="false"-->
-				<tr>
-					<th data-field="" data-checkbox="true"></th>
-					<th data-field="uId" data-halign="center" data-align="center" data-valign="middle" class="hidden">用户账号
-					</th>
-					<th data-field="uName" data-halign="center" data-formatter="nameformater" data-align="center" data-valign="middle">用户名
-					</th>
-					<th data-field="uRealName" data-halign="center" data-align="center" data-sortable="true" data-valign="middle">姓名</th>
-					<th data-field="uRoleId" data-halign="center" data-align="center" data-formatter="roleFormatter" data-valign="middle">角色
-					</th>
-					<th data-field="uUnitId" data-halign="center" data-align="center" data-formatter="unitFormatter" data-valign="middle">单位
-					</th>
-					<th data-field="uCardId" data-halign="center" data-align="center" data-valign="middle">身份证</th>
-					<th data-field="uDuty" data-halign="center" data-align="center" data-valign="middle">职务</th>
-					<th data-field="policeType" data-halign="center" data-align="center" data-valign="middle">警种</th>
-					<th data-field="uPolicyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
-					<th data-field="approval" data-halign="center" data-align="center" data-valign="middle">审批人</th>
-					<th data-field="uStatus" data-halign="center" data-align="center" data-valign="middle" data-formatter="statusFormatter" data-events="statusEvents">用户状态
-					</th>
-					<th data-field="uUnitId" data-formatter="unitFormatter" data-halign="center" data-align="center" data-valign="middle" class="hidden">
-						单位
-					</th>
-					<th data-field="uSex" data-halign="center" data-align="center" data-valign="middle" class="hidden">性别
-					</th>
-					<th data-field="uType" data-halign="center" data-align="center" data-valign="middle" class="hidden">
-						账户类别
-					</th>
-					<th data-field="expireTime" data-halign="center" data-sortable="true" data-align="center" data-valign="middle">账户到期时间
-					</th>
-					<th data-field="operate" data-halign="center" data-align="center" data-valign="middle" data-formatter="operateFormatter" data-events="operateEvents">操作
-					</th>
-				</tr>
-			</thead>
-			<tbody id="body"></tbody>
-		</table>
-	</div>
+            <div class="form-group">
+                <form id="uploadForm" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="form-group" style="margin: 0 0 0 15px;">
+                        <div class="form-group">
+                            <input type="file" style="width:200px;" accept=".xlsx" name="file" class="form-control"/>
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <button data-id="button4" class="pcode btn face-button" onclick="doUpload()" type="button">
+                                <i class="fa fa-arrow-up"></i> 导入
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table id="userTable1" class="table table-striped face-table">
+            <thead>
+            <!--data-visible="false"-->
+            <tr>
+                <th data-field="" data-checkbox="true"></th>
+                <th data-field="uId" data-halign="center" data-align="center" data-valign="middle" class="hidden">用户账号
+                </th>
+                <th data-field="uName" data-halign="center" data-formatter="nameformater" data-align="center"
+                    data-valign="middle">用户名
+                </th>
+                <th data-field="uRealName" data-halign="center" data-align="center" data-sortable="true"
+                    data-valign="middle">姓名
+                </th>
+                <th data-field="uRoleId" data-halign="center" data-align="center" data-formatter="roleFormatter"
+                    data-valign="middle">角色
+                </th>
+                <th data-field="uUnitId" data-halign="center" data-align="center" data-formatter="unitFormatter"
+                    data-valign="middle">单位
+                </th>
+                <th data-field="uCardId" data-halign="center" data-align="center" data-valign="middle">身份证</th>
+                <th data-field="uDuty" data-halign="center" data-align="center" data-valign="middle">职务</th>
+                <th data-field="policeType" data-halign="center" data-align="center" data-valign="middle">警种</th>
+                <th data-field="uPolicyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
+                <th data-field="approval" data-halign="center" data-align="center" data-valign="middle">审批人</th>
+                <th data-field="uStatus" data-halign="center" data-align="center" data-valign="middle"
+                    data-formatter="statusFormatter" data-events="statusEvents">用户状态
+                </th>
+                <th data-field="uUnitId" data-formatter="unitFormatter" data-halign="center" data-align="center"
+                    data-valign="middle" class="hidden">
+                    单位
+                </th>
+                <th data-field="uSex" data-halign="center" data-align="center" data-valign="middle" class="hidden">性别
+                </th>
+                <th data-field="uType" data-halign="center" data-align="center" data-valign="middle" class="hidden">
+                    账户类别
+                </th>
+                <th data-field="expireTime" data-halign="center" data-sortable="true" data-align="center"
+                    data-valign="middle">账户到期时间
+                </th>
+                <th data-field="operate" data-halign="center" data-align="center" data-valign="middle"
+                    data-formatter="operateFormatter" data-events="operateEvents">操作
+                </th>
+            </tr>
+            </thead>
+            <tbody id="body"></tbody>
+        </table>
+    </div>
 </div>
 <!-- 提示modal -->
-<div class="modal fade face-modal " id="deptModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title text-center">提示</h4>
-			</div>
-			<div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
-			<div class="modal-footer">
-				<button type="button" data-dismiss="modal" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal " id="deptModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title text-center">提示</h4>
+            </div>
+            <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 重置提示modal -->
-<div class="modal fade face-modal " id="resetTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center">提示</h4>
-			</div>
-			<div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
-			<div class="modal-footer">
-				<button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
-				<button type="button" id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal " id="resetTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center">提示</h4>
+            </div>
+            <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 解绑提示modal -->
-<div class="modal fade face-modal " id="unbindTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="unbind">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center">提示</h4>
-			</div>
-			<div class="modal-body" id="unbind-text" style="text-align:center;"></div>
-			<div class="modal-footer">
-				<button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
-				<button type="button" id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal " id="unbindTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" id="unbind">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center">提示</h4>
+            </div>
+            <div class="modal-body" id="unbind-text" style="text-align:center;"></div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 删除用户提示modal -->
-<div class="modal fade face-modal " id="delUserTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center">提示</h4>
-			</div>
-			<div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
-			<div class="modal-footer">
-				<button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
-				<button type="button" id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal " id="delUserTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center">提示</h4>
+            </div>
+            <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 批量删除用户提示modal -->
-<div class="modal fade face-modal " id="delUsersTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center">提示</h4>
-			</div>
-			<div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
-			<div class="modal-footer">
-				<button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
-				<button type="button" id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal " id="delUsersTModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" id="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center">提示</h4>
+            </div>
+            <div class="modal-body" id="modal-body-text" style="text-align:center;"></div>
+            <div class="modal-footer">
+                <button type="button" id="cancel" data-dismiss="modal" class="btn btn-default">取消</button>
+                <button type="button" id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
-<input type="hidden" id="rowUId" />
-<input type="hidden" id="username" />
+<input type="hidden" id="rowUId"/>
+<input type="hidden" id="username"/>
 
 <!-- 添加 -->
-<div class="modal fade face-modal" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:800px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center" id="myModalLabel"></h4>
-			</div>
-			<div class="modal-body clearfix">
-				<form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
-					<div class="row">
-						<div class="col-sm-5 col-lg-5">
+<div class="modal fade face-modal" id="adduserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body clearfix">
+                <form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5">
 
 
-							<img src="./img/default_img.png" id="img0" class="img-responsive" style="width:100%;height: 230px">
-							<div id="add-image-button1" class="btn face-button" style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
-								点击上传
+                            <img src="./img/default_img.png" id="img0" class="img-responsive"
+                                 style="width:100%;height: 230px">
+                            <div id="add-image-button1" class="btn face-button"
+                                 style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
+                                点击上传
 
-								<input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
-							</div>
+                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file"
+                                       style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                            </div>
 
-						</div>
-						<div class="col-sm-7 col-lg-7">
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="uName" name="uName" placeholder="用户名" id="uName">
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<input type="text" class="form-control" path="uRealName" name="uRealName" placeholder="真实姓名" id="urealName">
-								</div>
-							</div>
-							<div class="form-inline face-form" style="margin-top:12px;">
-								<div class="form-group" style="margin-left:45px;">
-									性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" checked name="uSex" value="0" />男
-									</div>
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" name="uSex" value="1" />女
-									</div>
+                        </div>
+                        <div class="col-sm-7 col-lg-7">
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="uName" name="uName" placeholder="用户名"
+                                           id="uName">
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <input type="text" class="form-control" path="uRealName" name="uRealName"
+                                           placeholder="真实姓名" id="urealName">
+                                </div>
+                            </div>
+                            <div class="form-inline face-form" style="margin-top:12px;">
+                                <div class="form-group" style="margin-left:45px;">
+                                    性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" checked name="uSex" value="0"/>男
+                                    </div>
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" name="uSex" value="1"/>女
+                                    </div>
 
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group " style="margin-left:45px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-								<div class="form-group" style="margin-left:8px;">
-									<div class="radio-inline" id="uVIP" style="margin-top:-10px;">
-										<input type="radio" value="1" path="uVIP" name="uVIP">是
-									</div>
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" checked value="0" path="uVIP" name="uVIP">否
-									</div>
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group " style="margin-left:45px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
+                                <div class="form-group" style="margin-left:8px;">
+                                    <div class="radio-inline" id="uVIP" style="margin-top:-10px;">
+                                        <input type="radio" value="1" path="uVIP" name="uVIP">是
+                                    </div>
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" checked value="0" path="uVIP" name="uVIP">否
+                                    </div>
 
-								</div>
+                                </div>
 
-							</div>
-							<div class="form-inline face-form" style="margin-top:12px;">
+                            </div>
+                            <div class="form-inline face-form" style="margin-top:12px;">
 
-								<div class="form-group" style="margin-left:45px;">
-									用&nbsp;&nbsp;户&nbsp;&nbsp;状&nbsp;&nbsp;态
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<select class="populate placeholder form-control" path="uStatus" id="uStatus" name="uStatus" style="width:194px;">
-                      <option value="Y">正常</option>
-                      <option value="N">禁用</option>
-                  </select>
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证
-								</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="uCardId" id="uCardId" name="uCardId" placeholder="身份证">
-								</div>
-
-
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人
-								</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="approval" id="approval" name="approval" placeholder="审批人">
-								</div>
+                                <div class="form-group" style="margin-left:45px;">
+                                    用&nbsp;&nbsp;户&nbsp;&nbsp;状&nbsp;&nbsp;态
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <select class="populate placeholder form-control" path="uStatus" id="uStatus"
+                                            name="uStatus" style="width:194px;">
+                                        <option value="Y">正常</option>
+                                        <option value="N">禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证
+                                </div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="uCardId" id="uCardId" name="uCardId"
+                                           placeholder="身份证">
+                                </div>
 
 
-							</div>
-						</div>
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<input type="text" class="form-control" path="uPhone" id="uPhone" name="uPhone" placeholder="手机">
-						</div>
-
-						<div class="form-group" style="margin-left:20px;">
-							座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="uTelephone" id="uTelephone" name="uTelephone" placeholder="座机">
-						</div>
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<input type="text" class="form-control" path="uPolicyNum" id="uPolicyNum" name="uPolicyNum" placeholder="警号">
-						</div>
-						<div class="form-group" style="margin-left:20px;">
-							警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="policeType" id="policeType" name="policeType" placeholder="警种">
-						</div>
-
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId" style="width:194px;"></select>
-						</div>
-						<div class="form-group" style="margin-left:17px;">
-							单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-
-							<select class="form-control" path="uUnitId" id="uunitId" name="uUnitId" style="width:194px;">
-
-              </select>
-						</div>
-					</div>
-					<div class="form-inline face-form " style="margin-top:12px; ">
-						<div class="form-group " style="margin-left:45px; ">账户到期时间</div>
-						<div class="form-group " style="margin-left:2px; ">
-							<select id="expireTime" class="form-control ">
-                  <option value="0">7天</option>
-                  <option value="1">30天</option>
-                  <option value="2">6个月</option>
-                  <option value="3">一年</option>
-									<option value="4">三年</option>
-                  <option value="5">自定义</option>
-              </select>
-							<input style="width:100px;visibility: hidden" id="expireTimeVal" class="form-control " type="text " />
-						</div>
-						<div class="form-group" style="margin-left:15px;">
-							职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty" placeholder="职务">
-						</div>
-
-					</div>
-					<div class="form-inline face-form " style="margin-top:12px; ">
-						<div class="form-group" style="margin-left:45px; ">行&nbsp;&nbsp;政&nbsp;&nbsp;区&nbsp;&nbsp;域</div>
-						<!--<div class="form-group " style="margin-left:10px; ">-->
-						<!--<div data-toggle="distpicker" id="distpicker">-->
-						<!--<select class="form-control" name="province"></select>-->
-						<!--<select class="form-control" name="city"></select>-->
-						<!--<select class="form-control" name="area"></select>-->
-						<!--</div>-->
-						<!--</div>-->
-						<div class="city-picker-selector form-group" id="city-picker-search1">
-							<div class="selector-item storey province form-control" data-index="0"><a href="javascript:;" class="selector-name reveal df-color province">请选择省份</a><input type="hidden" name="userProvinceId" class="input-price val-error" value="" data-required="userProvinceId">
-								<div class="selector-list listing hide">
-									<div class="selector-search"><input type="text" class="input-search" value="" placeholder="拼音、中文搜索"></div>
-
-								</div>
-							</div>
-							<div class="selector-item storey city" data-index="1"><a href="javascript:;" class="selector-name reveal df-color forbid city">请选择城市</a><input type="hidden" name="userCityId" class="input-price val-error" value="" data-required="userCityId">
-								<div class="selector-list listing hide">
-									<div class="selector-search"><input type="text" class="input-search" value="" placeholder="拼音、中文搜索"></div>
-									<ul></ul>
-								</div>
-							</div>
-							<div class="selector-item storey district" data-index="2"><a href="javascript:;" class="selector-name reveal df-color forbid area">请选择区县</a><input type="hidden" name="userDistrictId" class="input-price val-error" value="" data-required="userDistrictId">
-								<div class="selector-list listing hide">
-									<div class="selector-search"><input type="text" class="input-search" value="" placeholder="拼音、中文搜索"></div>
-									<ul></ul>
-								</div>
-							</div>
-						</div>
-					</div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人
+                                </div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="approval" id="approval"
+                                           name="approval" placeholder="审批人">
+                                </div>
 
 
-				</form>
-			</div>
-			<div class="modal-footer text-center clearfix">
-				<button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
-				<button type="button " id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <input type="text" class="form-control" path="uPhone" id="uPhone" name="uPhone"
+                                   placeholder="手机">
+                        </div>
+
+                        <div class="form-group" style="margin-left:20px;">
+                            座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="uTelephone" id="uTelephone" name="uTelephone"
+                                   placeholder="座机">
+                        </div>
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <input type="text" class="form-control" path="uPolicyNum" id="uPolicyNum" name="uPolicyNum"
+                                   placeholder="警号">
+                        </div>
+                        <div class="form-group" style="margin-left:20px;">
+                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="policeType" id="policeType" name="policeType"
+                                   placeholder="警种">
+                        </div>
+
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
+                                    style="width:194px;"></select>
+                        </div>
+                        <div class="form-group" style="margin-left:17px;">
+                            单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+
+                            <select class="form-control" path="uUnitId" id="uunitId" name="uUnitId"
+                                    style="width:194px;">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
+                        <div class="form-group " style="margin-left:2px; ">
+                            <select id="expireTime" class="form-control ">
+                                <option value="0">7天</option>
+                                <option value="1">30天</option>
+                                <option value="2">6个月</option>
+                                <option value="3">一年</option>
+                                <option value="4">三年</option>
+                                <option value="5">自定义</option>
+                            </select>
+                            <input style="width:100px;visibility: hidden" id="expireTimeVal" class="form-control "
+                                   type="text "/>
+                        </div>
+                        <div class="form-group" style="margin-left:15px;">
+                            职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty"
+                                   placeholder="职务">
+                        </div>
+
+                    </div>
+                    <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group"
+                             style="margin-left:45px; ">行&nbsp;&nbsp;政&nbsp;&nbsp;区&nbsp;&nbsp;域</div>
+                        <div class="city-picker-selector form-group" id="city-picker-search1">
+                            <div class="selector-item storey province form-control" data-index="0"><a
+                                    href="javascript:;" class="selector-name reveal df-color province">请选择省份</a><input
+                                    type="hidden" name="userProvinceId" class="input-price val-error" value=""
+                                    data-required="userProvinceId">
+                                <div class="selector-list listing hide">
+                                    <div class="selector-search"><input type="text" class="input-search" value=""
+                                                                        placeholder="拼音、中文搜索"></div>
+
+                                </div>
+                            </div>
+                            <div class="selector-item storey city" data-index="1"><a href="javascript:;"
+                                                                                     class="selector-name reveal df-color forbid city">请选择城市</a><input
+                                    type="hidden" name="userCityId" class="input-price val-error" value=""
+                                    data-required="userCityId">
+                                <div class="selector-list listing hide">
+                                    <div class="selector-search"><input type="text" class="input-search" value=""
+                                                                        placeholder="拼音、中文搜索"></div>
+                                    <ul></ul>
+                                </div>
+                            </div>
+                            <div class="selector-item storey district" data-index="2"><a href="javascript:;"
+                                                                                         class="selector-name reveal df-color forbid area">请选择区县</a><input
+                                    type="hidden" name="userDistrictId" class="input-price val-error" value=""
+                                    data-required="userDistrictId">
+                                <div class="selector-list listing hide">
+                                    <div class="selector-search"><input type="text" class="input-search" value=""
+                                                                        placeholder="拼音、中文搜索"></div>
+                                    <ul></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer text-center clearfix">
+                <button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
+                <button type="button " id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- /修改 -->
-<div class="modal fade face-modal" id="modifyUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:800px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center" id="myModalLabel"></h4>
-			</div>
-			<div class="modal-body">
-				<form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
-					<div class="row">
-						<div class="col-sm-5 col-lg-5">
+<div class="modal fade face-modal" id="modifyUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
+                    <div class="row">
+                        <div class="col-sm-5 col-lg-5">
 
 
-							<img src="./img/default_img.png" id="img0" class="img-responsive" style="width:100%;height: 230px">
-							<div id="add-image-button2" class="btn face-button" style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
-								点击上传
+                            <img src="./img/default_img.png" id="img0" class="img-responsive"
+                                 style="width:100%;height: 230px">
+                            <div id="add-image-button2" class="btn face-button"
+                                 style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
+                                点击上传
 
-								<input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
-							</div>
+                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file"
+                                       style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                            </div>
 
-						</div>
-						<div class="col-sm-7 col-lg-7">
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="uName" name="uName" placeholder="用户名" id="uName">
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<input type="text" class="form-control" path="uRealName" name="uRealName" placeholder="真实姓名" id="urealName">
-								</div>
-							</div>
-							<div class="form-inline face-form" style="margin-top:12px;">
-								<div class="form-group" style="margin-left:45px;">
-									性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" id="man" name="uSex" value="0" />男
-									</div>
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" id="woman" name="uSex" value="1" />女
-									</div>
+                        </div>
+                        <div class="col-sm-7 col-lg-7">
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="uName" name="uName" placeholder="用户名"
+                                           id="uName">
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    真&nbsp;&nbsp;实&nbsp;&nbsp;姓&nbsp;&nbsp;名
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <input type="text" class="form-control" path="uRealName" name="uRealName"
+                                           placeholder="真实姓名" id="urealName">
+                                </div>
+                            </div>
+                            <div class="form-inline face-form" style="margin-top:12px;">
+                                <div class="form-group" style="margin-left:45px;">
+                                    性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" id="man" name="uSex" value="0"/>男
+                                    </div>
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" id="woman" name="uSex" value="1"/>女
+                                    </div>
 
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group " style="margin-left:45px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
-								<div class="form-group" style="margin-left:8px;">
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" value="1" id="vip" path="uVIP" name="uVIP">是
-									</div>
-									<div class="radio-inline" style="margin-top:-10px;">
-										<input type="radio" value="0" id="novip" path="uVIP" name="uVIP">否
-									</div>
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group " style="margin-left:45px; ">是 &nbsp; &nbsp; 否 &nbsp; VIP</div>
+                                <div class="form-group" style="margin-left:8px;">
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" value="1" id="vip" path="uVIP" name="uVIP">是
+                                    </div>
+                                    <div class="radio-inline" style="margin-top:-10px;">
+                                        <input type="radio" value="0" id="novip" path="uVIP" name="uVIP">否
+                                    </div>
 
-								</div>
+                                </div>
 
-							</div>
-							<div class="form-inline face-form" style="margin-top:12px;">
+                            </div>
+                            <div class="form-inline face-form" style="margin-top:12px;">
 
-								<div class="form-group" style="margin-left:45px;">
-									用&nbsp;&nbsp;户&nbsp;&nbsp;状&nbsp;&nbsp;态
-								</div>
-								<div class="form-group" style="margin-left:7px;">
-									<select class="populate placeholder form-control" path="uStatus" id="uStatus" name="uStatus" style="width:194px;">
-                      <option value="Y">正常</option>
-                      <option value="N">禁用</option>
-                  </select>
-								</div>
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证
-								</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="uCardId" id="uCardId" name="uCardId" placeholder="身份证">
-								</div>
-
-
-							</div>
-							<div class="form-inline face-form">
-								<div class="form-group" style="margin-left:45px;">
-									审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人
-								</div>
-								<div class="form-group" style="margin-left:5px;">
-									<input type="text" class="form-control" path="approval" id="approval" name="approval" placeholder="审批人">
-								</div>
+                                <div class="form-group" style="margin-left:45px;">
+                                    用&nbsp;&nbsp;户&nbsp;&nbsp;状&nbsp;&nbsp;态
+                                </div>
+                                <div class="form-group" style="margin-left:7px;">
+                                    <select class="populate placeholder form-control" path="uStatus" id="uStatus"
+                                            name="uStatus" style="width:194px;">
+                                        <option value="Y">正常</option>
+                                        <option value="N">禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;证
+                                </div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="uCardId" id="uCardId" name="uCardId"
+                                           placeholder="身份证">
+                                </div>
 
 
-							</div>
-						</div>
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<input type="text" class="form-control" path="uPhone" id="uPhone" name="uPhone" placeholder="手机">
-						</div>
+                            </div>
+                            <div class="form-inline face-form">
+                                <div class="form-group" style="margin-left:45px;">
+                                    审&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人
+                                </div>
+                                <div class="form-group" style="margin-left:5px;">
+                                    <input type="text" class="form-control" path="approval" id="approval"
+                                           name="approval" placeholder="审批人">
+                                </div>
 
-						<div class="form-group" style="margin-left:20px;">
-							座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="uTelephone" id="uTelephone" name="uTelephone" placeholder="座机">
-						</div>
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<input type="text" class="form-control" path="uPolicyNum" id="uPolicyNum" name="uPolicyNum" placeholder="警号">
-						</div>
-						<div class="form-group" style="margin-left:20px;">
-							警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="policeType" id="policeType" name="policeType" placeholder="警种">
-						</div>
 
-					</div>
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId" style="width:194px;"></select>
-						</div>
-						<div class="form-group" style="margin-left:17px;">
-							单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
-						</div>
-						<div class="form-group" style="margin-left:7px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <input type="text" class="form-control" path="uPhone" id="uPhone" name="uPhone"
+                                   placeholder="手机">
+                        </div>
 
-							<select class="form-control" path="uUnitId" id="uunitId" name="uUnitId" style="width:194px;">
+                        <div class="form-group" style="margin-left:20px;">
+                            座&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="uTelephone" id="uTelephone" name="uTelephone"
+                                   placeholder="座机">
+                        </div>
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <input type="text" class="form-control" path="uPolicyNum" id="uPolicyNum" name="uPolicyNum"
+                                   placeholder="警号">
+                        </div>
+                        <div class="form-group" style="margin-left:20px;">
+                            警&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="policeType" id="policeType" name="policeType"
+                                   placeholder="警种">
+                        </div>
 
-              </select>
-						</div>
-					</div>
-					<div class="form-inline face-form " style="margin-top:12px; ">
-						<div class="form-group " style="margin-left:45px; ">账户到期时间</div>
-						<div class="form-group " style="margin-left:2px; ">
-							<select id="expireTime2" class="form-control ">
-								<option value="0">7天</option>
-								<option value="1">30天</option>
-								<option value="2">6个月</option>
-								<option value="3">一年</option>
-								<option value="4">三年</option>
-								<option value="5">自定义</option>
-		          </select>
-							<input style="width:100px;visibility: hidden" id="expireTimeVal2" class="form-control " type="text " />
-						</div>
-						<div class="form-group" style="margin-left:15px;">
-							职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
-						</div>
-						<div class="form-group" style="margin-left:7px;">
-							<input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty" placeholder="职务">
-						</div>
+                    </div>
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
+                                    style="width:194px;"></select>
+                        </div>
+                        <div class="form-group" style="margin-left:17px;">
+                            单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
 
-					</div>
-					<div class="form-inline face-form " style="margin-top:12px; ">
-						<div class="form-group " style="margin-left:45px; ">行&nbsp;&nbsp;政&nbsp;&nbsp;区&nbsp;&nbsp;域</div>
-						<div class="form-group " style="margin-left:10px; ">
-							<div class="city-picker-selector form-inline" id="city-picker-search2">
-								<div class="selector-item storey" data-index="0"></div>
-								<div class="selector-item storey" data-index="1"></div>
-								<div class="selector-item storey" data-index="2"></div>
-							</div>
-						</div>
-					</div>
+                            <select class="form-control" path="uUnitId" id="uunitId" name="uUnitId"
+                                    style="width:194px;">
 
-				</form>
-			</div>
-			<div class="modal-footer text-center ">
-				<button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
-				<button type="button " id="continue" class="btn face-button ">确定</button>
-			</div>
-		</div>
-	</div>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
+                        <div class="form-group " style="margin-left:2px; ">
+                            <select id="expireTime2" class="form-control ">
+                                <option value="0">7天</option>
+                                <option value="1">30天</option>
+                                <option value="2">6个月</option>
+                                <option value="3">一年</option>
+                                <option value="4">三年</option>
+                                <option value="5">自定义</option>
+                            </select>
+                            <input style="width:100px;visibility: hidden" id="expireTimeVal2" class="form-control "
+                                   type="text "/>
+                        </div>
+                        <div class="form-group" style="margin-left:15px;">
+                            职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
+                            <input type="text" class="form-control" path="uDuty" id="uDuty" name="uDuty"
+                                   placeholder="职务">
+                        </div>
+
+                    </div>
+                    <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group "
+                             style="margin-left:45px; ">行&nbsp;&nbsp;政&nbsp;&nbsp;区&nbsp;&nbsp;域</div>
+                        <div class="form-group " style="margin-left:10px; ">
+                            <div class="city-picker-selector form-inline" id="city-picker-search2">
+                                <div class="selector-item storey" data-index="0"></div>
+                                <div class="selector-item storey" data-index="1"></div>
+                                <div class="selector-item storey" data-index="2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer text-center ">
+                <button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
+                <button type="button " id="continue" class="btn face-button ">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 批量修改 -->
 
 <!-- 批量修改 -->
-<div class="modal fade face-modal" id="wrenchModal" tabindex="-1" role="dialog" aria-labelledby="wrenchLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:800px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center" id="wrenchLabel">批量修改</h4>
-			</div>
-			<div class="modal-body">
-				<form id="wrench" modelAttribute="user" class="form-horizontal" role="form">
+<div class="modal fade face-modal" id="wrenchModal" tabindex="-1" role="dialog" aria-labelledby="wrenchLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center" id="wrenchLabel">批量修改</h4>
+            </div>
+            <div class="modal-body">
+                <form id="wrench" modelAttribute="user" class="form-horizontal" role="form">
 
-					<div class="form-inline face-form" style="margin-top:12px;">
-						<div class="form-group" style="margin-left:45px;">
-							角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
-						</div>
-						<div class="form-group" style="margin-left:5px;">
-							<select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId" style="width:194px;"></select>
-						</div>
-						<div class="form-group" style="margin-left:15px;">
-							单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
-						</div>
-						<div class="form-group" style="margin-left:7px;">
+                    <div class="form-inline face-form" style="margin-top:12px;">
+                        <div class="form-group" style="margin-left:45px;">
+                            角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
+                        </div>
+                        <div class="form-group" style="margin-left:5px;">
+                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
+                                    style="width:194px;"></select>
+                        </div>
+                        <div class="form-group" style="margin-left:15px;">
+                            单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
+                        </div>
+                        <div class="form-group" style="margin-left:7px;">
 
-							<select class="form-control" path="uUnitId" id="uunitId" name="uUnitId">
+                            <select class="form-control" path="uUnitId" id="uunitId" name="uUnitId">
 
-              </select>
-						</div>
-					</div>
-					<div class="form-inline face-form " style="margin-top:12px; ">
-						<div class="form-group " style="margin-left:45px; ">账户到期时间</div>
-						<div class="form-group " style="margin-left:7px; ">
-							<input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control " type="text " />
-						</div>
-					</div>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
+                        <div class="form-group " style="margin-left:7px; ">
+                            <input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control "
+                                   type="text "/>
+                        </div>
+                    </div>
 
-				</form>
-			</div>
-			<div class="modal-footer text-center ">
-				<button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
-				<button type="button " id="continue" class="btn face-button ">确定</button>
-			</div>
-		</div>
-	</div>
+                </form>
+            </div>
+            <div class="modal-footer text-center ">
+                <button type="button " data-dismiss="modal " id="cancel" class="btn btn-default ">取消</button>
+                <button type="button " id="continue" class="btn face-button ">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 导入modal -->
-<div class="modal fade face-modal" id="fileinputModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center" id="myModalLabel">提示</h4>
-			</div>
-			<div class="modal-body" id="modal-text" style="text-align:center;"></div>
-			<div class="modal-footer ">
-				<h5>
-	          点此下载: <a href="./upload/uploadModal.xlsx" download="">导入表格模板</a>
-	      </h5>
-				<button type="button" data-dismiss="modal" id="cancel" class="btn btn-default">取消</button>
-				<button type="button" data-dismiss="modal" id="continue" class="btn face-button">确定</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal" id="fileinputModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center" id="myModalLabel">提示</h4>
+            </div>
+            <div class="modal-body" id="modal-text" style="text-align:center;"></div>
+            <div class="modal-footer ">
+                <h5>
+                    点此下载: <a href="./upload/uploadModal.xlsx" download="">导入表格模板</a>
+                </h5>
+                <button type="button" data-dismiss="modal" id="cancel" class="btn btn-default">取消</button>
+                <button type="button" data-dismiss="modal" id="continue" class="btn face-button">确定</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- 文件导入后信息 -->
 <div class="modal fade face-modal" id="fileInfoModal" tabindex="-1" role="dialog" aria-labelledby="fileInfoLabel">
-	<div class="modal-dialog" style="width:900px;">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-				<h4 class="modal-title text-center" id="fileInfoLabel"></h4>
+    <div class="modal-dialog" style="width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title text-center" id="fileInfoLabel"></h4>
 
 
-			</div>
-			<div class="modal-body">
+            </div>
+            <div class="modal-body">
 
-				<table id="fileInfoTable" data-side-pagination="server" class="table table-bordered  face-table table-hover">
-					<thead>
-						<tr>
-							<th data-field="name" data-halign="center" data-formatter="nameformater" data-align="center" data-valign="middle">用户名
-							</th>
-							<th data-field="realName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
-							<th data-field="rName" data-halign="center" data-align="center" data-valign="middle">角色
-							</th>
-							<th data-field="sex" data-halign="center" data-align="center" data-valign="middle">性别
-							</th>
-							<th data-field="idCard" data-halign="center" data-align="center" data-valign="middle">身份证</th>
-
-
-							<th data-field="telephone" data-halign="center" data-align="center" data-valign="middle">手机
-							</th>
-							<th data-field="phone" data-halign="center" data-align="center" data-valign="middle">电话</th>
-
-							<th data-field="policyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
+                <table id="fileInfoTable" data-side-pagination="server"
+                       class="table table-bordered  face-table table-hover">
+                    <thead>
+                    <tr>
+                        <th data-field="name" data-halign="center" data-formatter="nameformater" data-align="center"
+                            data-valign="middle">用户名
+                        </th>
+                        <th data-field="realName" data-halign="center" data-align="center" data-valign="middle">姓名</th>
+                        <th data-field="rName" data-halign="center" data-align="center" data-valign="middle">角色
+                        </th>
+                        <th data-field="sex" data-halign="center" data-align="center" data-valign="middle">性别
+                        </th>
+                        <th data-field="idCard" data-halign="center" data-align="center" data-valign="middle">身份证</th>
 
 
-							<th data-field="area" data-halign="center" data-align="center" data-valign="middle">
-								行政区域
-							</th>
-							<th data-field="code" data-halign="center" data-align="center" data-valign="middle">
-								单位
-							</th>
-							<th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间
-							</th>
-							<th data-field="reason" data-halign="center" data-align="center" data-valign="middle">失败原因
-							</th>
+                        <th data-field="telephone" data-halign="center" data-align="center" data-valign="middle">手机
+                        </th>
+                        <th data-field="phone" data-halign="center" data-align="center" data-valign="middle">电话</th>
+
+                        <th data-field="policyNum" data-halign="center" data-align="center" data-valign="middle">警号</th>
 
 
-						</tr>
-					</thead>
-					<tbody id="fileInfobody">
+                        <th data-field="area" data-halign="center" data-align="center" data-valign="middle">
+                            行政区域
+                        </th>
+                        <th data-field="code" data-halign="center" data-align="center" data-valign="middle">
+                            单位
+                        </th>
+                        <th data-field="expireTime" data-halign="center" data-align="center" data-valign="middle">账户到期时间
+                        </th>
+                        <th data-field="reason" data-halign="center" data-align="center" data-valign="middle">失败原因
+                        </th>
 
-					</tbody>
-				</table>
-			</div>
-			<div class="modal-footer" style="text-align:center;">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">知道了</button>
-			</div>
-		</div>
-	</div>
+
+                    </tr>
+                    </thead>
+                    <tbody id="fileInfobody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">知道了</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!--点击用户弹窗 -->
-<div class="modal fade face-modal" id="openinofModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+<div class="modal fade face-modal" id="openinofModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="fa fa-times" aria-hidden="true"></span></button>
-				<h4 class="modal-title text-center">用户信息</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
+                <h4 class="modal-title text-center">用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--点击用户查询次数弹窗 -->
-<div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+<div class="modal fade face-modal" id="countModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
                         class="fa fa-times" aria-hidden="true"></span></button>
-				<h4 class="modal-title text-center">查询次数</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<table data-pagination="true" data-side-pagination="server" class="table table-bordered" id="counttable">
-						<thead>
-							<tr>
-								<td>次数</td>
-								<td>时间</td>
-							</tr>
-						</thead>
-						<tbody id="countbody">
+                <h4 class="modal-title text-center">查询次数</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table data-pagination="true" data-side-pagination="server" class="table table-bordered"
+                           id="counttable">
+                        <thead>
+                        <tr>
+                            <td>次数</td>
+                            <td>时间</td>
+                        </tr>
+                        </thead>
+                        <tbody id="countbody">
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--重置安全码弹窗 -->
-<div class="modal fade face-modal" id="resetSafetyCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
-				<h4 class="modal-title text-center">安全码重置</h4>
-			</div>
-			<div class="modal-body">
-					<form id="resetSafetyCodeForm">
-						<div class="form-inline face-form" style="width:100%;">
-								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
-										<label style="display:inline-block;width:120px;">请输入原始密码</label>
-										<input class="form-control" id="oldPd" name="oldPd" type="text" placeholder="请输入原始密码">
-								</div>
-								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
-										<label style="display:inline-block;width:120px;">请输入新密码</label>
-										<input class="form-control" id="newPd" name="newPd" type="text" placeholder="请输入新密码">
-								</div>
-								<div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
-										<label style="display:inline-block;width:120px;">请再次输入新密码</label>
-										<input class="form-control" id="twiceNewPd" name="twiceNewPd" type="text" placeholder="请再次输入新密码">
-								</div>
-						</div>
-						<div class="modal-footer" style="text-align:center;">
-							<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-							<button type="button" class="btn face-button" id="resetSubmit">确定</button>
-						</div>
-					</form>
-			</div>
-		</div>
-	</div>
+<div class="modal fade face-modal" id="resetSafetyCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times"
+                                                                                                  aria-hidden="true"></span>
+                </button>
+                <h4 class="modal-title text-center">安全码重置</h4>
+            </div>
+            <div class="modal-body">
+                <form id="resetSafetyCodeForm">
+                    <div class="form-inline face-form" style="width:100%;">
+                        <div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+                            <label style="display:inline-block;width:120px;">请输入原始密码</label>
+                            <input class="form-control" id="oldPd" name="oldPd" type="text" placeholder="请输入原始密码">
+                        </div>
+                        <div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+                            <label style="display:inline-block;width:120px;">请输入新密码</label>
+                            <input class="form-control" id="newPd" name="newPd" type="text" placeholder="请输入新密码">
+                        </div>
+                        <div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+                            <label style="display:inline-block;width:120px;">请再次输入新密码</label>
+                            <input class="form-control" id="twiceNewPd" name="twiceNewPd" type="text"
+                                   placeholder="请再次输入新密码">
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align:center;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn face-button" id="resetSubmit">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script id="openinfoTemp" type="text/x-jquery-tmpl">
 	<table class="table table-bordered">
@@ -855,8 +895,13 @@
 			<td class='count'>身份检索（次数）：{{= idCardCount}}</td>
 			<td class='count'>登录（次数）：{{= loginCount}}</td>
 		</tr>
+		<tr>
+			<td class='count'>app登陆（次数）：{{= appCount}}</td>
+			<td class='count'>重点人员反馈记录（次数）：{{= importCount}}</td>
+		</tr>
 
 	</table>
+
 
 
 

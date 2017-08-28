@@ -1,8 +1,8 @@
 
-<script src="js/city/distpicker.js"></script>
 <div id="backModel"></div>
 <div class="container-fluid face-table-group">
     <div class="row">
+        <div class="form-inline face-form" id="userdiv">
         <div class="form-inline face-form" id="my-button">
             <div class="form-group">
                 <select id="u_unit_id" class="form-control">
@@ -20,13 +20,10 @@
 
                 </select>
             </div>
-            <div class="form-group">
-
-                <div data-toggle="distpicker" id="distpicker">
-                    <select class="form-control" name="province"></select>
-                    <select class="form-control" name="city"></select>
-                    <select class="form-control" name="area"></select>
-                </div>
+            <div class="city-picker-selector form-group" id="city-picker-search">
+                <div class="selector-item storey" data-index="0"></div>
+                <div class="selector-item storey" data-index="1"></div>
+                <div class="selector-item storey" data-index="2"></div>
             </div>
 
 
@@ -58,6 +55,7 @@
                 </a>
             </div>
         </div>
+    </div>
     </div>
     <div class="row">
         <table id="userTable" data-show-header="true"
@@ -157,44 +155,48 @@
     </div>
 </div>
 <script id="openinfoTemp" type="text/x-jquery-tmpl">
-<table class="table table-bordered">
-                       <tr>
-                            <td class='name'> 姓名:{{= name}}</td>
-                            <td>
-                                性别：{{= sex=="0"?'男':'女'}}
-                            </td>
-                        </tr>
+	<table class="table table-bordered">
+		<tr>
+			<td class='name'> 姓名:{{= name}}</td>
+			<td>
+				性别：{{= sex=="0"?'男':'女'}}
+			</td>
+		</tr>
 
-                        <tr>
+		<tr>
 
-                            <td>真实姓名：{{= realname}}</td>
-                            <td>证件号:{{= card}}</td>
+			<td>真实姓名：{{= realname}}</td>
+			<td>证件号:{{= card}}</td>
 
-                        </tr>
-                        <tr>
-                            <td>单位：<span class='unit'>{{= unit}}</span></td>
-                            <td>账户到期时间：{{= expireTime}}</td>
-                        </tr>
-                        <tr>
-                            <td>警号：{{= policynum}}</td>
+		</tr>
+		<tr>
+			<td>单位：<span class='unit'>{{= unit}}</span></td>
+			<td>账户到期时间：{{= expireTime}}</td>
+		</tr>
+		<tr>
+			<td>警号：{{= policynum}}</td>
 
-                            <td>手机号：{{= telephone}}</td>
-                        </tr>
-                        <tr>
-                            <td>职务：{{= duty}}</td>
+			<td>手机号：{{= telephone}}</td>
+		</tr>
+		<tr>
+			<td>职务：{{= duty}}</td>
 
-                            <td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
-                        </tr>
+			<td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
+		</tr>
 
-                        <tr>
-                            <td class='count'>人脸检索（次数）：{{= retrieveCount}}</td>
-                            <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
-                        </tr>
-                        <tr>
-                            <td class='count'>身份检索（次数）：{{= idCardCount}}</td>
-                            <td class='count'>登录（次数）：{{= loginCount}}</td>
-                        </tr>
+		<tr>
+			<td class='count'> 人脸检索（次数）：{{= retrieveCount}} </td>
+			<td class='count'>人脸比对（次数）：{{= compareCount}} </td>
+		</tr>
+		<tr>
+			<td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+			<td class='count'>登录（次数）：{{= loginCount}}</td>
+		</tr>
+		<tr>
+			<td class='count'>app登陆（次数）：{{= appCount}}</td>
+			<td class='count'>重点人员反馈记录（次数）：{{= importCount}}</td>
+		</tr>
 
-                        </table>
+	</table>
 </script>
 <script src="./template/userInformation.js" charset="utf-8"></script>

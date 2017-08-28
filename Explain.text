@@ -14,7 +14,8 @@
       检索记录统计	   userOperations
       比中率统计	       ratioStatistics
       比中战果统计      statisticsVictories
-      处置结果战果统计  resultsDisposal
+      重点人员比对统计  resultsDisposal
+      系统状态         systemState
 
 配置中心
       用户管理	       userManagement

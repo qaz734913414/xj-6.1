@@ -1017,10 +1017,13 @@ tbody>tr:nth-of-type(even) {
 }
 
 .face-modal .modal-dialog {
-    width: 600px;
+    /*width: 600px;*/
     color: #000;
 }
-
+#countModal .modal-dialog {
+    width: 1250px;
+    color: #000;
+}
 .face-modal .modal-dialog .modal-header {
     background: #eee;
     background-size: cover !important;
@@ -1231,6 +1234,9 @@ tbody>tr:nth-of-type(even) {
     border-color: #357ebd;
     color: #e3e3e3;
 
+}
+.hov,.count{
+    color: #257dfe;
 }
 
 .hov:hover,.count:hover {
@@ -1813,9 +1819,7 @@ tbody>tr:nth-of-type(even) {
 #main{
     float: left;
 }
-.count{
-    color: #2aabd2;
-}
+
 .fixed-table-container thead th .both{
 	background-image: url(../img/bootstraptableimg/updown.png)!important;
 }
@@ -1828,3 +1832,29 @@ tbody>tr:nth-of-type(even) {
 
 
 
+.form-inline.face-form .city-picker-selector {
+    height: 34px;
+}
+
+.form-inline.face-form .selector-item {
+    width: 120px;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.form-inline.face-form .selector-item .selector-name {
+    color: #333;
+    height: 100%;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 34px;
+}
+
+/*#resetSafetyCodeForm .form-group{
+    position: relative;
+}*/
+#resetSafetyCodeForm .form-group small {
+    text-align: center;
+    width: 220px;
+    float: right;
+}
