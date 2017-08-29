@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="c362cfdb-8639-494d-a776-52a56e8f35c7" name="Default" comment="11">
+    <list default="true" readonly="true" id="c362cfdb-8639-494d-a776-52a56e8f35c7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrievalLog.js" afterPath="$PROJECT_DIR$/template/faceRetrievalLog.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceToFaceLog.js" afterPath="$PROJECT_DIR$/template/faceToFaceLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityRetrievalLog.js" afterPath="$PROJECT_DIR$/template/identityRetrievalLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/ratioStatistics.js" afterPath="$PROJECT_DIR$/template/ratioStatistics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userInformation.js" afterPath="$PROJECT_DIR$/template/userInformation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userManagement.html" afterPath="$PROJECT_DIR$/template/userManagement.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userManagement.js" afterPath="$PROJECT_DIR$/template/userManagement.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,34 +17,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2520">
-              <caret line="112" column="46" lean-forward="true" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
-              <folding>
-                <element signature="n#style#0;n#li#0;n#ul#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1504004798701" expanded="false" signature="4265:4280" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="5317:5332" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="5500:5513" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="6558:6585" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="6889:6917" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="7224:7242" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="7319:7337" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="7675:7703" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="8563:8575" ph="..." />
-                <marker date="1504004798701" expanded="false" signature="9080:9098" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Explain.text" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Explain.text">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
+            <state relative-caret-position="510">
               <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
               <folding />
             </state>
@@ -67,14 +37,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faceToFaceLog.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="faceToFaceLog.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="559" column="17" lean-forward="false" selection-start-line="559" selection-start-column="17" selection-end-line="559" selection-end-column="17" />
+            <state relative-caret-position="214">
+              <caret line="93" column="32" lean-forward="false" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
               <folding>
                 <element signature="e#17878#18320#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faceToFaceLog.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="8" column="73" lean-forward="false" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="73" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,7 +72,7 @@
       <file leaf-file-name="userManagement.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/userManagement.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
+            <state relative-caret-position="-3638">
               <caret line="1736" column="32" lean-forward="false" selection-start-line="1736" selection-start-column="32" selection-end-line="1736" selection-end-column="32" />
               <folding>
                 <element signature="e#64158#64600#0" expanded="false" />
@@ -167,11 +147,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userManagement.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userManagement.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/userManagement.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="752" column="0" lean-forward="true" selection-start-line="752" selection-start-column="0" selection-end-line="752" selection-end-column="0" />
+            <state relative-caret-position="339">
+              <caret line="755" column="36" lean-forward="true" selection-start-line="755" selection-start-column="36" selection-end-line="755" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#11;n#!!top" expanded="true" />
               </folding>
@@ -254,6 +234,7 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/Documents/Tencent Files/1196631658/FileRecv/userManagement.js" root0="FORCE_HIGHLIGHTING" />
@@ -306,8 +287,8 @@
         <option value="$PROJECT_DIR$/template/identityRetrievalLog.js" />
         <option value="$PROJECT_DIR$/template/faceRetrievalLog.js" />
         <option value="$PROJECT_DIR$/template/userInformation.js" />
-        <option value="$PROJECT_DIR$/template/faceToFaceLog.js" />
         <option value="$PROJECT_DIR$/template/userManagement.html" />
+        <option value="$PROJECT_DIR$/template/faceToFaceLog.js" />
       </list>
     </option>
   </component>
@@ -613,7 +594,7 @@
       <updated>1496285430322</updated>
       <workItem from="1496285431838" duration="25000" />
       <workItem from="1496285474543" duration="3131000" />
-      <workItem from="1503881921989" duration="74963000" />
+      <workItem from="1503881921989" duration="76227000" />
     </task>
     <task id="LOCAL-00001" summary="所有点击用户名 弹窗查看次数修改，&#10;所有页面省市区搜素 替换联想搜素">
       <created>1503912252741</created>
@@ -699,11 +680,18 @@
       <option name="project" value="LOCAL" />
       <updated>1504005359368</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="登录次数修改，导入文件错误提示表格修改">
+      <created>1504008779608</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1504008779608</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78123000" />
+    <option name="totallyTimeSpent" value="79387000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -714,7 +702,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41022852" sideWeight="0.5021075" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5799782" sideWeight="0.4947313" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43960828" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12295974" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.022850925" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -803,7 +791,8 @@
     <MESSAGE value="人员信息检索 加验证" />
     <MESSAGE value="时间插件开始时间不能大于结束，结束时间最大到今天" />
     <MESSAGE value="删除多余dataTable文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="删除多余dataTable文件" />
+    <MESSAGE value="登录次数修改，导入文件错误提示表格修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="登录次数修改，导入文件错误提示表格修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1165,14 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3572">
-          <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/identityQuery.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1285,14 +1266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Explain.text">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/ratioStatistics.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -1319,19 +1292,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
+    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="559" column="17" lean-forward="false" selection-start-line="559" selection-start-column="17" selection-end-line="559" selection-end-column="17" />
+        <state relative-caret-position="109">
+          <caret line="584" column="32" lean-forward="false" selection-start-line="584" selection-start-column="32" selection-end-line="584" selection-end-column="32" />
           <folding>
-            <element signature="e#17878#18320#0" expanded="false" />
+            <element signature="e#18715#19157#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="522" column="32" lean-forward="false" selection-start-line="522" selection-start-column="32" selection-end-line="522" selection-end-column="32" />
+          <folding>
+            <element signature="e#17467#17909#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/userManagement.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="755" column="36" lean-forward="true" selection-start-line="755" selection-start-column="36" selection-end-line="755" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#11;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/template/userManagement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
+        <state relative-caret-position="-3638">
           <caret line="1736" column="32" lean-forward="false" selection-start-line="1736" selection-start-column="32" selection-end-line="1736" selection-end-column="32" />
           <folding>
             <element signature="e#64158#64600#0" expanded="false" />
@@ -1381,32 +1374,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/faceRetrievalLog.js">
+    <entry file="file://$PROJECT_DIR$/Explain.text">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="584" column="32" lean-forward="false" selection-start-line="584" selection-start-column="32" selection-end-line="584" selection-end-column="32" />
-          <folding>
-            <element signature="e#18715#19157#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="510">
+          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
+    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="522" column="32" lean-forward="false" selection-start-line="522" selection-start-column="32" selection-end-line="522" selection-end-column="32" />
-          <folding>
-            <element signature="e#17467#17909#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="8" column="73" lean-forward="false" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="73" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/userManagement.html">
+    <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="752" column="0" lean-forward="true" selection-start-line="752" selection-start-column="0" selection-end-line="752" selection-end-column="0" />
+        <state relative-caret-position="214">
+          <caret line="93" column="32" lean-forward="false" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="32" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#11;n#!!top" expanded="true" />
+            <element signature="e#17878#18320#0" expanded="false" />
           </folding>
         </state>
       </provider>

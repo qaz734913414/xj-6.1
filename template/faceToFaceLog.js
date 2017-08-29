@@ -91,7 +91,7 @@ function getTable() {
     var areaname = regk(areanameArr).substr(1)
 
     var plat = $("#plat").val() ||'',
-        username = $("#iusername").val() ||'',
+        username = $("#tusername").val() ||'',
         company = $("#company").val() ||'',
         chosen = $("#chosen").val() ||'',
         harmful = $("#harmful").val() ||'',
