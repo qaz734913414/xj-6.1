@@ -221,18 +221,23 @@
             <div class="modal-body clearfix">
                 <form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
                     <div class="row">
-                        <div class="col-sm-5 col-lg-5">
+                        <div class="col-sm-5 col-lg-5" style="padding-left:60px">
+                            <div class="tx form-group">
+                                <div class="file-img">
+                                    <img src="./img/default_img.png" width="140" height="170" id="addImg" >
+                                </div>
 
+                                <a href="javascript" class="file-input" alt="点击上传">
+                                    <input type="file" value="00" name="avatar" id="addImgFile" onchange="preview(this)" multiple="multiple">
+                                </a>
+                            </div>
 
-                            <img src="./img/default_img.png" id="img0" class="img-responsive"
-                                 style="width:100%;height: 230px">
-                            <div id="add-image-button1" class="btn face-button"
-                                 style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
+                            <!-- <img src="./img/default_img.png" id="img0" class="img-responsive" style="width:100%;height: 230px">
+                            <div id="add-image-button1" class="btn face-button" style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
                                 点击上传
 
-                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file"
-                                       style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
-                            </div>
+                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file" style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                            </div> -->
 
                         </div>
                         <div class="col-sm-7 col-lg-7">
@@ -455,17 +460,15 @@
             <div class="modal-body">
                 <form id="userForm" modelAttribute="user" class="form-horizontal" role="form">
                     <div class="row">
-                        <div class="col-sm-5 col-lg-5">
+                        <div class="col-sm-5 col-lg-5" style="padding-left:60px">
+                            <div class="tx form-group">
+                                <div class="file-img">
+                                    <img src="./img/default_img.png" width="140" height="170" id="modifyImg" >
+                                </div>
 
-
-                            <img src="./img/default_img.png" id="img0" class="img-responsive"
-                                 style="width:100%;height: 230px">
-                            <div id="add-image-button2" class="btn face-button"
-                                 style="position: relative; overflow: hidden; width: 100%; height: 30px; margin-top: 15px; direction: ltr;">
-                                点击上传
-
-                                <input qq-button-id="776fee03-134a-4a44-be60-e8e40ffb8838" type="file" name="file"
-                                       style="position: absolute; right: 0px; top: 0px; font-family: Arial; font-size: 118px; margin: 0px; padding: 0px; cursor: pointer; opacity: 0;">
+                                <a href="javascript" class="file-input" alt="点击上传">
+                                    <input type="file" value="00" name="avatar" id="modifyImgFile" onchange="preview(this)" multiple="multiple">
+                                </a>
                             </div>
 
                         </div>
@@ -854,6 +857,31 @@
                     <div class="modal-footer" style="text-align:center;">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         <button type="button" class="btn face-button" id="resetSubmit">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除用户安全码验证 -->
+<div class="modal fade face-modal" id="verificationSafetyCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="fa fa-times" aria-hidden="true"></span></button>
+                <h4 class="modal-title text-center">安全码验证</h4>
+            </div>
+            <div class="modal-body">
+                <form id="verificationSafetyCodeForm">
+                    <div class="form-inline face-form" style="width:100%;">
+                        <div class="form-group" style="width:330px;display:block;margin:0 auto 20px">
+                            <label style="display:inline-block;width:120px;">请输入安全码</label>
+                            <input class="form-control" id="safetyCode" name="safetyCode" type="text" placeholder="请输入安全码">
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align:center;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn face-button" id="verificationSafetyCodeSubmit">确定</button>
                     </div>
                 </form>
             </div>

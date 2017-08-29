@@ -78,7 +78,7 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
 
 
 </head>
-<body>
+<body onbeforeunload="return '真的要关闭此窗口吗?'">
 <!-- 自定义一级导航栏 -->
 <div class="mynav-box-blank">
     <div class="mynav-box first-box">
@@ -330,13 +330,38 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
 
 
     };
-//    //绑定beforeunload事件
-//    window.addEventListener('beforeunload', function(event) {
-//        $.post(url:'+ pathurl + '/logout',{},function(result){
-//            console.log('result:'+result);
-//        });
-//        console.log('I am the 1st one.');
-//    });
+
+    window.onbeforeunload = onbeforeunload_handler;
+    window.onunload = onunload_handler;
+    function onbeforeunload_handler(){
+        $.ajax({
+            url: pathurl + 'logout',
+            method:'post',
+            async:true,
+            success: function (data) {
+
+                localStorage.setItem('token','');
+                localStorage.setItem('userMes','');
+
+            }
+        });
+        return '确认退出?';
+
+    }
+    function onunload_handler(){
+
+        $.ajax({
+            url: pathurl + 'logout',
+            method:'post',
+            success: function (data) {
+
+               localStorage.setItem('token','');
+               localStorage.setItem('userMes','');
+
+            }
+        });
+
+    }
 </script>
 
 </html>

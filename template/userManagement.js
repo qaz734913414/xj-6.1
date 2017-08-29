@@ -141,7 +141,8 @@ function getTable() {
         clickToSelect: true,
         queryParams: function (params) {
             var obj = {}
-            obj.limit = params.limit;
+            obj.pageNumber = Math.ceil(++params.offset / params.limit);
+            obj.pageSize = params.limit;
             obj.offset = params.offset;
             obj.limit = params.limit;
             obj.order = params.order;
@@ -168,7 +169,22 @@ function getTable() {
         ], //可供选择的每页的行数（*）
         onLoadSuccess: function (data) { //加载成功时执行
             console.log('初始化%o', data)
-        }
+        },
+        columns:[{
+            field : 'checked',
+            checkbox : true,
+            formatter :function(value, row, index){
+                if (row.uId == userMes.uid){
+                    return {
+                        disabled :true, //设置是否可用
+                    };
+                }else{
+                    return {
+                        disabled :false, //设置是否可用
+                    };
+                }
+            }
+        }]
     });
 
 }
@@ -242,14 +258,20 @@ function addFormVali() {
     });
 }
 
-// 新增
 function addUser() {
-    uploadFile1 = null
-    uploader1 = uploadFile($("#add-image-button1"));
+    // uploadFile($("#add-image-button1"));
+    // uploadFile1=null
+    $('#adduserModal #city-picker-search1 .province a').html('请选择省份')
+    $('#adduserModal #city-picker-search1 .city a').html('请选择省份')
+    $('#adduserModal #city-picker-search1 .district a').html('请选择区县')
+    $('#adduserModal #city-picker-search1 input').val("");
+
+    $('#addImg').attr('src','./img/default_img.png');
+    $('#adduserModal #userForm')[0].reset()
     $("#adduserModal .modal-title").html("添加用户");
     $("#adduserModal").modal();
     $("#adduserModal #cancel").off()
-    $("#adduserModal #cancel").click(function () {
+    $("#adduserModal #cancel").click(function() {
         $('#adduserModal').modal('hide');
         $("#adduserModal #userForm")[0].reset();
         $("#userTable1").bootstrapTable('refresh');
@@ -327,7 +349,15 @@ $("#adduserModal #continue").click(function () {
         var areaname = regk(areanameArr).substr(1)
 
         var faceData = new FormData();
-        faceData.append('file', uploadFile1);
+        try{
+            var isImg=$('#addImgFile').get(0).files[0];
+        }catch(e){
+            var isImg=$('#addImgFile').get(0).value;
+        }
+        console.log(isImg)
+        if(!!isImg){
+            faceData.append('file', isImg);
+        }
         faceData.append('uName', $("#adduserModal #uName").val());
         faceData.append('policeType', $("#adduserModal #policeType").val());
         faceData.append('approval', $("#adduserModal #approval").val());
@@ -486,25 +516,36 @@ function statusFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-    if (userMes.uid == row.uId) {   //登陆的用户和列表的用户相同   ：不现实删除按钮   登录用户不能删除自己
-        if (userMes.uid == 1) {
-            if (row.bindType == 0) {
-                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>', '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
-            } else if (row.bindType == 1) {
-                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>', '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+    if(userMes.uid==row.uId){   //登陆的用户和列表的用户相同   ：不现实删除按钮   登录用户不能删除自己
+        if(userMes.uid==1){  //是管理员
+
+            if (row.bindType == 0) {  //绑定状态
+
+                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
+            } else if (row.bindType == 1) {  //未绑定状态
+
+                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
             }
-        } else {
+        }else{ //不是管理员
             if (row.bindType == 0) {
+
                 return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
             } else if (row.bindType == 1) {
+
                 return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
             }
         }
 
-    } else {
+    }else{
         if (row.bindType == 0) {
+            if(row.isdelete==1){//删除
+                return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">确认删除</button>', '<button type="button" data-id="button2" class="pcode btn-warning btn-sm btn" style="margin-right:15px;">恢复</button>'].join('');
+            }
             return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
         } else if (row.bindType == 1) {
+            if(row.isdelete==1){//删除
+                return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">确认删除</button>', '<button type="button" data-id="button2" class="pcode btn-warning btn-sm btn recovery" style="margin-right:15px;">恢复</button>'].join('');
+            }
             return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
         }
     }
@@ -544,6 +585,9 @@ window.statusEvents = {
 };
 
 window.operateEvents = { //done
+    'click .recovery':function(e, value, row, index){
+        recovery(row);
+    },
     'click .resetSafetyCode': function (e, value, row, index) { //安全吗重置
         resetSafetyCodeValidator()
         $('#resetSafetyCodeModal').modal('show');
@@ -556,8 +600,6 @@ window.operateEvents = { //done
     },
     'click .update': function (e, value, row, index) { //修改用户
         userEdit(row);
-        uploadFile2 = null
-        uploader2 = uploadFile($("#add-image-button2"));
     },
     'click .delete': function (e, value, row, index) { //删除用户
         // deleteUser(row);
@@ -770,6 +812,7 @@ $("#unbindTModel #continue").click(function () {
 
 //表格批量修改
 function toWrench() {
+    $('#wrenchModal #wrench')[0].reset();
     var ids = getSelectedRowsIds('userTable1');
     $('#rowUId').val(ids);
     if (ids) {
@@ -779,7 +822,31 @@ function toWrench() {
         $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
         $("#myModal").modal('show');
     }
-}
+};
+$('#wrenchModal #manyExpireTime').change(function() {
+    var dateval = $(this).val();
+    if(dateval==5){
+        $('#wrenchModal #manyExpireTimeVal').css('visibility','');
+
+    }else{
+        $('#wrenchModal #manyExpireTimeVal').css('visibility','hidden');
+        var expireTime;
+        if(dateval==0){
+            expireTime=dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+        }else if(dateval==1){
+            expireTime=dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
+        }else if(dateval==2){
+            expireTime=dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
+        }else if(dateval==3){
+            expireTime=dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
+        }else if(dateval==4){
+            expireTime=dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
+        }
+        console.log(expireTime)
+        $('#wrenchModal #manyExpireTimeVal').val(expireTime);
+    }
+
+});
 
 $("#wrenchModal #cancel").click(function () {
     $("#wrenchModal").modal('hide')
@@ -793,7 +860,7 @@ $("#wrenchModal #continue").click(function () {
         url: pathurl + 'user/batchUpdate',
         data: {
             ids: $('#rowUId').val(),
-            expireTime: $('#wrenchModal #wrench #expireTimeVal').val(),
+            expireTime: $('#manyExpireTimeVal').val()||dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd'),
             uRoleId: $('#wrenchModal #wrench #uRoleId').val(),
             uUnitId: $('#wrenchModal #wrench #uunitId').val()
         },
@@ -852,34 +919,91 @@ $("#delUserTModel #cancel").click(function () {
 // 删除用户
 
 $("#delUserTModel #continue").off();
-$("#delUserTModel #continue").click(function () {
-
-
-    $("#delUserTModel").modal('hide');
-    $.ajax({
-        type: 'POST',
-        url: pathurl + 'user/delete',
-        data: {
-            uId: $('#rowUId').val()
-        },
-        success: function (data) {
-            console.log('删除成功!')
-            if (data.code == 200) {
-                $("#modal-body-id").text("删除成功!");
-                $("#myModal").modal();
-                $("#userTable1").bootstrapTable('refresh');
-            } else {
-                $("#modal-body-id").text('删除失败');
+$("#delUserTModel #continue").click(function() {
+    if(userMes.roleid==1){
+        $("#delUserTModel").modal('hide');
+        $('#verificationSafetyCodeModal').modal('show');
+    }else{
+        $("#delUserTModel").modal('hide');
+        $.ajax({
+            type: 'POST',
+            url: pathurl + 'user/delete',
+            data: {
+                uId: $('#rowUId').val()
+            },
+            success: function(data) {
+                console.log('删除成功!')
+                if (data.code == 200) {
+                    $("#modal-body-id").text("删除成功!");
+                    $("#myModal").modal();
+                    $("#userTable1").bootstrapTable('refresh');
+                } else {
+                    $("#modal-body-id").text('删除失败');
+                    $("#myModal").modal();
+                }
+            },
+            error: function() {
+                console.log('处理失败!!')
+                $("#modal-body-id").text("处理失败!");
                 $("#myModal").modal();
             }
-        },
-        error: function () {
-            console.log('处理失败!!')
-            $("#modal-body-id").text("处理失败!");
-            $("#myModal").modal();
-        }
-    });
+        });
+    }
+
+
 });
+//管理员删除是真删啊  用安全吗验证
+$('#verificationSafetyCodeModal').on('hide.bs.modal', function () {
+    $('#verificationSafetyCodeForm')[0].reset();
+    $("#userTable1").bootstrapTable('refresh');
+});
+$('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click',function(){
+    var safetyCode=md5($('#safetyCode').val()).toUpperCase();
+    $.ajax({
+        type: 'POST',
+        async:false,
+        url: pathurl + 'user/getsafepwd',
+        success: function(data) {
+            //  console.log(data)
+            if(data.code==200){
+                console.log(safetyCode)
+                console.log(data.result)
+                if(safetyCode==data.result){
+                    $("#delUserTModel").modal('hide');
+                    $.ajax({
+                        type: 'POST',
+                        url: pathurl + 'user/delete',
+                        data: {
+                            uId: $('#rowUId').val()
+                        },
+                        success: function(data) {
+                            console.log('删除成功!')
+                            if (data.code == 200) {
+                                $("#modal-body-id").text("删除成功!");
+                                $("#myModal").modal();
+                                $('#verificationSafetyCodeModal').modal('hide');
+                            } else {
+                                $("#modal-body-id").text('删除失败');
+                                $("#myModal").modal();
+                            }
+                        },
+                        error: function() {
+                            console.log('处理失败!!')
+                            $("#modal-body-id").text("处理失败!");
+                            $("#myModal").modal();
+                        }
+                    });
+                }else{
+                    $("#modal-body-id").text("密码错误");
+                    $("#myModal").modal();
+                }
+
+            }
+        }
+    })
+
+
+})
 
 // 修改
 $('#modifyUserModal #userForm').on('hide.bs.modal', function () {
@@ -889,9 +1013,44 @@ $('#modifyUserModal #userForm').on('hide.bs.modal', function () {
 });
 
 function userEdit(row) {
-    console.log(uploadFile2)
+//   console.log(uploadFile2)
+//
+// uploadFile2 = null; //重置
+// console.log(row.uId)
+// console.log(userMes.uId)
+//
+    $('#modifyUserModal #city-picker-search2 .province a').html('请选择省份');
+    $('#modifyUserModal #city-picker-search2 .city a').html('请选择省份');
+    $('#modifyUserModal #city-picker-search2 .district a').html('请选择区县');
+    $('#modifyUserModal #city-picker-search2 input').val("");
 
-    uploadFile2 = null; //重置
+    $('#modifyImg').attr('src','./img/default_img.png');
+    $('#modifyUserModal #userForm')[0].reset()
+    if(row.uId==userMes.uid){
+        console.log('是自己')
+        $('#modifyUserModal #vip').prop('disabled',true);
+        $('#modifyUserModal #novip').prop('disabled',true);
+        $('#modifyUserModal #uRoleId').prop('disabled',true);
+        $('#modifyUserModal #uunitId').prop('disabled',true);
+        $('#modifyUserModal #approval').prop('readonly',true);
+        // $('#city-picker-search2')
+        // select2.bindEvent()
+        $('#city-picker-search2').click(function(){
+            $('#city-picker-search2 .selector-list').hide();
+        })
+
+    }else{
+        console.log('不是自己')
+        $('#modifyUserModal #vip').prop('disabled',false);
+        $('#modifyUserModal #novip').prop('disabled',false);
+        $('#modifyUserModal #uRoleId').prop('disabled',false);
+        $('#modifyUserModal #uunitId').prop('disabled',false);
+        $('#modifyUserModal #approval').prop('readonly',false);
+        $('#city-picker-search2').click(function(){
+            $('#city-picker-search2 .selector-list').show();
+        })
+    }
+
     console.log(row);
     var uSex = row.uSex;
     var uVip = row.uVip;
@@ -935,29 +1094,27 @@ function userEdit(row) {
     // }
     // $("#imgId").attr('src',path);
     // $("#modifyUserModal #img0").attr('src','');
-    var select2 = $('#city-picker-search2').cityPicker({
-        dataJson: cityData,
-        renderMode: true,
-        search: true,
-        linkage: false
-    });
+    var select2 = $('#city-picker-search2').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
-
-    if (row.picurl) {
-        $('#modifyUserModal #img0').attr('src', row.picurl)
+    $('#modifyUserModal #modifyImg').attr('src','')
+    if(row.picurl){
+        console.log(row.picurl)
+        $('#modifyUserModal #modifyImg').attr('src',row.picurl)
+    }else{
+        $('#modifyUserModal #modifyImg').attr('src','./img/default_img.png');
     }
-    var cityArr = []
+    var cityArr=[]
 
-    var areanameArr = row.uArea.split('-')
-    var areacodeArr = row.areacode.split('-')
+    var areanameArr=row.uArea.split('-')
+    var areacodeArr=row.areacode.split('-')
 
     // console.log(areanameArr)
     // console.log(areacodeArr)
-    for (var i = 0; i < areacodeArr.length; i++) {
-        var obj = {}
-        obj.id = areacodeArr[i];
-        obj.name = areanameArr[i];
+    for(var i=0;i<areacodeArr.length;i++){
+        var obj={}
+        obj.id=areacodeArr[i];
+        obj.name=areanameArr[i];
         cityArr.push(obj)
     }
 
@@ -968,17 +1125,17 @@ function userEdit(row) {
     $("#modifyUserModal #uType").val(row.uType);
     $("#modifyUserModal #uStatus").val(row.uStatus);
     console.log(row.uVip)
-    if (row.uVip == 1) {
+    if(row.uVip==1){
         console.log('是vip')
-        $("#modifyUserModal #vip").prop('checked', true);
-    } else if (row.uVip == 0) {
+        $("#modifyUserModal #vip").prop('checked',true);
+    }else if(row.uVip==0){
         console.log('不是vip')
-        $("#modifyUserModal #novip").prop('checked', true);
+        $("#modifyUserModal #novip").prop('checked',true);
     }
 
     $('#modifyUserModal #expireTime2').val(5)
-    $('#modifyUserModal #expireTimeVal2').css('visibility', '').val(row.expireTime)
-
+    $('#modifyUserModal #expireTimeVal2').css('visibility','').val(row.expireTime)
+    $('#modifyUserModal #imgBox').attr('src',row.picurl);
     $("#modifyUserModal #uPhone").val(row.phone);
     $("#modifyUserModal #uTelephone").val(row.telephone);
     $("#modifyUserModal #uPolicyNum").val(row.uPolicyNum);
@@ -989,27 +1146,27 @@ function userEdit(row) {
     $("#modifyUserModal .modal-title").html("修改用户");
     $('#modifyUserModal #approval').val(row.approval);
     $('#modifyUserModal #policeType').val(row.policeType)
-    setTimeout(function () {
+    setTimeout(function() {
         $("#modifyUserModal").modal('show');
     }, 100)
-    $('#modifyUserModal #expireTime2').change(function () {
+    $('#modifyUserModal #expireTime2').change(function() {
         var dateval = $(this).val();
-        if (dateval == 5) {
-            $('#modifyUserModal #expireTimeVal2').css('visibility', '');
+        if(dateval==5){
+            $('#modifyUserModal #expireTimeVal2').css('visibility','');
 
-        } else {
-            $('#modifyUserModal #expireTimeVal2').css('visibility', 'hidden');
+        }else{
+            $('#modifyUserModal #expireTimeVal2').css('visibility','hidden');
             var expireTime;
-            if (dateval == 0) {
-                expireTime = dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
-            } else if (dateval == 1) {
-                expireTime = dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
-            } else if (dateval == 2) {
-                expireTime = dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
-            } else if (dateval == 3) {
-                expireTime = dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
-            } else if (dateval == 4) {
-                expireTime = dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
+            if(dateval==0){
+                expireTime=dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+            }else if(dateval==1){
+                expireTime=dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
+            }else if(dateval==2){
+                expireTime=dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
+            }else if(dateval==3){
+                expireTime=dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
+            }else if(dateval==4){
+                expireTime=dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
             }
             console.log(expireTime)
             $('#expireTimeVal2').val(expireTime);
@@ -1017,25 +1174,37 @@ function userEdit(row) {
 
     });
     $("#modifyUserModal #cancel").off();
-    $("#modifyUserModal #cancel").click(function () {
+    $("#modifyUserModal #cancel").click(function() {
         $('#modifyUserModal').modal('hide');
         $("#userTable1").bootstrapTable('refresh');
         $("#userForm")[0].reset();
     });
-    $("#modifyUserModal").on("hidden.bs.modal", function () {
+    $("#modifyUserModal").on("hidden.bs.modal", function() {
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
     $("#modifyUserModal #continue").off();
-    $("#modifyUserModal #continue").click(function () {
+    $("#modifyUserModal #continue").click(function() {
         $('#modifyUserModal').modal('hide');
 
         var faceDatas = new FormData();
-        expireTime = $('#expireTimeVal2').val()
+        expireTime=$('#expireTimeVal2').val()
 
         faceDatas.append('uId', uId);
-        if (uploadFile2) {
-            faceDatas.append('file', uploadFile2);
+
+        // if(uploadFile2){
+        //   faceDatas.append('file', uploadFile2);
+        // }
+
+        try{
+            var isImg=$('#modifyImgFile').get(0).files[0];
+        }catch(e){
+            var isImg=$('#modifyImgFile').get(0).value;
+        }
+        console.log(isImg)
+        if(!!isImg){
+            faceDatas.append('file', isImg);
+
         }
 
         faceDatas.append('uName', $("#modifyUserModal #uName").val());
@@ -1104,7 +1273,7 @@ function userEdit(row) {
             dataType: 'json',
             processData: false,
             contentType: false,
-            success: function (data) {
+            success: function(data) {
                 console.log(data)
                 if (data.code == 200) {
                     console.log('修改成功')
@@ -1120,7 +1289,7 @@ function userEdit(row) {
                     $('#deptModel').modal('show');
                 }
             },
-            error: function () {
+            error: function() {
                 console.log('修改失败')
                 $("#modal-body-id").html('系统出错请稍后再试');
                 $('#myModal').modal('show');
@@ -1254,7 +1423,38 @@ function unitFormatter(value, row) {
         }
     }
 }
+//恢复
+function recovery(row){
+    console.log(row);
+    $("#resetTModel #modal-body-text").text("确定恢复吗?");
+    $("#resetTModel").modal('show');
+    $("#resetTModel #continue").off();
+    $("#resetTModel #continue").click(function() {
+        $.ajax({
+            type:'post',
+            url:pathurl + 'user/undodelete',
+            data:{
+                uId:row.uId
+            },
+            success:function(res){
+                if(res.code==200){
+                    $("#modal-body-id").text("恢复成功");
+                    $("#myModal").modal();
+                    $("#resetTModel").modal('hide');
+                    $("#userTable1").bootstrapTable('refresh');
+                }else{
+                    $("#modal-body-id").text("恢复失败");
+                    $("#myModal").modal();
+                }
+            },
+            error:function(){
+                $("#modal-body-id").text("服务器出错");
+                $("#myModal").modal();
+            }
+        })
+    })
 
+};
 // 点击用户查看信息
 function openinfo(username) {
 
@@ -1690,61 +1890,18 @@ function countinfo(n, i) {
 
 }
 
-function uploadFile(button) {
-    return new qq.FineUploaderBasic({
-        button: button[0],
-        request: {
-            endpoint: pathurl + 'user/new',
-            method: "POST"
-        },
-        validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png']
-        },
-        debug: true,
-        multiple: false,
-        autoUpload: false,
-        editFilename: {
-            enable: false
-        },
-        messages: {
-            noFilesError: '没有选中文件'
-        },
-        text: {
-            formatProgress: "{percent}% of {total_size}",
-            failUpload: "上传失败",
-            waitingForResponse: "上传中...",
-            paused: "暂停"
-        },
-        callbacks: {
-            onError: function (id, filename, message, xhr) {
-                console.log(id, filename, '上传失败', message);
-                if (filename === undefined)
-                    alert("请选择图片或重新选择图片");
-            }
-            ,
-            onSubmit: function (id, filename) {
-                console.log(filename, '文件开始提交');
-                var self = this;
-                button.text("重新添加照片");
-                //画框展示
-                this.drawThumbnail(id, button.prev('#img0')[0]);
-                //由于上传完成后文件会自动清空，需要保存到uploadFiles
-                if (button.attr("id") == "add-image-button1") {
-                    uploadFile1 = self.getFile(id);
-                }
-                if (button.attr("id") == "add-image-button2") {
-                    uploadFile2 = self.getFile(id);
-                }
-            },
-            onComplete: function (id, filename, responseJSON, xhr) {
-                console.log(id, filename, '上传成功，返回信息为：', responseJSON);
-                //object可以如下初始化表格
-                /* if (imagetable)
-                             imagetable.fnDestroy(false);
-                             imageTable(responseJSON.images);
-                             var self = this; */
-                // self.clearStoredFiles();
-            }
+
+function preview(file){
+    var img=$(file).parents('.tx').find('img');
+    if (file.files && file.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(evt){
+            $(img).attr('src',evt.target.result);
         }
-    });
+        reader.readAsDataURL(file.files[0]);
+        // console.log(file.files)
+    }else{
+        $(img).removeAttr('src');
+        $(img)[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + file.value + "\")"
+    }
 }
