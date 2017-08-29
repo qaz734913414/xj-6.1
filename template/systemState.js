@@ -268,6 +268,14 @@ function detial(val){
                 return '<img style="width:140px;heihgt:170px;" src="' + value + '" />';
             }
 					},
+                    {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value) {
+
+                            return '<img style="width:140px;heihgt:170px;" src="' + value + '" />';
+                        }
+                    },
 					{
 						field: 'u_area',
 						title: '地址'
@@ -330,17 +338,32 @@ function detial(val){
 						title: '职务'
 					},
 					{
-						field: 'u_card_id',
+						field: 'id_no',
 						title: '身份证号'
 					},
 					{
-						field: 'u_phone',
+						field: 'phone_no',
 						title: '手机号'
 					},
 					{
-						field: 'u_telephone',
+						field: 'car_no',
 						title: '座机号'
-					}
+					},
+                    {
+                        field: 'dispose',
+                        title: '采取措施',
+                        formatter: function (value) {
+                        	if(value==2){
+                        		return '返回原籍';
+							}else if(value==3){
+                                return '滞留审查';
+							}else if(value==4){
+                                return '立即抓捕';
+                            }else if(value==5){
+                                return '信息采集';
+                            }
+						}
+                    }
 				]
 			}
 
