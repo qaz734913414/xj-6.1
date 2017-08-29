@@ -240,7 +240,9 @@
 		}
         getTable3(start, end, type);
     }
-
+    $('.face-form select').on('input propertychange', function () {
+        getTable3()
+    })
     function getTable3(start, end, type) {
         $("#proportion").bootstrapTable('destroy');
         $("#proportion").bootstrapTable({

@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="c362cfdb-8639-494d-a776-52a56e8f35c7" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/css/common/jquery.dataTables.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/js/common/jquery.dataTables.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrieval.js" afterPath="$PROJECT_DIR$/template/faceRetrieval.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceRetrievalLog.js" afterPath="$PROJECT_DIR$/template/faceRetrievalLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/faceToFaceLog.js" afterPath="$PROJECT_DIR$/template/faceToFaceLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityQuery.html" afterPath="$PROJECT_DIR$/template/identityQuery.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityQuery.js" afterPath="$PROJECT_DIR$/template/identityQuery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/identityRetrievalLog.js" afterPath="$PROJECT_DIR$/template/identityRetrievalLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/messagePush.js" afterPath="$PROJECT_DIR$/template/messagePush.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/problemFeedback.js" afterPath="$PROJECT_DIR$/template/problemFeedback.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/ratioStatistics.js" afterPath="$PROJECT_DIR$/template/ratioStatistics.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/resultsDisposal.js" afterPath="$PROJECT_DIR$/template/resultsDisposal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/roleManagement.js" afterPath="$PROJECT_DIR$/template/roleManagement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/statisticsVictories.js" afterPath="$PROJECT_DIR$/template/statisticsVictories.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/systemLog.js" afterPath="$PROJECT_DIR$/template/systemLog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userManagement.js" afterPath="$PROJECT_DIR$/template/userManagement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/userOperations.js" afterPath="$PROJECT_DIR$/template/userOperations.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,15 +20,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+            <state relative-caret-position="2520">
+              <caret line="112" column="46" lean-forward="true" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
               <folding>
+                <element signature="n#style#0;n#li#0;n#ul#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1504004798701" expanded="false" signature="4265:4280" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="5317:5332" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="5500:5513" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="6558:6585" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="6889:6917" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="7224:7242" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="7319:7337" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="7675:7703" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="8563:8575" ph="..." />
+                <marker date="1504004798701" expanded="false" signature="9080:9098" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,6 +59,36 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
               <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ratioStatistics.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/ratioStatistics.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statisticsVictories.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/statisticsVictories.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="343">
+              <caret line="256" column="28" lean-forward="true" selection-start-line="256" selection-start-column="28" selection-end-line="256" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ratioStatistics.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/ratioStatistics.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1710">
+              <caret line="249" column="47" lean-forward="true" selection-start-line="249" selection-start-column="47" selection-end-line="249" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -65,41 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faceToFaceLog.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="faceToFaceLog.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/faceToFaceLog.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="697">
               <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="identityRetrievalLog.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/identityRetrievalLog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="35" column="7" lean-forward="false" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="messagePush.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/messagePush.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="42" column="7" lean-forward="false" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="systemLog.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/systemLog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="41" column="7" lean-forward="false" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -115,16 +124,6 @@
                 <marker date="1504003893926" expanded="true" signature="4546:4564" ph="..." />
                 <marker date="1504003893926" expanded="true" signature="4567:4575" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="identityQuery.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/identityQuery.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="18" column="28" lean-forward="false" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -239,7 +238,6 @@
         <option value="$PROJECT_DIR$/template/userManagement.js" />
         <option value="$PROJECT_DIR$/template/faceDatabase.html" />
         <option value="$PROJECT_DIR$/template/identityRetrievalLog.html" />
-        <option value="$PROJECT_DIR$/template/statisticsVictories.js" />
         <option value="$PROJECT_DIR$/template/organizationManagement.js" />
         <option value="$PROJECT_DIR$/template/systemState.js" />
         <option value="$PROJECT_DIR$/template/faceToFaceLog.html" />
@@ -247,7 +245,6 @@
         <option value="$PROJECT_DIR$/template/identityQuery.js" />
         <option value="$PROJECT_DIR$/template/identityQuery.html" />
         <option value="$PROJECT_DIR$/template/roleManagement.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/template/faceRetrievalLog.js" />
         <option value="$PROJECT_DIR$/template/faceRetrieval.js" />
         <option value="$PROJECT_DIR$/template/identityRetrievalLog.js" />
@@ -255,6 +252,9 @@
         <option value="$PROJECT_DIR$/template/systemLog.js" />
         <option value="$PROJECT_DIR$/template/problemFeedback.js" />
         <option value="$PROJECT_DIR$/template/faceToFaceLog.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/template/statisticsVictories.js" />
+        <option value="$PROJECT_DIR$/template/ratioStatistics.js" />
       </list>
     </option>
   </component>
@@ -304,6 +304,12 @@
               <item name="xj828" type="b2602c69:ProjectViewProjectNode" />
               <item name="xj828" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xj828" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xj828" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="xj828" type="b2602c69:ProjectViewProjectNode" />
@@ -362,12 +368,8 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/organizationManagement.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/problemFeedback.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/ratioStatistics.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/roleManagement.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/statisticsVictories.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/template/userOperations.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/login.html</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -375,7 +377,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/upload/uploadModal.xlsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/fa.ico</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -383,7 +385,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/upload/b.xlsx</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -560,7 +561,7 @@
       <updated>1496285430322</updated>
       <workItem from="1496285431838" duration="25000" />
       <workItem from="1496285474543" duration="3131000" />
-      <workItem from="1503881921989" duration="70437000" />
+      <workItem from="1503881921989" duration="71726000" />
     </task>
     <task id="LOCAL-00001" summary="所有点击用户名 弹窗查看次数修改，&#10;所有页面省市区搜素 替换联想搜素">
       <created>1503912252741</created>
@@ -632,22 +633,29 @@
       <option name="project" value="LOCAL" />
       <updated>1503997717547</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="时间插件开始时间不能大于结束，结束时间最大到今天">
+      <created>1504004077373</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1504004077373</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73597000" />
+    <option name="totallyTimeSpent" value="74886000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12434141" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19125395" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38084874" sideWeight="0.5052687" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1218716" sideWeight="0.4947313" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5799782" sideWeight="0.4947313" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13819368" sideWeight="0.49578503" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17083786" sideWeight="0.49578503" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.022850925" sideWeight="0.49789253" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -734,29 +742,14 @@
     <MESSAGE value="bug" />
     <MESSAGE value="已经忘记刚刚干了啥了" />
     <MESSAGE value="人员信息检索 加验证" />
-    <option name="LAST_COMMIT_MESSAGE" value="人员信息检索 加验证" />
+    <MESSAGE value="时间插件开始时间不能大于结束，结束时间最大到今天" />
+    <option name="LAST_COMMIT_MESSAGE" value="时间插件开始时间不能大于结束，结束时间最大到今天" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/template/systemState.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="34" column="10" lean-forward="false" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/userOperations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/faceRetrieval.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
@@ -802,14 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="51" column="19" lean-forward="true" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/ratioStatistics.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-290">
-          <caret line="248" column="12" lean-forward="false" selection-start-line="248" selection-start-column="12" selection-end-line="248" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -1004,14 +989,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3360">
           <caret line="135" column="20" lean-forward="true" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/statisticsVictories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="325" column="10" lean-forward="false" selection-start-line="325" selection-start-column="10" selection-end-line="325" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -1460,29 +1437,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="334" column="0" lean-forward="false" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/identityQuery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="449">
           <caret line="18" column="28" lean-forward="false" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Explain.text">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1544,6 +1502,68 @@
         <state relative-caret-position="697">
           <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Explain.text">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="17" column="30" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/ratioStatistics.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/statisticsVictories.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="256" column="28" lean-forward="true" selection-start-line="256" selection-start-column="28" selection-end-line="256" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/ratioStatistics.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="249" column="47" lean-forward="true" selection-start-line="249" selection-start-column="47" selection-end-line="249" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2520">
+          <caret line="112" column="46" lean-forward="true" selection-start-line="112" selection-start-column="46" selection-end-line="112" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#li#0;n#ul#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1504004798701" expanded="false" signature="4265:4280" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="5317:5332" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="5500:5513" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="6558:6585" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="6889:6917" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="7224:7242" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="7319:7337" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="7675:7703" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="8563:8575" ph="..." />
+            <marker date="1504004798701" expanded="false" signature="9080:9098" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
