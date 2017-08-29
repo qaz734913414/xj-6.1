@@ -20,9 +20,12 @@
 		text-decoration: none;
 		line-height: 34px;
 	}
+	.systemState .bootstrap-table tbody tr{
+		cursor: pointer;
+	}
 </style>
 
-<div class="container-fluid face-table-group">
+<div class="container-fluid face-table-group systemState">
     <div class="row">
     	<div class="form-inline face-form" id="mainSearch">
     			<div class="form-group">
@@ -81,6 +84,24 @@
                   </tr>
                 </thead>
               </table>
+    </div>
+</div>
+<div class="modal fade face-modal" id="detialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="fa fa-times" aria-hidden="true"></span></button>
+                <h4 class="modal-title text-center">查询次数</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table data-pagination="true" data-side-pagination="server" class="table table-bordered" id="detialTable">
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="./template/systemState.js" charset="utf-8"></script>
