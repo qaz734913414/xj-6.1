@@ -348,6 +348,7 @@ function addDepartment() {
     xiala();
     $("#deptInfoModal .modal-title").html("添加");
     $("#deptInfoModal").modal();
+    $('#deptInfoModal #code').val('');
     $("#deptInfoModal #name").val('');
     $("#deptInfoModal #dPId").val('');
 }

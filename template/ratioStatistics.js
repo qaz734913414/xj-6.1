@@ -1,14 +1,14 @@
 
     $(function(){
+      $(".mydate input").datetimepicker({
+          format: 'yyyy-mm-dd',
+          showMeridian: true,
+          autoclose: true,
+          language: 'zh-CN',
+          minView: 2
+      });
       getMessage3();
-        $(".mydate input").datetimepicker({
-            format: 'yyyy-mm-dd',
-            showMeridian: true,
-            autoclose: true,
-            language: 'zh-CN',
-            minView: 2
-        });
-        $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
+      $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
     })
     function changeTime() {
         $("#startDate").datetimepicker('remove');
@@ -40,7 +40,7 @@
 	    } else if (s == 3) {
 	    	$('.mydate').hide()
 			$('.mydateQ').show()
-			
+
 	        getDateByQuarter(y,month);
 	    } else if (s == 1) {
 			$('.mydate').show()
@@ -113,11 +113,11 @@
 	  endDate: new Date(),
 	  forceParse: false
 	}).on("show", function(event) {
-	  
+
 	  $(".month").each(function(index, element) {
 	    if (index > 3) $(element).hide();
 	  });
-	  
+
 	}).on("change", function (ev) {
 		console.log()
 		qFormat(this,$(this).val(),month)
@@ -156,7 +156,7 @@
     	}else{
     		$(el).attr('data-q',month+' '+month)
     	}
-    	
+
     }
 }function getDateByYear() {
         //按年查询
