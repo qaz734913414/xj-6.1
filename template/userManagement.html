@@ -654,8 +654,7 @@
 <!-- 批量修改 -->
 
 <!-- 批量修改 -->
-<div class="modal fade face-modal" id="wrenchModal" tabindex="-1" role="dialog" aria-labelledby="wrenchLabel"
-     aria-hidden="true">
+<div class="modal fade face-modal" id="wrenchModal" tabindex="-1" role="dialog" aria-labelledby="wrenchLabel" aria-hidden="true">
     <div class="modal-dialog" style="width:800px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -670,8 +669,7 @@
                             角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色
                         </div>
                         <div class="form-group" style="margin-left:5px;">
-                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId"
-                                    style="width:194px;"></select>
+                            <select class="populate placeholder form-control" path="uRoleId" id="uRoleId" name="uRoleId" style="width:194px;"></select>
                         </div>
                         <div class="form-group" style="margin-left:15px;">
                             单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位
@@ -683,13 +681,29 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-inline face-form " style="margin-top:12px; ">
+                    <div class="form-inline face-form" style="margin-top:12px;">
                         <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
-                        <div class="form-group " style="margin-left:7px; ">
-                            <input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control "
-                                   type="text "/>
+                        <div class="form-group " style="margin-left:2px; ">
+
+                            <select id="manyExpireTime" class="form-control ">
+                                <option value="0">7天</option>
+                                <option value="1">30天</option>
+                                <option value="2">6个月</option>
+                                <option value="3">一年</option>
+                                <option value="4">三年</option>
+                                <option value="5">自定义</option>
+                            </select>
+                            <input style="width:100px;visibility: hidden" id="manyExpireTimeVal" class="form-control " type="text " />
                         </div>
                     </div>
+
+
+                    <!-- <div class="form-inline face-form " style="margin-top:12px; ">
+                        <div class="form-group " style="margin-left:45px; ">账户到期时间</div>
+                        <div class="form-group " style="margin-left:7px; ">
+                            <input path="expireTime " name="expireTime " id="expireTimeVal" class="form-control " type="text " />
+                        </div>
+                    </div> -->
 
                 </form>
             </div>
