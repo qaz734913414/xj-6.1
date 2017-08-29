@@ -238,7 +238,6 @@ $.ajax({
     url: pathurl + 'user/initDeptAndRole',
     success: function (data) {
         var dListData = data.result.dList;//dList    rName  rId
-        console.log(dListData);
         for (var i = 0; i < dListData.length; i++) {
             $('#u_unit_id').append('<option value="' + dListData[i].did + '">' + dListData[i].dname + '</option>');
         }
@@ -269,10 +268,11 @@ function getMessage3() {
 		var choesnType = $("#timestatus").find("option:selected").val();
 		var startDate = $("#startDate").val();
 	    var endDate = $("#endDate").val();
+	    var departname=$('#u_unit_id').find("option:selected").val()||'1';
 	}else{
-		console.log($('#QDate').attr('data-q'))
 		var choesnType = 1;
 		var QDate=$('#QDate').attr('data-q').split(' ');
+        var departname=$('#u_unit_id').find("option:selected").val()||'1';
 		var startDate = QDate[0];
 	    var endDate = QDate[1];
 	}
@@ -284,21 +284,21 @@ function getMessage3() {
     var ci = $("#userdiv input[name='userCityId']").val() || '';
     areacodeArr.push(ci)
     var di = $("#userdiv input[name='userDistrictId']").val() || '';
-    areacodeArr.push(di)
+    areacodeArr.push(di);
 
 
     var prn = $("#userdiv .province>a").text() || '';
-    areanameArr.push(prn)
+    areanameArr.push(prn);
     var cin = $("#userdiv .city>a").text() || '';
-    areanameArr.push(cin)
+    areanameArr.push(cin);
     var din = $("#userdiv .district>a").text() || '';
-    areanameArr.push(din)
-    var areacode = regk(areacodeArr).substr(1)
-    var areaname = regk(areanameArr).substr(1)
+    areanameArr.push(din);
+    var areacode = regk(areacodeArr).substr(1);
+    var areaname = regk(areanameArr).substr(1);
 
-    getTable3(startDate, endDate, choesnType,areacode);
+    getTable3(startDate, endDate,departname, choesnType,areacode);
 }
-function getTable3(startDate, endDate, departname, choesnType, areacode) {
+function getTable3(startDate, endDate, departname, choesnType,areacode) {
     $("#proportion").bootstrapTable('destroy');
     $("#proportion").bootstrapTable({
         method: "post",
@@ -311,7 +311,8 @@ function getTable3(startDate, endDate, departname, choesnType, areacode) {
         clickToSelect: true,
         queryParams: function (params) {
             var obj = {}
-            obj.limit = params.limit;
+            obj.pageNumber = Math.ceil(++params.offset / params.limit);
+            obj.pageSize = params.limit;
             obj.offset = params.offset;
             obj.limit = params.limit;
             obj.order = params.order;

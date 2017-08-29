@@ -1,6 +1,15 @@
+<style media="screen">
+  #userdiv>.form-group{
+    margin:0 15px 15px 0;
+  }
+  .uM .bootstrap-table {
+      margin-top: -68px;
+  }
+</style>
+
 <!-- 用户管理 -->
 <div id="backModel"></div>
-<div class="container-fluid face-table-group">
+<div class="container-fluid face-table-group uM">
     <div class="row">
         <div class="form-inline face-form" id="userdiv">
             <div class="form-group">
@@ -61,8 +70,8 @@
 
             <div class="form-group">
                 <form id="uploadForm" enctype="multipart/form-data" class="form-horizontal">
-                    <div class="form-group" style="margin: 0 0 0 15px;">
-                        <div class="form-group">
+                    <div class="">
+                        <div class="form-group"  style="margin-left: 0px;">
                             <input type="file" style="width:200px;" accept=".xlsx" name="file" class="form-control"/>
                         </div>
                         <div class="form-group" style="margin-left:5px;">
