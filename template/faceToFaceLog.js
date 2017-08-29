@@ -378,7 +378,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img width="130" height="180" src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '>'
                         }
                     }, {
                         field: 'remark',
@@ -444,7 +444,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img width="130" height="180" src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '>'
                         }
                     }, {
                         field: 'remark',
@@ -511,7 +511,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img width="130" height="180" src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '>'
                         }
                     }, {
                         field: 'remark',
@@ -646,7 +646,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img width="130" height="180" src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '>'
                         }
                     }, {
                         field: 'car_no',
