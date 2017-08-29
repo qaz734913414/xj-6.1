@@ -1,24 +1,30 @@
 var heightFactor = 1.2;
 $("#iidno").focus();
+$(".err").html('');
+$("#iidno").blur(function () {
+    if($("#iidno").val()){
+        $("#iidno").val($("#iidno").val().toLocaleUpperCase())
+    }
+});
 function getMessage4() {
 
     var idno = $("#iidno").val() || '';
     var iname = $("#iname").val() || '';
     if (!idno && !iname) {
-        alert('请输入查询条件');
         $("#iidno").focus();
-        return ;
+        return false;
 
     } else if (idno && !/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idno)) {
-        alert('身份证号格式错误');
+        $(".err").html('身份证号格式错误');
         $("#iidno").focus();
         return ;
     } else if (iname && !/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(iname)) {
-        alert('请正确输入中文姓名');
+        $(".err").html('请正确输入中文姓名');
         $("#iname").focus();
         return ;
     }
     else {
+        $(".err").html('');
         var upload = $(this);
         upload.addClass("disabled");
         var form_Data = new FormData();
@@ -132,6 +138,7 @@ function showImageOnModal(resource) {
 }
 
 function reset4() {
+    $(".err").html('');
     $(".face-form input").val("");
     $('.result-box .row').html('')
 }

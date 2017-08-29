@@ -223,26 +223,22 @@ window.operateEvents = {
                             console.log(data);
                             console.log(!data.code);
                             if(!data.code){
-                                $("#myComfirmModal #myComfirmModalLabel").html("提示");
-                                $("#myComfirmModal #confirm_modal-body-id").html("修改成功");
-                                $('#myComfirmModal').modal('show');
+                                $("#myModal #modal-body-id").html("修改成功");
+                                $('#myModal').modal('show');
                                 $('.roleList').show();
                                 $('.roleList').siblings().hide();
                                 $("#roleTable").bootstrapTable('refresh');
                             }else if (data.code == 200) {
                                 console.log('修改成功')
-                                $("#myComfirmModal #myComfirmModalLabel").html("提示");
-                                $("#myComfirmModal #confirm_modal-body-id").html("修改成功");
-                                $('#myComfirmModal').modal('show');
+                                $("#myModal #modal-body-id").html("修改成功");
+                                $('#myModal').modal('show');
                                 $('.roleList').show();
                                 $('.roleList').siblings().hide();
                                 $("#roleTable").bootstrapTable('refresh');
 
                             } else {
-
-                                $("#myComfirmModal #myComfirmModalLabel").html("提示");
-                                $("#myComfirmModal #confirm_modal-body-id").html(data.msg);
-                                $('#myComfirmModal').modal('show');
+                                $("#myModal #modal-body-id").html("修改成功");
+                                $('#myModal').modal('show');
                             }
                             var rIdVal=null;
                             changeNodes='';
@@ -451,18 +447,17 @@ function goback() {
                                 console.log(data)
                                 if (data.code == 200) {
                                     console.log("添加成功")
-                                    $("#myComfirmModal #myComfirmModalLabel").html("提示");
-                                    $("#myComfirmModal #confirm_modal-body-id").html("添加成功");
-                                    $('#myComfirmModal').modal('show');
+                                    $("#myModal #modal-body-id").html("添加成功");
+                                    $('#myModal').modal('show');
                                     $('.roleList').show();
                                     $('.roleList').siblings().hide();
                                     $("#roleTable").bootstrapTable('refresh');
                                     //									LoadAjaxContent('${ctx }/role/list');
                                 } else {
                                     console.log(data.msg)
-                                    $("#myComfirmModal #myComfirmModalLabel").html("提示");
-                                    $("#myComfirmModal #confirm_modal-body-id").html(data.msg);
-                                    $('#myComfirmModal').modal('show');
+
+                                    $("#myModal #modal-body-id").html(data.msg);
+                                    $('#myModal').modal('show');
                                 }
                             },
                             error: function() {

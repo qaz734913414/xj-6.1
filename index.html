@@ -332,37 +332,6 @@ var pathurl = 'http://192.168.0.169:8080/FaceManage/';
 
     };
 
-    window.onbeforeunload = onbeforeunload_handler;
-    window.onunload = onunload_handler;
-    function onbeforeunload_handler(){
-        $.ajax({
-            url: pathurl + 'logout',
-            method:'post',
-            async:true,
-            success: function (data) {
-
-                localStorage.setItem('token','');
-                localStorage.setItem('userMes','');
-
-            }
-        });
-        return '确认退出?';
-
-    }
-    function onunload_handler(){
-
-        $.ajax({
-            url: pathurl + 'logout',
-            method:'post',
-            success: function (data) {
-
-               localStorage.setItem('token','');
-               localStorage.setItem('userMes','');
-
-            }
-        });
-
-    }
 </script>
 
 </html>

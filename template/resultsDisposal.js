@@ -5,7 +5,7 @@ $(function(){
     $(".mydate input").datetimepicker({
         format: 'yyyy-mm-dd',
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 2
     });
@@ -62,7 +62,7 @@ function getDateByMonth() {
         startView: 3,
         startDate: 3,
         todayHighlight: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 4,
         todayBtn: true,
@@ -79,7 +79,7 @@ function getDateByMonth() {
         format: "yyyy-mm",
         startView: 3,
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 4,
         todayBtn: true,
@@ -109,7 +109,7 @@ function getDateByQuarter(y,month) {
 	$('#QDate').datepicker({
 	  format: "yyyy MM",
 	  minViewMode: 1,
-	  autoclose: true,
+	  endDate: new Date(),autoclose: true,
 	  language: "qtrs",
 	  endDate: new Date(),
 	  forceParse: false
@@ -169,7 +169,7 @@ function getDateByYear() {
         endDate: "2020",
         //todayHighlight:true,
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 'decade',
         //todayBtn:true,
@@ -183,7 +183,7 @@ function getDateByYear() {
         format: "yyyy",
         startView: 'decade',
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 'decade',
 
@@ -202,7 +202,7 @@ function getDateByDay() {
         startDate: 4,
         todayHighlight: true,
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 2,
 
@@ -216,7 +216,7 @@ function getDateByDay() {
     $("#endDate").datetimepicker({
         format: "yyyy-mm-dd",
         showMeridian: true,
-        autoclose: true,
+        endDate: new Date(),autoclose: true,
         language: 'zh-CN',
         minView: 2,
 

@@ -1,14 +1,14 @@
 
     $(function(){
-      $(".mydate input").datetimepicker({
-          format: 'yyyy-mm-dd',
-          showMeridian: true,
-          autoclose: true,
-          language: 'zh-CN',
-          minView: 2
-      });
       getMessage3();
-      $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
+        $(".mydate input").datetimepicker({
+            format: 'yyyy-mm-dd',
+            showMeridian: true,
+            endDate: new Date(),autoclose: true,
+            language: 'zh-CN',
+            minView: 2
+        });
+        $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
     })
     function changeTime() {
         $("#startDate").datetimepicker('remove');
@@ -40,7 +40,7 @@
 	    } else if (s == 3) {
 	    	$('.mydate').hide()
 			$('.mydateQ').show()
-
+			
 	        getDateByQuarter(y,month);
 	    } else if (s == 1) {
 			$('.mydate').show()
@@ -61,7 +61,7 @@
             startView: 3,
             startDate: 3,
             todayHighlight: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 4,
             todayBtn: true,
@@ -78,7 +78,7 @@
             format: "yyyy-mm",
             startView: 3,
             showMeridian: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 4,
             todayBtn: true,
@@ -108,16 +108,16 @@
 	$('#QDate').datepicker({
 	  format: "yyyy MM",
 	  minViewMode: 1,
-	  autoclose: true,
+	  endDate: new Date(),autoclose: true,
 	  language: "qtrs",
 	  endDate: new Date(),
 	  forceParse: false
 	}).on("show", function(event) {
-
+	  
 	  $(".month").each(function(index, element) {
 	    if (index > 3) $(element).hide();
 	  });
-
+	  
 	}).on("change", function (ev) {
 		console.log()
 		qFormat(this,$(this).val(),month)
@@ -156,7 +156,7 @@
     	}else{
     		$(el).attr('data-q',month+' '+month)
     	}
-
+    	
     }
 }function getDateByYear() {
         //按年查询
@@ -167,7 +167,7 @@
             endDate: "2020",
             //todayHighlight:true,
             showMeridian: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 'decade',
             //todayBtn:true,
@@ -181,7 +181,7 @@
             format: "yyyy",
             startView: 'decade',
             showMeridian: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 'decade',
 
@@ -200,7 +200,7 @@
             startDate: 4,
             todayHighlight: true,
             showMeridian: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 2,
 
@@ -214,7 +214,7 @@
         $("#endDate").datetimepicker({
             format: "yyyy-mm-dd",
             showMeridian: true,
-            autoclose: true,
+            endDate: new Date(),autoclose: true,
             language: 'zh-CN',
             minView: 2,
 
