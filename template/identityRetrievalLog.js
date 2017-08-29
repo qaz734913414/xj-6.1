@@ -114,7 +114,7 @@ function getTable() {
         },
         rowAttributes: function (row, index) {
             return {
-                "data-idCard": row.id
+                "data-id": row.idno
             }
         },
         columns: [{
@@ -216,14 +216,13 @@ $("#btn-reset").on("click", function () {
 
 //点击图片  弹出详情
 $(".ft2").delegate(".imgDetail", "click", function () {
-    var idcard = $(this).parents("tr").attr('data-idCard');
+    var idcard = $(this).parents("tr").attr('data-id');
     var imgsDom = $("#faceLogModal .modal-body .row");
     $('.modal-title').html('检索人员详情');
     imgsDom.html("");
     $.ajax({
         type: 'post',
         url: pathurl + 'face/getPicture',
-        // url:'./testJson/clickImage.json',
         data: {
             idcard: idcard
         },
@@ -303,109 +302,370 @@ function countinfo(n, i) {
         case 0:
             $('#counttable2').bootstrapTable({
                 url: pathurl + 'facelog/retrieveShow?username=' + n, //请求后台的URL（*）
-
-
+                method:'post',
                 pagination: true,
-
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
                 sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
-                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-                onLoadSuccess: function (data) {  //加载成功时执行
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
                     console.log(data)
                 },
-                columns: [{
-                    title: '序号',
-                    formatter: function (value, row, index) {
-                        return ++index;
-                    }
-                }, {
-                    field: 'time',
-                    title: '时间'
-                },]
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'plat',
+                        title: '来源'
+                    }, {
+                        field: 'company',
+                        title: '算法'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'chosen',
+                        title: '是否比中',
+                        formatter: function (value, row, index) {
+                            if (value == 0) {
+                                return '是'
+                            } else {
+                                return '否'
+                            }
+                        }
+                    }, {
+                        field: 'harmful',
+                        title: '是否有害'
+                    }, {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value, row, index) {
+                            return '<img width="130" height="180" src=' + value + '/>'
+                        }
+                    }, {
+                        field: 'remark',
+                        title: '检索备注'
+                    }, {
+                        field: 'longtutide',
+                        title: '经度'
+                    }, {
+                        field: 'laititude',
+                        title: '纬度'
+                    },
+                ]
             });
             break;
         case 1:
             $('#counttable2').bootstrapTable({
                 url: pathurl + 'facelog/compareShow?username=' + n, //请求后台的URL（*）
-
-
+                method:'post',
                 pagination: true,
-
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
                 sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
-                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-                onLoadSuccess: function (data) {  //加载成功时执行
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
                     console.log(data)
                 },
-                columns: [{
-                    title: '序号',
-                    formatter: function (value, row, index) {
-                        return ++index;
-                    }
-                }, {
-                    field: 'time',
-                    title: '时间'
-                },]
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'plat',
+                        title: '来源'
+                    }, {
+                        field: 'company',
+                        title: '算法'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'chosen',
+                        title: '是否比中',
+                        formatter: function (value, row, index) {
+                            if (value == 0) {
+                                return '是'
+                            } else {
+                                return '否'
+                            }
+                        }
+                    }, {
+                        field: 'harmful',
+                        title: '是否有害'
+                    }, {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value, row, index) {
+                            return '<img width="130" height="180" src=' + value + '/>'
+                        }
+                    }, {
+                        field: 'remark',
+                        title: '检索备注'
+                    }, {
+                        field: 'longtutide',
+                        title: '经度'
+                    }, {
+                        field: 'laititude',
+                        title: '纬度'
+                    },
+                ]
             });
             break;
         case 2:
             $('#counttable2').bootstrapTable({
                 url: pathurl + 'facelog/idCardShow?username=' + n, //请求后台的URL（*）
-
+                method:'post',
                 pagination: true,
+
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
                 sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
-                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-                onLoadSuccess: function (data) {  //加载成功时执行
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
                     console.log(data)
                 },
-                columns: [{
-                    title: '序号',
-                    formatter: function (value, row, index) {
-                        return ++index;
-                    }
-                }, {
-                    field: 'time',
-                    title: '时间'
-                },]
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'plat',
+                        title: '来源'
+                    }, {
+                        field: 'company',
+                        title: '算法'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'chosen',
+                        title: '是否比中',
+                        formatter: function (value, row, index) {
+                            if (value == 0) {
+                                return '是'
+                            } else {
+                                return '否'
+                            }
+                        }
+                    }, {
+                        field: 'harmful',
+                        title: '是否有害'
+                    }, {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value, row, index) {
+                            return '<img width="130" height="180" src=' + value + '/>'
+                        }
+                    }, {
+                        field: 'remark',
+                        title: '检索备注'
+                    }, {
+                        field: 'longtutide',
+                        title: '经度'
+                    }, {
+                        field: 'laititude',
+                        title: '纬度'
+                    },
+                ]
             });
             break;
         case 3:
             $('#counttable2').bootstrapTable({
                 url: pathurl + 'facelog/loginShow?username=' + n, //请求后台的URL（*）
 
+                method:'post',
                 pagination: true,
+
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
                 sortOrder: 'desc',
                 pageNumber: 1, //初始化加载第一页，默认第一页
-                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-                onLoadSuccess: function (data) {  //加载成功时执行
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
                     console.log(data)
                 },
-                columns: [{
-                    title: '序号',
-                    formatter: function (value, row, index) {
-                        return ++index;
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'plat',
+                        title: '来源'
+                    }, {
+                        field: 'company',
+                        title: '算法'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'chosen',
+                        title: '是否比中',
+                        formatter: function (value, row, index) {
+                            if (value == 0) {
+                                return '是'
+                            } else {
+                                return '否'
+                            }
+                        }
+                    }, {
+                        field: 'harmful',
+                        title: '是否有害'
+                    }, {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value, row, index) {
+                            return '<img width="130" height="180" src=' + value + '/>'
+                        }
+                    }, {
+                        field: 'remark',
+                        title: '检索备注'
+                    }, {
+                        field: 'longtutide',
+                        title: '经度'
+                    }, {
+                        field: 'laititude',
+                        title: '纬度'
+                    },
+                ]
+            });
+            break;
+        case 4:
+            $('#counttable2').bootstrapTable({
+                url: pathurl + 'facelog/appLoginShow?username=' + n, //请求后台的URL（*）
+
+                method:'post',
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder: 'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
+                    console.log(data)
+                },
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'devicetype',
+                        title: 'APP类型'
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'longtutide',
+                        title: '经度'
+                    }, {
+                        field: 'laititude',
+                        title: '纬度'
+                    },
+                ]
+            });
+            break;
+        case 5:
+            $('#counttable2').bootstrapTable({
+                url: pathurl + 'facelog/importShow?username=' + n, //请求后台的URL（*）
+
+                method:'post',
+                pagination: true,
+
+                contentType: "application/x-www-form-urlencoded",
+                queryParamsType: " limit",
+                paginationDetailHAlign: "left",
+                sortOrder: 'desc',
+                pageNumber: 1, //初始化加载第一页，默认第一页
+                pageList: [
+                    10, 25, 50, 100
+                ], //可供选择的每页的行数（*）
+                onLoadSuccess: function (data) { //加载成功时执行
+                    console.log(data)
+                },
+                columns: [
+                    {
+                        title: '序号',
+                        formatter: function (value, row, index) {
+                            return ++index;
+                        }
+                    }, {
+                        field: 'time',
+                        title: '创建时间'
+                    }, {
+                        field: 'username',
+                        title: '用户名'
+                    }, {
+                        field: 'name',
+                        title: '真实姓名'
+                    }, {
+                        field: 'userdepart',
+                        title: '部门'
+                    }, {
+                        field: 'userorgan',
+                        title: '地区'
+                    }, {
+                        field: 'url',
+                        title: '图片',
+                        formatter: function (value, row, index) {
+                            return '<img width="130" height="180" src=' + value + '/>'
+                        }
+                    }, {
+                        field: 'car_no',
+                        title: '车牌号'
+                    }, {
+                        field: 'phone_no',
+                        title: '手机号'
                     }
-                }, {
-                    field: 'time',
-                    title: '时间'
-                },]
+                ]
             });
             break;
     }
-
+    $("#countModal .modal-title").text($($('.count')[i]).text());
     $("#countModal").modal();
 
 

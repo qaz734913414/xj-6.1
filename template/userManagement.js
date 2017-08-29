@@ -75,6 +75,13 @@ $(function () {
         language: 'zh-CN',
         minView: 2
     });
+    $('#wrenchModal #manyExpireTimeVal').datetimepicker({
+        format: "yyyy-mm-dd",
+        showMeridian: true,
+        autoclose: true,
+        language: 'zh-CN',
+        minView: 2
+    });
 
 });
 
@@ -133,7 +140,7 @@ function getTable() {
     $("#userTable1").bootstrapTable({
         method: "post",
         url: pathurl + "user/usersList?uName=" + uName + "&uUnitId=" + uUnitId + "&uRoleId=" + uRoleId + "&areacode=" + areacode + "&policeType=" + policeType + '&approval=' + approval,
-        method:'post',
+        method: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",
@@ -170,17 +177,17 @@ function getTable() {
         onLoadSuccess: function (data) { //加载成功时执行
             console.log('初始化%o', data)
         },
-        columns:[{
-            field : 'checked',
-            checkbox : true,
-            formatter :function(value, row, index){
-                if (row.uId == userMes.uid){
+        columns: [{
+            field: 'checked',
+            checkbox: true,
+            formatter: function (value, row, index) {
+                if (row.uId == userMes.uid) {
                     return {
-                        disabled :true, //设置是否可用
+                        disabled: true, //设置是否可用
                     };
-                }else{
+                } else {
                     return {
-                        disabled :false, //设置是否可用
+                        disabled: false, //设置是否可用
                     };
                 }
             }
@@ -266,12 +273,12 @@ function addUser() {
     $('#adduserModal #city-picker-search1 .district a').html('请选择区县')
     $('#adduserModal #city-picker-search1 input').val("");
 
-    $('#addImg').attr('src','./img/default_img.png');
+    $('#addImg').attr('src', './img/default_img.png');
     $('#adduserModal #userForm')[0].reset()
     $("#adduserModal .modal-title").html("添加用户");
     $("#adduserModal").modal();
     $("#adduserModal #cancel").off()
-    $("#adduserModal #cancel").click(function() {
+    $("#adduserModal #cancel").click(function () {
         $('#adduserModal').modal('hide');
         $("#adduserModal #userForm")[0].reset();
         $("#userTable1").bootstrapTable('refresh');
@@ -304,7 +311,7 @@ $('#adduserModal #expireTime').change(function () {
         } else if (dateval == 4) {
             expireTime = dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
         }
-        console.log(expireTime)
+
         $('#expireTimeVal').val(expireTime);
     }
 
@@ -349,13 +356,13 @@ $("#adduserModal #continue").click(function () {
         var areaname = regk(areanameArr).substr(1)
 
         var faceData = new FormData();
-        try{
-            var isImg=$('#addImgFile').get(0).files[0];
-        }catch(e){
-            var isImg=$('#addImgFile').get(0).value;
+        try {
+            var isImg = $('#addImgFile').get(0).files[0];
+        } catch (e) {
+            var isImg = $('#addImgFile').get(0).value;
         }
         console.log(isImg)
-        if(!!isImg){
+        if (!!isImg) {
             faceData.append('file', isImg);
         }
         faceData.append('uName', $("#adduserModal #uName").val());
@@ -371,7 +378,7 @@ $("#adduserModal #continue").click(function () {
         faceData.append('uDuty', $("#adduserModal #uDuty").val());
         faceData.append('uRoleId', $("#adduserModal #uRoleId").val());
         faceData.append('uUnitId', $("#adduserModal #uunitId").val());
-        faceData.append('expireTime', expireTime);
+        faceData.append('expireTime', expireTime||dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd'));
         faceData.append('areacode', areacode);
         faceData.append('areaname', areaname);
         faceData.append('uVip', $("#adduserModal input[name='uVIP']:checked").val());
@@ -407,7 +414,6 @@ $("#adduserModal #continue").click(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data)
                 if (data.code == 200) {
                     $('#adduserModal').modal('hide');
                     $("#modal-body-id").html('添加成功');
@@ -463,7 +469,7 @@ function init() {
             for (var i = 0; i < rListData.length; i++) {
                 roleStr += '<option value="' + rListData[i].id + '">' + rListData[i].name + '</option>';
             }
-            //			console.log(roleStr)
+
 
             $('#userdiv #uUnitId option').eq(0).after(unitStr);
             $('#userdiv #uRoleId option').eq(0).after(roleStr);
@@ -494,15 +500,14 @@ function init() {
 function reset() {
     $("#uUnitId").val('');
     $("#uRealName").val("");
-    $('select').val("");
+    $(".face-form input,.face-form select").val("");
     $('#userdiv #city-picker-search .province a').html('请选择省份')
     $('#userdiv #city-picker-search .city a').html('请选择省份')
     $('#userdiv #city-picker-search .district a').html('请选择区县')
     $('#userdiv #city-picker-search input').val("");
     var select = $('.city-picker-select').cityPicker({dataJson: cityData, renderMode: false, linkage: false});
 
-    // var aa=$('#uUnitId option').eq(0).props('selected','selected')
-    // console.log(aa);
+
     getTable();
 }
 
@@ -516,17 +521,17 @@ function statusFormatter(value, row, index) {
 }
 
 function operateFormatter(value, row, index) {
-    if(userMes.uid==row.uId){   //登陆的用户和列表的用户相同   ：不现实删除按钮   登录用户不能删除自己
-        if(userMes.uid==1){  //是管理员
+    if (userMes.uid == row.uId) {   //登陆的用户和列表的用户相同   ：不现实删除按钮   登录用户不能删除自己
+        if (userMes.uid == 1) {  //是管理员
 
             if (row.bindType == 0) {  //绑定状态
 
-                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
+                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>', '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
             } else if (row.bindType == 1) {  //未绑定状态
 
-                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>','<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
+                return ['<button type="button" class="resetSafetyCode btn-sm btn  face-button" style="margin-right:15px;">安全码重置</button>', '<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
             }
-        }else{ //不是管理员
+        } else { //不是管理员
             if (row.bindType == 0) {
 
                 return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
@@ -536,14 +541,14 @@ function operateFormatter(value, row, index) {
             }
         }
 
-    }else{
+    } else {
         if (row.bindType == 0) {
-            if(row.isdelete==1){//删除
+            if (row.isdelete == 1) {//删除
                 return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">确认删除</button>', '<button type="button" data-id="button2" class="pcode btn-warning btn-sm btn" style="margin-right:15px;">恢复</button>'].join('');
             }
             return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" data-id="button3" class="pcode unbind btn-sm btn face-button2" style="margin-right:15px;">解&#12288;绑</button>'].join('');
         } else if (row.bindType == 1) {
-            if(row.isdelete==1){//删除
+            if (row.isdelete == 1) {//删除
                 return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">确认删除</button>', '<button type="button" data-id="button2" class="pcode btn-warning btn-sm btn recovery" style="margin-right:15px;">恢复</button>'].join('');
             }
             return ['<button type="button" class="resetPwd btn-sm btn  face-button" style="margin-right:15px;">重置密码</button>', '<button type="button" data-id="button1" class="pcode update btn-sm btn face-button " style="margin-right:15px;">修改</button>', '<button type="button" data-id="button2" class="pcode delete btn-sm btn face-button2" style="margin-right:15px;">删除</button>', '<button type="button" disabled class="unbind btn-sm btn face-button" style="margin-right:15px;">未绑定</button>'].join('');
@@ -585,7 +590,7 @@ window.statusEvents = {
 };
 
 window.operateEvents = { //done
-    'click .recovery':function(e, value, row, index){
+    'click .recovery': function (e, value, row, index) {
         recovery(row);
     },
     'click .resetSafetyCode': function (e, value, row, index) { //安全吗重置
@@ -823,24 +828,24 @@ function toWrench() {
         $("#myModal").modal('show');
     }
 };
-$('#wrenchModal #manyExpireTime').change(function() {
+$('#wrenchModal #manyExpireTime').change(function () {
     var dateval = $(this).val();
-    if(dateval==5){
-        $('#wrenchModal #manyExpireTimeVal').css('visibility','');
+    if (dateval == 5) {
+        $('#wrenchModal #manyExpireTimeVal').css('visibility', '');
 
-    }else{
-        $('#wrenchModal #manyExpireTimeVal').css('visibility','hidden');
+    } else {
+        $('#wrenchModal #manyExpireTimeVal').css('visibility', 'hidden');
         var expireTime;
-        if(dateval==0){
-            expireTime=dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
-        }else if(dateval==1){
-            expireTime=dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
-        }else if(dateval==2){
-            expireTime=dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
-        }else if(dateval==3){
-            expireTime=dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
-        }else if(dateval==4){
-            expireTime=dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
+        if (dateval == 0) {
+            expireTime = dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+        } else if (dateval == 1) {
+            expireTime = dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
+        } else if (dateval == 2) {
+            expireTime = dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
+        } else if (dateval == 3) {
+            expireTime = dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
+        } else if (dateval == 4) {
+            expireTime = dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
         }
         console.log(expireTime)
         $('#wrenchModal #manyExpireTimeVal').val(expireTime);
@@ -860,7 +865,7 @@ $("#wrenchModal #continue").click(function () {
         url: pathurl + 'user/batchUpdate',
         data: {
             ids: $('#rowUId').val(),
-            expireTime: $('#manyExpireTimeVal').val()||dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd'),
+            expireTime: $('#manyExpireTimeVal').val() || dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd'),
             uRoleId: $('#wrenchModal #wrench #uRoleId').val(),
             uUnitId: $('#wrenchModal #wrench #uunitId').val()
         },
@@ -919,11 +924,11 @@ $("#delUserTModel #cancel").click(function () {
 // 删除用户
 
 $("#delUserTModel #continue").off();
-$("#delUserTModel #continue").click(function() {
-    if(userMes.roleid==1){
+$("#delUserTModel #continue").click(function () {
+    if (userMes.roleid == 1) {
         $("#delUserTModel").modal('hide');
         $('#verificationSafetyCodeModal').modal('show');
-    }else{
+    } else {
         $("#delUserTModel").modal('hide');
         $.ajax({
             type: 'POST',
@@ -931,7 +936,7 @@ $("#delUserTModel #continue").click(function() {
             data: {
                 uId: $('#rowUId').val()
             },
-            success: function(data) {
+            success: function (data) {
                 console.log('删除成功!')
                 if (data.code == 200) {
                     $("#modal-body-id").text("删除成功!");
@@ -942,7 +947,7 @@ $("#delUserTModel #continue").click(function() {
                     $("#myModal").modal();
                 }
             },
-            error: function() {
+            error: function () {
                 console.log('处理失败!!')
                 $("#modal-body-id").text("处理失败!");
                 $("#myModal").modal();
@@ -957,18 +962,18 @@ $('#verificationSafetyCodeModal').on('hide.bs.modal', function () {
     $('#verificationSafetyCodeForm')[0].reset();
     $("#userTable1").bootstrapTable('refresh');
 });
-$('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click',function(){
-    var safetyCode=md5($('#safetyCode').val()).toUpperCase();
+$('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click', function () {
+    var safetyCode = md5($('#safetyCode').val()).toUpperCase();
     $.ajax({
         type: 'POST',
-        async:false,
+        async: false,
         url: pathurl + 'user/getsafepwd',
-        success: function(data) {
+        success: function (data) {
             //  console.log(data)
-            if(data.code==200){
+            if (data.code == 200) {
                 console.log(safetyCode)
                 console.log(data.result)
-                if(safetyCode==data.result){
+                if (safetyCode == data.result) {
                     $("#delUserTModel").modal('hide');
                     $.ajax({
                         type: 'POST',
@@ -976,7 +981,7 @@ $('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click',funct
                         data: {
                             uId: $('#rowUId').val()
                         },
-                        success: function(data) {
+                        success: function (data) {
                             console.log('删除成功!')
                             if (data.code == 200) {
                                 $("#modal-body-id").text("删除成功!");
@@ -987,13 +992,13 @@ $('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click',funct
                                 $("#myModal").modal();
                             }
                         },
-                        error: function() {
+                        error: function () {
                             console.log('处理失败!!')
                             $("#modal-body-id").text("处理失败!");
                             $("#myModal").modal();
                         }
                     });
-                }else{
+                } else {
                     $("#modal-body-id").text("密码错误");
                     $("#myModal").modal();
                 }
@@ -1024,29 +1029,29 @@ function userEdit(row) {
     $('#modifyUserModal #city-picker-search2 .district a').html('请选择区县');
     $('#modifyUserModal #city-picker-search2 input').val("");
 
-    $('#modifyImg').attr('src','./img/default_img.png');
+    $('#modifyImg').attr('src', './img/default_img.png');
     $('#modifyUserModal #userForm')[0].reset()
-    if(row.uId==userMes.uid){
+    if (row.uId == userMes.uid) {
         console.log('是自己')
-        $('#modifyUserModal #vip').prop('disabled',true);
-        $('#modifyUserModal #novip').prop('disabled',true);
-        $('#modifyUserModal #uRoleId').prop('disabled',true);
-        $('#modifyUserModal #uunitId').prop('disabled',true);
-        $('#modifyUserModal #approval').prop('readonly',true);
+        $('#modifyUserModal #vip').prop('disabled', true);
+        $('#modifyUserModal #novip').prop('disabled', true);
+        $('#modifyUserModal #uRoleId').prop('disabled', true);
+        $('#modifyUserModal #uunitId').prop('disabled', true);
+        $('#modifyUserModal #approval').prop('readonly', true);
         // $('#city-picker-search2')
         // select2.bindEvent()
-        $('#city-picker-search2').click(function(){
+        $('#city-picker-search2').click(function () {
             $('#city-picker-search2 .selector-list').hide();
         })
 
-    }else{
+    } else {
         console.log('不是自己')
-        $('#modifyUserModal #vip').prop('disabled',false);
-        $('#modifyUserModal #novip').prop('disabled',false);
-        $('#modifyUserModal #uRoleId').prop('disabled',false);
-        $('#modifyUserModal #uunitId').prop('disabled',false);
-        $('#modifyUserModal #approval').prop('readonly',false);
-        $('#city-picker-search2').click(function(){
+        $('#modifyUserModal #vip').prop('disabled', false);
+        $('#modifyUserModal #novip').prop('disabled', false);
+        $('#modifyUserModal #uRoleId').prop('disabled', false);
+        $('#modifyUserModal #uunitId').prop('disabled', false);
+        $('#modifyUserModal #approval').prop('readonly', false);
+        $('#city-picker-search2').click(function () {
             $('#city-picker-search2 .selector-list').show();
         })
     }
@@ -1094,27 +1099,32 @@ function userEdit(row) {
     // }
     // $("#imgId").attr('src',path);
     // $("#modifyUserModal #img0").attr('src','');
-    var select2 = $('#city-picker-search2').cityPicker({dataJson: cityData, renderMode: true, search: true, linkage: false});
+    var select2 = $('#city-picker-search2').cityPicker({
+        dataJson: cityData,
+        renderMode: true,
+        search: true,
+        linkage: false
+    });
     $("#modifyUserModal #uName").val(row.uName);
     $("#modifyUserModal #urealName").val(row.uRealName);
-    $('#modifyUserModal #modifyImg').attr('src','')
-    if(row.picurl){
+    $('#modifyUserModal #modifyImg').attr('src', '')
+    if (row.picurl) {
         console.log(row.picurl)
-        $('#modifyUserModal #modifyImg').attr('src',row.picurl)
-    }else{
-        $('#modifyUserModal #modifyImg').attr('src','./img/default_img.png');
+        $('#modifyUserModal #modifyImg').attr('src', row.picurl)
+    } else {
+        $('#modifyUserModal #modifyImg').attr('src', './img/default_img.png');
     }
-    var cityArr=[]
+    var cityArr = []
 
-    var areanameArr=row.uArea.split('-')
-    var areacodeArr=row.areacode.split('-')
+    var areanameArr = row.uArea.split('-')
+    var areacodeArr = row.areacode.split('-')
 
     // console.log(areanameArr)
     // console.log(areacodeArr)
-    for(var i=0;i<areacodeArr.length;i++){
-        var obj={}
-        obj.id=areacodeArr[i];
-        obj.name=areanameArr[i];
+    for (var i = 0; i < areacodeArr.length; i++) {
+        var obj = {}
+        obj.id = areacodeArr[i];
+        obj.name = areanameArr[i];
         cityArr.push(obj)
     }
 
@@ -1125,17 +1135,17 @@ function userEdit(row) {
     $("#modifyUserModal #uType").val(row.uType);
     $("#modifyUserModal #uStatus").val(row.uStatus);
     console.log(row.uVip)
-    if(row.uVip==1){
+    if (row.uVip == 1) {
         console.log('是vip')
-        $("#modifyUserModal #vip").prop('checked',true);
-    }else if(row.uVip==0){
+        $("#modifyUserModal #vip").prop('checked', true);
+    } else if (row.uVip == 0) {
         console.log('不是vip')
-        $("#modifyUserModal #novip").prop('checked',true);
+        $("#modifyUserModal #novip").prop('checked', true);
     }
 
     $('#modifyUserModal #expireTime2').val(5)
-    $('#modifyUserModal #expireTimeVal2').css('visibility','').val(row.expireTime)
-    $('#modifyUserModal #imgBox').attr('src',row.picurl);
+    $('#modifyUserModal #expireTimeVal2').css('visibility', '').val(row.expireTime)
+    $('#modifyUserModal #imgBox').attr('src', row.picurl);
     $("#modifyUserModal #uPhone").val(row.phone);
     $("#modifyUserModal #uTelephone").val(row.telephone);
     $("#modifyUserModal #uPolicyNum").val(row.uPolicyNum);
@@ -1146,27 +1156,27 @@ function userEdit(row) {
     $("#modifyUserModal .modal-title").html("修改用户");
     $('#modifyUserModal #approval').val(row.approval);
     $('#modifyUserModal #policeType').val(row.policeType)
-    setTimeout(function() {
+    setTimeout(function () {
         $("#modifyUserModal").modal('show');
     }, 100)
-    $('#modifyUserModal #expireTime2').change(function() {
+    $('#modifyUserModal #expireTime2').change(function () {
         var dateval = $(this).val();
-        if(dateval==5){
-            $('#modifyUserModal #expireTimeVal2').css('visibility','');
+        if (dateval == 5) {
+            $('#modifyUserModal #expireTimeVal2').css('visibility', '');
 
-        }else{
-            $('#modifyUserModal #expireTimeVal2').css('visibility','hidden');
+        } else {
+            $('#modifyUserModal #expireTimeVal2').css('visibility', 'hidden');
             var expireTime;
-            if(dateval==0){
-                expireTime=dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
-            }else if(dateval==1){
-                expireTime=dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
-            }else if(dateval==2){
-                expireTime=dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
-            }else if(dateval==3){
-                expireTime=dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
-            }else if(dateval==4){
-                expireTime=dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
+            if (dateval == 0) {
+                expireTime = dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd');
+            } else if (dateval == 1) {
+                expireTime = dateUtil.dateAdd('d ', 30, new Date).format('yyyy-MM-dd');
+            } else if (dateval == 2) {
+                expireTime = dateUtil.dateAdd('m ', 6, new Date).format('yyyy-MM-dd');
+            } else if (dateval == 3) {
+                expireTime = dateUtil.dateAdd('y ', 1, new Date).format('yyyy-MM-dd');
+            } else if (dateval == 4) {
+                expireTime = dateUtil.dateAdd('y ', 3, new Date).format('yyyy-MM-dd');
             }
             console.log(expireTime)
             $('#expireTimeVal2').val(expireTime);
@@ -1174,21 +1184,21 @@ function userEdit(row) {
 
     });
     $("#modifyUserModal #cancel").off();
-    $("#modifyUserModal #cancel").click(function() {
+    $("#modifyUserModal #cancel").click(function () {
         $('#modifyUserModal').modal('hide');
         $("#userTable1").bootstrapTable('refresh');
         $("#userForm")[0].reset();
     });
-    $("#modifyUserModal").on("hidden.bs.modal", function() {
+    $("#modifyUserModal").on("hidden.bs.modal", function () {
         $("#userForm")[0].reset();
     });
     var uId = row.uId;
     $("#modifyUserModal #continue").off();
-    $("#modifyUserModal #continue").click(function() {
+    $("#modifyUserModal #continue").click(function () {
         $('#modifyUserModal').modal('hide');
 
         var faceDatas = new FormData();
-        expireTime=$('#expireTimeVal2').val()
+        expireTime = $('#expireTimeVal2').val()
 
         faceDatas.append('uId', uId);
 
@@ -1196,13 +1206,13 @@ function userEdit(row) {
         //   faceDatas.append('file', uploadFile2);
         // }
 
-        try{
-            var isImg=$('#modifyImgFile').get(0).files[0];
-        }catch(e){
-            var isImg=$('#modifyImgFile').get(0).value;
+        try {
+            var isImg = $('#modifyImgFile').get(0).files[0];
+        } catch (e) {
+            var isImg = $('#modifyImgFile').get(0).value;
         }
         console.log(isImg)
-        if(!!isImg){
+        if (!!isImg) {
             faceDatas.append('file', isImg);
 
         }
@@ -1223,7 +1233,7 @@ function userEdit(row) {
         faceDatas.append('uDuty', $("#modifyUserModal #uDuty").val());
         faceDatas.append('uRoleId', $("#modifyUserModal #uRoleId").val());
         faceDatas.append('uUnitId', $("#modifyUserModal #uunitId").val());
-        faceDatas.append('expireTime', expireTime);
+        faceDatas.append('expireTime', expireTime||dateUtil.dateAdd('d ', 7, new Date).format('yyyy-MM-dd'));
         var areacodeArr = [],
             areanameArr = [];
 
@@ -1273,7 +1283,7 @@ function userEdit(row) {
             dataType: 'json',
             processData: false,
             contentType: false,
-            success: function(data) {
+            success: function (data) {
                 console.log(data)
                 if (data.code == 200) {
                     console.log('修改成功')
@@ -1289,7 +1299,7 @@ function userEdit(row) {
                     $('#deptModel').modal('show');
                 }
             },
-            error: function() {
+            error: function () {
                 console.log('修改失败')
                 $("#modal-body-id").html('系统出错请稍后再试');
                 $('#myModal').modal('show');
@@ -1423,31 +1433,32 @@ function unitFormatter(value, row) {
         }
     }
 }
+
 //恢复
-function recovery(row){
+function recovery(row) {
     console.log(row);
     $("#resetTModel #modal-body-text").text("确定恢复吗?");
     $("#resetTModel").modal('show');
     $("#resetTModel #continue").off();
-    $("#resetTModel #continue").click(function() {
+    $("#resetTModel #continue").click(function () {
         $.ajax({
-            type:'post',
-            url:pathurl + 'user/undodelete',
-            data:{
-                uId:row.uId
+            type: 'post',
+            url: pathurl + 'user/undodelete',
+            data: {
+                uId: row.uId
             },
-            success:function(res){
-                if(res.code==200){
+            success: function (res) {
+                if (res.code == 200) {
                     $("#modal-body-id").text("恢复成功");
                     $("#myModal").modal();
                     $("#resetTModel").modal('hide');
                     $("#userTable1").bootstrapTable('refresh');
-                }else{
+                } else {
                     $("#modal-body-id").text("恢复失败");
                     $("#myModal").modal();
                 }
             },
-            error:function(){
+            error: function () {
                 $("#modal-body-id").text("服务器出错");
                 $("#myModal").modal();
             }
@@ -1455,6 +1466,7 @@ function recovery(row){
     })
 
 };
+
 // 点击用户查看信息
 function openinfo(username) {
 
@@ -1521,7 +1533,7 @@ function countinfo(n, i) {
         case 0:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/retrieveShow?username=' + n, //请求后台的URL（*）
-                method:'post',
+                method: 'post',
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
@@ -1569,7 +1581,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -1635,7 +1647,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -1702,7 +1714,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -1721,7 +1733,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/loginShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -1770,7 +1782,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -1789,7 +1801,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/appLoginShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -1832,7 +1844,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/importShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -1871,7 +1883,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'car_no',
@@ -1891,16 +1903,16 @@ function countinfo(n, i) {
 }
 
 
-function preview(file){
-    var img=$(file).parents('.tx').find('img');
-    if (file.files && file.files[0]){
+function preview(file) {
+    var img = $(file).parents('.tx').find('img');
+    if (file.files && file.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(evt){
-            $(img).attr('src',evt.target.result);
+        reader.onload = function (evt) {
+            $(img).attr('src', evt.target.result);
         }
         reader.readAsDataURL(file.files[0]);
         // console.log(file.files)
-    }else{
+    } else {
         $(img).removeAttr('src');
         $(img)[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + file.value + "\")"
     }

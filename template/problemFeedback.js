@@ -174,6 +174,7 @@ function ButtonInit() {
 
         });
         $("#btn-reset").on("click", function() {
+            $(".face-form input,.face-form select").val("");
             $("#problem input,#problem select").val("");
             oTable.Init();
         });

@@ -166,8 +166,10 @@ function sexFormatter(value) {
 }
 
 function reset() {
+    $(".face-form input,.face-form select").val("");
     $(".face-form select").val("-1");
     $('#u_status').val('Y');
+
     $('#city-picker-search .province a').html('请选择省份')
     $('#city-picker-search .city a').html('请选择省份')
     $('#city-picker-search .district a').html('请选择区县')
@@ -287,7 +289,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -353,7 +355,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -420,7 +422,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -488,7 +490,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'remark',
@@ -589,7 +591,7 @@ function countinfo(n, i) {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
-                            return '<img src=' + value + '/>'
+                            return '<img width="130" height="180" src=' + value + '/>'
                         }
                     }, {
                         field: 'car_no',
