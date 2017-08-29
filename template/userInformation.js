@@ -463,45 +463,11 @@ function countinfo(n, i) {
                         }
                     }, {
                         field: 'time',
-                        title: '创建时间'
-                    }, {
-                        field: 'plat',
-                        title: '来源'
-                    }, {
-                        field: 'company',
-                        title: '算法'
-                    }, {
+                        title: '时间'
+                    },  {
                         field: 'username',
                         title: '用户名'
-                    }, {
-                        field: 'chosen',
-                        title: '是否比中',
-                        formatter: function (value, row, index) {
-                            if (value == 0) {
-                                return '是'
-                            } else {
-                                return '否'
-                            }
-                        }
-                    }, {
-                        field: 'harmful',
-                        title: '是否有害'
-                    }, {
-                        field: 'url',
-                        title: '图片',
-                        formatter: function (value, row, index) {
-                            return '<img width="130" height="180" src=' + value + '/>'
-                        }
-                    }, {
-                        field: 'remark',
-                        title: '检索备注'
-                    }, {
-                        field: 'longtutide',
-                        title: '经度'
-                    }, {
-                        field: 'laititude',
-                        title: '纬度'
-                    },
+                    }
                 ]
             });
             break;
