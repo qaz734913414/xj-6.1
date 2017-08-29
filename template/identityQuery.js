@@ -1,31 +1,24 @@
 var heightFactor = 1.2;
-
 $("#iidno").focus();
-$("#iidno").off('blur');
-
-$("#iidno").on('blur',function () {
-    var idno = $("#iidno").val() || '';
-    if( !/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idno)){
-        alert('身份证号格式错误');
-        return false;
-    };
-});
-$("#iname").off('blur');
-$("#iname").on('blur',function () {
-    var iname = $("#iname").val() || '';
-    if(!/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(iname)){
-        alert('姓名格式不对');
-        return false;
-    }
-})
-
 function getMessage4() {
+
     var idno = $("#iidno").val() || '';
     var iname = $("#iname").val() || '';
     if (!idno && !iname) {
-        alert('请输入查询条件')
-    } else if (idno || iname) {
+        alert('请输入查询条件');
+        $("#iidno").focus();
+        return ;
 
+    } else if (idno && !/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idno)) {
+        alert('身份证号格式错误');
+        $("#iidno").focus();
+        return ;
+    } else if (iname && !/[\u4E00-\u9FA5\uF900-\uFA2D]/.test(iname)) {
+        alert('请正确输入中文姓名');
+        $("#iname").focus();
+        return ;
+    }
+    else {
         var upload = $(this);
         upload.addClass("disabled");
         var form_Data = new FormData();
@@ -140,4 +133,5 @@ function showImageOnModal(resource) {
 
 function reset4() {
     $(".face-form input").val("");
+    $('.result-box .row').html('')
 }

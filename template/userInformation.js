@@ -173,6 +173,7 @@ function reset() {
     $('#city-picker-search .city a').html('请选择省份')
     $('#city-picker-search .district a').html('请选择区县')
     $('#city-picker-search input').val("");
+    getTable();
 }
 
 // 点击用户查看信息
