@@ -40,13 +40,37 @@ $(function () {
         $("#retrieveModal2 .modal-body #carNo").val("");
         $("#retrieveModal2 .modal-body #modal-remark").val("");
     });
-    $("input#from,input#to").datetimepicker({
-        format: 'yyyy-mm-dd',
-        language: 'zh-CN',
-        minView: 2,
-        autoclose: true,
-        inputMask: true
+    $("#from").datetimepicker({
+        startView:2,
+        format:"yyyy-mm-dd",
+        minView:"month",
+        todayBtn : "linked",
+        todayHighlight : true,
+        language: "zh-CN",
+        showMeridian:true,
+        autoclose:true,
+    }).on('changeDate',function(ev){
+        var starttime=$("#from").val();
+        $("#to").datetimepicker('setStartDate',starttime);
+        $("#from").datetimepicker('hide');
     });
+
+    $("#to").datetimepicker({
+        startView:2,
+        minView:"month",
+        format:"yyyy-mm-dd",
+        todayBtn : "linked",
+        todayHighlight : true,
+        language: "zh-CN",
+        autoclose:true,
+        showMeridian:true,
+    }).on('changeDate',function(ev){
+        var starttime=$("#from").val();
+        var endtime=$("#to").val();
+        $("#from").datetimepicker('setEndDate',endtime);
+        $("#to").datetimepicker('hide');
+    });
+   
 
     $("#retrieveModal2 .face-button").on("click", function () {
         $('#retrieveModal2 #uploadChosen').data('bootstrapValidator').validate();

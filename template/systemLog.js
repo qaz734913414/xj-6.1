@@ -10,23 +10,35 @@ if (token) {
 
 $(function () {
 
-    $("input#from,input#to").datetimepicker({
-        format: 'yyyy-mm-dd',
-        language: 'zh-CN',
-        minView: 2,
-        autoclose: true,
-        inputMask: true
+    $("#from").datetimepicker({
+        startView:2,
+        format:"yyyy-mm-dd",
+        minView:"month",
+        todayBtn : "linked",
+        todayHighlight : true,
+        language: "zh-CN",
+        showMeridian:true,
+        autoclose:true,
+    }).on('changeDate',function(ev){
+        var starttime=$("#from").val();
+        $("#to").datetimepicker('setStartDate',starttime);
+        $("#from").datetimepicker('hide');
     });
-    $('#from').datetimepicker({
-        format: 'yyyy-mm-dd',
-        language: 'zh-CN',
-        minView: 2,
-        autoclose: true,
-        inputMask: true
-    }).on('changeDate', function () {
-        var startTime = $('#from').val();
-        $('#to').datetimepicker('setStartDate', startTime);
-        $('#to').datetimepicker('hide');
+
+    $("#to").datetimepicker({
+        startView:2,
+        minView:"month",
+        format:"yyyy-mm-dd",
+        todayBtn : "linked",
+        todayHighlight : true,
+        language: "zh-CN",
+        autoclose:true,
+        showMeridian:true,
+    }).on('changeDate',function(ev){
+        var starttime=$("#from").val();
+        var endtime=$("#to").val();
+        $("#from").datetimepicker('setEndDate',endtime);
+        $("#to").datetimepicker('hide');
     });
     var select = $('#city-picker-search').cityPicker({
         dataJson: cityData,
