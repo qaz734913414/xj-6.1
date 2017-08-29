@@ -1821,13 +1821,13 @@ tbody>tr:nth-of-type(even) {
 }
 
 .fixed-table-container thead th .both{
-	background-image: url(../img/bootstraptableimg/updown.png)!important;
+	background-image: url(../img/bootstrapTableImg/ud.png);
 }
 .fixed-table-container thead th .desc{
-	background-image: url(../img/bootstraptableimg/down.png)!important;
+	background-image: url(../img/bootstrapTableImg/down.png);
 }
 .fixed-table-container thead th .asc{
-	background-image: url(../img/bootstraptableimg/up.png)!important;
+	background-image: url(../img/bootstrapTableImg/up.png);
 }
 
 

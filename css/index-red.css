@@ -1843,13 +1843,13 @@ tbody>tr:nth-of-type(even) {
     float: left;
 }
 .fixed-table-container thead th .both{
-	background-image: url(../img/bootstraptableimg/updown.png);
+	background-image: url(../img/bootstrapTableImg/ud.png);
 }
 .fixed-table-container thead th .desc{
-	background-image: url(../img/bootstraptableimg/down.png);
+	background-image: url(../img/bootstrapTableImg/down.png);
 }
 .fixed-table-container thead th .asc{
-	background-image: url(../img/bootstraptableimg/up.png);
+	background-image: url(../img/bootstrapTableImg/up.png);
 }
 
 .form-inline.face-form .city-picker-selector {

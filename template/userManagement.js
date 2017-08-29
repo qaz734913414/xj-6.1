@@ -1,5 +1,6 @@
 var userMes = JSON.parse(localStorage.getItem('userMes'))
-
+var rListData=[];
+var dListData=[];
 //初始化Table
 var token = window.localStorage.getItem('token');
 // console.log(token)
@@ -448,7 +449,7 @@ $("#modifyUserModal").on("hidden.bs.modal", function () {
     $("#modifyUserModal #userForm")[0].reset();
 });
 /*初始化单位和角色的下拉框 dList rList*/
-var rListData;
+
 
 // 角色数组
 function init() {
@@ -1423,8 +1424,6 @@ function roleFormatter(value) {
     })
     return rn;
 }
-
-var dListData;
 
 function unitFormatter(value, row) {
     for (var m = 0; m < dListData.length; m++) {

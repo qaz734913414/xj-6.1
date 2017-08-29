@@ -22,7 +22,7 @@ if (cookie_skin) {
     $.cookie("MyCssSkin", this.id, {path: '/', expires: 10});
 }
 jQuery.support.cors = true;
-var userMes =JSON.parse(localStorage.getItem('userMes'));
+var userMes =localStorage.getItem('userMes')?JSON.parse(localStorage.getItem('userMes')):'';
 
 if (!userMes) {
     $('#loginModal #myModalLabel').html('请登录!');
@@ -201,7 +201,7 @@ function quesmis() {
 
         },
         error: function () {
-            alert('错误')
+            // alert('错误')
         },
         dataType: 'json'
     });
@@ -290,7 +290,7 @@ function mis() {
 
         },
         error: function () {
-            alert('错误')
+            // alert('错误')
         },
         dataType: 'json'
     });
