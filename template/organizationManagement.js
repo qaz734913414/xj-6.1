@@ -223,6 +223,9 @@ function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) { //这个函数仅�
     }
 
 }
+$('#table input').on('input propertychange', function () {
+    getTable()
+})
 
 // 	table
 function getTable() {
