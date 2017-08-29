@@ -512,12 +512,20 @@ function reset() {
 }
 
 function statusFormatter(value, row, index) {
-
-    if (row.uStatus == 'Y') {
-        return ['<button class="reset btn-sm btn face-button " style="margin-right:15px;">正常</button>'].join();
-    } else {
-        return ['<button class="reset btn-sm btn face-button2" style="margin-right:15px;">停用</button>'].join();
+    if(userMes.uid==row.uId){
+      if (row.uStatus == 'Y') {
+          return ['<button class="reset btn-sm btn face-button " style="margin-right:15px;" disabled="disabled">正常</button>'].join();
+      } else {
+          return ['<button class="reset btn-sm btn face-button2" style="margin-right:15px;" disabled="disabled">停用</button>'].join();
+      }
+    }else{
+      if (row.uStatus == 'Y') {
+          return ['<button class="reset btn-sm btn face-button " style="margin-right:15px;">正常</button>'].join();
+      } else {
+          return ['<button class="reset btn-sm btn face-button2" style="margin-right:15px;">停用</button>'].join();
+      }
     }
+
 }
 
 function operateFormatter(value, row, index) {
@@ -585,6 +593,7 @@ function updateStatus(row) {
 //修改状态
 window.statusEvents = {
     'click .reset': function (e, value, row, index) {
+        // if(row.uId=)
         updateStatus(row); //修改状态
     }
 };
@@ -711,10 +720,6 @@ function resetSafetyCodeValidator() {
 
                     notEmpty: {
                         message: '请输入新密码'
-                    },
-                    identical: {
-                        field: 'twiceNewPd',
-                        message: '两次输入的密码不相符'
                     }
                 }
             },
