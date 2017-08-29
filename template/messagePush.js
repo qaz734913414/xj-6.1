@@ -40,7 +40,7 @@ function getTable() {
     var username=$("#queryMesUser").val()||'';
     var content=$("#queryMesText").val()||'';
     var startTime=$("#from").val()||'';
-    var endTime=$("#to").val()||'';
+    var endTime=$("#to").val()|| new Date();
     $("#add-table").bootstrapTable('destroy');
 
     $('#add-table').bootstrapTable({
@@ -66,8 +66,7 @@ function getTable() {
             }
             return obj
         },
-        //      search: true,
-        //		height:$(document).height()-130,
+
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "basic", //basic', 'all', 'selected'.

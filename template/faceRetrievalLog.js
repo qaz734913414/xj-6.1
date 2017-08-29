@@ -69,13 +69,13 @@ function getTable() {
     var areacode = regk(areacodeArr).substr(1)
     var areaname = regk(areanameArr).substr(1)
     console.log(areacodeArr);
-    var plat = $("#userdiv #plat").val();
-    var username=$("#userdiv #username").val();
-    var company = $("#userdiv #company").val();
-    var chosen = $("#userdiv #chosen").val();
-    var harmful = $("#userdiv #harmful").val();
-    var from = $("#userdiv #from").val();
-    var to = $("#userdiv #to").val();
+    var plat = $("#userdiv #plat").val() || '';
+    var username=$("#userdiv #username").val() || '';
+    var company = $("#userdiv #company").val() || '';
+    var chosen = $("#userdiv #chosen").val() || '';
+    var harmful = $("#userdiv #harmful").val() || '';
+    var from = $("#userdiv #from").val() || '';
+    var to = $("#userdiv #to").val() || '';
     console.log(username)
     $("#face-table").bootstrapTable('destroy');
 
@@ -101,11 +101,9 @@ function getTable() {
             }
             return obj
         },
-        //      search: true,
-        //		height:$(document).height()-130,
+       
         buttonsClass: "face",
-        showExport: true, //是否显示导出
-        exportDataType: "basic", //basic', 'all', 'selected'.
+
         sortable: true, //是否启用排序
         sortOrder: 'desc',
         sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）

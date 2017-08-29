@@ -96,11 +96,11 @@ function getTable() {
     var areacode = regk(areacodeArr).substr(1)
     var areaname = regk(areanameArr).substr(1)
 
-    var logUser = $("#susername").val();
+    var logUser = $("#susername").val()||'';
 
-    var startTime = $("#from").val();
-    var endTime = $("#to").val();
-    var unit = $("#unit").val();
+    var startTime = $("#from").val()||'';
+    var endTime = $("#to").val()|| new Date();
+    var unit = $("#uUnit").val() || '1';
 
     $(".systemLog-table").bootstrapTable('destroy');
 
@@ -114,7 +114,8 @@ function getTable() {
         clickToSelect: true,
         queryParams: function (params) {
             var obj = {}
-            obj.limit = params.limit;
+            obj.pageNumber = Math.ceil(++params.offset / params.limit);
+            obj.pageSize = params.limit;
             obj.offset = params.offset;
             obj.limit = params.limit;
             obj.order = params.order;
@@ -126,8 +127,7 @@ function getTable() {
             }
             return obj
         },
-        //      search: true,
-        //		height:$(document).height()-130,
+
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "basic", //basic', 'all', 'selected'.

@@ -104,8 +104,7 @@ function getTable() {
             }
             return obj
         },
-        //      search: true,
-        //		height:$(document).height()-130,
+
         buttonsClass: "face",
         showExport: true, //是否显示导出
         exportDataType: "basic", //basic', 'all', 'selected'.

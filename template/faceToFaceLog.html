@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="plat">
-                        <option value="">来源</option>
+                        <option value="">平台</option>
                         <option value="0">pc</option>
                         <option value="1">android</option>
                         <option value="2">ios</option>
@@ -18,10 +18,12 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" id="company">
-                        <option value="">厂商</option>
-                        <option value="0">云创</option>
-                        <option value="1">依图</option>
-                        <option value="2">旷世</option>
+                        <!--["0云创","1依图","2旷视","3商汤"];-->
+                        <option value="">算法</option>
+                        <option value="0">通道一</option>
+                        <option value="1">通道二</option>
+                        <option value="2">通道三</option>
+                        <option value="3">通道四</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -50,7 +52,7 @@
         </div>
     </div>
     <div class="row">
-        <table id="face-table2" class="face-table"></table>
+        <table id="face-table2" class="face-table ft3"></table>
     </div>
     <!--子页面开始 -->
     <div class="modal fade face-modal" id="faceLogModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -100,13 +102,16 @@
                     <div class="row">
                         <table
                                 data-pagination="true"
-                                data-side-pagination="server" class="table table-bordered" id="counttable2">
+                                data-side-pagination="server" class="table table-bordered" id="counttable">
                             <thead>
                             <tr>
                                 <td>次数</td>
                                 <td>时间</td>
                             </tr>
                             </thead>
+                            <tbody id="countbody">
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -115,45 +120,75 @@
     </div>
 </div>
 
-<script id="userDetial" type="text/x-jquery-tmpl">
-<table class="table table-bordered">
-                       <tr>
-                            <td class='name'> 姓名:{{= name}}</td>
-                            <td>
-                                性别：{{= sex=="0"?'男':'女'}}
-                            </td>
-                        </tr>
+<script id="imgTemp" type="text/x-jquery-tmpl">
+ 	<div class="retrieve-log-thumbnail-box">
+		<div class="thumbnail  {{= focus=='Y'?'focus':''}}">
+			<img src={{= url}} alt="..." />
+			<div class="caption">
+				<p><span>相似度：</span><span class="similar"><font>{{= percent.toString().substring(0,3)}}</font><font>{{= percent.toString().substring(3,5)+"%"}}</font></span></p>
+				 <p>姓名:{{= name}}</p>
+ 				 <p>证件号:{{= idNo}}</p>
+				 <p>地区：{{= address}}</p>
+				 <p>出生年月：{{= birthday}}</p>
+				 <p>性别：{{= sex==1?'男':'女'}}</p>
+         {{if focus=="Y"}}
+         <p class="hidden focus-font">重点人员情况：{{= "是"}}</p>
+         {{/if}}
+         {{if focus=="N"}}
+         <p class="hidden focus-font">重点人员情况：{{= "否"}}</p>
+         {{/if}}
+         {{if focus=="W"}}
+         <p class="hidden focus-font">重点人员情况：{{= "未知"}}</p>
+         {{/if}}
+			</div>
+		</div>
+	</div>
 
-                        <tr>
+</script>
+<script id="openinfoTemp" type="text/x-jquery-tmpl">
+	<table class="table table-bordered">
+		<tr>
+			<td class='name'> 姓名:{{= name}}</td>
+			<td>
+				性别：{{= sex=="0"?'男':'女'}}
+			</td>
+		</tr>
 
-                            <td>证件号:{{= card}}</td>
+		<tr>
 
-                        </tr>
-                        <tr>
-                            <td>单位：<span class='unit'>{{= unit}}</span></td>
-                            <td>账户到期时间：{{= expireTime}}</td>
-                        </tr>
-                        <tr>
-                            <td>警号：{{= policynum}}</td>
+			<td>真实姓名：{{= realname}}</td>
+			<td>证件号:{{= card}}</td>
 
-                            <td>账号级别：{{= usertype}}</td>
-                        </tr>
-                        <tr>
-                            <td>职务：{{= duty}}</td>
+		</tr>
+		<tr>
+			<td>单位：<span class='unit'>{{= unit}}</span></td>
+			<td>账户到期时间：{{= expireTime}}</td>
+		</tr>
+		<tr>
+			<td>警号：{{= policynum}}</td>
 
-                            <td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
-                        </tr>
+			<td>手机号：{{= telephone}}</td>
+		</tr>
+		<tr>
+			<td>职务：{{= duty}}</td>
 
-                        <tr>
-                            <td class='count'>人脸搜索（次数）：{{= retrieveCount}}</td>
-                            <td class='count'>人脸比对（次数）：{{= compareCount}}</td>
-                        </tr>
-                        <tr>
-                            <td class='count'>身份搜索（次数）：{{= idCardCount}}</td>
-                            <td class='count'>登录（次数）：{{= loginCount}}</td>
-                        </tr>
+			<td>用户状态：{{= userstatus=="Y"?'正常':'停用'}}</td>
+		</tr>
 
-                        </table>
+		<tr>
+			<td class='count'> 人脸检索（次数）：{{= retrieveCount}} </td>
+			<td class='count'>人脸比对（次数）：{{= compareCount}} </td>
+		</tr>
+		<tr>
+			<td class='count'>身份检索（次数）：{{= idCardCount}}</td>
+			<td class='count'>登录（次数）：{{= loginCount}}</td>
+		</tr>
+		<tr>
+			<td class='count'>app登陆（次数）：{{= appCount}}</td>
+			<td class='count'>重点人员反馈记录（次数）：{{= importCount}}</td>
+		</tr>
+
+	</table>
 
 </script>
 <script type="text/javascript" src="./template/faceToFaceLog.js"></script>

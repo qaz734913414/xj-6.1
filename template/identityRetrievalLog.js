@@ -90,11 +90,8 @@ function getTable() {
             }
             return obj
         },
-        //      search: true,
-        //		height:$(document).height()-130,
+
         buttonsClass: "face",
-        showExport: true, //是否显示导出
-        exportDataType: "basic", //basic', 'all', 'selected'.
         sortable: true, //是否启用排序
         sortOrder: 'desc',
         sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
