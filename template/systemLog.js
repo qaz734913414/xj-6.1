@@ -106,7 +106,7 @@ function getTable() {
 
     $('.systemLog-table').bootstrapTable({
         url: pathurl + 'systemlog/initTable?areacode=' + areacode + '&logUser=' + logUser + '&unit=' + unit + '&startTime=' + startTime + '&endTime=' + endTime,
-
+        method:'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",

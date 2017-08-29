@@ -49,7 +49,7 @@ function upload() {
     if (!!uploadFile1 && !!uploadFile2) {
         $.ajax({
             type: 'post',
-            url: pathurl + 'face/compare/',
+            url: pathurl + 'face/compare',
             data: form_Data,
             cache: false,
             contentType: false,

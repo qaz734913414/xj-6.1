@@ -70,7 +70,7 @@ function getTable() {
     $('.ft2').bootstrapTable({
         url: pathurl + 'facelog/queryIdcardLog?areacode=' + areacode + '&username=' + username + '&plat=' + plat + '&company=' + company + '&chosen=' + chosen + '&harmful=' + harmful + '&from=' + from + '&to=' + to,
         // url: './testJson/queryIdcardLog.json',
-        type: 'post',
+        method: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",
@@ -142,13 +142,13 @@ function getTable() {
             formatter: function (value) {
                 switch (value) {
                     <!--["0云创","1依图","2旷视","3商汤"];-->
-                    case "1":
+                    case "0":
                         return "通道一";
-                    case "2":
+                    case "1":
                         return "通道二";
-                    case "3":
+                    case "2":
                         return "通道三";
-                    case "4":
+                    case "3":
                         return "通道四";
                 }
             }

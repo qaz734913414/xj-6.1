@@ -84,7 +84,7 @@ function getTable() {
         + "&areacode=" + areacode + "&u_role_id=" + u_role_id + "&dateStatus="
         + dateStatus + "&u_real_name=" + u_real_name
         + "&u_status=" + u_status,
-        type: 'post',
+        method:'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
         queryParamsType: "limit",
@@ -239,7 +239,7 @@ function countinfo(n, i) {
         case 0:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/retrieveShow?username=' + n, //请求后台的URL（*）
-
+                method:'post',
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
@@ -305,7 +305,7 @@ function countinfo(n, i) {
         case 1:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/compareShow?username=' + n, //请求后台的URL（*）
-
+                method:'post',
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
@@ -371,7 +371,7 @@ function countinfo(n, i) {
         case 2:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/idCardShow?username=' + n, //请求后台的URL（*）
-
+                method:'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -439,7 +439,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/loginShow?username=' + n, //请求后台的URL（*）
 
-                // url: './faceLog.json',
+                method:'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -507,7 +507,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/appLoginShow?username=' + n, //请求后台的URL（*）
 
-                // url: './faceLog.json',
+                method:'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -550,7 +550,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/importShow?username=' + n, //请求后台的URL（*）
 
-                // url: './faceLog.json',
+                method:'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",

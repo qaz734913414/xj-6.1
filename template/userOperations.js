@@ -13,8 +13,9 @@ $(function () {
         search: true,
         linkage: false
     });
-    getMessage3();
 
+    getDateByYear();
+    getMessage3();
 $('.datetimepicker.datetimepicker-dropdown-bottom-right.dropdown-menu').remove();
 })
 function changeTime() {
@@ -348,6 +349,7 @@ function reset3() {
     $('#city-picker-search .city a').html('请选择省份')
     $('#city-picker-search .district a').html('请选择区县')
     $('#city-picker-search input').val("");
+    getDateByYear();
     getMessage3();
 }
 function typeformatter(value) {
