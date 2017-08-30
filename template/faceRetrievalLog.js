@@ -307,8 +307,6 @@ function openinfo(username) {
                 retrieveCount,
                 appCount,
                 importCount;
-
-
             dataresult = data.result[0];
             dataresult.compareCount = data.compareCount;
             dataresult.idCardCount = data.idCardCount;

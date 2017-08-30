@@ -268,11 +268,11 @@ function getMessage3() {
 		var choesnType = $("#timestatus").find("option:selected").val();
 		var startDate = $("#startDate").val();
 	    var endDate = $("#endDate").val();
-	    var departname=$('#u_unit_id').find("option:selected").val()||'1';
+	    var departname=$('#u_unit_id').find("option:selected").val()||'';
 	}else{
 		var choesnType = 1;
 		var QDate=$('#QDate').attr('data-q').split(' ');
-        var departname=$('#u_unit_id').find("option:selected").val()||'1';
+        var departname=$('#u_unit_id').find("option:selected").val()||'';
 		var startDate = QDate[0];
 	    var endDate = QDate[1];
 	}
