@@ -29,7 +29,35 @@ $(function () {
 
     addFormVali();
     init();
-    /*初始化单位和角色的下拉框 dList rList*/
+    var select1 = $('#city-picker-search1').cityPicker({
+        dataJson: cityData,
+        renderMode: true,
+        search: true,
+        linkage: false
+    });
+    $('#userdiv input').on('input propertychange', function () {
+        getTable()
+    })
+    $('#userdiv select').on('input propertychange', function () {
+        getTable()
+    })
+    $('#userdiv .selector-item').on('input propertychange', function () {
+        getTable()
+    })
+
+    $('#userdiv a.selector-name').on('click', function () {
+        $('#userdiv .selector-item ul li').each(function (i, val) {
+            console.log($(val))
+            $(val).on('click', function () {
+                console.log('点击了')
+                setTimeout(function () {
+                    getTable()
+                })
+            })
+        })
+    })
+
+
 });
 
 function addFormVali() {
@@ -103,7 +131,12 @@ function addFormVali() {
 function getTable() {
     $("#facedataTable").bootstrapTable('destroy');
     $("#facedataTable").bootstrapTable({
-        method: "post",
+        method: 'post',
+        pagination: true,
+        contentType: "application/x-www-form-urlencoded",
+        queryParamsType: "limit",
+        paginationDetailHAlign: "left",
+        clickToSelect: true,
         url: pathurl + 'library/librarylist',
         queryParams: function (params) {
             return {
@@ -112,20 +145,20 @@ function getTable() {
                 dbname: $('#dbname').val()
             }
         },
-        pagination: true,
-        contentType: "application/x-www-form-urlencoded",
-        queryParamsType: " limit",
-        paginationDetailHAlign: "left",
-        clickToSelect: true,
-        toolbar: "#userdiv",
-        searchOnEnterKey: true,
-        //		height:$(document).height()-130,
         buttonsClass: "face",
-
-        pageList: [10, 25, 50, 100],
-        onLoadSuccess: function (data) {  //加载成功时执行
-            console.log('初始化' + data)
-        }
+        // showExport: true, //是否显示导出
+        // exportDataType: "basic", //basic', 'all', 'selected'.
+        sortable: true, //是否启用排序
+        //      sortOrder: 'desc',
+        sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）
+        pageNumber: 1, //初始化加载第一页，默认第一页
+        pageSize: 10, //每页的记录行数（*）
+        pageList: [
+            10, 25, 50, 100
+        ], //可供选择的每页的行数（*）
+        onLoadSuccess: function (data) { //加载成功时执行
+            console.log('初始化%o', data)
+        },
     });
 }
 //重置按钮
@@ -180,8 +213,6 @@ function openinfo(username) {
                 retrieveCount,
                 appCount,
                 importCount;
-
-
             dataresult = data.result[0];
             dataresult.compareCount = data.compareCount;
             dataresult.idCardCount = data.idCardCount;
@@ -319,6 +350,48 @@ $("#delUserTModel #continue").click(function () {
         }
     });
 });
+//表格批量删除
+function toRemove() {
+    var ids = '';
+    $.map($('#facedataTable').bootstrapTable('getSelections'), function (row) {
+        ids += row.id + ',';
+    });
+    $('#rowUId').val(ids)
+    if (ids) {
+        $("#delUsersTModel #modal-body-text").text("删除后数据不可恢复，确定要删除吗?");
+        $("#delUsersTModel").modal('show');
+    } else {
+        $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
+        $("#myModal").modal('show');
+    }
+}
+//批量删除
+$("#delUsersTModel #cancel").click(function () {
+    $("#userTable1").bootstrapTable('refresh');
+});
+$("#delUsersTModel #continue").off();
+$("#delUsersTModel #continue").click(function () {
+    $("#delUsersTModel").modal('hide')
+    console.log(111)
+    $.ajax({
+        type: 'POST',
+        url: pathurl + 'user/deleteByIds',
+        data: {
+            ids: $('#rowUId').val()
+        },
+        success: function () {
+            console.log('多表删除成功')
+            $("#modal-body-id").text("删除成功!");
+            $("#myModal").modal();
+            $("#userTable1").bootstrapTable('refresh');
+        },
+        error: function () {
+            console.log('多表删除失败')
+            $("#modal-body-id").text("处理失败!");
+            $("#myModal").modal();
+        }
+    });
+});
 
 // 新增1
 function addUser() {
@@ -334,14 +407,28 @@ function addUser() {
 $("#adduserModal #continue").off();
 $("#adduserModal #continue").click(function (form) {
 
+    var areacodeArr = [],
+        areanameArr = [];
+    var pr = $("#adduserModal input[name='userProvinceId']").val() || '';
+    areacodeArr.push(pr)
+    var ci = $("#adduserModal input[name='userCityId']").val() || '';
+    areacodeArr.push(ci)
+    var di = $("#adduserModal input[name='userDistrictId']").val() || '';
+    areacodeArr.push(di)
+    var prn = $("#adduserModal .province>a").text() || '';
+    areanameArr.push(prn)
+    var cin = $("#adduserModal .city>a").text() || '';
+    areanameArr.push(cin)
+    var din = $("#adduserModal .district>a").text() || '';
+    areanameArr.push(din)
+    var areacode = regk(areacodeArr).substr(1)
+    var areaname = regk(areanameArr).substr(1)
     $.ajax({
         type: 'post',
         url: pathurl + 'library/addlibrary',
         data: {
             dbname: $("#adduserModal #uName").val(),
-            province: $("#adduserModal #distpicker select[name='province']").val(),
-            city: $("#adduserModal #distpicker select[name='city']").val(),
-            area: $("#adduserModal #distpicker select[name='area']").val(),
+            areacode:areacode,
             uVIP: $("#adduserModal #uVIP").is(':checked') ? '0' : '1'
         },
         cache: false,

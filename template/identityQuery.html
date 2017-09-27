@@ -7,8 +7,8 @@
             <div class="form-group" style="position: relative;">
                 <input id="iidno" size="22" type="text" value="" class="form-control" placeholder="身份证号">
 
-                <input id="iname" size="22" type="text" value="" class="form-control" placeholder="中文姓名">
-                <p class="err" style="color:red;margin-left: 80PX;position: absolute;bottom:-38px;">222</p>
+                <!--<input hidden="hidden" id="iname" size="22" type="text" value="" class="form-control" placeholder="中文姓名">-->
+                <p class="err" style="color:red;position: absolute;bottom:-38px;">222</p>
             </div>
             <div class="form-group button-group">
                 <a class="btn face-button" onclick="getMessage4()" id="btn-query"><span class="fa fa-search"
@@ -89,7 +89,7 @@
 <script id="imgTemp" type="text/html">
     <div class="col-sm-4 col-md-3 col-lg-2">
         <div class="thumbnail {{= focus==''?'':' focus'}}">
-            <img src={{= url}} alt="...">
+            <img src={{= url}} alt="..." width="140" height="170">
             <div class="caption">
                 <p>姓名：{{= name}}</p>
                 <p>年龄：{{= age}}</p>

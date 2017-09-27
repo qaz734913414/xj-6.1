@@ -361,7 +361,6 @@ $("#adduserModal #continue").click(function () {
         } catch (e) {
             var isImg = $('#addImgFile').get(0).value;
         }
-        console.log(isImg)
         if (!!isImg) {
             faceData.append('file', isImg);
         }
@@ -387,28 +386,6 @@ $("#adduserModal #continue").click(function () {
             type: 'post',
             url: pathurl + 'user/new',
             data: faceData,
-            //     {
-            //     approval: $("#adduserModal #approval").val(),
-            //     policeType: $("#adduserModal #policeType").val(),
-            //     uName: $("#adduserModal #uName").val(),
-            //     uRealName: $("#adduserModal #urealName").val(),
-            //     uSex: $("#adduserModal input[name='uSex']:checked").val(),
-            //     uCardId: $('#adduserModal #uCardId').val(),
-            //     uStatus: $("#adduserModal #uStatus").val(),
-            //     uPhone: $("#adduserModal #uPhone").val(),
-            //     uTelephone: $("#adduserModal #uTelephone").val(),
-            //     uPolicyNum: $("#adduserModal #uPolicyNum").val(),
-            //     uDuty: $("#adduserModal #uDuty").val(),
-            //     uRoleId: $("#adduserModal #uRoleId").val(),
-            //     uUnitId: $("#adduserModal #uunitId").val(),
-            //     expireTime:expireTime,
-            //     // file:uploadFile1,
-            //     province: $("#adduserModal #distpicker select[name='province']").val(),
-            //
-            //     city: $("#adduserModal #distpicker select[name='city']").val(),
-            //     area: $("#adduserModal #distpicker select[name='area']").val(),
-            //     uVIP: $("#adduserModal input[name='uVIP']:checked").val()
-            // },
             cache: false,
             dataType: 'json',
             processData: false,
@@ -570,7 +547,7 @@ $('#userModal #cancel').on('click', function () {
 })
 
 function updateStatus(row) {
-    console.log(row.uId)
+
     $.ajax({
         type: 'POST',
         url: pathurl + 'user/status',
@@ -1860,7 +1837,7 @@ function preview(file) {
             $(img).attr('src', evt.target.result);
         }
         reader.readAsDataURL(file.files[0]);
-        // console.log(file.files)
+
     } else {
         $(img).removeAttr('src');
         $(img)[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale',src=\"" + file.value + "\")"
