@@ -1746,6 +1746,7 @@ face-form input {
     left: -245px;
     z-index: 10000;
     border-top: 2px solid #0f0f0f;
+    box-sizing: border-box;
 }
 
 .leftopen {

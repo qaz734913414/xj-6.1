@@ -3,6 +3,20 @@ var heightFactor = 1.2;//图片高度宽度比例
 var logId;//全局调用
 $('.nation').html('<option value="">民族</option>');
 $(function () {
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'library/libname',
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function (data) {
+            var data=data.result;
+            $.each(data,function (index,val) {
+                $('#dbname').append('<option value="' + val.dbname + '">' + val.dbname + '</option>')
+            })
+        }
+    });
     var select = $('#city-picker-search').cityPicker({
         dataJson: cityData,
         renderMode: true,
@@ -142,14 +156,15 @@ function faceList() {
     areanameArr.push(cin)
     var din = $("#retrievalFrom .district>a").text() || '';
     areanameArr.push(din)
-    var areacode = regk(areacodeArr).substr(1);
+    var areacode = regk(areacodeArr).substr(1)||'';
     var areaname = regk(areanameArr).substr(1);
 
-    var nation=$('#retrievalFrom .nation').val();
-    var sex=$('#retrievalFrom .sex').val();
-    var ispoint=$('#retrievalFrom .ispoint').val();
+    var nation=$('#retrievalFrom .nation').val()||'';
+    var sex=$('#retrievalFrom .sex').val()||'';
+    var ispoint=$('#retrievalFrom .ispoint').val()||'';
     var startbirth=$('#from').val();
-    var endbirth=$('#to').val();
+    var logId=$('#logId').val()||'';
+    var endbirth=$('#to').val()||'';
     var faceData = new FormData();
     faceData.append('areacode',areacode);
     faceData.append('nation',nation);
@@ -157,6 +172,7 @@ function faceList() {
     faceData.append('sex',sex);
     faceData.append('startbirth',startbirth);
     faceData.append('endbirth',endbirth);
+    faceData.append('logId',logId);
     $.ajax({
         type: 'post',
         url: pathurl + 'face/retrieveSearch',
@@ -279,16 +295,19 @@ function showImageOnModal(resource) {
     }
 
 }
-$("#btntype input[name='options']").eq(0).prop("checked", true);
+$("#btntype input[name='options']").last().prop("checked", true);
 function upload() {
     if (uploadFile == null) {
         alert("请选择图片");
+
+
         return;
     }
     var form_Data = new FormData();
     form_Data.append("file", uploadFile);
     form_Data.append("type", $("#btntype input[name='options']:checked").val());
-    form_Data.append("remark", $("#remark").val());
+    form_Data.append("remark", $("#remark").val()||'');
+    form_Data.append("dbname", 'aaaa');
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
@@ -317,6 +336,7 @@ function upload() {
             console.log(data);
             if (data.code == 200) {
                 logId = data.logId;
+                $('#logId').val(logId);
                 var data = data.result;
                 //alert("拿到了logId："+logId);
                 $("#add-image-button-span").text("重新添加照片");

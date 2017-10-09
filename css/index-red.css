@@ -1763,6 +1763,7 @@ tbody>tr:nth-of-type(even) {
     left:-245px;
     z-index:10000;
     border-top:2px solid #942c1e;
+    box-sizing: border-box;
 }
 
 .leftopen {
