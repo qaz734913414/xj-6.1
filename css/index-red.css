@@ -1961,7 +1961,7 @@ tbody>tr:nth-of-type(even) {
 }
 #carousel-example-generic .carousel-inner img{
     width: 100%;
-    height: 280px;
+    height: 280px!important;
 }
 .carousel-control {
     position: absolute;

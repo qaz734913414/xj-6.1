@@ -45,7 +45,17 @@ $(function () {
         $('.nation').append('<option value="' + val + '">' + val + '</option>');
     });
 
-    $("#upload-button").bind("click", upload);
+
+    $("#upload-button").on('click',function () {
+        if($("#upload-button").text()=='重新搜素'){
+            $('#ajax-content').empty();
+            $('.second-box .mynav-menu li').eq(0).find('a').trigger('click');
+            $("#upload-button").text()=='开始搜素'
+        }else {
+            upload();
+        }
+
+    });
     $("#retrieveModal .similar-box").bind("click", function () {
         $("#retrieveModal2").modal();
         $("#retrieveModal2 .modal-body #phoneNo").val("");
@@ -349,7 +359,8 @@ function upload() {
                 $('#imgTemp').tmpl(imgs).appendTo(imgsDom);
                 $('#examples').show();
 
-                winChange();//调整高宽
+                // winChange();//调整高宽
+
                 $('#loading').hide();
                 $('#carousel-example-generic').on('slide.bs.carousel', function (event) {
                     var $hoder = $('#carousel-example-generic').find('.item'),
@@ -367,6 +378,9 @@ function upload() {
                     setTimeout(faceList(), 100);
 
                 });
+                $("#upload-button").css('margin-top','60px')
+                $("#upload-button").html('重新搜素')
+
                 //绑定图片点击事件
                 $(".result-box .thumbnail").bind('click', function () {
                     $("#retrieveModal").modal();
@@ -407,7 +421,7 @@ function upload() {
 
 
                     });
-                    winChange();
+                    // winChange();
                 });
 
 
@@ -427,6 +441,9 @@ function upload() {
         }
     });
 }
+
+
+
 // 初始化处置结果
 setTimeout(function () {
     $.ajax({
@@ -531,7 +548,7 @@ function preview(file) {
         $('#carousel-example-generic').carousel('pause');
         $('.select-button').show();
         $('.carousel-control').show();
-        $('#add-image-button-span').hide();
+
     } else {
         $('.carousel-indicators').html('');
         $('.carousel-inner').html('');
