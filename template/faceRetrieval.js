@@ -1,6 +1,7 @@
 
 var heightFactor = 1.2;//图片高度宽度比例
 var logId;//全局调用
+var logIds=[];//全局调用
 $('.nation').html('<option value="">民族</option>');
 $(function () {
     $.ajax({
@@ -160,7 +161,7 @@ function faceList() {
     var sex=$('#retrievalFrom .sex').val()||'';
     var ispoint=$('#retrievalFrom .ispoint').val()||'';
     var startbirth=$('#from').val();
-    var logId=$('#logId').val()||'';
+    var logId=$('#logId').val();
     var endbirth=$('#to').val()||'';
     var faceData = new FormData();
     faceData.append('areacode',areacode);
@@ -292,32 +293,9 @@ function showImageOnModal(resource) {
     }
 
 }
-$("#btntype input[name='options']").last().prop("checked", true);
+$("#btntype input[name='type']").last().prop("checked", true);
 function upload() {
-
-    $('#file0').each(function(i,val){
-        console.log(val)
-        try{
-            isImg=$(this).get(0).files;
-            console.log($(this).get(0).files)
-        }catch(e){
-            isImg=$(this).get(0).value;
-        }
-        if(!isImg){
-
-            $(this).attr('disabled',false);
-        }
-    });
-    // if (!isImg) {
-    //     alert("请选择图片");
-    //     return;
-    // }
-    // console.log(isImg)
-    var form_Data = new FormData();
-    form_Data.append("file", isImg);
-    form_Data.append("type", $("#btntype input[name='options']:checked").val());
-    form_Data.append("remark", $("#remark").val()||'');
-    form_Data.append("dbname", $('#dbname').val()||'aaaa');
+    var form_Data = new FormData($('#uploadFiles')[0]);
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
@@ -330,13 +308,10 @@ function upload() {
     setTimeout(function () {
         $addimgthis.find(".topLine,.bottomLine").stop().animate({"width": "0px"});
         $addimgthis.find(".rightLine,.leftLine").stop().animate({"height": "0px"});
-    }, 1500)
-
-
-    // $('.loading').show();
+    }, 1500);
     $.ajax({
         type: 'post',
-        url: pathurl + 'face/retrieve',
+        url: pathurl + 'face/testretrieve',
         data: form_Data,
         cache: false,
         contentType: false,
@@ -346,21 +321,22 @@ function upload() {
             console.log(data);
             if (data.code == 200) {
                 logId = data.logId;
+                logIds = data.logids;
+                console.log(logIds);
                 $('#logId').val(logId);
                 var data = data.result;
-                //alert("拿到了logId："+logId);
-                $("#add-image-button-span").text("重新添加照片");
-                $("#add-image-button").removeClass("hidden");
-                $(".select-button").addClass("hidden");
                 $(".add-img-box")
                     .removeClass(
                         "col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-4 col-lg-2 col-lg-offset-5");
                 $(".add-img-box").addClass(
-                    "col-sm-4 col-md-3 col-lg-2 mybackground ");
+                    "mybackground ");
 
                 $(".vertical-center").removeClass("vertical-center");
-                $(".add-img-box").css("margin-top", "0px");
+                $(".add-img-box").css({"margin-top":"0px","padding": "25px"/*固定宽度*/ });
+                $(".file-input").css({"z-index":"-200" });
+                $(".add-img-box .add-img").css({"border":"-0" });
                 $(".filter-box").removeClass("hidden");
+                $(".select-button").addClass("hidden");
                 //展示图片
                 $(".result-box .container-fluid .row").html("");//清空
 
@@ -375,6 +351,22 @@ function upload() {
 
                 winChange();//调整高宽
                 $('#loading').hide();
+                $('#carousel-example-generic').on('slide.bs.carousel', function (event) {
+                    var $hoder = $('#carousel-example-generic').find('.item'),
+                        $items = $(event.relatedTarget);
+                    //getIndex就是轮播到当前位置的索引
+                    var getIndex= $hoder.index($items);
+                    console.log(getIndex);
+                    if(getIndex==0){
+                        // var logId;//全局调用
+                        // var logIds=[];//全局调用
+                        $('#logId').val(logId)
+                    }else {
+                        $('#logId').val(logIds[getIndex-1].logid)
+                    }
+                    setTimeout(faceList(), 100);
+
+                });
                 //绑定图片点击事件
                 $(".result-box .thumbnail").bind('click', function () {
                     $("#retrieveModal").modal();
@@ -508,69 +500,11 @@ function uploadChosen() {
 $("#retrieveModal2").on("hidden.bs.modal", function() {
     $("#retrieveModal2 #uploadChosen").data('bootstrapValidator').resetForm();
 });
-// function bindUploadFileComponent(buttonid) {
-//     return new qq.FineUploaderBasic({
-//         button: $("#" + buttonid)[0],
-//         request: {
-//             endpoint: pathurl + 'face/retrieve',
-//             method: "POST"
-//         },
-//         validation: {
-//             allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'JPEG'],
-//         },
-//         debug: true,
-//         multiple: true,
-//         autoUpload: false,
-//         editFilename: {
-//             enable: false
-//         },
-//         messages: {
-//             noFilesError: '没有选中文件'
-//         },
-//         text: {
-//             formatProgress: "{percent}% of {total_size}",
-//             failUpload: "上传失败",
-//             waitingForResponse: "上传中...",
-//             paused: "暂停"
-//         },
-//         callbacks: {
-//             onError: function (id, filename, message, xhr) {
-//                 console.log("id" + filename, '上传失败');
-//                 if (filename == undefined)
-//                     alert("请选择图片或重新选择图片");
-//             },
-//             onSubmit: function (id, filename) {
-//                 console.log(filename, '文件开始提交');
-//                 var self = this;
-//
-//                 $("#add-image-button").addClass("hidden");
-//                 $("#remark").removeClass("hidden");
-//                 $(".select-button").removeClass("hidden");
-//                 //画框展示
-//                 this.drawThumbnail(id, $(".add-img-box .add-img img")[0]);
-//                 //子页面展示
-//                 this.drawThumbnail(id, $("#retrieveModal .modal-body .thumbnail img")[0]);
-//                 //由于上传完成后文件会自动清空，需要保存到uploadFiles
-//                 uploadFile = self.getFile(id);
-//             },
-//             onComplete: function (id, filename, responseJSON, xhr) {
-//
-//                 console.log(filename, '上传成功，返回信息为：', responseJSON);
-//                 //object可以如下初始化表格
-//                 /*
-//                  if (imagetable)
-//                  imagetable.fnDestroy(false);
-//                  imageTable(responseJSON.imgs); */
-//                 var self = this;
-//                 //  self.clearStoredFiles();
-//             }
-//         }
-//     });
-//
-// }
+
 function preview(file) {
     $('#carousel-example-generic')[0].style.display = "block";
     if (file.files && file.files[0]) {
+        $('#default_img').hide()
         /* var reader = new FileReader();
         reader.onload = function(evt){
          $('#img0').attr('src',evt.target.result);
@@ -583,19 +517,21 @@ function preview(file) {
             if (i == 0) {
                 reader.readAsDataURL(file.files[i]);
                 reader.onload = function (evt) {
-                    $('.carousel-inner').append('<div class="item active"><img src="' + evt.target.result + '"></div>');
+                    $('.carousel-inner').append('<div class="active item item' + i + '"><img src="' + evt.target.result + '"></div>');
                 }
                 $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + i + '" class="active"></li>');
             } else {
                 reader.readAsDataURL(file.files[i]);
                 reader.onload = function (evt) {
-                    $('.carousel-inner').append('<div class="item"><img src="' + evt.target.result + '"></div>');
+                    $('.carousel-inner').append('<div class="item item' + i + '"><img src="' + evt.target.result + '"></div>');
                 }
                 $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
             }
         });
         $('#carousel-example-generic').carousel('pause');
         $('.select-button').show();
+        $('.carousel-control').show();
+        $('#add-image-button-span').hide();
     } else {
         $('.carousel-indicators').html('');
         $('.carousel-inner').html('');
