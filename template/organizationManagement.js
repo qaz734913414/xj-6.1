@@ -36,7 +36,7 @@ var setting = {
         // editNameSelectAll : true, //删除按钮和修改按钮都会出现，添加按钮需要自己额外添加
         // showRenameBtn : true, //如果只要删除功能，所以修改按钮设置为false,默认值为true
         // showRemoveBtn : showRemoveBtn, //选做，可以删除这一行
-        //高级用法就是为showRemoveBtn 设置函数，函数体内判断节点来为某一些节点禁用删除按钮,比如这里禁止删除跟节点。
+        // 高级用法就是为showRemoveBtn 设置函数，函数体内判断节点来为某一些节点禁用删除按钮,比如这里禁止删除跟节点。
     },
     data: {
         key: {
@@ -53,9 +53,9 @@ var setting = {
     callback: {
         beforeRemove: beforeRemove, //删除前的回调函数
         beforeRename: beforeRename, //修改前的回调函数
-        //		beforeClick : beforeClick,
-        // 			onRename : onRename,
-        // 			onRemove : onRemove,
+        		// beforeClick : beforeClick,
+        		// 	onRename : onRename,
+        		// 	onRemove : onRemove,
         onClick: onClick, //点击事件
         onAsyncSuccess: zTreeOnAsyncSuccess
         //异步加载完毕的回调函数

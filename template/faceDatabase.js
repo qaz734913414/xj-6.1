@@ -92,10 +92,6 @@ function addFormVali() {
                         notEmpty: {
                             message: '请输入用户名'
                         },
-                        regexp: {
-                            regexp: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{3,11}/,
-                            message: '库名只能包含字母或者数字'
-                        }
                     }
                 },
                 uCardId: {
@@ -124,7 +120,7 @@ function addFormVali() {
                             message: '手机号码不能为空'
                         },
                         regexp: {
-                            regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+                            regexp: /^1[3|4|5|7|8][0-9]{9}$/,
                             message: '手机格式不正确'
                         }
                     }
@@ -202,48 +198,28 @@ function openFormatter(value, row, index) {
 // 点击建库者查看信息
 function openinfo(username) {
 
-    // var openinofDom = $("#openinofModal .modal-body");
-    // openinofDom.html("");
-    // $.ajax({
-    //     type: 'post',
-    //     url: pathurl + 'facelog/personInfo',
-    //     data: {
-    //         username: username
-    //     },
-    //     cache: false,
-    //     success: function (data) {
-    //         var dataresult = [],
-    //             compareCount,
-    //             idCardCount,
-    //             loginCount,
-    //             retrieveCount,
-    //             appCount,
-    //             importCount;
-    //         dataresult = data.result[0];
-    //         dataresult.compareCount = data.compareCount;
-    //         dataresult.idCardCount = data.idCardCount;
-    //         dataresult.loginCount = data.loginCount;
-    //         dataresult.retrieveCount = data.retrieveCount;
-    //         dataresult.appCount = data.appCount;
-    //         dataresult.importCount = data.importCount;
-    //         $('#openinfoTemp').tmpl(dataresult).appendTo(openinofDom);
-    //         var unittext = $("#openinofModal .modal-body").find('.unit').text();
-    //
-    //         $.each(dListData, function (index) {
-    //             if (unittext == dListData[index].did) {
-    //                 return $("#openinofModal .modal-body").find('.unit').html(dListData[index].dname)
-    //             }
-    //         })
-    $('#username').text(username);
-    $("#openinofModal").modal();
+    var openinofDom = $("#openinofModal .modal-body #libPicList");
+    openinofDom.html("");
+    $.ajax({
+        type: 'post',
+        url: pathurl + 'library/libPicList',
+        data: {
+            dbname: username
+        },
+        cache: false,
+        success: function (data) {
+           var dataresult=data.result.rows;
 
-    //     },
-    //
-    //     error: function () {
-    //         console.error("ajax error");
-    //     }
-    //
-    // });
+            $('#imgsTemp').tmpl(dataresult).appendTo(openinofDom);
+            $('#dn').text(username);
+            $("#openinofModal").modal();
+        },
+
+        error: function () {
+            console.error("ajax error");
+        }
+
+    });
 }
 function doUpload2() {
     $("#fileinputModal #modal-text").text("请上传后缀为'.zip'的文件");
@@ -356,52 +332,11 @@ $("#delUserTModel #continue").click(function () {
         }
     });
 });
-//表格批量删除
-function toRemove() {
-    var ids = '';
-    $.map($('#facedataTable').bootstrapTable('getSelections'), function (row) {
-        ids += row.id + ',';
-    });
-    $('#rowUId').val(ids)
-    if (ids) {
-        $("#delUsersTModel #modal-body-text").text("删除后数据不可恢复，确定要删除吗?");
-        $("#delUsersTModel").modal('show');
-    } else {
-        $("#myModal #modal-body-id").text("请选择一条数据进行操作!");
-        $("#myModal").modal('show');
-    }
-}
-//批量删除
-$("#delUsersTModel #cancel").click(function () {
-    $("#userTable1").bootstrapTable('refresh');
-});
-$("#delUsersTModel #continue").off();
-$("#delUsersTModel #continue").click(function () {
-    $("#delUsersTModel").modal('hide')
-    $.ajax({
-        type: 'POST',
-        url: pathurl + 'user/deleteByIds',
-        data: {
-            ids: $('#rowUId').val()
-        },
-        success: function () {
-            console.log('多表删除成功')
-            $("#modal-body-id").text("删除成功!");
-            $("#myModal").modal();
-            $("#userTable1").bootstrapTable('refresh');
-        },
-        error: function () {
-            console.log('多表删除失败')
-            $("#modal-body-id").text("处理失败!");
-            $("#myModal").modal();
-        }
-    });
-});
 
 // 新增1
 function addUser() {
     $("#userForm")[0].reset();
-    $("#adduserModal .modal-title").html("添加用户");
+    $("#adduserModal .modal-title").html("添加库");
     $("#adduserModal").modal();
     $("#adduserModal #cancel").off()
     $("#adduserModal #cancel").click(function () {
@@ -464,7 +399,7 @@ $("#adduserModal #continue").click(function (form) {
 // 点击库名后 新增2
 function add() {
     $("#userForm")[0].reset();
-    $("#addModal .modal-title").html("添加用户");
+    $("#addModal .modal-title").html("添加图片");
     $("#addModal").modal();
     $("#addModal #cancel").off()
     $("#addModal #cancel").click(function () {
@@ -473,28 +408,9 @@ function add() {
 
     });
 }
-$("#addModal").on("hidden.bs.modal", function () {
-    $("#addModal #addForm").data('bootstrapValidator').resetForm();
-});
+
 $("#addModal #continue").off();
 $("#addModal #continue").click(function () {
-    var areacodeArr = [],
-        areanameArr = [];
-    var pr = $("#addModal input[name='userProvinceId']").val() || '';
-    areacodeArr.push(pr)
-    var ci = $("#addModal input[name='userCityId']").val() || '';
-    areacodeArr.push(ci)
-    var di = $("#addModal input[name='userDistrictId']").val() || '';
-    areacodeArr.push(di)
-    var prn = $("#addModal .province>a").text() || '';
-    areanameArr.push(prn)
-    var cin = $("#addModal .city>a").text() || '';
-    areanameArr.push(cin)
-    var din = $("#addModal .district>a").text() || '';
-    areanameArr.push(din)
-    var areacode = regk(areacodeArr).substr(1)
-    var areaname = regk(areanameArr).substr(1)
-
     var form_Data = new FormData($("#addForm"));
     form_Data.append("file", uploadFile);
     form_Data.append("dbname", $('#dn').text());
@@ -503,7 +419,6 @@ $("#addModal #continue").click(function () {
     form_Data.append("idcard", $("#addModal #uCardId").val());
     form_Data.append("remark", $("#addModal #remark").val());
     form_Data.append("telphone", $("#addModal #uPhone").val());
-    form_Data.append("address", areacode);
     console.log(form_Data);
     $.ajax({
         type: 'post',
@@ -524,7 +439,7 @@ $("#addModal #continue").click(function () {
                 $("#facedataTable").bootstrapTable('refresh');
             } else {
                 $("#myModal").css("z-index", 1550);
-                $("#modal-body-id").text("请正确输入");
+                $("#modal-body-id").text(data.msg);
                 $("#myModal").modal();
             }
         },
@@ -535,7 +450,11 @@ $("#addModal #continue").click(function () {
         }
     });
 });
-
+$("#addModal").on("hidden.bs.modal", function () {
+    $("#addModal #addForm").data('bootstrapValidator').resetForm();
+    $("#addModal #addForm")[0].reset();
+    $('#img0').attr('src','./img/default_img.png')
+});
 function uploadFile(button) {
     return new qq.FineUploaderBasic(
         {
@@ -548,7 +467,7 @@ function uploadFile(button) {
                 allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
             },
             debug: true,
-            multiple: false,
+            multiple: true,
             autoUpload: false,
             editFilename: {
                 enable: false

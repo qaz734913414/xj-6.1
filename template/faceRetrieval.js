@@ -1,4 +1,4 @@
-var uploadFile;
+
 var heightFactor = 1.2;//图片高度宽度比例
 var logId;//全局调用
 $('.nation').html('<option value="">民族</option>');
@@ -32,7 +32,7 @@ $(function () {
                             message: '手机号码不能为空'
                         },
                         regexp: {
-                            regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+                            regexp: /^1[3|4|5|7|8][0-9]{9}$/,
                             message: '手机格式不正确'
                         }
                     }
@@ -44,9 +44,6 @@ $(function () {
         $('.nation').append('<option value="' + val + '">' + val + '</option>');
     });
 
-
-    // logId = null;
-    var uploader = bindUploadFileComponent("add-image-button");
     $("#upload-button").bind("click", upload);
     $("#retrieveModal .similar-box").bind("click", function () {
         $("#retrieveModal2").modal();
@@ -297,17 +294,30 @@ function showImageOnModal(resource) {
 }
 $("#btntype input[name='options']").last().prop("checked", true);
 function upload() {
-    if (uploadFile == null) {
-        alert("请选择图片");
 
+    $('#file0').each(function(i,val){
+        console.log(val)
+        try{
+            isImg=$(this).get(0).files;
+            console.log($(this).get(0).files)
+        }catch(e){
+            isImg=$(this).get(0).value;
+        }
+        if(!isImg){
 
-        return;
-    }
+            $(this).attr('disabled',false);
+        }
+    });
+    // if (!isImg) {
+    //     alert("请选择图片");
+    //     return;
+    // }
+    // console.log(isImg)
     var form_Data = new FormData();
-    form_Data.append("file", uploadFile);
+    form_Data.append("file", isImg);
     form_Data.append("type", $("#btntype input[name='options']:checked").val());
     form_Data.append("remark", $("#remark").val()||'');
-    form_Data.append("dbname", 'aaaa');
+    form_Data.append("dbname", $('#dbname').val()||'aaaa');
     //防止同时多次提交
     var uploadButton = $(this);
     uploadButton.addClass("disabled");
@@ -498,63 +508,101 @@ function uploadChosen() {
 $("#retrieveModal2").on("hidden.bs.modal", function() {
     $("#retrieveModal2 #uploadChosen").data('bootstrapValidator').resetForm();
 });
-function bindUploadFileComponent(buttonid) {
-    return new qq.FineUploaderBasic({
-        button: $("#" + buttonid)[0],
-        request: {
-            endpoint: pathurl + 'face/retrieve',
-            method: "POST"
-        },
-        validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'zip'],
-        },
-        debug: true,
-        multiple: false,
-        autoUpload: false,
-        editFilename: {
-            enable: false
-        },
-        messages: {
-            noFilesError: '没有选中文件'
-        },
-        text: {
-            formatProgress: "{percent}% of {total_size}",
-            failUpload: "上传失败",
-            waitingForResponse: "上传中...",
-            paused: "暂停"
-        },
-        callbacks: {
-            onError: function (id, filename, message, xhr) {
-                console.log("id" + filename, '上传失败');
-                if (filename == undefined)
-                    alert("请选择图片或重新选择图片");
-            },
-            onSubmit: function (id, filename) {
-                console.log(filename, '文件开始提交');
-                var self = this;
-
-                $("#add-image-button").addClass("hidden");
-                $("#remark").removeClass("hidden");
-                $(".select-button").removeClass("hidden");
-                //画框展示
-                this.drawThumbnail(id, $(".add-img-box .add-img img")[0]);
-                //子页面展示
-                this.drawThumbnail(id, $("#retrieveModal .modal-body .thumbnail img")[0]);
-                //由于上传完成后文件会自动清空，需要保存到uploadFiles
-                uploadFile = self.getFile(id);
-
-            },
-            onComplete: function (id, filename, responseJSON, xhr) {
-                console.log(filename, '上传成功，返回信息为：', responseJSON);
-                //object可以如下初始化表格
-                /*
-                 if (imagetable)
-                 imagetable.fnDestroy(false);
-                 imageTable(responseJSON.imgs); */
-                var self = this;
-                //  self.clearStoredFiles();
-            }
+// function bindUploadFileComponent(buttonid) {
+//     return new qq.FineUploaderBasic({
+//         button: $("#" + buttonid)[0],
+//         request: {
+//             endpoint: pathurl + 'face/retrieve',
+//             method: "POST"
+//         },
+//         validation: {
+//             allowedExtensions: ['jpeg', 'jpg', 'gif', 'png', 'JPEG'],
+//         },
+//         debug: true,
+//         multiple: true,
+//         autoUpload: false,
+//         editFilename: {
+//             enable: false
+//         },
+//         messages: {
+//             noFilesError: '没有选中文件'
+//         },
+//         text: {
+//             formatProgress: "{percent}% of {total_size}",
+//             failUpload: "上传失败",
+//             waitingForResponse: "上传中...",
+//             paused: "暂停"
+//         },
+//         callbacks: {
+//             onError: function (id, filename, message, xhr) {
+//                 console.log("id" + filename, '上传失败');
+//                 if (filename == undefined)
+//                     alert("请选择图片或重新选择图片");
+//             },
+//             onSubmit: function (id, filename) {
+//                 console.log(filename, '文件开始提交');
+//                 var self = this;
+//
+//                 $("#add-image-button").addClass("hidden");
+//                 $("#remark").removeClass("hidden");
+//                 $(".select-button").removeClass("hidden");
+//                 //画框展示
+//                 this.drawThumbnail(id, $(".add-img-box .add-img img")[0]);
+//                 //子页面展示
+//                 this.drawThumbnail(id, $("#retrieveModal .modal-body .thumbnail img")[0]);
+//                 //由于上传完成后文件会自动清空，需要保存到uploadFiles
+//                 uploadFile = self.getFile(id);
+//             },
+//             onComplete: function (id, filename, responseJSON, xhr) {
+//
+//                 console.log(filename, '上传成功，返回信息为：', responseJSON);
+//                 //object可以如下初始化表格
+//                 /*
+//                  if (imagetable)
+//                  imagetable.fnDestroy(false);
+//                  imageTable(responseJSON.imgs); */
+//                 var self = this;
+//                 //  self.clearStoredFiles();
+//             }
+//         }
+//     });
+//
+// }
+function preview(file) {
+    $('#carousel-example-generic')[0].style.display = "block";
+    if (file.files && file.files[0]) {
+        /* var reader = new FileReader();
+        reader.onload = function(evt){
+         $('#img0').attr('src',evt.target.result);
         }
-    });
+        */
+        $('.carousel-indicators').html('');
+        $('.carousel-inner').html('');
+        $.each(file.files, function (i, item) {
+            var reader = new FileReader();
+            if (i == 0) {
+                reader.readAsDataURL(file.files[i]);
+                reader.onload = function (evt) {
+                    $('.carousel-inner').append('<div class="item active"><img src="' + evt.target.result + '"></div>');
+                }
+                $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + i + '" class="active"></li>');
+            } else {
+                reader.readAsDataURL(file.files[i]);
+                reader.onload = function (evt) {
+                    $('.carousel-inner').append('<div class="item"><img src="' + evt.target.result + '"></div>');
+                }
+                $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
+            }
+        });
+        $('#carousel-example-generic').carousel('pause');
+        $('.select-button').show();
+    } else {
+        $('.carousel-indicators').html('');
+        $('.carousel-inner').html('');
+        $('#img0').removeAttr('src');
+        $('.carousel-inner').append('<div class="item active"><img style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=' + file.value + ',sizingMethod=scale)"></div>');
+        $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + 0 + '" class="active"></li>');
 
+        $('#carousel-example-generic').carousel('pause');
+    }
 }

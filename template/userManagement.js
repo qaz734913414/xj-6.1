@@ -203,15 +203,6 @@ function addFormVali() {
                 validators: {
                     notEmpty: {
                         message: '请输入用户名'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 11,
-                        message: '用户名长度必须在3到11位之间'
-                    },
-                    regexp: {
-                        regexp: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{3,11}/,
-                        message: '用户名只能包含字母+数字,或者手机号'
                     }
                 }
             },
@@ -256,7 +247,7 @@ function addFormVali() {
                         message: '手机号码不能为空'
                     },
                     regexp: {
-                        regexp: /^(0|86|17951)?(13[0-9]|15[012356789]|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+                        regexp: /^1[3|4|5|7|8][0-9]{9}$/,
                         message: '手机格式不正确'
                     }
                 }
@@ -1695,7 +1686,6 @@ function countinfo(n, i) {
 
                 method: 'post',
                 pagination: true,
-
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
                 paginationDetailHAlign: "left",
