@@ -444,14 +444,14 @@ $("#addModal #continue").click(function () {
             console.log(data)
             if (data.code == 200) {
                 $('#addModal').modal('hide');
-                $("#modal-body-id").html('添加成功');
-                $('#myModal').modal('show');
+                $("#msgModal #modal-body-id").html('添加成功');
+                $('#msgModal').modal('show');
                 $("#addForm")[0].reset();
                 // LoadAjaxContent(pathurl+'user/list');
                 $("#facedataTable").bootstrapTable('refresh');
             } else {
-                $("#myModal").css("z-index", 1550);
-                $("#modal-body-id").text(data.msg);
+                $("#msgModal").css("z-index", 1550);
+                $("#msgModal #modal-body-id").html(data.msg);
                 $("#myModal").modal();
             }
         },
