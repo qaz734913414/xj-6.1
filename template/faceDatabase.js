@@ -28,7 +28,6 @@ $(function () {
     getTable();
 
     addFormVali();
-    init();
     var select1 = $('#city-picker-search1').cityPicker({
         dataJson: cityData,
         renderMode: true,
@@ -222,30 +221,39 @@ function openinfo(username) {
     });
 }
 function doUpload2() {
-    $("#fileinputModal #modal-text").text("请上传后缀为'.zip'的文件");
-    $("#fileinputModal").modal();
-}
-$("#fileinputModal #continue2").click(function () {
+
     var formData = new FormData($("#uploadForm2")[0]);
-    console.log('formData.get("file"):' + formData.get("file"));
-         var name=$('#dn').text();
+    var name=$('#dn').text();
     if (formData.get("file").name) {
+        $('#doUploadbtn').hide();
         $.ajax({
             url: pathurl + 'library/libPicZipAdd?dbname=' + name,
             type: 'POST',
             data: formData,
-            async: false,
+            async: true,
             cache: false,
             contentType: false,
             processData: false,
             success: function (data) {
-                console.log(data);
+                $('#doUploadbtn').show();
+                $("#openinofModal").modal('hide');
                 if (data.code == 200) {
-                    $("#modal-body-id").text('上传成功!');
-                    $("#myModal").modal('show');
-                } else {
-                    $("#modal-body-id").text('上传文件失败,请重新尝试!');
-                    $("#myModal").modal();
+                    $("#msgModal #modal-body-id").html('上传成功!');
+                    $("#msgModal").modal('show');
+
+                    $("#facedataTable").bootstrapTable('refresh');
+
+                } else if (data.code == 1){
+
+                    $("#msgModal #modal-body-id").html('<a href="#" class="repeat">上传重复' + data.repeat.total + '条</a>');
+                    $('#msgModal #modal-body-id').on('click','.repeat',function(){
+                        repeatmodel(data.repeat.result);
+                    })
+                    $("#msgModal").modal();
+                }else {
+
+                    $("#msgModal #modal-body-id").text('上传文件失败,请重新尝试!');
+                    $("#msgModal").modal();
                 }
             },
             error: function (data) {
@@ -255,13 +263,17 @@ $("#fileinputModal #continue2").click(function () {
         });
     }else {
         alert('请选择文件再上传');
+        $('#doUploadbtn').prop("disabled",false);
         return false;
     }
+}
+function repeatmodel(data) {
+   data.forEach(function(val,index,arr){
+        $('#repeatModal #modal-body-id').append('<img style="width:200px;height: 200px" width="200" href="200" src="' + val.repaeturl + '">');
+    });
+    $('#repeatModal').modal();
 
-
-
-
-});
+}
 $("#myModal").on("hidden.bs.modal", function () {
     $("#uploadForm2")[0].reset();
 });
@@ -291,12 +303,12 @@ function userEdit(row) {
             dbname: row.dbname
         },
         success: function () {
-            $("#modal-body-id").text("已清空!");
+            $("#myModal #modal-body-id").html("已清空!");
             $("#myModal").modal();
             $("#facedataTable").bootstrapTable('refresh');
         },
         error: function () {
-            $("#modal-body-id").text("清空失败!");
+            $("#myModal #modal-body-id").text("清空失败!");
             $("#myModal").modal();
         },
         dataType: 'json'

@@ -3,33 +3,33 @@ $(function () {
     getTable()
 
     $("#from").datetimepicker({
-        startView:2,
-        format:"yyyy-mm-dd",
-        minView:"month",
-        todayBtn : "linked",
-        todayHighlight : true,
+        startView: 2,
+        format: "yyyy-mm-dd",
+        minView: "month",
+        todayBtn: "linked",
+        todayHighlight: true,
         language: "zh-CN",
-        showMeridian:true,
-        autoclose:true,
-    }).on('changeDate',function(ev){
-        var starttime=$("#from").val();
-        $("#to").datetimepicker('setStartDate',starttime);
+        showMeridian: true,
+        autoclose: true,
+    }).on('changeDate', function (ev) {
+        var starttime = $("#from").val();
+        $("#to").datetimepicker('setStartDate', starttime);
         $("#from").datetimepicker('hide');
     });
 
     $("#to").datetimepicker({
-        startView:2,
-        minView:"month",
-        format:"yyyy-mm-dd",
-        todayBtn : "linked",
-        todayHighlight : true,
+        startView: 2,
+        minView: "month",
+        format: "yyyy-mm-dd",
+        todayBtn: "linked",
+        todayHighlight: true,
         language: "zh-CN",
-        autoclose:true,
-        showMeridian:true,
-    }).on('changeDate',function(ev){
-        var starttime=$("#from").val();
-        var endtime=$("#to").val();
-        $("#from").datetimepicker('setEndDate',endtime);
+        autoclose: true,
+        showMeridian: true,
+    }).on('changeDate', function (ev) {
+        var starttime = $("#from").val();
+        var endtime = $("#to").val();
+        $("#from").datetimepicker('setEndDate', endtime);
         $("#to").datetimepicker('hide');
     });
     var select = $('#city-picker-search').cityPicker({
@@ -71,6 +71,7 @@ $('#userdiv a.selector-name').on('click', function () {
         })
     })
 })
+
 function getTable() {
     // 地区选择编码
     var areacodeArr = [], areanameArr = [];
@@ -92,7 +93,7 @@ function getTable() {
     var areaname = regk(areanameArr).substr(1)
     console.log(areacodeArr);
     var plat = $("#userdiv #plat").val() || '';
-    var username=$("#userdiv #username").val() || '';
+    var username = $("#userdiv #username").val() || '';
     var company = $("#userdiv #company").val() || '';
     var chosen = $("#userdiv #chosen").val() || '';
     var harmful = $("#userdiv #harmful").val() || '';
@@ -102,7 +103,7 @@ function getTable() {
     $("#face-table").bootstrapTable('destroy');
 
     $('#face-table').bootstrapTable({
-        url: pathurl + 'facelog/queryRetrieveLog?areacode=' + areacode +  '&username=' + username+'&plat=' + plat + '&company=' + company + '&chosen=' + chosen + '&harmful=' + harmful + '&from=' + from+ '&to=' + to,
+        url: pathurl + 'facelog/queryRetrieveLog?areacode=' + areacode + '&username=' + username + '&plat=' + plat + '&company=' + company + '&chosen=' + chosen + '&harmful=' + harmful + '&from=' + from + '&to=' + to,
         method: 'post',
         pagination: true,
         contentType: "application/x-www-form-urlencoded",
@@ -123,7 +124,7 @@ function getTable() {
             }
             return obj
         },
-       
+
         buttonsClass: "face",
 
         sortable: true, //是否启用排序
@@ -382,7 +383,7 @@ function countinfo(n, i) {
         case 0:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/retrieveShow?username=' + n, //请求后台的URL（*）
-                method:'post',
+                method: 'post',
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
@@ -448,7 +449,7 @@ function countinfo(n, i) {
         case 1:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/compareShow?username=' + n, //请求后台的URL（*）
-                method:'post',
+                method: 'post',
                 pagination: true,
                 contentType: "application/x-www-form-urlencoded",
                 queryParamsType: " limit",
@@ -482,13 +483,13 @@ function countinfo(n, i) {
                     }, {
                         field: 'name',
                         title: '真实姓名'
-                    },  {
+                    }, {
                         field: 'url',
                         title: '图片',
                         formatter: function (value, row, index) {
                             return '<img width="130" height="180" src=' + value + '>'
                         }
-                    },{
+                    }, {
                         field: 'yurl',
                         title: '原来图片',
                         formatter: function (value, row, index) {
@@ -504,7 +505,7 @@ function countinfo(n, i) {
         case 2:
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/idCardShow?username=' + n, //请求后台的URL（*）
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -562,7 +563,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/loginShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -585,7 +586,7 @@ function countinfo(n, i) {
                     }, {
                         field: 'time',
                         title: '时间'
-                    },  {
+                    }, {
                         field: 'username',
                         title: '用户名'
                     }
@@ -596,7 +597,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/appLoginShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",
@@ -639,7 +640,7 @@ function countinfo(n, i) {
             $('#counttable').bootstrapTable({
                 url: pathurl + 'facelog/importShow?username=' + n, //请求后台的URL（*）
 
-                method:'post',
+                method: 'post',
                 pagination: true,
 
                 contentType: "application/x-www-form-urlencoded",

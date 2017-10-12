@@ -543,11 +543,12 @@ function preview(file) {
                     $('.carousel-inner').append('<div class="item item' + i + '"><img src="' + evt.target.result + '"></div>');
                 }
                 $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + i + '"></li>');
+                $('.carousel-control').show();
             }
         });
         $('#carousel-example-generic').carousel('pause');
         $('.select-button').show();
-        $('.carousel-control').show();
+
 
     } else {
         $('.carousel-indicators').html('');
@@ -557,5 +558,6 @@ function preview(file) {
         $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="' + 0 + '" class="active"></li>');
 
         $('#carousel-example-generic').carousel('pause');
+        $('.carousel-control').show();
     }
 }
