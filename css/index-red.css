@@ -1996,7 +1996,4 @@ tbody>tr:nth-of-type(even) {
 :-ms-input-placeholder{
     font-family: '宋体';
     font-size:12px;
-}           /* IE浏览器 */
-html,body,.mynav-menu,.face-form,#userdiv{
-    min-width: 1360px;
 }

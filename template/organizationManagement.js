@@ -130,7 +130,7 @@ function showRemoveBtn(treeId, treeNode) {
 
 function beforeRemove(treeId, treeNode) {
     if (treeNode.pId == 0) { //如果删除的是根节点，也提示无法删除
-        $("#modal-body-id").text("根节点无法删除!");
+        $("#myModal #modal-body-id").text("根节点无法删除!");
         $("#myModal").modal();
         return false; //返回false 就会使前端的节点还保持存在，
         //  如果是true,则会在前端界面删除，但数据库中还会有，刷新一下即可再次出现
@@ -149,13 +149,13 @@ function beforeRemove(treeId, treeNode) {
                 type: 'POST',
                 url: pathurl + 'department/delete?dId=' + treeNode.id,
                 success: function () {
-                    $("#modal-body-id").text("删除成功!");
+                    $("#myModal #modal-body-id").text("删除成功!");
                     $("#myModal").modal();
                     zTree.removeNode(treeNode);
                     // LoadAjaxContent('${ctx }/department/selectAll');
                 },
                 error: function () {
-                    $("#modal-body-id").text("处理失败!");
+                    $("#myModal #modal-body-id").text("处理失败!");
                     $("#myModal").modal();
                     return false;
                 }
@@ -169,7 +169,7 @@ function beforeRename(treeId, treeNode, newName, isCancel) {
     if (newName == "") { // 新名称为空的情况
         var node = treeNode.getParentNode(); //获取父节点
         zTree.reAsyncChildNodes(node, "refresh"); //重新访问数据库更新父节点，即可回到旧名称
-        $("#modal-body-id").text("名称不能为空!");
+        $("#myModal #modal-body-id").text("名称不能为空!");
         $("#myModal").modal();
     } else if (newName != oldName) { // 如果新名称与旧名称一致，什么也不做
         $.ajax({
@@ -185,7 +185,7 @@ function beforeRename(treeId, treeNode, newName, isCancel) {
             success: function (data) {
                 var node = treeNode.getParentNode();
                 zTree.reAsyncChildNodes(node, "refresh");
-                $("#modal-body-id").text("修改成功!");
+                $("#myModal #modal-body-id").text("修改成功!");
                 $("#myModal").modal();
                 $("#deptTable").bootstrapTable('refresh');
             },
@@ -194,7 +194,7 @@ function beforeRename(treeId, treeNode, newName, isCancel) {
                 //zTree.updateNode(treeNode);
                 var node = treeNode.getParentNode();
                 zTree.reAsyncChildNodes(node, "refresh"); //回到旧名称
-                $("#modal-body-id").text("修改失败，同一级下该名称已存在，请尝试修改为其它名称！");
+                $("#myModal #modal-body-id").text("修改失败，同一级下该名称已存在，请尝试修改为其它名称！");
                 $("#myModal").modal();
             }
         });
@@ -276,14 +276,14 @@ function deleteDept(row) {
             type: 'POST',
             url: pathurl + 'department/delete?dId=' + row.did,
             success: function () {
-                $("#modal-body-id").text("删除成功!");
+                $("#myModal #modal-body-id").text("删除成功!");
                 $("#myModal").modal();
                 $("#deptTable").bootstrapTable('refresh');
                 load = false;
                 zTree = $.fn.zTree.init($("#treeDemo"), setting);
             },
             error: function () {
-                $("#modal-body-id").text("删除失败!");
+                $("#myModal #modal-body-id").text("删除失败!");
                 $("#myModal").modal();
             }
         });
@@ -324,7 +324,7 @@ function deptEdit(row) {
                 console.log(data)
                 if (data.code == 200) {
                     $("#myModalLabel").html("提示");
-                    $("#modal-body-id").html(data.msg);
+                    $("#myModal #modal-body-id").html(data.msg);
                     $('#myModal').modal('show');
                     // LoadAjaxContent('${ctx }/department/selectAll');
                     $("#deptTable").bootstrapTable('refresh');
@@ -332,13 +332,13 @@ function deptEdit(row) {
                     zTree = $.fn.zTree.init($("#treeDemo"), setting);
                 } else {
                     $("#myModalLabel").html("提示");
-                    $("#modal-body-id").html("修改失败，名称不能相同！");
+                    $("#myModal #modal-body-id").html("修改失败，名称不能相同！");
                     $('#myModal').modal('show');
                 }
             },
             error: function () {
                 $("#myModalLabel").html("提示");
-                $("#modal-body-id").html('系统出错请稍后再试');
+                $("#myModal #modal-body-id").html('系统出错请稍后再试');
                 $('#myModal').modal('show');
             }
         });
@@ -364,7 +364,7 @@ $("#deptInfoModal #continue").click(function (form) {
             console.log(data)
             if (data.code == 200) {
                 $("#myModalLabel").html("提示");
-                $("#modal-body-id").html("添加成功");
+                $("#myModal #modal-body-id").html("添加成功");
                 $('#myModal').modal('show');
                 // LoadAjaxContent('${ctx }/department/selectAll');
                 $("#deptTable").bootstrapTable('refresh');
@@ -372,14 +372,14 @@ $("#deptInfoModal #continue").click(function (form) {
                 zTree = $.fn.zTree.init($("#treeDemo"), setting);
             } else {
                 $("#myModalLabel").html("提示");
-                $("#modal-body-id").html(data.msg);
+                $("#myModal #modal-body-id").html(data.msg);
                 $('#myModal').modal('show');
             }
             $("#deptTable").bootstrapTable('refresh');
         },
         error: function () {
             $("#myModalLabel").html("提示");
-            $("#modal-body-id").html('系统出错请稍后再试');
+            $("#myModal #modal-body-id").html('系统出错请稍后再试');
             $('#myModal').modal('show');
         }
     });

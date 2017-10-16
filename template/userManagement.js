@@ -384,7 +384,7 @@ $("#adduserModal #continue").click(function () {
             success: function (data) {
                 if (data.code == 200) {
                     $('#adduserModal').modal('hide');
-                    $("#modal-body-id").html('添加成功');
+                    $("#myModal #modal-body-id").html('添加成功');
                     $('#myModal').modal('show');
                     $("#userForm")[0].reset();
                     uploadFile1 = null; //重置
@@ -399,7 +399,7 @@ $("#adduserModal #continue").click(function () {
             },
             error: function () {
                 $("#myModalLabel").html("提示");
-                $("#modal-body-id").html('系统出错请稍后再试');
+                $("#myModal #modal-body-id").html('系统出错请稍后再试');
                 $('#myModal').modal('show');
             }
         });
@@ -457,7 +457,7 @@ function init() {
 
         },
         error: function () {
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
         },
         dataType: 'json'
@@ -546,12 +546,12 @@ function updateStatus(row) {
             uId: row.uId
         },
         success: function () {
-            $("#modal-body-id").text("用户状态已改变!");
+            $("#myModal #modal-body-id").text("用户状态已改变!");
             $("#myModal").modal();
             $("#userTable1").bootstrapTable('refresh');
         },
         error: function () {
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
         },
         dataType: 'json'
@@ -610,13 +610,13 @@ $("#resetTModel #continue").click(function () { //done
             uId: $('#rowUId').val()
         },
         success: function () {
-            $("#modal-body-id").text("密码重置成功!");
+            $("#myModal #modal-body-id").text("密码重置成功!");
             $("#myModal").modal();
             console.log('密码重置成功!')
             $("#userTable1").bootstrapTable('refresh');
         },
         error: function () {
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
             console.log('密码重置失败!')
         },
@@ -775,14 +775,14 @@ $("#unbindTModel #continue").click(function () {
         },
         success: function () {
 
-            $("#modal-body-id").text("批量解绑成功!");
+            $("#myModal #modal-body-id").text("批量解绑成功!");
             $("#myModal").modal();
             getTable();
             $("#userTable1").bootstrapTable('refresh');
         },
         error: function () {
             console.log('批量解绑失败')
-            $("#modal-body-id").text("批量解绑失败!");
+            $("#myModal #modal-body-id").text("批量解绑失败!");
             $("#myModal").modal();
         }
     });
@@ -844,13 +844,13 @@ $("#wrenchModal #continue").click(function () {
         },
         success: function () {
 
-            $("#modal-body-id").text("批量修改成功!");
+            $("#myModal #modal-body-id").text("批量修改成功!");
             $("#myModal").modal();
             $("#userTable1").bootstrapTable('refresh');
         },
         error: function () {
             console.log('批量修改失败')
-            $("#modal-body-id").text("批量修改失败!");
+            $("#myModal #modal-body-id").text("批量修改失败!");
             $("#myModal").modal();
         }
     });
@@ -872,13 +872,13 @@ $("#delUsersTModel #continue").click(function () {
         },
         success: function () {
             console.log('多表删除成功')
-            $("#modal-body-id").text("删除成功!");
+            $("#myModal #modal-body-id").text("删除成功!");
             $("#myModal").modal();
             $("#userTable1").bootstrapTable('refresh');
         },
         error: function () {
             console.log('多表删除失败')
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
         }
     });
@@ -912,17 +912,17 @@ $("#delUserTModel #continue").click(function () {
             success: function (data) {
                 console.log('删除成功!')
                 if (data.code == 200) {
-                    $("#modal-body-id").text("删除成功!");
+                    $("#myModal #modal-body-id").text("删除成功!");
                     $("#myModal").modal();
                     $("#userTable1").bootstrapTable('refresh');
                 } else {
-                    $("#modal-body-id").text('删除失败');
+                    $("#myModal #modal-body-id").text('删除失败');
                     $("#myModal").modal();
                 }
             },
             error: function () {
                 console.log('处理失败!!')
-                $("#modal-body-id").text("处理失败!");
+                $("#myModal #modal-body-id").text("处理失败!");
                 $("#myModal").modal();
             }
         });
@@ -957,22 +957,22 @@ $('#verificationSafetyCodeModal #verificationSafetyCodeSubmit').on('click', func
                         success: function (data) {
                             console.log('删除成功!')
                             if (data.code == 200) {
-                                $("#modal-body-id").text("删除成功!");
+                                $("#myModal #modal-body-id").text("删除成功!");
                                 $("#myModal").modal();
                                 $('#verificationSafetyCodeModal').modal('hide');
                             } else {
-                                $("#modal-body-id").text('删除失败');
+                                $("#myModal #modal-body-id").text('删除失败');
                                 $("#myModal").modal();
                             }
                         },
                         error: function () {
                             console.log('处理失败!!')
-                            $("#modal-body-id").text("处理失败!");
+                            $("#myModal #modal-body-id").text("处理失败!");
                             $("#myModal").modal();
                         }
                     });
                 } else {
-                    $("#modal-body-id").text("密码错误");
+                    $("#myModal #modal-body-id").text("密码错误");
                     $("#myModal").modal();
                 }
 
@@ -1261,7 +1261,7 @@ function userEdit(row) {
                 if (data.code == 200) {
                     console.log('修改成功')
                     $('userModal').modal('hide');
-                    $("#modal-body-id").text(data.msg);
+                    $("#myModal #modal-body-id").text(data.msg);
                     $("#myModal").modal('show');
                     $("#userForm")[0].reset();
                     // LoadAjaxContent(pathurl+'user/list');
@@ -1274,7 +1274,7 @@ function userEdit(row) {
             },
             error: function () {
                 console.log('修改失败')
-                $("#modal-body-id").html('系统出错请稍后再试');
+                $("#myModal #modal-body-id").html('系统出错请稍后再试');
                 $('#myModal').modal('show');
             }
         });
@@ -1311,24 +1311,24 @@ $("#fileinputModal #continue").click(function () {
             success: function (data) {
 
                 if (data.code == 200) {
-                    $("#modal-body-id").empty();
+                    $("#myModal #modal-body-id").empty();
                     var text = '';
                     text += '<p onclick="fileInfo(0) "><a>上传成功:' + data.success + '</a> </p ><p onclick="fileInfo(1)"><a>上传失败:' + data.fail + '</a> </p><p onclick="fileInfo(2)"><a>上传重复:' + data.repeat + '</a> </p>';
-                    $("#modal-body-id").append(text);
+                    $("#myModal #modal-body-id").append(text);
                     $("#myModal").modal('show');
                     $("#userTable1").bootstrapTable('refresh');
                 } else {
-                    $("#modal-body-id").text('上传文件失败,请重新尝试!');
+                    $("#myModal #modal-body-id").text('上传文件失败,请重新尝试!');
                     $("#myModal").modal();
                 }
             },
             error: function (data) {
-                $("#modal-body-id").text("上传文件失败,请重新尝试!");
+                $("#myModal #modal-body-id").text("上传文件失败,请重新尝试!");
                 $("#myModal").modal();
             }
         });
     } else {
-        $("#modal-body-id").text('请选择要上传的文件');
+        $("#myModal #modal-body-id").text('请选择要上传的文件');
         $("#myModal").modal();
 
     }
@@ -1420,17 +1420,17 @@ function recovery(row) {
             },
             success: function (res) {
                 if (res.code == 200) {
-                    $("#modal-body-id").text("恢复成功");
+                    $("#myModal #modal-body-id").text("恢复成功");
                     $("#myModal").modal();
                     $("#resetTModel").modal('hide');
                     $("#userTable1").bootstrapTable('refresh');
                 } else {
-                    $("#modal-body-id").text("恢复失败");
+                    $("#myModal #modal-body-id").text("恢复失败");
                     $("#myModal").modal();
                 }
             },
             error: function () {
-                $("#modal-body-id").text("服务器出错");
+                $("#myModal #modal-body-id").text("服务器出错");
                 $("#myModal").modal();
             }
         })

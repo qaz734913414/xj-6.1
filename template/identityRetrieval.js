@@ -77,7 +77,7 @@ function getPicture() {
                     winChange();
 
                 } else {
-                    $("#modal-body-id").text("操作失败，请重试");
+                    $("#myModal #modal-body-id").text("操作失败，请重试");
                     $("#myModal").modal();
 
                 }
@@ -189,7 +189,7 @@ function upload() {
                     $(".compare-box .face-similar").hide();
 
                     $(".face-similar").unbind("mouseover");
-                    $("#modal-body-id").text("对不起，查询不到任何相关数据");
+                    $("#myModal #modal-body-id").text("对不起，查询不到任何相关数据");
                     $("#myModal").modal();
                 } else {
                     $(".compare-box .face-similar>p:last-child>span").html('<font>' + simi.substring(0, 3) + '</fonts><fonts>' + simi.substring(3, 6) + '</font>');

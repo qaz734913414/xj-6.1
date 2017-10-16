@@ -2000,7 +2000,3 @@ face-form input {
     color: #000 !important;
 }
 
-/* IE浏览器 */
-html,body,.mynav-menu,.face-form,#userdiv{
-    min-width: 1360px;
-}

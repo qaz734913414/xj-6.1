@@ -260,7 +260,7 @@ function faceList() {
                     winChange();
                 });
             } else {
-                $("#modal-body-id").text("操作失败，请重试");
+                $("#myModal #modal-body-id").text("操作失败，请重试");
                 $("#myModal").modal();
             }
         },
@@ -426,7 +426,7 @@ function upload() {
 
 
             } else {
-                $("#modal-body-id").text("操作失败，请重试");
+                $("#myModal #modal-body-id").text("操作失败，请重试");
                 $("#myModal").modal();
 
             }
@@ -498,11 +498,11 @@ function uploadChosen() {
             success: function (data) {
                 console.log(data)
                 if (data.msg == "SUCCESS") {
-                    $("#modal-body-id").text("比中成功");
+                    $("#myModal #modal-body-id").text("比中成功");
                     $("#myModal").modal();
                     $("#retrieveModal2").modal("hide");
                 } else {
-                    $("#modal-body-id").text("操作失败，请重试");
+                    $("#myModal #modal-body-id").text("操作失败，请重试");
                     $("#myModal").modal();
                 }
             },

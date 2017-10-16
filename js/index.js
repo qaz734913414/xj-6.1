@@ -252,7 +252,7 @@ function ques() {
                 },
                 error: function () {
                     $("#myModal").css('z-index', 1500);
-                    $("#modal-body-id").text("处理失败!");
+                    $("#myModal #modal-body-id").text("处理失败!");
                     $("#myModal").modal();
                 },
                 dataType: 'json'
@@ -331,7 +331,7 @@ function msg() {
                 },
                 error: function () {
                     $("#myModal").css('z-index', 1500);
-                    $("#modal-body-id").text("处理失败!");
+                    $("#myModal #modal-body-id").text("处理失败!");
                     $("#myModal").modal();
                 },
                 dataType: 'json'

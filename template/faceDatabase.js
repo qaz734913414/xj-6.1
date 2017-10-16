@@ -257,7 +257,7 @@ function doUpload2() {
                 }
             },
             error: function (data) {
-                $("#modal-body-id").text("上传文件失败,请重新尝试!");
+                $("#myModal #modal-body-id").text("上传文件失败,请重新尝试!");
                 $("#myModal").modal();
             }
         });
@@ -329,17 +329,17 @@ $("#delUserTModel #continue").click(function () {
         success: function (data) {
             console.log('删除成功!')
             if (data.code == 200) {
-                $("#modal-body-id").text("删除成功!");
+                $("#myModal #modal-body-id").text("删除成功!");
                 $("#myModal").modal();
                 $("#facedataTable").bootstrapTable('refresh');
             } else {
-                $("#modal-body-id").text('删除失败');
+                $("#myModal #modal-body-id").text('删除失败');
                 $("#myModal").modal();
             }
         },
         error: function () {
             console.log('处理失败!!')
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
         }
     });
@@ -389,7 +389,7 @@ $("#adduserModal #continue").click(function (form) {
             console.log(data)
             if (data.code == 200) {
                 $('#adduserModal').modal('hide');
-                $("#modal-body-id").html('添加成功');
+                $("#myModal #modal-body-id").html('添加成功');
                 $('#myModal').modal('show');
                 $("#userForm")[0].reset();
                 // LoadAjaxContent(pathurl+'user/list');
@@ -403,7 +403,7 @@ $("#adduserModal #continue").click(function (form) {
         },
         error: function () {
             $("#myModalLabel").html("提示");
-            $("#modal-body-id").html('系统出错请稍后再试');
+            $("#myModal #modal-body-id").html('系统出错请稍后再试');
             //	$('#myModal').modal('show');
         }
     });
@@ -452,12 +452,12 @@ $("#addModal #continue").click(function () {
             } else {
                 $("#msgModal").css("z-index", 1550);
                 $("#msgModal #modal-body-id").html(data.msg);
-                $("#myModal").modal();
+                $("#msgModal").modal();
             }
         },
         error: function () {
             $("#myModalLabel").html("提示");
-            $("#modal-body-id").html('系统出错请稍后再试');
+            $("#myModal #modal-body-id").html('系统出错请稍后再试');
             //	$('#myModal').modal('show');
         }
     });

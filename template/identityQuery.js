@@ -85,7 +85,7 @@ function getMessage4() {
                     });
 
                 } else {
-                    $("#modal-body-id").text("操作失败，请重试");
+                    $("#myModal #modal-body-id").text("操作失败，请重试");
                     $("#myModal").modal();
 
                 }

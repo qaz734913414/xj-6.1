@@ -463,7 +463,7 @@ function goback() {
                             error: function() {
                                 console.log('系统出错请稍后再试');
                                 $("#myModalLabel").html("提示");
-                                $("#modal-body-id").html('系统出错请稍后再试');
+                                $("#myModal #modal-body-id").html('系统出错请稍后再试');
                                 $('#myModal').modal('show');
                             }
                         })

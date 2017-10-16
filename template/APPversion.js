@@ -160,7 +160,7 @@ $("#editModal #continue").click(function () {
             pid:$('#rowUId').val()
         },
         success: function () {
-            $("#modal-body-id").text("修改成功!");
+            $("#myModal #modal-body-id").text("修改成功!");
             $("#myModal").css('z-index','1551');
             $("#myModal").modal();
             $('#editModal').modal('hide');
@@ -168,7 +168,7 @@ $("#editModal #continue").click(function () {
         },
         error: function () {
             $("#myModal").css('z-index','1551');
-            $("#modal-body-id").text("修改失败!");
+            $("#myModal #modal-body-id").text("修改失败!");
             $("#myModal").modal();
         },
         dataType: 'json'
@@ -193,17 +193,17 @@ $("#delUserTModel #continue").click(function () {
         success: function (data) {
             console.log('删除成功!')
             if (data.code == 200) {
-                $("#modal-body-id").text("删除成功!");
+                $("#myModal #modal-body-id").text("删除成功!");
                 $("#myModal").modal();
                 $("#facedataTable").bootstrapTable('refresh');
             } else {
-                $("#modal-body-id").text('删除失败');
+                $("#myModal #modal-body-id").text('删除失败');
                 $("#myModal").modal();
             }
         },
         error: function () {
             console.log('处理失败!!')
-            $("#modal-body-id").text("处理失败!");
+            $("#myModal #modal-body-id").text("处理失败!");
             $("#myModal").modal();
         }
     });
@@ -241,7 +241,7 @@ $("#adduserModal #continue").click(function () {
                 console.log(data)
                 if (data.code == 200) {
                     $('#adduserModal').modal('hide');
-                    $("#modal-body-id").html('添加成功');
+                    $("#myModal #modal-body-id").html('添加成功');
                     $('#myModal').modal('show');
                     $("#userForm")[0].reset();
                     // LoadAjaxContent(pathurl+'user/list');
@@ -255,7 +255,7 @@ $("#adduserModal #continue").click(function () {
             },
             error: function () {
                 $("#myModalLabel").html("提示");
-                $("#modal-body-id").html('系统出错请稍后再试');
+                $("#myModal #modal-body-id").html('系统出错请稍后再试');
                 //	$('#myModal').modal('show');
             }
         });
