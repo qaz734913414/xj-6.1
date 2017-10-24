@@ -64,6 +64,7 @@ html,body {
     width: 100%;
     height: 62px;
     z-index: 10;
+    min-width: 1360px !important;
 }
 
 /* 填充导航栏 */
@@ -1172,6 +1173,8 @@ tbody>tr:nth-of-type(even) {
     padding-left: 40px;
     padding-right: 40px;
     min-height: calc(100% - 110px);
+    min-width: 1360px !important;
+
 }
 
 .face-table-group .bs-bars {
@@ -1183,6 +1186,7 @@ tbody>tr:nth-of-type(even) {
 .face-form {
     margin-top: 10px;
     margin-bottom: 10px;
+    min-width: 1360px !important;
 
 }
 
@@ -1781,6 +1785,7 @@ tbody>tr:nth-of-type(even) {
     position: relative;
     float: right;
     width: 100%;
+    min-width: 1360px !important;
 }
 
 .welcome {

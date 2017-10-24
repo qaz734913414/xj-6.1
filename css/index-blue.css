@@ -60,6 +60,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 1360px !important;
     height: 62px;
     z-index: 10;
 }
@@ -1151,6 +1152,7 @@ tbody > tr:nth-of-type(even) {
     padding-left: 40px;
     padding-right: 40px;
     min-height: calc(100% - 110px);
+    min-width: 1360px !important;
 }
 
 .face-table-group .bs-bars {
@@ -1162,6 +1164,7 @@ tbody > tr:nth-of-type(even) {
 .face-form {
     margin-top: 10px;
     margin-bottom: 10px;
+    min-width: 1360px !important;
 
 }
 
@@ -1764,6 +1767,7 @@ face-form input {
     position: relative;
     float: right;
     width: 100%;
+    min-width: 1360px !important;
 }
 
 .welcome {
@@ -1847,6 +1851,7 @@ face-form input {
 
 #main {
     float: left;
+    min-width: 1360px !important;
 }
 
 .fixed-table-container thead th .both {
